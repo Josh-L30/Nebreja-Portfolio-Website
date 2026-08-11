@@ -46,6 +46,12 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.remove('no-scroll');
   };
 
+  const setActiveNavLink = (id) => {
+    navLinks.forEach((link) => {
+      link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+    });
+  };
+
   navToggle.addEventListener('click', () => {
     const isOpen = navPanel.classList.toggle('is-open');
     navToggle.classList.toggle('is-open', isOpen);
@@ -57,6 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   navLinks.forEach((link) => {
     link.addEventListener('click', () => {
+      setActiveNavLink(link.getAttribute('href').slice(1));
       closeNavigation();
     });
   });
@@ -65,9 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         const id = entry.target.getAttribute('id');
-        navLinks.forEach((link) => {
-          link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
-        });
+        setActiveNavLink(id);
       }
     });
   }, { rootMargin: '-10% 0px -70% 0px', threshold: 0.2 });
