@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portfolio website for Brad Josh Nebreja, a web developer and UI/UX designer based in Calamba City, Laguna." />
+  <meta property="og:title" content="Brad Josh Nebreja | Web Developer & UI/UX Designer" />
+  <meta property="og:description" content="Portfolio of Brad Josh Nebreja, a web developer and UI/UX designer." />
+  <title>Brad Josh Nebreja | Web Developer & UI/UX Designer</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="scroll-progress" aria-hidden="true">
+    <div class="scroll-progress-bar" id="scrollProgress"></div>
+  </div>
+
+  <header class="site-header" id="siteHeader">
+    <nav class="navbar container">
+      <a class="brand" href="#home" aria-label="Brad Josh Nebreja home">
+        <span class="brand-mark brand-photo-mark">
+          <img src="assets/BJ.jpg" alt="" aria-hidden="true" />
+        </span>
+        <span class="brand-text">Brad Josh Nebreja</span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Open navigation" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <div class="nav-panel" id="navPanel">
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#home" class="nav-link active">Home</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#experience" class="nav-link">Experience</a></li>
+          <li><a href="#projects" class="nav-link">Projects</a></li>
+          <li><a href="#skills" class="nav-link">Skills</a></li>
+          <li><a href="#certifications" class="nav-link">Certifications</a></li>
+          <li><a href="#education" class="nav-link">Education</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+          <span class="theme-toggle-icon" aria-hidden="true">
+            <svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 3v2.2M12 18.8V21M4.7 4.7l1.6 1.6M17.7 17.7l1.6 1.6M3 12h2.2M18.8 12H21M4.7 19.3l1.6-1.6M17.7 6.3l1.6-1.6M12 6.5A5.5 5.5 0 1 0 17.5 12 5.5 5.5 0 0 0 12 6.5Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"/>
+            </svg>
+            <svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20 15.8A7.9 7.9 0 0 1 8.2 4a6.3 6.3 0 1 0 11.8 11.8Z" fill="currentColor" stroke="currentColor" stroke-width="1"/>
+            </svg>
+          </span>
+          <span class="theme-label" id="themeLabel">Light</span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero section" id="home">
+      <div class="container hero-grid">
+        <div class="hero-content reveal">
+          <div class="eyebrow">Calamba City, Laguna • Philippines</div>
+          <h1>
+            Brad Josh Nebreja
+            <span class="typed-wrapper">
+              <span class="typed-text" id="typedText">Web Developer</span>
+            </span>
+          </h1>
+          <p class="hero-lede">I design and build polished digital experiences that turn ideas into efficient, user-focused systems.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#projects">View My Work</a>
+            <a class="btn btn-secondary" href="assets/Nebreja_CVitae.pdf" target="_blank" rel="noopener">Download CV</a>
+          </div>
+          <ul class="hero-socials" aria-label="Social links">
+            <li><a href="https://www.linkedin.com/in/josh-nebreja-894248402/" target="_blank" rel="noopener" aria-label="LinkedIn">LinkedIn</a></li>
+            <li><a href="mailto:bradjosh.nebreja05@gmail.com" aria-label="Email">Email</a></li>
+            <li><a href="tel:+639693148752" aria-label="Phone">Phone</a></li>
+          </ul>
+        </div>
+
+        <aside class="hero-visual reveal">
+          <div class="avatar-frame">
+            <div class="avatar-bg">
+              <div class="avatar-image">
+                <img src="assets/BJ.jpg" alt="Profile placeholder" />
+              </div>
+              <div class="orbit orbit-one"></div>
+              <div class="orbit orbit-two"></div>
+            </div>
+          </div>
+          <div class="status-card">
+            <span class="dot"></span>
+            <div>
+              <span class="status-label">Availability</span>
+              <span class="status-text">Open to projects</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="section about" id="about">
+      <div class="container section-shell reveal">
+        <div class="section-head">
+          <span class="overline">About Me</span>
+          <h2>Information Technology student with a passion for building useful digital tools.</h2>
+        </div>
+        <div class="about-grid">
+          <div class="about-copy">
+            <p>I’m <strong>Brad Josh Nebreja</strong>, a motivated and detail-oriented Information Technology student with a strong foundation in programming, object-oriented analysis, and design. I enjoy turning ideas into practical software that helps teams work smarter.</p>
+            <p>I demonstrate leadership, project management, and collaborative problem-solving skills. I’m eager to apply data-analytical expertise to data-driven projects within a dynamic organization.</p>
+            <div class="about-actions">
+              <a class="btn btn-outline" href="#contact">Let’s Collaborate</a>
+            </div>
+          </div>
+
+          <div class="stats-panel">
+            <article class="stat-card">
+              <span class="stat-number" data-counter="2">0</span>
+              <span class="stat-label">Years Experience</span>
+            </article>
+            <article class="stat-card">
+              <span class="stat-number" data-counter="5">0</span>
+              <span class="stat-label">Certifications</span>
+            </article>
+            <article class="stat-card">
+              <span class="stat-number" data-counter="3">0</span>
+              <span class="stat-label">Projects</span>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section class="section experience" id="experience">
+      <div class="container section-shell reveal">
+        <div class="section-head centered">
+          <span class="overline">Experience & Leadership</span>
+          <h2>Project leadership, design direction, and development execution.</h2>
+        </div>
+
+        <div class="timeline">
+          <article class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-meta">
+                <span class="timeline-title">Capstone Project Lead</span>
+                <span class="timeline-company">Containerboard Packaging Corporation (CPC)</span>
+              </div>
+              <div class="timeline-location">Carmelray Industrial Park II, Calamba City, Laguna</div>
+              <div class="timeline-date">June 2025 – March 2026</div>
+              <ul class="timeline-list">
+                <li>Led the capstone project through successful implementation of a centralized system for CPC.</li>
+                <li>Managed the development team by assigning tasks, monitoring progress, and ensuring project goals were met.</li>
+                <li>Collaborated with team members to design and implement a system centralizing Sales, Production, Inventory, and Logistics operations.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-meta">
+                <span class="timeline-title">Capstone UI/UX Designer Lead</span>
+                <span class="timeline-company">CPC Centralized System</span>
+              </div>
+              <div class="timeline-location">Calamba City, Laguna</div>
+              <div class="timeline-date">June 2025 – March 2026</div>
+              <ul class="timeline-list">
+                <li>Led the UI/UX design to establish the frontend of a centralized system.</li>
+                <li>Assisted the main web developer as a backup web developer for the system.</li>
+                <li>Applied HTML, JavaScript, CSS, and PHP to develop a user-friendly and fully functional centralized system.</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section class="section projects" id="projects">
+      <div class="container section-shell reveal">
+        <div class="section-head centered">
+          <span class="overline">Selected Work</span>
+          <h2>Project portfolio and system solutions.</h2>
+        </div>
+
+        <div class="project-grid">
+          <article class="project-card featured-project">
+            <div class="project-media">
+              <img class="project-media-image" src="assets/UI/Pic1.png" alt="CPC Centralized System main dashboard view" />
+            </div>
+            <div class="project-body">
+              <span class="tag tag-dark">CPC Centralized System</span>
+              <h3>Production & Operations Centralization</h3>
+              <p>A centralized digital platform for supply, production, inventory, logistics, and sales visibility.</p>
+              <div class="tag-row">
+                <span class="tag">HTML</span>
+                <span class="tag">CSS</span>
+                <span class="tag">JavaScript</span>
+                <span class="tag">PHP</span>
+                <span class="tag">Laravel WebSocket</span>
+                <span class="tag">React</span>
+                <span class="tag">Express.js</span>
+                <span class="tag">MS SQL</span>
+              </div>
+              <button class="btn btn-text view-project" type="button" data-project="cpc">View Details</button>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-media">
+              <div class="dashboard-inline-gallery">
+                <div class="gallery-heading">
+                  <div class="carousel-controls">
+                    <button class="carousel-arrow carousel-prev" type="button" aria-label="Previous UI previews">‹</button>
+                    <button class="carousel-arrow carousel-next" type="button" aria-label="Next UI previews">›</button>
+                  </div>
+                </div>
+                <div class="carousel-window">
+                  <div class="carousel-track dashboard-inline-track">
+                    <figure class="gallery-slide">
+                      <img src="assets/UI/Pic1.png" alt="UI Snapshot 1" />
+                      <span></span>
+                    </figure>
+                    <figure class="gallery-slide">
+                      <img src="assets/UI/Pic2.png" alt="UI Snapshot 2" />
+                      <span></span>
+                    </figure>
+                    <figure class="gallery-slide">
+                      <img src="assets/UI/Pic3.png" alt="UI Snapshot 3" />
+                      <span></span>
+                    </figure>
+                    <figure class="gallery-slide">
+                      <img src="assets/UI/Pic4.png" alt="UI Snapshot 4" />
+                      <span></span>
+                    </figure>
+                    <figure class="gallery-slide">
+                      <img src="assets/UI/Pic5.png" alt="UI Snapshot 5" />
+                      <span></span>
+                    </figure>
+                    <figure class="gallery-slide">
+                      <img src="assets/UI/Pic6.png" alt="UI Snapshot 6" />
+                      <span></span>
+                    </figure>
+                    <figure class="gallery-slide">
+                      <img src="assets/UI/Pic7.png" alt="UI Snapshot 7" />
+                      <span></span>
+                    </figure>
+                    <figure class="gallery-slide">
+                      <img src="assets/UI/Pic8.png" alt="UI Snapshot 8" />
+                      <span></span>
+                    </figure>
+                    <figure class="gallery-slide">
+                      <img src="assets/UI/Pic9.png" alt="UI Snapshot 9" />
+                      <span></span>
+                    </figure>
+                    <figure class="gallery-slide">
+                      <img src="assets/UI/Pic10.png" alt="UI Snapshot 10" />
+                      <span></span>
+                    </figure>
+                    <figure class="gallery-slide">
+                      <img src="assets/UI/Pic11.png" alt="UI Snapshot 11" />
+                      <span></span>
+                    </figure>
+                    <figure class="gallery-slide">
+                      <img src="assets/UI/Pic12.png" alt="UI Snapshot 12" />
+                      <span></span>
+                    </figure>
+                    <figure class="gallery-slide">
+                      <img src="assets/UI/Pic13.png" alt="UI Snapshot 13" />
+                      <span></span>
+                    </figure>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="project-body">
+              <span class="tag tag-dark">User Interface</span>
+              <h3>CPC Dashboard Experience</h3>
+              <p>UI/UX-focused dashboard concepts that align production, inventory, sales, and logistics operations.</p>
+              <div class="tag-row">
+                <span class="tag">Figma</span>
+                <span class="tag">HTML</span>
+                <span class="tag">CSS</span>
+                <span class="tag">JavaScript</span>
+              </div>
+              <button class="btn btn-text view-project" type="button" data-project="dashboard">View Details</button>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-media">
+              <div class="dashboard-inline-gallery">
+                <div class="carousel-window">
+                  <div class="carousel-track">
+                    <figure class="gallery-slide">
+                      <img src="assets/UI/ter1.png" alt="Game Mechanics Website screenshot 1" />
+                    </figure>
+                    <figure class="gallery-slide">
+                      <img src="assets/UI/ter2.png" alt="Game Mechanics Website screenshot 2" />
+                    </figure>
+                    <figure class="gallery-slide">
+                      <img src="assets/UI/ter3.png" alt="Game Mechanics Website screenshot 3" />
+                    </figure>
+                    <figure class="gallery-slide">
+                      <img src="assets/UI/ter4.png" alt="Game Mechanics Website screenshot 4" />
+                    </figure>
+                    <figure class="gallery-slide">
+                      <img src="assets/UI/ter5.png" alt="Game Mechanics Website screenshot 5" />
+                    </figure>
+                    <figure class="gallery-slide">
+                      <img src="assets/UI/ter6.png" alt="Game Mechanics Website screenshot 6" />
+                    </figure>
+                    <figure class="gallery-slide">
+                      <img src="assets/UI/ter7.png" alt="Game Mechanics Website screenshot 7" />
+                    </figure>
+                    <figure class="gallery-slide">
+                      <img src="assets/UI/ter8.png" alt="Game Mechanics Website screenshot 8" />
+                    </figure>
+                    <figure class="gallery-slide">
+                      <img src="assets/UI/ter9.png" alt="Game Mechanics Website screenshot 9" />
+                    </figure>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="project-body">
+              <span class="tag tag-dark">User Interface</span>
+              <span class="tag tag-dark">User Experience</span>
+              <h3>Game Mechanics Website</h3>
+              <p>Website made as 1st year IT student for our group project focused on game mechanics of Masters of World Literature.</p>
+              <div class="tag-row">
+                <span class="tag">HTML</span>
+                <span class="tag">CSS</span>
+                <span class="tag">JS</span>
+              </div>
+              <button class="btn btn-text view-project" type="button" data-project="gamemechanics">View Details</button>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-media">
+              <div class="dashboard-inline-gallery">
+                <div class="carousel-window">
+                  <div class="carousel-track">
+                    <figure class="gallery-slide">
+                      <img src="assets/UI/fig1.png" alt="CinemaBuddy interface design 1" />
+                    </figure>
+                    <figure class="gallery-slide">
+                      <img src="assets/UI/fig2.png" alt="CinemaBuddy interface design 2" />
+                    </figure>
+                    <figure class="gallery-slide">
+                      <img src="assets/UI/fig3.png" alt="CinemaBuddy interface design 3" />
+                    </figure>
+                    <figure class="gallery-slide">
+                      <img src="assets/UI/fig4.png" alt="CinemaBuddy interface design 4" />
+                    </figure>
+                    <figure class="gallery-slide">
+                      <img src="assets/UI/fig5.png" alt="CinemaBuddy interface design 5" />
+                    </figure>
+                    <figure class="gallery-slide">
+                      <img src="assets/UI/fig6.png" alt="CinemaBuddy interface design 6" />
+                    </figure>
+                    <figure class="gallery-slide">
+                      <img src="assets/UI/fig7.png" alt="CinemaBuddy interface design 7" />
+                    </figure>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="project-body">
+              <span class="tag tag-dark">User Interface</span>
+              <span class="tag tag-dark">User Experience</span>
+              <h3>CinemaBuddy</h3>
+              <p>A mobile app interface concept for discovering movies and managing a personalized viewing experience. Project for our Interactive Media Design course.</p>
+              <div class="tag-row">
+                <span class="tag">Figma</span>
+                <span class="tag">UI Design</span>
+                <span class="tag">UX Design</span>
+              </div>
+              <button class="btn btn-text view-project" type="button" data-project="cinemabuddy">View Details</button>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-media">
+              <video class="project-media-video" autoplay muted loop playsinline controls preload="metadata" aria-label="CinemaBuddy user experience walkthrough">
+                <source src="assets/video/Dagooc_Nebreja_INMEDIA%20FINALS.mp4" type="video/mp4" />
+                Your browser does not support HTML video.
+              </video>
+            </div>
+            <div class="project-body">
+              <span class="tag tag-dark">User Experience</span>
+              <span class="tag tag-dark">Prototype Walkthrough</span>
+              <h3>CinemaBuddy UX Walkthrough</h3>
+              <p>A looping walkthrough of the CinemaBuddy experience, showing the key user flows from onboarding and account access to movie discovery.</p>
+              <div class="tag-row">
+                <span class="tag">Figma</span>
+                <span class="tag">UX Design</span>
+                <span class="tag">User Flows</span>
+              </div>
+              <button class="btn btn-text view-project" type="button" data-project="cinemabuddyux">View Details</button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section class="section skills" id="skills">
+      <div class="container section-shell reveal">
+        <div class="section-head centered">
+          <span class="overline">Skills & Tools</span>
+          <h2>Technical foundations, design capability, and cross-functional delivery.</h2>
+        </div>
+        <div class="skill-grid">
+          <article class="skill-card">
+            <h3>Programming Languages</h3>
+            <div class="skill-tags">
+              <span class="skill-tag"><img class="skill-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="" />Java</span>
+              <span class="skill-tag"><img class="skill-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="" />Python</span>
+              <span class="skill-tag"><img class="skill-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="" />C++</span>
+              <span class="skill-tag"><img class="skill-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="" />JavaScript</span>
+              <span class="skill-tag"><img class="skill-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="" />HTML</span>
+              <span class="skill-tag"><img class="skill-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="" />CSS</span>
+              <span class="skill-tag"><img class="skill-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="" />PHP</span>
+            </div>
+          </article>
+
+          <article class="skill-card">
+            <h3>Database</h3>
+            <div class="skill-tags">
+              <span class="skill-tag"><img class="skill-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-original.svg" alt="" />MS SQL</span>
+            </div>
+          </article>
+
+          <article class="skill-card">
+            <h3>Frameworks</h3>
+            <div class="skill-tags">
+              <span class="skill-tag"><img class="skill-logo" src="/assets/UI/Laravel-Logo.wine.png" alt="" />Laravel WebSocket</span>
+              <span class="skill-tag"><img class="skill-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="" />React</span>
+              <span class="skill-tag"><img class="skill-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" alt="" />Express.js</span>
+            </div>
+          </article>
+
+          <article class="skill-card">
+            <h3>Software & Tools</h3>
+            <div class="skill-tags">
+              <span class="skill-tag"><img class="skill-logo" src="/assets/UI/M365.png" alt="" />Microsoft Office 365</span>
+              <span class="skill-tag"><img class="skill-logo" src="/assets/UI/MLoop.jpg" alt="" />Microsoft Loop</span>
+              <span class="skill-tag"><img class="skill-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="" />Visual Studio Code</span>
+              <span class="skill-tag"><img class="skill-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="" />Figma</span>
+              <span class="skill-tag"><img class="skill-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/canva/canva-original.svg" alt="" />Canva</span>
+            </div>
+          </article>
+
+          <article class="skill-card">
+            <h3>Other Skills</h3>
+            <div class="skill-tags">
+              <span class="skill-tag"><img class="skill-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg" alt="" />Problem-Solving</span>
+              <span class="skill-tag"><img class="skill-logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/trello/trello-plain.svg" alt="" />Project Management</span>
+            </div>
+          </article>
+
+          <article class="skill-card">
+            <h3>Languages</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">Filipino (Native)</span>
+              <span class="skill-tag">English (Proficient)</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Certifications -->
+    <section class="section certifications" id="certifications">
+      <div class="container section-shell reveal">
+        <div class="section-head centered">
+          <span class="overline">Certifications</span>
+          <h2>Professional and technology certifications.</h2>
+        </div>
+        <div class="cert-grid">
+          <article class="cert-card">
+            <a class="cert-link" href="assets/certificates/NetworkSecurity.png" data-title="Information Technology Specialist – Network Security">
+              <div class="cert-image-frame">
+                <img src="assets/certificates/NetworkSecurity.png" alt="Certificate image placeholder 1" class="cert-image" loading="lazy" />
+                <span class="cert-zoom" aria-hidden="true">+</span>
+              </div>
+            </a>
+            <span class="cert-date">2026</span>
+            <h3>Information Technology Specialist – Network Security</h3>
+            <p>Certiport</p>
+          </article>
+          <article class="cert-card">
+            <a class="cert-link" href="assets/certificates/Databases.png" data-title="Information Technology Specialist – Databases">
+              <div class="cert-image-frame">
+                <img src="assets/certificates/Databases.png" alt="Certificate image placeholder 2" class="cert-image" loading="lazy" />
+                <span class="cert-zoom" aria-hidden="true">+</span>
+              </div>
+            </a>
+            <span class="cert-date">2025</span>
+            <h3>Information Technology Specialist – Databases</h3>
+            <p>Certiport</p>
+          </article>
+          <article class="cert-card">
+            <a class="cert-link" href="assets/certificates/LearnKey.jpg" data-title="LearnKey (LK) Database Certification">
+              <div class="cert-image-frame">
+                <img src="assets/certificates/LearnKey.jpg" alt="Certificate image placeholder 3" class="cert-image" loading="lazy" />
+                <span class="cert-zoom" aria-hidden="true">+</span>
+              </div>
+            </a>
+            <span class="cert-date">2025</span>
+            <h3>LearnKey (LK) Database Certification</h3>
+            <p>LearnKey</p>
+          </article>
+          <article class="cert-card">
+            <a class="cert-link" href="assets/certificates/MSExcelVBA.jpg" data-title="Automation with MS Excel VBA">
+              <div class="cert-image-frame">
+                <img src="assets/certificates/MSExcelVBA.jpg" alt="Certificate image placeholder 4" class="cert-image" loading="lazy" />
+                <span class="cert-zoom" aria-hidden="true">+</span>
+              </div>
+            </a>
+            <span class="cert-date">2024</span>
+            <h3>Automation with MS Excel VBA</h3>
+            <p>Ask Lex PH Academy</p>
+          </article>
+          <article class="cert-card">
+            <a class="cert-link" href="assets/certificates/CodeCombat.jpg" data-title="CodeCombat">
+              <div class="cert-image-frame">
+                <img src="assets/certificates/CodeCombat.jpg" alt="Certificate image placeholder 5" class="cert-image" loading="lazy" />
+                <span class="cert-zoom" aria-hidden="true">+</span>
+              </div>
+            </a>
+            <span class="cert-date">2023</span>
+            <h3>CodeCombat</h3>
+            <p>NU Laguna</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section class="section education" id="education">
+      <div class="container section-shell reveal">
+        <div class="section-head centered">
+          <span class="overline">Education</span>
+          <h2>Academic foundation and continuing development.</h2>
+        </div>
+        <div class="education-list">
+          <article class="education-item">
+            <div>
+              <span class="education-degree">Bachelor of Science in Information Technology</span>
+              <div class="education-place">National University Laguna x Asia Pacific College</div>
+              <div class="education-date">Calamba City, Laguna • Expected July 2027</div>
+            </div>
+          </article>
+          <article class="education-item">
+            <div>
+              <span class="education-degree">General Academic Strand (GAS)</span>
+              <div class="education-place">Saint Benilde International School (SBIS)</div>
+              <div class="education-date">Calamba City, Laguna • 2021–2023</div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section contact" id="contact">
+      <div class="container contact-grid reveal">
+        <div class="contact-copy">
+          <span class="overline">Contact</span>
+          <h2>Let’s build something useful.</h2>
+          <p>I’m available for web development, UI/UX design, and project collaboration opportunities.</p>
+          <ul class="contact-list">
+            <li>
+              <span class="contact-label">Location</span>
+              <span class="contact-value">Calamba City, Laguna, Philippines</span>
+            </li>
+            <li>
+              <span class="contact-label">Phone</span>
+              <a class="contact-value" href="tel:+639693148752">+63 969 314 8752</a>
+            </li>
+            <li>
+              <span class="contact-label">Email</span>
+              <a class="contact-value" href="mailto:bradjosh.nebreja05@gmail.com">bradjosh.nebreja05@gmail.com</a>
+            </li>
+            <li>
+              <span class="contact-label">LinkedIn</span>
+              <a class="contact-value" href="https://www.linkedin.com/in/josh-nebreja-894248402/" target="_blank" rel="noopener">josh-nebreja-894248402</a>
+            </li>
+          </ul>
+          <div class="contact-socials">
+            <a class="icon-link" href="https://www.linkedin.com/in/josh-nebreja-894248402/" target="_blank" rel="noopener" aria-label="LinkedIn">
+              <span aria-hidden="true">in</span>
+            </a>
+            <a class="icon-link" href="mailto:bradjosh.nebreja05@gmail.com" aria-label="Email">
+              <span aria-hidden="true">@</span>
+            </a>
+            <a class="icon-link" href="tel:+639693148752" aria-label="Phone">
+              <span aria-hidden="true">☎</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="contact-form-wrap">
+          <form class="contact-form" id="contactForm" novalidate>
+            <div class="form-row">
+              <label for="name">Name <span aria-hidden="true">*</span></label>
+              <input type="text" id="name" name="name" autocomplete="name" required />
+              <small class="error-message" id="nameError"></small>
+            </div>
+
+            <div class="form-row">
+              <label for="email">Email <span aria-hidden="true">*</span></label>
+              <input type="email" id="email" name="email" autocomplete="email" required />
+              <small class="error-message" id="emailError"></small>
+            </div>
+
+            <div class="form-row">
+              <label for="message">Message <span aria-hidden="true">*</span></label>
+              <textarea id="message" name="message" rows="6" required></textarea>
+              <small class="error-message" id="messageError"></small>
+            </div>
+
+            <div class="form-status" id="formStatus" aria-live="polite"></div>
+
+            <button class="btn btn-primary btn-block" type="submit" id="submitButton">
+              <span class="button-text">Send Message</span>
+              <span class="loader hidden" id="loader"></span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-content">
+      <a class="footer-brand" href="#home">Brad Josh Nebreja</a>
+      <span class="copyright">© <span id="year"></span> Brad Josh Nebreja. All rights reserved.</span>
+      <a class="back-to-top" href="#home" aria-label="Back to top">↑</a>
+    </div>
+  </footer>
+
+  <dialog class="project-modal" id="projectModal">
+    <div class="modal-card">
+      <button class="modal-close" id="modalClose" aria-label="Close project details">×</button>
+      <div class="modal-content" id="modalContent"></div>
+    </div>
+  </dialog>
+
+  <dialog class="cert-modal" id="certificateModal">
+    <div class="cert-modal-card">
+      <button class="modal-close cert-modal-close" id="certModalClose" aria-label="Close certificate">×</button>
+      <div class="cert-modal-content">
+        <div class="cert-modal-image-wrap">
+          <img id="certModalImage" src="" alt="" />
+        </div>
+        <div class="cert-modal-caption" id="certModalCaption"></div>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
