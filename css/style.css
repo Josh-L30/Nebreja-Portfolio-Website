@@ -1803,6 +1803,11 @@ body[data-theme="dark"] .icon-link:hover {
     font-size: 1rem;
   }
 
+  body[data-theme="dark"] .nav-panel .nav-link,
+  body[data-theme="dark"] .nav-panel .nav-link.active {
+    color: var(--text);
+  }
+
   .site-header.scrolled .nav-toggle {
     color: var(--text-light);
   }
