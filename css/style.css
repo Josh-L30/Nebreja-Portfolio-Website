@@ -1715,7 +1715,7 @@ body[data-theme="dark"] .icon-link:hover {
   .nav-toggle {
     display: inline-flex;
     color: currentColor;
-    z-index: 1202;
+    flex: 0 0 44px;
   }
 
   .nav-panel {
@@ -1745,12 +1745,22 @@ body[data-theme="dark"] .icon-link:hover {
   }
 
   .nav-actions {
-    margin: 28px 0 0;
+    position: relative;
+    z-index: 1202;
+    margin-left: auto;
+    gap: 8px;
   }
 
   .theme-toggle {
-    width: 100%;
+    width: 44px;
+    min-height: 44px;
+    padding: 0;
     justify-content: center;
+    gap: 0;
+  }
+
+  .theme-label {
+    display: none;
   }
 
   .nav-links .nav-link {
@@ -1973,6 +1983,10 @@ body[data-theme="dark"] .icon-link:hover {
   .brand-mark {
     width: 36px;
     height: 36px;
+  }
+
+  .brand-text {
+    display: none;
   }
 
   .nav-panel {
