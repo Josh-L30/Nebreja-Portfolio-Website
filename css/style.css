@@ -1722,6 +1722,11 @@ body[data-theme="dark"] .icon-link:hover {
     flex: 0 0 44px;
   }
 
+  .nav-toggle.is-open {
+    visibility: hidden;
+    pointer-events: none;
+  }
+
   .nav-panel {
     position: fixed;
     top: 0;
