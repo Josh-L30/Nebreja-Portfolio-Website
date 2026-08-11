@@ -69,6 +69,7 @@ body {
   background: var(--bg);
   line-height: 1.75;
   font-size: 16px;
+  overflow-x: hidden;
 }
 
 body.no-scroll {
@@ -1721,15 +1722,15 @@ body[data-theme="dark"] .icon-link:hover {
     position: fixed;
     top: 0;
     right: 0;
-    width: min(84vw, 380px);
-    height: 100vh;
+    width: min(88vw, 380px);
+    height: 100dvh;
     flex-direction: column;
     align-items: stretch;
     justify-content: center;
     background: var(--accent);
     transition: transform 300ms ease;
     transform: translateX(105%);
-    padding: 36px 34px;
+    padding: 32px 28px;
     z-index: 1100;
   }
 
@@ -1743,6 +1744,15 @@ body[data-theme="dark"] .icon-link:hover {
     gap: 30px;
   }
 
+  .nav-actions {
+    margin: 28px 0 0;
+  }
+
+  .theme-toggle {
+    width: 100%;
+    justify-content: center;
+  }
+
   .nav-links .nav-link {
     color: var(--text-light);
     font-size: 1rem;
@@ -1753,7 +1763,46 @@ body[data-theme="dark"] .icon-link:hover {
   }
 
   .hero-content h1 {
-    font-size: 2.72rem;
+    font-size: clamp(2.25rem, 11vw, 2.72rem);
+    overflow-wrap: anywhere;
+  }
+
+  .hero {
+    padding-top: 104px;
+    padding-bottom: 64px;
+  }
+
+  .hero-grid {
+    gap: 42px;
+  }
+
+  .hero-lede {
+    margin-top: 22px;
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  .hero-visual .avatar-bg {
+    width: min(78vw, 330px);
+  }
+
+  .avatar-image {
+    width: 78%;
+  }
+
+  .orbit-one {
+    width: calc(100% + 32px);
+    height: calc(100% + 32px);
+  }
+
+  .orbit-two {
+    width: 84%;
+    height: 84%;
+  }
+
+  .status-card {
+    max-width: 100%;
+    padding: 10px 14px;
   }
 
   .hero-actions {
@@ -1766,10 +1815,19 @@ body[data-theme="dark"] .icon-link:hover {
 
   .hero-socials {
     gap: 18px;
+    flex-wrap: wrap;
   }
 
   .section-head h2 {
     font-size: 2rem;
+  }
+
+  .section {
+    padding-block: 64px;
+  }
+
+  .section-head {
+    margin-bottom: 32px;
   }
 
   .timeline-item {
@@ -1785,7 +1843,42 @@ body[data-theme="dark"] .icon-link:hover {
   }
 
   .timeline-content {
-    padding: 24px;
+    padding: 22px 20px;
+  }
+
+  .timeline-company {
+    display: block;
+    margin: 6px 0 0;
+  }
+
+  .project-body {
+    padding: 24px 20px;
+  }
+
+  .project-media,
+  .project-media-image,
+  .project-media-video {
+    min-height: 190px;
+  }
+
+  .dashboard-inline-gallery {
+    padding: 12px;
+  }
+
+  .dashboard-inline-gallery .carousel-window {
+    padding: 8px;
+  }
+
+  .dashboard-inline-gallery .carousel-track .gallery-slide {
+    flex-basis: min(72vw, 290px);
+  }
+
+  .dashboard-inline-gallery .gallery-slide {
+    padding: 7px;
+  }
+
+  .dashboard-inline-gallery .gallery-slide img {
+    height: 150px;
   }
 
   .project-grid,
@@ -1811,9 +1904,96 @@ body[data-theme="dark"] .icon-link:hover {
     font-size: 2rem;
   }
 
+  .contact-form-wrap {
+    padding: 22px 18px;
+  }
+
+  .contact-value,
+  .cert-modal-caption,
+  .copyright {
+    overflow-wrap: anywhere;
+  }
+
+  .education-item {
+    padding: 22px 20px;
+  }
+
+  .cert-card {
+    padding: 20px;
+  }
+
+  .cert-modal,
+  .cert-modal-card {
+    width: 94vw;
+    max-width: 94vw;
+    min-width: 0;
+  }
+
+  .cert-modal-card {
+    max-height: 90dvh;
+    overflow-y: auto;
+    padding: 42px 14px 18px;
+  }
+
+  .cert-modal-image-wrap {
+    padding: 8px;
+  }
+
+  #certModalImage {
+    max-height: 64dvh;
+  }
+
+  .project-modal {
+    width: 94vw;
+    max-height: 88dvh;
+  }
+
+  .modal-card {
+    padding: 52px 20px 24px;
+  }
+
   .footer-content {
     align-items: flex-start;
     flex-direction: column;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 374px) {
+  .container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .brand {
+    gap: 8px;
+    font-size: 0.9rem;
+  }
+
+  .brand-mark {
+    width: 36px;
+    height: 36px;
+  }
+
+  .nav-panel {
+    padding-inline: 22px;
+  }
+
+  .hero-socials {
+    gap: 14px;
+  }
+
+  .stats-panel {
+    gap: 12px;
+  }
+
+  .stat-card {
+    min-height: 130px;
+    padding: 20px 12px;
+  }
+
+  .skill-card {
+    padding: 20px 16px;
   }
 }
 
