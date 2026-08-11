@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const header = document.getElementById('siteHeader');
   const navToggle = document.getElementById('navToggle');
   const navPanel = document.getElementById('navPanel');
+  const navClose = document.getElementById('navClose');
   const navLinks = Array.from(document.querySelectorAll('.nav-link'));
   const themeToggle = document.getElementById('themeToggle');
   const themeLabel = document.getElementById('themeLabel');
@@ -38,6 +39,13 @@ document.addEventListener('DOMContentLoaded', () => {
   updateHeader();
   window.addEventListener('scroll', updateHeader, { passive: true });
 
+  const closeNavigation = () => {
+    navPanel.classList.remove('is-open');
+    navToggle.classList.remove('is-open');
+    navToggle.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('no-scroll');
+  };
+
   navToggle.addEventListener('click', () => {
     const isOpen = navPanel.classList.toggle('is-open');
     navToggle.classList.toggle('is-open', isOpen);
@@ -45,12 +53,11 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.toggle('no-scroll', isOpen);
   });
 
+  navClose?.addEventListener('click', closeNavigation);
+
   navLinks.forEach((link) => {
     link.addEventListener('click', () => {
-      navPanel.classList.remove('is-open');
-      navToggle.classList.remove('is-open');
-      navToggle.setAttribute('aria-expanded', 'false');
-      document.body.classList.remove('no-scroll');
+      closeNavigation();
     });
   });
 

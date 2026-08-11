@@ -325,6 +325,10 @@ textarea {
   transform: translateY(-8px) rotate(-45deg);
 }
 
+.nav-close {
+  display: none;
+}
+
 .scroll-progress {
   position: fixed;
   top: 0;
@@ -1736,6 +1740,37 @@ body[data-theme="dark"] .icon-link:hover {
 
   .nav-panel.is-open {
     transform: translateX(0);
+  }
+
+  .nav-close {
+    display: inline-flex;
+    position: absolute;
+    top: max(20px, env(safe-area-inset-top));
+    left: 20px;
+    width: 44px;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+    color: var(--text-light);
+    font-size: 2rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  body[data-theme="dark"] .nav-close {
+    border-color: rgba(32, 27, 23, 0.35);
+    background: rgba(32, 27, 23, 0.10);
+    color: var(--text);
+  }
+
+  .nav-close:hover,
+  .nav-close:focus-visible {
+    background: var(--panel);
+    color: var(--accent);
+    outline: none;
   }
 
   .nav-links {
