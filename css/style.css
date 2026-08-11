@@ -15,6 +15,7 @@
   --panel: #FFFDF8;
   --panel-soft: #F4EFE8;
   --accent: #201B17;
+  --on-accent: #FFFDF8;
   --accent-secondary: #8B6B47;
   --accent-secondary-soft: #ECE2D1;
   --success: #556B4F;
@@ -41,6 +42,7 @@ body[data-theme="dark"] {
   --panel: #2A241F;
   --panel-soft: #3B3328;
   --accent: #F0DDB8;
+  --on-accent: #201B17;
   --accent-secondary: #C6A06B;
   --accent-secondary-soft: #453B30;
   --success: #C7BB92;
@@ -78,7 +80,7 @@ body.no-scroll {
 
 body::selection {
   background: var(--accent);
-  color: var(--text-light);
+  color: var(--on-accent);
 }
 
 a {
@@ -115,7 +117,7 @@ textarea {
 
 .site-header.scrolled {
   background: var(--accent);
-  color: var(--text-light);
+  color: var(--on-accent);
   box-shadow: 0 2px 14px var(--shadow-strong);
 }
 
@@ -165,8 +167,8 @@ textarea {
 }
 
 .site-header.scrolled .brand-mark {
-  border-color: var(--text-light);
-  color: var(--text-light);
+  border-color: var(--on-accent);
+  color: var(--on-accent);
   background: transparent;
 }
 
@@ -285,11 +287,11 @@ textarea {
 }
 
 .site-header.scrolled .nav-link {
-  color: var(--text-light);
+  color: var(--on-accent);
 }
 
 .site-header.scrolled .nav-link.active {
-  color: #BDBEC9;
+  color: var(--on-accent);
 }
 
 .nav-toggle {
@@ -423,7 +425,7 @@ textarea {
 
 .btn-primary {
   background: var(--accent);
-  color: var(--text-light);
+  color: var(--on-accent);
 }
 
 .btn-primary:hover {
@@ -437,7 +439,7 @@ textarea {
 
 .btn-secondary:hover {
   background: var(--accent);
-  color: var(--text-light);
+  color: var(--on-accent);
 }
 
 .btn-outline {
@@ -448,7 +450,7 @@ textarea {
 
 .btn-outline:hover {
   background: var(--accent);
-  color: var(--text-light);
+  color: var(--on-accent);
 }
 
 .btn-text {
@@ -936,8 +938,26 @@ textarea {
 
 .tag-dark {
   background: var(--accent);
-  color: var(--text-light);
+  color: var(--on-accent);
   border-color: var(--accent);
+}
+
+/* The dark theme intentionally uses a light accent. Keep every label placed
+   on that accent dark, even when component-specific styles are added later. */
+body[data-theme="dark"] .site-header.scrolled,
+body[data-theme="dark"] .site-header.scrolled .brand-mark,
+body[data-theme="dark"] .site-header.scrolled .nav-link,
+body[data-theme="dark"] .site-header.scrolled .nav-link.active,
+body[data-theme="dark"] .site-header.scrolled .nav-toggle,
+body[data-theme="dark"] .btn-primary,
+body[data-theme="dark"] .btn-secondary:hover,
+body[data-theme="dark"] .btn-outline:hover,
+body[data-theme="dark"] .tag-dark {
+  color: #201B17;
+}
+
+body[data-theme="dark"] .site-header.scrolled .brand-mark {
+  border-color: #201B17;
 }
 
 .view-project {
@@ -1559,7 +1579,7 @@ body[data-theme="dark"] .icon-link:hover {
 
 .dashboard-inline-gallery .carousel-arrow:hover,
 .dashboard-inline-gallery .carousel-arrow:focus {
-  color: var(--text-light);
+  color: var(--on-accent);
   background: var(--accent);
   border-color: var(--accent);
 }
@@ -1814,7 +1834,7 @@ body[data-theme="dark"] .icon-link:hover {
   }
 
   .site-header.scrolled .nav-toggle {
-    color: var(--text-light);
+    color: var(--on-accent);
   }
 
   .hero-content h1 {
