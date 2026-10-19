@@ -501,6 +501,7 @@ document.addEventListener('DOMContentLoaded', () => {
     sections.forEach((section) => {
       let pointerFrame = 0;
       section.addEventListener('pointermove', (event) => {
+        section.classList.add('cursor-active');
         if (pointerFrame) cancelAnimationFrame(pointerFrame);
         pointerFrame = requestAnimationFrame(() => {
           const bounds = section.getBoundingClientRect();
@@ -510,8 +511,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       }, { passive: true });
       section.addEventListener('pointerleave', () => {
-        section.style.setProperty('--pointer-x', '50%');
-        section.style.setProperty('--pointer-y', '35%');
+        if (pointerFrame) cancelAnimationFrame(pointerFrame);
+        pointerFrame = 0;
+        section.classList.remove('cursor-active');
       }, { passive: true });
     });
   }

@@ -2469,3 +2469,78 @@ main .section > .container { position: relative; z-index: 1; }
 @media (hover: none), (pointer: coarse) {
   main .section::after { display: none; }
 }
+
+main .section::after {
+  opacity: 0;
+  transition: opacity 220ms ease;
+}
+main .section.cursor-active::after { opacity: 1; }
+
+/* Keep the contact area consistent with the monochrome dark theme. */
+body[data-theme="dark"] .contact {
+  background: linear-gradient(145deg, #181818 0%, #111111 100%);
+  color: #f4f4f4;
+}
+body[data-theme="dark"] .contact .overline,
+body[data-theme="dark"] .contact-copy h2,
+body[data-theme="dark"] .contact-value { color: #f1f1f1; }
+body[data-theme="dark"] .contact-copy p { color: #c8c8c8; }
+body[data-theme="dark"] .contact-list li,
+body[data-theme="dark"] .contact-list li:last-child { border-color: #383838; }
+body[data-theme="dark"] .contact-label { color: #a4a4a4; }
+body[data-theme="dark"] .contact-form-wrap {
+  background: #1b1b1b;
+  border: 1px solid #383838;
+  color: #f4f4f4;
+  box-shadow: 0 16px 42px rgba(0, 0, 0, 0.28);
+}
+body[data-theme="dark"] .contact .form-row label { color: #d0d0d0; }
+body[data-theme="dark"] .contact .form-row input,
+body[data-theme="dark"] .contact .form-row textarea {
+  color: #f4f4f4;
+  background: #141414;
+  border-color: #404040;
+  caret-color: #f4f4f4;
+}
+body[data-theme="dark"] .contact .form-row input::placeholder,
+body[data-theme="dark"] .contact .form-row textarea::placeholder { color: #858585; }
+body[data-theme="dark"] .contact .form-row input:focus,
+body[data-theme="dark"] .contact .form-row textarea:focus {
+  border-color: #c8c8c8;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.14);
+}
+body[data-theme="dark"] .contact .icon-link {
+  color: #f1f1f1;
+  background: #232323;
+  border-color: #444444;
+}
+body[data-theme="dark"] .contact .icon-link:hover {
+  color: #111111;
+  background: #f1f1f1;
+}
+
+/* Use a compact icon-only theme switch on every viewport. */
+.theme-toggle {
+  width: 44px;
+  height: 44px;
+  min-height: 44px;
+  padding: 0;
+  justify-content: center;
+  gap: 0;
+  border-radius: 50%;
+}
+.theme-label { display: none; }
+
+.theme-toggle-icon { width: 24px; height: 24px; }
+.theme-toggle-icon svg {
+  width: 23px;
+  height: 23px;
+  filter: drop-shadow(0 1px 2px color-mix(in srgb, var(--text) 22%, transparent));
+  transition: opacity 320ms ease, transform 460ms cubic-bezier(.2,.8,.2,1), filter var(--theme-transition);
+}
+.theme-toggle-icon .sun-icon { transform: rotate(0) scale(1); }
+.theme-toggle-icon .moon-icon { transform: rotate(-35deg) scale(.58); }
+.theme-toggle[aria-pressed="true"] .sun-icon { transform: rotate(55deg) scale(.55); }
+.theme-toggle[aria-pressed="true"] .moon-icon { transform: rotate(0) scale(1); }
+.theme-toggle:hover .sun-icon { transform: rotate(22deg) scale(1.08); }
+.theme-toggle[aria-pressed="true"]:hover .moon-icon { transform: rotate(-12deg) scale(1.08); }
