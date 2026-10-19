@@ -31,12 +31,15 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const heroName = document.querySelector('.hero-content h1');
+  const heroPhoto = document.querySelector('.hero-visual .avatar-bg');
   const updateHeader = () => {
     const isScrolled = window.scrollY > 24;
     const hasPassedHeroName = heroName && heroName.getBoundingClientRect().bottom <= header.offsetHeight;
+    const hasPassedHeroPhoto = heroPhoto && heroPhoto.getBoundingClientRect().bottom <= header.offsetHeight;
     header.classList.toggle('scrolled', isScrolled);
     header.classList.toggle('transparent', !isScrolled);
     header.classList.toggle('show-brand-name', Boolean(hasPassedHeroName));
+    header.classList.toggle('show-brand-photo', Boolean(hasPassedHeroPhoto));
   };
 
   updateHeader();

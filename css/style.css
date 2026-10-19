@@ -2544,3 +2544,49 @@ body[data-theme="dark"] .contact .icon-link:hover {
 .theme-toggle[aria-pressed="true"] .moon-icon { transform: rotate(0) scale(1); }
 .theme-toggle:hover .sun-icon { transform: rotate(22deg) scale(1.08); }
 .theme-toggle[aria-pressed="true"]:hover .moon-icon { transform: rotate(-12deg) scale(1.08); }
+
+/* Reveal the navbar portrait only after the hero portrait has scrolled away. */
+.brand-photo-mark {
+  width: 0;
+  height: 0;
+  min-width: 0;
+  flex: 0 0 0;
+  margin-right: -12px;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(.72);
+  transition: width 420ms cubic-bezier(.2,.75,.2,1), height 420ms cubic-bezier(.2,.75,.2,1),
+    flex-basis 420ms cubic-bezier(.2,.75,.2,1), margin-right 420ms cubic-bezier(.2,.75,.2,1),
+    opacity 240ms ease, transform 420ms cubic-bezier(.2,.75,.2,1), border-color var(--theme-transition);
+}
+.site-header.show-brand-photo .brand-photo-mark {
+  width: 40px;
+  height: 40px;
+  flex-basis: 40px;
+  margin-right: 0;
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+}
+@media (max-width: 374px) {
+  .site-header.show-brand-photo .brand-photo-mark { width: 36px; height: 36px; flex-basis: 36px; }
+}
+
+/* Keep the rotating role line visually secondary to the name. */
+.hero-content h1 .typed-wrapper {
+  min-height: .72em;
+  line-height: 1.08;
+}
+.hero-content h1 .typed-text {
+  font-size: .58em;
+  line-height: 1.08;
+  letter-spacing: -.035em;
+}
+
+/* Preserve the original role line spacing; only its lettering is smaller. */
+.hero-content h1 .typed-wrapper { min-height: 1.2em; line-height: .97; }
+
+/* Slightly enlarge the role while keeping its line compact beneath the name. */
+.hero-content h1 .typed-wrapper { min-height: .82em; line-height: 1.1; }
+.hero-content h1 .typed-text { font-size: .68em; line-height: 1.1; }
