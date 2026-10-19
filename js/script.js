@@ -65,13 +65,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const linkRect = activeLink.getBoundingClientRect();
     const listRect = linksContainer.getBoundingClientRect();
     const isMobileMenu = window.matchMedia('(max-width: 639px)').matches;
-    const horizontalPadding = isMobileMenu ? 9 : 9;
+    const horizontalPadding = 9;
     const verticalPadding = isMobileMenu ? 6 : 6;
-    const x = linkRect.left - listRect.left - horizontalPadding;
+    const x = isMobileMenu ? 0 : linkRect.left - listRect.left - horizontalPadding;
     const y = linkRect.top - listRect.top - verticalPadding;
+    const width = isMobileMenu ? listRect.width : linkRect.width + horizontalPadding * 2;
     linksContainer.style.setProperty('--indicator-x', `${x}px`);
     linksContainer.style.setProperty('--indicator-y', `${y}px`);
-    linksContainer.style.setProperty('--indicator-width', `${linkRect.width + horizontalPadding * 2}px`);
+    linksContainer.style.setProperty('--indicator-width', `${width}px`);
     linksContainer.style.setProperty('--indicator-height', `${linkRect.height + verticalPadding * 2}px`);
     linksContainer.classList.add('has-indicator');
   };
@@ -80,7 +81,15 @@ document.addEventListener('DOMContentLoaded', () => {
     navLinks.forEach((link) => {
       link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
     });
-    requestAnimationFrame(moveNavIndicator);
+    requestAnimationFrame(() => {
+      moveNavIndicator();
+      const linksContainer = navPanel.querySelector('.nav-links');
+      if (linksContainer && window.matchMedia('(max-width: 639px)').matches) {
+        linksContainer.classList.remove('is-filling');
+        void navIndicator.offsetWidth;
+        linksContainer.classList.add('is-filling');
+      }
+    });
   };
 
   moveNavIndicator();
