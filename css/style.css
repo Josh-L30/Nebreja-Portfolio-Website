@@ -2270,3 +2270,26 @@ body[data-theme="dark"] .site-header.scrolled .nav-link,
 body[data-theme="dark"] .site-header.scrolled .nav-link.active,
 body[data-theme="dark"] .site-header.scrolled .nav-toggle { color: var(--text); }
 body[data-theme="dark"] .site-header.scrolled .brand-mark { border-color: var(--line); }
+
+/* Keep the navbar brand label out of the way until the hero name has passed. */
+.brand-text {
+  max-width: 0;
+  margin-left: -12px;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-6px);
+  transition: max-width 420ms cubic-bezier(.2,.75,.2,1), margin-left 420ms cubic-bezier(.2,.75,.2,1),
+    opacity 240ms ease, transform 420ms cubic-bezier(.2,.75,.2,1), visibility 0s linear 420ms;
+}
+.site-header.show-brand-name .brand-text {
+  max-width: 240px;
+  margin-left: 0;
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+  transition-delay: 0s;
+}
+@media (max-width: 374px) {
+  .site-header.show-brand-name .brand-text { max-width: 0; margin-left: -8px; }
+}
