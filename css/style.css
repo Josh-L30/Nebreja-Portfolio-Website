@@ -2634,3 +2634,14 @@ body[data-theme="dark"] .contact .icon-link:hover {
 @media (prefers-reduced-motion: reduce) {
   .nav-links.is-filling .nav-indicator { animation: none; }
 }
+
+/* Quicker indicator travel keeps the capsule responsive without feeling abrupt. */
+.nav-indicator {
+  transition: left 280ms cubic-bezier(.2,.8,.2,1), top 280ms cubic-bezier(.2,.8,.2,1),
+    width 280ms cubic-bezier(.2,.8,.2,1), height 280ms cubic-bezier(.2,.8,.2,1),
+    opacity 160ms ease, background-color var(--theme-transition), border-color var(--theme-transition),
+    box-shadow 280ms ease;
+}
+@media (max-width: 639px) {
+  .nav-links.is-filling .nav-indicator { animation: none; }
+}

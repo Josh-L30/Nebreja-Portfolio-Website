@@ -81,15 +81,16 @@ document.addEventListener('DOMContentLoaded', () => {
     navLinks.forEach((link) => {
       link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
     });
-    requestAnimationFrame(() => {
-      moveNavIndicator();
-      const linksContainer = navPanel.querySelector('.nav-links');
-      if (linksContainer && window.matchMedia('(max-width: 639px)').matches) {
-        linksContainer.classList.remove('is-filling');
-        void navIndicator.offsetWidth;
-        linksContainer.classList.add('is-filling');
-      }
-    });
+    moveNavIndicator();
+    if (window.matchMedia('(max-width: 639px)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      navIndicator.animate(
+        [
+          { clipPath: 'inset(0 0 0 100% round 999px)' },
+          { clipPath: 'inset(0 0 0 0 round 999px)' }
+        ],
+        { duration: 260, easing: 'cubic-bezier(.2,.8,.2,1)' }
+      );
+    }
   };
 
   moveNavIndicator();
@@ -106,23 +107,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
   navLinks.forEach((link) => {
     link.addEventListener('click', () => {
-      setActiveNavLink(link.getAttribute('href').slice(1));
       closeNavigation();
     });
   });
 
-  const sectionObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        const id = entry.target.getAttribute('id');
-        setActiveNavLink(id);
+  const pageSections = Array.from(document.querySelectorAll('main section[id]'));
+  let sectionUpdateFrame = 0;
+  const updateActiveSection = () => {
+    if (sectionUpdateFrame) return;
+
+    sectionUpdateFrame = requestAnimationFrame(() => {
+      sectionUpdateFrame = 0;
+      const activationLine = window.innerHeight * 0.32;
+      const activeSection = pageSections.find((section) => {
+        const bounds = section.getBoundingClientRect();
+        return bounds.top <= activationLine && bounds.bottom > activationLine;
+      }) || pageSections.reduce((closest, section) => {
+        const distance = Math.abs(section.getBoundingClientRect().top - activationLine);
+        return !closest || distance < closest.distance ? { section, distance } : closest;
+      }, null)?.section;
+
+      if (!activeSection) return;
+      const currentActive = navLinks.find((link) => link.classList.contains('active'));
+      if (currentActive?.getAttribute('href') !== `#${activeSection.id}`) {
+        setActiveNavLink(activeSection.id);
       }
     });
-  }, { rootMargin: '-10% 0px -70% 0px', threshold: 0.2 });
+  };
 
-  document.querySelectorAll('main section[id]').forEach((section) => {
-    sectionObserver.observe(section);
-  });
+  updateActiveSection();
+  window.addEventListener('scroll', updateActiveSection, { passive: true });
+  window.addEventListener('resize', updateActiveSection, { passive: true });
 
   const typedText = document.getElementById('typedText');
   const taglines = ['Web Developer', 'UI/UX Designer', 'Project Lead'];
