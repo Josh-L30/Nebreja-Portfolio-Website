@@ -49,11 +49,39 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.remove('no-scroll');
   };
 
+  const navIndicator = document.createElement('span');
+  navIndicator.className = 'nav-indicator';
+  navIndicator.setAttribute('aria-hidden', 'true');
+  navPanel.querySelector('.nav-links')?.append(navIndicator);
+
+  const moveNavIndicator = () => {
+    const activeLink = navLinks.find((link) => link.classList.contains('active'));
+    const linksContainer = navPanel.querySelector('.nav-links');
+    if (!activeLink || !linksContainer) return;
+
+    const linkRect = activeLink.getBoundingClientRect();
+    const listRect = linksContainer.getBoundingClientRect();
+    const isMobileMenu = window.matchMedia('(max-width: 639px)').matches;
+    const horizontalPadding = isMobileMenu ? 9 : 9;
+    const verticalPadding = isMobileMenu ? 6 : 6;
+    const x = linkRect.left - listRect.left - horizontalPadding;
+    const y = linkRect.top - listRect.top - verticalPadding;
+    linksContainer.style.setProperty('--indicator-x', `${x}px`);
+    linksContainer.style.setProperty('--indicator-y', `${y}px`);
+    linksContainer.style.setProperty('--indicator-width', `${linkRect.width + horizontalPadding * 2}px`);
+    linksContainer.style.setProperty('--indicator-height', `${linkRect.height + verticalPadding * 2}px`);
+    linksContainer.classList.add('has-indicator');
+  };
+
   const setActiveNavLink = (id) => {
     navLinks.forEach((link) => {
       link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
     });
+    requestAnimationFrame(moveNavIndicator);
   };
+
+  moveNavIndicator();
+  window.addEventListener('resize', moveNavIndicator, { passive: true });
 
   navToggle.addEventListener('click', () => {
     const isOpen = navPanel.classList.toggle('is-open');
@@ -466,23 +494,25 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { threshold: 0.2 });
 
   document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
-  const hero = document.querySelector('.hero');
+  const sections = document.querySelectorAll('main .section');
   const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  if (hero && finePointer.matches && !reduceMotion.matches) {
-    let pointerFrame = 0;
-    hero.addEventListener('pointermove', (event) => {
-      if (pointerFrame) cancelAnimationFrame(pointerFrame);
-      pointerFrame = requestAnimationFrame(() => {
-        const bounds = hero.getBoundingClientRect();
-        hero.style.setProperty('--pointer-x', `${event.clientX - bounds.left}px`);
-        hero.style.setProperty('--pointer-y', `${event.clientY - bounds.top}px`);
-        pointerFrame = 0;
-      });
-    }, { passive: true });
-    hero.addEventListener('pointerleave', () => {
-      hero.style.setProperty('--pointer-x', '50%');
-      hero.style.setProperty('--pointer-y', '35%');
-    }, { passive: true });
+  if (finePointer.matches && !reduceMotion.matches) {
+    sections.forEach((section) => {
+      let pointerFrame = 0;
+      section.addEventListener('pointermove', (event) => {
+        if (pointerFrame) cancelAnimationFrame(pointerFrame);
+        pointerFrame = requestAnimationFrame(() => {
+          const bounds = section.getBoundingClientRect();
+          section.style.setProperty('--pointer-x', `${event.clientX - bounds.left}px`);
+          section.style.setProperty('--pointer-y', `${event.clientY - bounds.top}px`);
+          pointerFrame = 0;
+        });
+      }, { passive: true });
+      section.addEventListener('pointerleave', () => {
+        section.style.setProperty('--pointer-x', '50%');
+        section.style.setProperty('--pointer-y', '35%');
+      }, { passive: true });
+    });
   }
 });

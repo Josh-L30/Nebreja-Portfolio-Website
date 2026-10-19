@@ -2293,3 +2293,179 @@ body[data-theme="dark"] .site-header.scrolled .brand-mark { border-color: var(--
 @media (max-width: 374px) {
   .site-header.show-brand-name .brand-text { max-width: 0; margin-left: -8px; }
 }
+
+/* Traveling circular marker for the active navigation item. */
+.nav-links { position: relative; }
+.nav-link:after { display: none; }
+.nav-indicator {
+  position: absolute;
+  z-index: 2;
+  left: var(--indicator-x, 0px);
+  top: var(--indicator-y, 0px);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 0 4px color-mix(in srgb, currentColor 12%, transparent);
+  transform: translate(-50%, -50%) scale(.75);
+  opacity: 0;
+  pointer-events: none;
+  transition: left 420ms cubic-bezier(.2,.8,.2,1), top 420ms cubic-bezier(.2,.8,.2,1),
+    transform 240ms ease, opacity 180ms ease, background-color var(--theme-transition);
+}
+.nav-links.has-indicator .nav-indicator { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+@media (max-width: 639px) {
+  .nav-links { align-items: flex-start; }
+  .nav-indicator { left: var(--indicator-x, -12px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-indicator { transition: none; }
+}
+
+/* The active marker is a traveling outline that wraps the full link label. */
+.nav-indicator {
+  z-index: 0;
+  width: var(--indicator-width, 0px);
+  height: var(--indicator-height, 0px);
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  background: transparent;
+  box-shadow: none;
+  transform: none;
+  transition: left 420ms cubic-bezier(.2,.8,.2,1), top 420ms cubic-bezier(.2,.8,.2,1),
+    width 420ms cubic-bezier(.2,.8,.2,1), height 420ms cubic-bezier(.2,.8,.2,1), opacity 180ms ease,
+    background-color var(--theme-transition), border-color var(--theme-transition);
+}
+.nav-link { z-index: 1; padding: 6px 9px; margin: -6px -9px; }
+.nav-links.has-indicator .nav-indicator { transform: none; }
+@media (max-width: 639px) {
+  .nav-link { padding: 7px 12px; margin: -7px -12px; }
+}
+
+/* Theme-aware luminous treatment for the moving nav outline. */
+:root {
+  --nav-outline-glow: rgba(0, 0, 0, 0.20);
+  --nav-outline-fill: rgba(0, 0, 0, 0.045);
+}
+body[data-theme="dark"] {
+  --nav-outline-glow: rgba(255, 255, 255, 0.22);
+  --nav-outline-fill: rgba(255, 255, 255, 0.06);
+}
+.nav-indicator {
+  border: 1px solid var(--accent-secondary);
+  background: color-mix(in srgb, var(--panel) 70%, transparent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent-secondary) 22%, transparent),
+    0 0 16px var(--nav-outline-glow),
+    inset 0 0 12px var(--nav-outline-fill);
+  backdrop-filter: blur(5px);
+  transition: left 420ms cubic-bezier(.2,.8,.2,1), top 420ms cubic-bezier(.2,.8,.2,1),
+    width 420ms cubic-bezier(.2,.8,.2,1), height 420ms cubic-bezier(.2,.8,.2,1), opacity 180ms ease,
+    background-color var(--theme-transition), border-color var(--theme-transition), box-shadow var(--theme-transition);
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-indicator { transition: none; }
+}
+
+/* Give the active nav capsule a clearly visible grayscale gradient fill. */
+:root {
+  --nav-pill-start: #171717;
+  --nav-pill-end: #454545;
+  --nav-pill-label: #ffffff;
+  --nav-pill-glow: rgba(0, 0, 0, 0.34);
+}
+body[data-theme="dark"] {
+  --nav-pill-start: #f5f5f5;
+  --nav-pill-end: #c9c9c9;
+  --nav-pill-label: #111111;
+  --nav-pill-glow: rgba(255, 255, 255, 0.34);
+}
+.nav-indicator {
+  background: linear-gradient(135deg, var(--nav-pill-start), var(--nav-pill-end));
+  border-color: color-mix(in srgb, var(--nav-pill-end) 82%, var(--text));
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--nav-pill-end) 38%, transparent),
+    0 0 18px var(--nav-pill-glow), 0 5px 18px var(--shadow-strong),
+    inset 0 1px 0 color-mix(in srgb, var(--text-light) 28%, transparent);
+  backdrop-filter: none;
+}
+.nav-link.active,
+.site-header.scrolled .nav-link.active,
+body[data-theme="dark"] .site-header.scrolled .nav-link.active,
+body[data-theme="dark"] .nav-panel .nav-link.active {
+  color: var(--nav-pill-label);
+}
+
+/* Soft monochrome glow for the requested primary actions and theme switch. */
+:root { --button-glow: rgba(0, 0, 0, 0.17); --button-glow-strong: rgba(0, 0, 0, 0.28); }
+body[data-theme="dark"] { --button-glow: rgba(255, 255, 255, 0.16); --button-glow-strong: rgba(255, 255, 255, 0.27); }
+.theme-toggle,
+.hero-actions .btn,
+.about-actions .btn,
+#submitButton {
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent-secondary) 16%, transparent),
+    0 0 14px var(--button-glow);
+  transition: background-color var(--theme-transition), color var(--theme-transition),
+    border-color var(--theme-transition), transform 260ms ease, box-shadow 300ms ease;
+}
+.theme-toggle:hover,
+.theme-toggle:focus-visible,
+.hero-actions .btn:hover,
+.hero-actions .btn:focus-visible,
+.about-actions .btn:hover,
+.about-actions .btn:focus-visible,
+#submitButton:hover,
+#submitButton:focus-visible {
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent-secondary) 42%, transparent),
+    0 0 22px var(--button-glow-strong), 0 8px 24px var(--shadow-strong);
+}
+.theme-toggle:focus-visible,
+.hero-actions .btn:focus-visible,
+.about-actions .btn:focus-visible,
+#submitButton:focus-visible {
+  outline: 2px solid var(--accent-secondary);
+  outline-offset: 3px;
+}
+#submitButton:disabled { box-shadow: none; }
+
+/* More visible pointer spotlight in the hero, above the background and below content. */
+:root {
+  --cursor-glow: rgba(45, 45, 45, 0.18);
+  --cursor-ring: rgba(35, 35, 35, 0.20);
+}
+body[data-theme="dark"] {
+  --cursor-glow: rgba(255, 255, 255, 0.16);
+  --cursor-ring: rgba(255, 255, 255, 0.20);
+}
+.hero { isolation: isolate; }
+.hero::after {
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 520px 420px at var(--pointer-x, 50%) var(--pointer-y, 35%), var(--cursor-glow), transparent 74%),
+    radial-gradient(circle 250px at var(--pointer-x, 50%) var(--pointer-y, 35%), transparent 99%, var(--cursor-ring) 100%, transparent 101%);
+  opacity: 1;
+  transition: opacity 220ms ease;
+}
+.hero-grid { position: relative; z-index: 1; }
+@media (hover: none), (pointer: coarse) {
+  .hero::after { display: none; }
+}
+
+/* Keep the cursor interaction as a compact soft glow, without a visible ring. */
+.hero::after {
+  background: radial-gradient(ellipse 300px 250px at var(--pointer-x, 50%) var(--pointer-y, 35%), var(--cursor-glow), transparent 76%);
+}
+
+/* Extend the compact pointer spotlight across every main content section. */
+main .section { position: relative; isolation: isolate; }
+main .section::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse 300px 250px at var(--pointer-x, 50%) var(--pointer-y, 35%), var(--cursor-glow), transparent 76%);
+  opacity: 1;
+}
+main .section > .container { position: relative; z-index: 1; }
+@media (hover: none), (pointer: coarse) {
+  main .section::after { display: none; }
+}
