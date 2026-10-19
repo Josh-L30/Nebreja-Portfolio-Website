@@ -463,4 +463,23 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { threshold: 0.2 });
 
   document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
+  const hero = document.querySelector('.hero');
+  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (hero && finePointer.matches && !reduceMotion.matches) {
+    let pointerFrame = 0;
+    hero.addEventListener('pointermove', (event) => {
+      if (pointerFrame) cancelAnimationFrame(pointerFrame);
+      pointerFrame = requestAnimationFrame(() => {
+        const bounds = hero.getBoundingClientRect();
+        hero.style.setProperty('--pointer-x', `${event.clientX - bounds.left}px`);
+        hero.style.setProperty('--pointer-y', `${event.clientY - bounds.top}px`);
+        pointerFrame = 0;
+      });
+    }, { passive: true });
+    hero.addEventListener('pointerleave', () => {
+      hero.style.setProperty('--pointer-x', '50%');
+      hero.style.setProperty('--pointer-y', '35%');
+    }, { passive: true });
+  }
 });

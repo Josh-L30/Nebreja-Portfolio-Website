@@ -2136,3 +2136,137 @@ body[data-theme="dark"] .icon-link:hover {
     grid-template-columns: minmax(440px, 0.95fr) minmax(420px, 0.85fr);
   }
 }
+
+/* Monochrome theme polish and responsive motion */
+:root {
+  color-scheme: light;
+  --bg: #f7f7f7;
+  --bg-soft: #eeeeee;
+  --text: #151515;
+  --text-soft: #424242;
+  --text-muted: #686868;
+  --text-light: #ffffff;
+  --text-faint: #8a8a8a;
+  --line: #d4d4d4;
+  --line-soft: #e5e5e5;
+  --panel: #ffffff;
+  --panel-soft: #f1f1f1;
+  --accent: #171717;
+  --on-accent: #ffffff;
+  --accent-secondary: #555555;
+  --accent-secondary-soft: #e2e2e2;
+  --success: #343434;
+  --danger: #737373;
+  --shadow: rgba(0, 0, 0, 0.08);
+  --shadow-strong: rgba(0, 0, 0, 0.16);
+  --theme-transition: 520ms cubic-bezier(.2,.75,.2,1);
+}
+
+body[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #101010;
+  --bg-soft: #191919;
+  --text: #f4f4f4;
+  --text-soft: #d0d0d0;
+  --text-muted: #a4a4a4;
+  --text-light: #ffffff;
+  --text-faint: #858585;
+  --line: #383838;
+  --line-soft: #292929;
+  --panel: #1b1b1b;
+  --panel-soft: #232323;
+  --accent: #f1f1f1;
+  --on-accent: #111111;
+  --accent-secondary: #c8c8c8;
+  --accent-secondary-soft: #303030;
+  --success: #d0d0d0;
+  --danger: #a6a6a6;
+  --shadow: rgba(0, 0, 0, 0.28);
+  --shadow-strong: rgba(0, 0, 0, 0.5);
+}
+
+html { scroll-behavior: smooth; }
+body, .site-header, .hero, .section, .project-card, .skill-card, .cert-card,
+.stat-card, .timeline-content, .education-item, .contact-form-wrap, .status-card,
+.project-modal, .cert-modal-card, .theme-toggle, .btn, .tag, .carousel-window {
+  transition: background-color var(--theme-transition), color var(--theme-transition),
+    border-color var(--theme-transition), box-shadow var(--theme-transition);
+}
+
+.btn-primary:hover { background: var(--accent-secondary); }
+.site-header.scrolled { background: color-mix(in srgb, var(--bg) 90%, transparent); color: var(--text); backdrop-filter: blur(16px); border-bottom: 1px solid var(--line-soft); }
+.site-header.scrolled .nav-link, .site-header.scrolled .nav-link.active,
+.site-header.scrolled .nav-toggle { color: var(--text); }
+.site-header.scrolled .brand-mark { border-color: var(--line); }
+.scroll-progress-bar { background: var(--text); }
+
+.hero { position: relative; isolation: isolate; overflow: hidden; }
+.hero::after {
+  content: ""; position: absolute; z-index: -1; inset: 0; pointer-events: none;
+  background: radial-gradient(440px circle at var(--pointer-x, 50%) var(--pointer-y, 35%), rgba(128,128,128,.12), transparent 72%);
+  opacity: .85; transition: opacity 350ms ease;
+}
+.hero-content h1 { text-wrap: balance; }
+.typed-text { color: var(--accent-secondary); }
+.avatar-bg { background: radial-gradient(circle, var(--panel), var(--bg-soft)); }
+.avatar-image { background: linear-gradient(135deg, #111, #555); }
+.orbit { border-color: var(--text-faint); }
+
+.project-card, .skill-card, .cert-card, .stat-card, .timeline-content, .education-item, .status-card {
+  transition: transform 320ms cubic-bezier(.2,.75,.2,1), background-color var(--theme-transition),
+    color var(--theme-transition), border-color var(--theme-transition), box-shadow 320ms ease;
+}
+.project-card:hover, .skill-card:hover, .cert-card:hover, .stat-card:hover,
+.timeline-content:hover, .education-item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 42px var(--shadow-strong);
+}
+.project-media img, .project-media-image, .cert-image { transition: transform 650ms cubic-bezier(.2,.75,.2,1), filter 500ms ease; }
+.project-card:hover .project-media img, .project-card:hover .project-media-image { transform: scale(1.035); }
+.btn:hover, .theme-toggle:hover { transform: translateY(-2px); }
+.nav-link:after { transition-duration: 320ms; }
+
+@media (hover: hover) and (pointer: fine) {
+  .hero::after { background-position: center; }
+  .project-card, .skill-card, .cert-card, .btn, .theme-toggle, .icon-link { will-change: transform; }
+}
+
+@media (max-width: 1024px) {
+  .hero-grid { grid-template-columns: minmax(0, 1fr); }
+  .hero-content { min-width: 0; }
+  .hero-visual .avatar-bg { width: min(68vw, 390px); }
+  .orbit-one { width: min(74vw, 420px); height: min(74vw, 420px); }
+  .orbit-two { width: min(59vw, 340px); height: min(59vw, 340px); }
+}
+
+@media (max-width: 639px) {
+  .hero-grid { gap: 34px; }
+  .hero-content h1 { font-size: clamp(2.15rem, 10vw, 3.35rem); line-height: 1.02; }
+  .typed-wrapper { display: flex; justify-content: center; }
+  .hero-actions { justify-content: center; gap: 12px; }
+  .hero-actions .btn { min-height: 48px; padding-inline: 20px; }
+  .hero-socials { justify-content: center; }
+  .section h2 { font-size: clamp(1.75rem, 8vw, 2.35rem); }
+  .project-grid, .skill-grid, .cert-grid, .stats-panel, .about-grid, .contact-grid { grid-template-columns: minmax(0, 1fr); }
+  .featured-project { grid-column: auto; }
+  .project-card, .skill-card, .cert-card { min-width: 0; }
+  .nav-panel { background: var(--bg); color: var(--text); border-left: 1px solid var(--line); }
+  .nav-links .nav-link, body[data-theme="dark"] .nav-panel .nav-link,
+  body[data-theme="dark"] .nav-panel .nav-link.active { color: var(--text); }
+  .nav-close, body[data-theme="dark"] .nav-close { color: var(--text); border-color: var(--line); background: var(--panel-soft); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  .reveal { opacity: 1; transform: none; }
+}
+
+@media (min-width: 1025px) and (max-width: 1140px) {
+  .hero-grid { grid-template-columns: minmax(0, 1fr) minmax(300px, 340px); gap: 36px; }
+  .hero-content h1 { font-size: clamp(3rem, 5.4vw, 4.2rem); }
+}
+body[data-theme="dark"] .site-header.scrolled,
+body[data-theme="dark"] .site-header.scrolled .nav-link,
+body[data-theme="dark"] .site-header.scrolled .nav-link.active,
+body[data-theme="dark"] .site-header.scrolled .nav-toggle { color: var(--text); }
+body[data-theme="dark"] .site-header.scrolled .brand-mark { border-color: var(--line); }
