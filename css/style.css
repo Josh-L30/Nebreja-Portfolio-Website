@@ -2682,3 +2682,12 @@ body[data-theme="dark"] .contact .icon-link:hover {
 @media (prefers-reduced-motion: reduce) {
   .nav-link { transition: none; }
 }
+/* In dark mode, keep the previous active label readable after the capsule moves. */
+body[data-theme="dark"] .nav-links.is-hovering .nav-link.active:not(:hover) {
+  color: var(--text) !important;
+}
+body[data-theme="dark"] .nav-links .nav-link:hover {
+  color: var(--nav-pill-label) !important;
+  -webkit-text-stroke: 0;
+  text-shadow: none;
+}

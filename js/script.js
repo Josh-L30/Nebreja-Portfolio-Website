@@ -76,9 +76,15 @@ document.addEventListener('DOMContentLoaded', () => {
   navIndicator.setAttribute('aria-hidden', 'true');
   navPanel.querySelector('.nav-links')?.append(navIndicator);
   const navLinksContainer = navPanel.querySelector('.nav-links');
-  navLinksContainer?.addEventListener('pointerleave', () => moveNavIndicator());
+  navLinksContainer?.addEventListener('pointerleave', () => {
+    navLinksContainer.classList.remove('is-hovering');
+    moveNavIndicator();
+  });
   navLinks.forEach((link) => {
-    link.addEventListener('pointerenter', () => moveNavIndicator(link));
+    link.addEventListener('pointerenter', () => {
+      navLinksContainer?.classList.add('is-hovering');
+      moveNavIndicator(link);
+    });
   });
 
   const moveNavIndicator = (targetLink = navLinks.find((link) => link.classList.contains('active'))) => {
