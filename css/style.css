@@ -2645,3 +2645,21 @@ body[data-theme="dark"] .contact .icon-link:hover {
 @media (max-width: 639px) {
   .nav-links.is-filling .nav-indicator { animation: none; }
 }
+
+/* Circular theme reveal starts at the theme control. */
+@supports (view-transition-name: root) {
+  html { view-transition-name: root; }
+  ::view-transition-group(root) { animation-duration: 760ms; }
+  ::view-transition-old(root) { animation: none; }
+  ::view-transition-new(root) {
+    animation: theme-circle-reveal 760ms cubic-bezier(.2,.75,.2,1) both;
+  }
+}
+@keyframes theme-circle-reveal {
+  from { clip-path: circle(0 at var(--theme-origin-x, 50%) var(--theme-origin-y, 50%)); }
+  to { clip-path: circle(150vmax at var(--theme-origin-x, 50%) var(--theme-origin-y, 50%)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(root),
+  ::view-transition-new(root) { animation-duration: 0s; }
+}

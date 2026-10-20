@@ -24,9 +24,28 @@ document.addEventListener('DOMContentLoaded', () => {
   if (themeToggle) {
     themeToggle.addEventListener('click', () => {
       const nextTheme = document.body.dataset.theme === 'dark' ? 'light' : 'dark';
-      document.body.dataset.theme = nextTheme;
-      localStorage.setItem('portfolioTheme', nextTheme);
-      syncThemeControl();
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const bounds = themeToggle.getBoundingClientRect();
+      const centerX = bounds.left + bounds.width / 2;
+      const centerY = bounds.top + bounds.height / 2;
+
+      const applyTheme = () => {
+        document.body.dataset.theme = nextTheme;
+        localStorage.setItem('portfolioTheme', nextTheme);
+        syncThemeControl();
+      };
+
+      if (!prefersReducedMotion && document.startViewTransition) {
+        document.documentElement.style.setProperty('--theme-origin-x', `${centerX}px`);
+        document.documentElement.style.setProperty('--theme-origin-y', `${centerY}px`);
+        const transition = document.startViewTransition(applyTheme);
+        transition.finished.finally(() => {
+          document.documentElement.style.removeProperty('--theme-origin-x');
+          document.documentElement.style.removeProperty('--theme-origin-y');
+        });
+      } else {
+        applyTheme();
+      }
     });
   }
 
