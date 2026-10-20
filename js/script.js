@@ -75,9 +75,14 @@ document.addEventListener('DOMContentLoaded', () => {
   navIndicator.className = 'nav-indicator';
   navIndicator.setAttribute('aria-hidden', 'true');
   navPanel.querySelector('.nav-links')?.append(navIndicator);
+  const navLinksContainer = navPanel.querySelector('.nav-links');
+  navLinksContainer?.addEventListener('pointerleave', () => moveNavIndicator());
+  navLinks.forEach((link) => {
+    link.addEventListener('pointerenter', () => moveNavIndicator(link));
+  });
 
-  const moveNavIndicator = () => {
-    const activeLink = navLinks.find((link) => link.classList.contains('active'));
+  const moveNavIndicator = (targetLink = navLinks.find((link) => link.classList.contains('active'))) => {
+    const activeLink = targetLink;
     const linksContainer = navPanel.querySelector('.nav-links');
     if (!activeLink || !linksContainer) return;
 
@@ -124,8 +129,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
   navClose?.addEventListener('click', closeNavigation);
 
+  let navigationScrollTimer = 0;
+  let navigationInProgress = false;
+
   navLinks.forEach((link) => {
     link.addEventListener('click', () => {
+      const targetId = link.getAttribute('href')?.slice(1);
+      if (targetId) {
+        navigationInProgress = true;
+        window.clearTimeout(navigationScrollTimer);
+        navigationScrollTimer = window.setTimeout(() => {
+          navigationInProgress = false;
+          updateActiveSection();
+        }, 1200);
+        setActiveNavLink(targetId);
+      }
       closeNavigation();
     });
   });
@@ -133,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const pageSections = Array.from(document.querySelectorAll('main section[id]'));
   let sectionUpdateFrame = 0;
   const updateActiveSection = () => {
-    if (sectionUpdateFrame) return;
+    if (navigationInProgress || sectionUpdateFrame) return;
 
     sectionUpdateFrame = requestAnimationFrame(() => {
       sectionUpdateFrame = 0;
@@ -155,7 +173,17 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   updateActiveSection();
-  window.addEventListener('scroll', updateActiveSection, { passive: true });
+  window.addEventListener('scroll', () => {
+    if (navigationInProgress) {
+      window.clearTimeout(navigationScrollTimer);
+      navigationScrollTimer = window.setTimeout(() => {
+        navigationInProgress = false;
+        updateActiveSection();
+      }, 180);
+      return;
+    }
+    updateActiveSection();
+  }, { passive: true });
   window.addEventListener('resize', updateActiveSection, { passive: true });
 
   const typedText = document.getElementById('typedText');
