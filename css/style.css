@@ -698,14 +698,17 @@ textarea {
   border-radius: var(--radius-small);
   padding: 28px 24px;
   min-height: 160px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  grid-template-rows: 2rem 2.4em;
+  row-gap: 12px;
+  align-content: center;
+  justify-items: center;
   box-shadow: 0 5px 30px var(--shadow);
 }
 
 .stat-number {
+  width: 100%;
+  text-align: center;
   font-family: var(--font-display);
   font-size: 2rem;
   line-height: 1;
@@ -713,7 +716,9 @@ textarea {
 }
 
 .stat-label {
-  margin-top: 12px;
+  width: 100%;
+  min-height: 2.4em;
+  line-height: 1.2;
   font-weight: 700;
   font-size: 0.75rem;
   color: var(--text-muted);
@@ -736,6 +741,25 @@ textarea {
   bottom: 12px;
   width: 1px;
   background: var(--line-soft);
+}
+
+.experience .timeline-item.reveal.experience-slide-left,
+.experience .timeline-item.reveal.experience-slide-right {
+  opacity: 0;
+  transition: opacity 780ms ease, transform 780ms cubic-bezier(.2,.75,.2,1);
+}
+
+.experience .timeline-item.reveal.experience-slide-left {
+  transform: translateX(-180px);
+}
+
+.experience .timeline-item.reveal.experience-slide-right {
+  transform: translateX(180px);
+}
+
+.experience .timeline-item.reveal.in-view {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 .timeline-item {
@@ -1340,6 +1364,11 @@ body[data-theme="dark"] .contact-value {
   transition: background-color 220ms ease, color 220ms ease, transform 220ms ease;
 }
 
+.icon-link svg {
+  width: 20px;
+  height: 20px;
+}
+
 body[data-theme="dark"] .icon-link {
   border-color: var(--line);
   color: var(--text);
@@ -1644,6 +1673,17 @@ body[data-theme="dark"] .icon-link:hover {
   letter-spacing: 0.08em;
 }
 
+.about-typewriter-section [data-typewriter] .typing-char {
+  opacity: 0;
+}
+
+.about-typewriter-section.in-view [data-typewriter] .typing-char {
+  animation: about-type-character 1ms steps(1, end) forwards;
+}
+
+@keyframes about-type-character {
+  to { opacity: 1; }
+}
 .reveal {
   opacity: 0;
   transform: translateY(30px);
@@ -2259,6 +2299,10 @@ body, .site-header, .hero, .section, .project-card, .skill-card, .cert-card,
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
   .reveal { opacity: 1; transform: none; }
+  .experience .timeline-item.reveal.experience-slide-left,
+  .experience .timeline-item.reveal.experience-slide-right,
+  .experience .timeline-item.reveal.in-view { opacity: 1; transform: none; }
+  .about-typewriter-section [data-typewriter] .typing-char { opacity: 1; animation: none; }
 }
 
 @media (min-width: 1025px) and (max-width: 1140px) {
@@ -2690,4 +2734,10 @@ body[data-theme="dark"] .nav-links .nav-link:hover {
   color: var(--nav-pill-label) !important;
   -webkit-text-stroke: 0;
   text-shadow: none;
+}
+
+.stats-panel .stat-card:nth-child(2) .stat-number,
+.stats-panel .stat-card:nth-child(2) .stat-label {
+  position: relative;
+  left: -12px;
 }

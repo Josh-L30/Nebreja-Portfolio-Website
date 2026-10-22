@@ -569,10 +569,30 @@ document.addEventListener('DOMContentLoaded', () => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         entry.target.classList.add('in-view');
+      } else if (entry.target.matches('.experience-slide-left, .experience-slide-right, .about-typewriter-section')) {
+        entry.target.classList.remove('in-view');
       }
     });
   }, { threshold: 0.2 });
 
+  document.querySelectorAll('[data-typewriter]').forEach((element) => {
+    const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
+    const textNodes = [];
+    while (walker.nextNode()) textNodes.push(walker.currentNode);
+
+    let characterIndex = 0;
+    textNodes.forEach((textNode) => {
+      const fragment = document.createDocumentFragment();
+      Array.from(textNode.textContent).forEach((character) => {
+        const span = document.createElement('span');
+        span.className = 'typing-char';
+        span.style.animationDelay = (characterIndex++ * 4) + 'ms';
+        span.textContent = character;
+        fragment.appendChild(span);
+      });
+      textNode.replaceWith(fragment);
+    });
+  });
   document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
   const sections = document.querySelectorAll('main .section');
   const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
