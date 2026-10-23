@@ -329,7 +329,16 @@ const dialog = document.getElementById('projectDialog');
 const imageDialog=document.getElementById('imageDialog');
 const fullImage=document.getElementById('fullImage');
 const imageStatus=document.getElementById('imageStatus');
-function openImage(source,title){
+const imageFilmstrip=node('div','image-filmstrip');
+imageFilmstrip.setAttribute('aria-label','Choose a full-size project screen');
+imageFilmstrip.hidden=true;imageDialog.append(imageFilmstrip);
+imageFilmstrip.addEventListener('keydown',event=>{
+  if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;
+  event.preventDefault();
+  const index=event.key==='Home'?0:event.key==='End'?gallery.length-1:Math.max(0,Math.min(galleryIndex+(event.key==='ArrowRight'?1:-1),gallery.length-1));
+  imageFilmstrip.children[index]?.click();imageFilmstrip.children[index]?.focus();
+});
+function loadFullImage(source,title){
   document.getElementById('imageTitle').textContent=title;
   fullImage.alt=title;
   fullImage.hidden=true;
@@ -337,6 +346,24 @@ function openImage(source,title){
   fullImage.onload=()=>{fullImage.hidden=false;imageStatus.textContent='';};
   fullImage.onerror=()=>{imageStatus.textContent='This image could not load. Close the viewer and try again.';};
   fullImage.src=source;
+}
+function openImage(source,title,projectGallery=false){
+  imageFilmstrip.hidden=!projectGallery;
+  imageFilmstrip.replaceChildren();
+  if(projectGallery)gallery.forEach((screen,index)=>{
+    const button=node('button','gallery-thumbnail');button.type='button';
+    button.setAttribute('aria-label',`${String(index+1).padStart(2,'0')} Show ${screen.label}`);
+    button.setAttribute('aria-pressed',String(index===galleryIndex));
+    const image=node('img');fillImage(image,screen.image,'100px');image.alt='';image.loading='lazy';
+    button.append(image,node('span','',String(index+1).padStart(2,'0')));
+    button.addEventListener('click',()=>{
+      showGalleryImage(index);
+      loadFullImage(new URL('../'+screen.original,import.meta.url).href,document.getElementById('detailTitle').textContent+' / '+document.getElementById('galleryCount').textContent);
+      [...imageFilmstrip.children].forEach((choice,i)=>choice.setAttribute('aria-pressed',String(i===index)));
+    });
+    imageFilmstrip.append(button);
+  });
+  loadFullImage(source,title);
   imageDialog.showModal();
 }
 document.getElementById('closeImage').addEventListener('click',()=>imageDialog.close());
@@ -359,7 +386,7 @@ document.addEventListener('click',event=>{
   if(!link)return;
   event.preventDefault();
   const certificate=link.matches('.certificate-item');
-  openImage(link.href||document.getElementById('galleryOriginal').href,certificate?link.querySelector('h3').textContent:document.getElementById('detailTitle').textContent+' / '+document.getElementById('galleryCount').textContent);
+  openImage(link.href||document.getElementById('galleryOriginal').href,certificate?link.querySelector('h3').textContent:document.getElementById('detailTitle').textContent+' / '+document.getElementById('galleryCount').textContent,!certificate);
 });
 const detailVideo = document.getElementById('detailVideo');
 let gallery = [];
