@@ -111,6 +111,7 @@ class PortfolioProjects extends HTMLElement {
         [...list.children].forEach((slide,i)=>slide.hidden=i!==current);
         [...picker.children].forEach((choice,i)=>choice.setAttribute('aria-pressed',String(i===current)));
         count.textContent=`${current+1} / ${config.projects.length}`;
+        demo.hidden=!config.projects[current].video;
       }
       previous.addEventListener('click',()=>select(current-1));next.addEventListener('click',()=>select(current+1));
       picker.addEventListener('keydown',event=>{
@@ -119,6 +120,7 @@ class PortfolioProjects extends HTMLElement {
       });
       const demo=node('button','cinema-demo-link','Watch CinemaBuddy video demo');
       demo.type='button';demo.dataset.project='cinemabuddyux';
+      demo.hidden=!config.projects[0].video;
       this.replaceChildren(list,controls,picker,demo);
       revealOnce(this);
     } catch {
@@ -136,7 +138,7 @@ class PortfolioContactForm extends HTMLElement {
       form.setAttribute('aria-label','Contact Brad');
       const fields = node('div','form-fields');
       contact.fields.forEach(field => fields.append(createField(field)));
-      const note = node('p','form-note',canSend ? 'All fields are required. Messages are processed by Web3Forms.' : 'Opens your email app with a draft addressed to Brad.');
+      const note = node('p','form-note',canSend ? 'Required fields · via Web3Forms' : 'Opens a draft in your email app.');
       note.id = 'contact-note';
       form.setAttribute('aria-describedby','contact-note');
       const status = node('p','form-status');
@@ -201,7 +203,6 @@ class PortfolioContactForm extends HTMLElement {
       });
       this.replaceChildren(form);
       revealOnce(this);
-      revealOnce(form);
     } catch {
       this.replaceChildren(node('p','component-error','The contact form could not load. Please refresh to try again.'));
     }
@@ -312,7 +313,7 @@ const arrivalObserver = new IntersectionObserver(entries => {
       entry.target.addEventListener('animationend',()=>entry.target.classList.remove('arrive'),{once:true});
     }
   });
-}, {threshold:.12});
+}, {threshold:.16,rootMargin:'0px 0px -64px 0px'});
 function revealOnce(element) { arrivalObserver.observe(element); }
 reducedMotion.addEventListener('change',()=>{
   if(reducedMotion.matches){

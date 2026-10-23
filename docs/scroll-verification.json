@@ -2,8 +2,8 @@
   {
     "mode": "mobile",
     "cpuSlowdown": 4,
-    "count": 15,
-    "unique": 15,
+    "count": 20,
+    "unique": 20,
     "idle": 0,
     "overflow": false,
     "passed": true
@@ -11,8 +11,8 @@
   {
     "mode": "desktop",
     "cpuSlowdown": 4,
-    "count": 15,
-    "unique": 15,
+    "count": 20,
+    "unique": 20,
     "idle": 0,
     "overflow": false,
     "passed": true

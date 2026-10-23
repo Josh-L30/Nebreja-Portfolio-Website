@@ -1,0 +1,42 @@
+[
+  {
+    "width": 320,
+    "cinemaOnlyDemo": true,
+    "note": {
+      "text": "Required fields · via Web3Forms",
+      "lines": 1,
+      "overflow": false
+    },
+    "passed": true
+  },
+  {
+    "width": 390,
+    "cinemaOnlyDemo": true,
+    "note": {
+      "text": "Required fields · via Web3Forms",
+      "lines": 1,
+      "overflow": false
+    },
+    "passed": true
+  },
+  {
+    "width": 768,
+    "cinemaOnlyDemo": true,
+    "note": {
+      "text": "Required fields · via Web3Forms",
+      "lines": 1,
+      "overflow": false
+    },
+    "passed": true
+  },
+  {
+    "width": 1440,
+    "cinemaOnlyDemo": true,
+    "note": {
+      "text": "Required fields · via Web3Forms",
+      "lines": 1,
+      "overflow": false
+    },
+    "passed": true
+  }
+]
