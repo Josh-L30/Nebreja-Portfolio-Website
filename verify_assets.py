@@ -7,7 +7,7 @@ import json
 ROOT = Path(__file__).resolve().parent
 missing = set()
 def check(value):
-    path = unquote(urlsplit(value).path)
+    path = unquote(urlsplit(value).path).lstrip('/')
     if path and not urlsplit(value).scheme and not value.startswith('#') and not (ROOT / path).is_file():
         missing.add(path)
 class References(HTMLParser):

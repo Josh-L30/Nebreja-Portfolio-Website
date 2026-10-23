@@ -54,3 +54,7 @@ Full-size project screens and certificates open in a near-fullscreen native dial
 ## Scroll motion and performance
 
 Sections use short one-time transform/opacity reveals. Reduced-motion and data-saver users skip them. See docs/PERFORMANCE.md for measured Lighthouse results and test limitations. The local variable font is preloaded once, async content reserves space, and certificate/portrait images use responsive sizes.
+
+## Website icon and social sharing
+
+The browser favicon and Apple touch icon use Brad's existing portrait. Open Graph and Twitter large-card metadata are included directly in the HTML head, with absolute public URLs. The 1200x630 JPEG at assets/brad-hero-social-v1.jpg is captured from the actual light-theme hero design. Regenerate the image and update its versioned filename in the metadata when the hero changes. Previously cached platform previews may require a rescrape after publishing.
