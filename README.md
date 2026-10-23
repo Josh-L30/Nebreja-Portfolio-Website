@@ -1,109 +1,52 @@
-Brad Josh Nebreja — Personal Portfolio
+# Brad Josh Nebreja | Portfolio
 
-A responsive single-page portfolio website for **Brad Josh Nebreja**, an Information Technology student, web developer, UI/UX designer, and project lead based in Calamba City, Laguna, Philippines.
+Responsive static portfolio built with HTML, CSS and native JavaScript components. No build step or package install is required.
 
-The site presents Brad's background, leadership experience, selected work, technical skills, certifications, education, and ways to get in touch. It is built as a lightweight static site using plain HTML, CSS, and JavaScript—no build step or framework required.
+## Run locally
 
-Highlights
-
-- Responsive, mobile-friendly one-page layout
-- Light and dark themes, with the visitor's preference saved in `localStorage`
-- Accessible navigation with an active-section indicator and mobile menu
-- Animated role headline, scroll progress bar, reveal effects, and count-up statistics
-- Detailed project dialogs for the featured work
-- Interactive, auto-advancing UI galleries that pause on hover or keyboard focus
-- Full-size image dialog for project screens and certificate previews
-- Video walkthrough for the CinemaBuddy prototype
-- Client-side contact form validation with loading, success, and error states
-- Optional Formspree integration for live contact-form delivery
-
-Portfolio content:
-
-About and experience
-
-The site introduces Brad as an IT student focused on practical, user-centered digital tools. The experience timeline documents work as Capstone Project Lead and UI/UX Designer Lead for the Containerboard Packaging Corporation (CPC) centralized system.
-
-Selected projects
-
-| Project | Description | Main tools |
-| --- | --- | --- |
-| **CPC Centralized System** | A platform designed to centralize supply, production, inventory, logistics, and sales visibility. | HTML, CSS, JavaScript, PHP, React, Express.js, MS SQL, Laravel WebSocket |
-| **CPC Dashboard Experience** | UI/UX dashboard concepts for monitoring operational data and reporting. | Figma, HTML, CSS, JavaScript |
-| **Game Mechanics Website** | A first-year group project presenting game mechanics for *Masters of World Literature*. | HTML, CSS, JavaScript |
-| **CinemaBuddy** | A mobile movie-discovery and personalized viewing-experience concept. | Figma, UI/UX design |
-| **CinemaBuddy UX Walkthrough** | A video prototype walkthrough covering onboarding, account access, and movie discovery. | Figma, UX design, user flows |
-
-The portfolio also includes skills, five certificate previews, and education history. Visitors can open project details, browse design screens, and inspect certificates without leaving the page.
-
-Technology
-
-- **HTML5** for semantic page structure
-- **CSS3** for custom layout, responsive design, animation, and theme styling
-- **Vanilla JavaScript** for all interaction and UI behavior
-- **Native browser APIs** including `IntersectionObserver`, `HTMLDialogElement`, `localStorage`, and `fetch`
-- **Devicon CDN** for selected skill icons
-
-Project structure
-
-```text
-NebrejaPortfolio/
-├── index.html                    # Page content, sections, assets, and dialogs
-├── css/
-│   └── style.css                 # Visual design, themes, responsiveness, and animations
-├── js/
-│   └── script.js                 # Navigation, galleries, modals, form behavior, and effects
-├── assets/
-│   ├── BJ.jpg                    # Profile photo
-│   ├── Nebreja_CVitae.pdf        # Downloadable CV
-│   ├── certificates/             # Certificate images
-│   ├── UI/                       # Project and interface screenshots
-│   └── video/                    # CinemaBuddy walkthrough video
-├── verify.py                     # Basic local verification helper
-└── verify_assets.py              # Asset-reference verification helper
-```
-
-Run locally
-
-Because this is a static website, you can open `index.html` directly in a browser. For the closest local-server experience, serve the folder instead:
-
-```bash
+```sh
 python -m http.server 8000
 ```
 
-Then visit [http://localhost:8000](http://localhost:8000).
+Open http://localhost:8000. Use HTTP rather than opening index.html directly because the components fetch JSON and use ES modules.
 
-If you use XAMPP, place the project in `htdocs` and visit the corresponding local URL, such as `http://localhost/NebrejaPortfolio/`.
+## Design and content
 
-Contact form configuration
+- Three-link top navigation (Projects, Experience, Contact) and a compact profile, full experience, education, About and contact details.
+- Manual 3D project carousel with five entries, thumbnail controls and keyboard navigation. Image-first project details include a keyboard-operable thumbnail filmstrip, all 29 unique source screenshots and an on-demand video walkthrough.
+- Certificate folio with five thumbnail credential selectors and an in-page full-size image viewer.
+- Original-color local tool logos, light/dark themes with saved preference, reduced-motion and reduced-transparency fallbacks.
+- locally hosted Nunito Sans typography, responsive WebP previews, lazy images and no carousel autoplay or animation library.
 
-The form works as a front-end demonstration by default: it validates inputs and displays a simulated success state, but does not send an email. To enable delivery through Formspree, define `window.FORMSPREE_ENDPOINT` before loading `js/script.js` in `index.html`:
+## Files to edit
 
-```html
-<script>
-  window.FORMSPREE_ENDPOINT = 'https://formspree.io/f/your-form-id';
-</script>
-<script src="js/script.js"></script>
+| Content | Location |
+| --- | --- |
+| Main page copy and section structure | index.html |
+| Projects, galleries, tools, certificates and contact configuration | data/content.json |
+| Page layout and effects | css/style.css |
+| Shared form styles | css/components.css |
+| Components, selectors, dialogs and navigation | js/script.js |
+| Original media and optimized previews | assets/ |
+| Component sources and license notices | docs/ |
+
+Profile, experience, education and About values are also retained in JSON for reference; those sections currently render from index.html. Edit their HTML when changing visible copy.
+
+## Contact form
+
+No sending endpoint is configured. The form validates name, email and message, clearly states that messages are not sent, and retains unsent text. It never displays simulated success.
+
+To connect a service, set contact.endpoint in data/content.json to a verified endpoint that accepts a JSON POST containing name, email and message, supports browser CORS and returns a successful HTTP status only after acceptance. Test real delivery before publishing. Never put private credentials in client-side files. Local mock checks do not prove email delivery.
+
+## Verification
+
+```sh
+python verify_assets.py
+python verify.py
 ```
 
-Replace `your-form-id` with the endpoint supplied by Formspree. The existing JavaScript sends JSON and retains the built-in validation and feedback states.
+Asset verification checks local HTML and JSON references, responsive galleries and certificate previews. Browser smoke verification expects the HTTP server on port 8000, or pass its URL as the first argument. Latest local Chrome evidence is recorded in docs/verification.json. The 320, 390, 768 and 1440px checks are viewport emulation, not physical-device tests. No deployment has been performed.
 
-Customization guide
+Personal content, CV, certificates and project media belong to Brad and their respective owners. Third-party component adaptations and logo licenses are documented in docs/.
 
-| To update | Where to change it |
-| --- | --- |
-| Name, biography, links, contact details, and section text | `index.html` |
-| Resume/CV download | Replace `assets/Nebreja_CVitae.pdf`, or update the hero link in `index.html` |
-| Profile photo | Replace `assets/BJ.jpg` and keep the filename, or change its image path in `index.html` |
-| Project cards, images, and tags | The `#projects` section in `index.html` and the related assets in `assets/UI/` |
-| Project modal copy | The `projectData` object in `js/script.js` |
-| Certificates | The `#certifications` section and `assets/certificates/` |
-| Colors, typography, breakpoints, and component styling | `css/style.css` |
-| Contact endpoint | `window.FORMSPREE_ENDPOINT` before `js/script.js` loads |
-
-Accessibility and usability
-
-The portfolio uses semantic sections, descriptive labels, keyboard-operable gallery images, accessible modal controls, `aria-live` form feedback, and motion that supports browsing rather than blocking it. The layout adapts from desktop to mobile, while the navigation and gallery controls remain usable with a keyboard.
-
-License
-
-This portfolio and its personal content are intended for Brad Josh Nebreja's personal use. Please request permission before reusing the design assets, certificates, CV, profile image, or project materials.
+Full-size project screens and certificates open in a near-fullscreen native dialog, with loading/error feedback and Close/Escape dismissal. Closing the image returns to the underlying project and restores focus. No image preview opens a new tab.

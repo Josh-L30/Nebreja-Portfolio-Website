@@ -1,620 +1,422 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const header = document.getElementById('siteHeader');
-  const navToggle = document.getElementById('navToggle');
-  const navPanel = document.getElementById('navPanel');
-  const navClose = document.getElementById('navClose');
-  const navLinks = Array.from(document.querySelectorAll('.nav-link'));
-  const themeToggle = document.getElementById('themeToggle');
-  const themeLabel = document.getElementById('themeLabel');
-
-  const savedTheme = localStorage.getItem('portfolioTheme') || 'light';
-  document.body.dataset.theme = savedTheme;
-
-  const syncThemeControl = () => {
-    if (!themeToggle || !themeLabel) return;
-
-    const isDark = document.body.dataset.theme === 'dark';
-    themeToggle.setAttribute('aria-pressed', String(isDark));
-    themeToggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
-    themeLabel.textContent = isDark ? 'Dark' : 'Light';
-  };
-
-  syncThemeControl();
-
-  if (themeToggle) {
-    themeToggle.addEventListener('click', () => {
-      const nextTheme = document.body.dataset.theme === 'dark' ? 'light' : 'dark';
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const bounds = themeToggle.getBoundingClientRect();
-      const centerX = bounds.left + bounds.width / 2;
-      const centerY = bounds.top + bounds.height / 2;
-
-      const applyTheme = () => {
-        document.body.dataset.theme = nextTheme;
-        localStorage.setItem('portfolioTheme', nextTheme);
-        syncThemeControl();
-      };
-
-      if (!prefersReducedMotion && document.startViewTransition) {
-        document.documentElement.style.setProperty('--theme-origin-x', `${centerX}px`);
-        document.documentElement.style.setProperty('--theme-origin-y', `${centerY}px`);
-        const transition = document.startViewTransition(applyTheme);
-        transition.finished.finally(() => {
-          document.documentElement.style.removeProperty('--theme-origin-x');
-          document.documentElement.style.removeProperty('--theme-origin-y');
-        });
-      } else {
-        applyTheme();
-      }
-    });
-  }
-
-  const heroName = document.querySelector('.hero-content h1');
-  const heroPhoto = document.querySelector('.hero-visual .avatar-bg');
-  const updateHeader = () => {
-    const isScrolled = window.scrollY > 24;
-    const hasPassedHeroName = heroName && heroName.getBoundingClientRect().bottom <= header.offsetHeight;
-    const hasPassedHeroPhoto = heroPhoto && heroPhoto.getBoundingClientRect().bottom <= header.offsetHeight;
-    header.classList.toggle('scrolled', isScrolled);
-    header.classList.toggle('transparent', !isScrolled);
-    header.classList.toggle('show-brand-name', Boolean(hasPassedHeroName));
-    header.classList.toggle('show-brand-photo', Boolean(hasPassedHeroPhoto));
-  };
-
-  updateHeader();
-  window.addEventListener('scroll', updateHeader, { passive: true });
-
-  const closeNavigation = () => {
-    navPanel.classList.remove('is-open');
-    navToggle.classList.remove('is-open');
-    navToggle.setAttribute('aria-expanded', 'false');
-    document.body.classList.remove('no-scroll');
-  };
-
-  const navIndicator = document.createElement('span');
-  navIndicator.className = 'nav-indicator';
-  navIndicator.setAttribute('aria-hidden', 'true');
-  navPanel.querySelector('.nav-links')?.append(navIndicator);
-  const navLinksContainer = navPanel.querySelector('.nav-links');
-  navLinksContainer?.addEventListener('pointerleave', () => {
-    navLinksContainer.classList.remove('is-hovering');
-    moveNavIndicator();
-  });
-  navLinks.forEach((link) => {
-    link.addEventListener('pointerenter', () => {
-      navLinksContainer?.classList.add('is-hovering');
-      moveNavIndicator(link);
-    });
-  });
-
-  const moveNavIndicator = (targetLink = navLinks.find((link) => link.classList.contains('active'))) => {
-    const activeLink = targetLink;
-    const linksContainer = navPanel.querySelector('.nav-links');
-    if (!activeLink || !linksContainer) return;
-
-    const linkRect = activeLink.getBoundingClientRect();
-    const listRect = linksContainer.getBoundingClientRect();
-    const isMobileMenu = window.matchMedia('(max-width: 639px)').matches;
-    const horizontalPadding = 9;
-    const verticalPadding = isMobileMenu ? 6 : 6;
-    const x = isMobileMenu ? 0 : linkRect.left - listRect.left - horizontalPadding;
-    const y = linkRect.top - listRect.top - verticalPadding;
-    const width = isMobileMenu ? listRect.width : linkRect.width + horizontalPadding * 2;
-    linksContainer.style.setProperty('--indicator-x', `${x}px`);
-    linksContainer.style.setProperty('--indicator-y', `${y}px`);
-    linksContainer.style.setProperty('--indicator-width', `${width}px`);
-    linksContainer.style.setProperty('--indicator-height', `${linkRect.height + verticalPadding * 2}px`);
-    linksContainer.classList.add('has-indicator');
-  };
-
-  const setActiveNavLink = (id) => {
-    navLinks.forEach((link) => {
-      link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
-    });
-    moveNavIndicator();
-    if (window.matchMedia('(max-width: 639px)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      navIndicator.animate(
-        [
-          { clipPath: 'inset(0 0 0 100% round 999px)' },
-          { clipPath: 'inset(0 0 0 0 round 999px)' }
-        ],
-        { duration: 260, easing: 'cubic-bezier(.2,.8,.2,1)' }
-      );
-    }
-  };
-
-  moveNavIndicator();
-  window.addEventListener('resize', moveNavIndicator, { passive: true });
-
-  navToggle.addEventListener('click', () => {
-    const isOpen = navPanel.classList.toggle('is-open');
-    navToggle.classList.toggle('is-open', isOpen);
-    navToggle.setAttribute('aria-expanded', String(isOpen));
-    document.body.classList.toggle('no-scroll', isOpen);
-  });
-
-  navClose?.addEventListener('click', closeNavigation);
-
-  let navigationScrollTimer = 0;
-  let navigationInProgress = false;
-
-  navLinks.forEach((link) => {
-    link.addEventListener('click', () => {
-      const targetId = link.getAttribute('href')?.slice(1);
-      if (targetId) {
-        navigationInProgress = true;
-        window.clearTimeout(navigationScrollTimer);
-        navigationScrollTimer = window.setTimeout(() => {
-          navigationInProgress = false;
-          updateActiveSection();
-        }, 1200);
-        setActiveNavLink(targetId);
-      }
-      closeNavigation();
-    });
-  });
-
-  const pageSections = Array.from(document.querySelectorAll('main section[id]'));
-  let sectionUpdateFrame = 0;
-  const updateActiveSection = () => {
-    if (navigationInProgress || sectionUpdateFrame) return;
-
-    sectionUpdateFrame = requestAnimationFrame(() => {
-      sectionUpdateFrame = 0;
-      const activationLine = window.innerHeight * 0.32;
-      const activeSection = pageSections.find((section) => {
-        const bounds = section.getBoundingClientRect();
-        return bounds.top <= activationLine && bounds.bottom > activationLine;
-      }) || pageSections.reduce((closest, section) => {
-        const distance = Math.abs(section.getBoundingClientRect().top - activationLine);
-        return !closest || distance < closest.distance ? { section, distance } : closest;
-      }, null)?.section;
-
-      if (!activeSection) return;
-      const currentActive = navLinks.find((link) => link.classList.contains('active'));
-      if (currentActive?.getAttribute('href') !== `#${activeSection.id}`) {
-        setActiveNavLink(activeSection.id);
-      }
-    });
-  };
-
-  updateActiveSection();
-  window.addEventListener('scroll', () => {
-    if (navigationInProgress) {
-      window.clearTimeout(navigationScrollTimer);
-      navigationScrollTimer = window.setTimeout(() => {
-        navigationInProgress = false;
-        updateActiveSection();
-      }, 180);
-      return;
-    }
-    updateActiveSection();
-  }, { passive: true });
-  window.addEventListener('resize', updateActiveSection, { passive: true });
-
-  const typedText = document.getElementById('typedText');
-  const taglines = ['Web Developer', 'UI/UX Designer', 'Project Lead'];
-  let taglineIndex = 0;
-
-  const rotateTagline = () => {
-    if (!typedText) return;
-
-    typedText.animate([
-      { opacity: 0.25, transform: 'translateY(4px)' },
-      { opacity: 1, transform: 'translateY(0)' }
-    ], { duration: 420, easing: 'ease-out' });
-
-    typedText.textContent = taglines[taglineIndex];
-    taglineIndex = (taglineIndex + 1) % taglines.length;
-  };
-
-  rotateTagline();
-  setInterval(rotateTagline, 2600);
-
-  const counters = document.querySelectorAll('[data-counter]');
-  const counterObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-
-      const counter = entry.target;
-      const target = Number(counter.dataset.counter);
-      const prefix = target >= 10 ? '' : '';
-      const duration = 1500;
-      const start = performance.now();
-
-      const tick = (now) => {
-        const elapsed = now - start;
-        const progress = Math.min(elapsed / duration, 1);
-        counter.textContent = Math.round(progress * target) + prefix;
-
-        if (progress < 1) {
-          requestAnimationFrame(tick);
-        } else {
-          counter.textContent = target;
-        }
-      };
-
-      requestAnimationFrame(tick);
-      counterObserver.unobserve(counter);
-    });
-  }, { threshold: 0.55 });
-
-  counters.forEach((counter) => counterObserver.observe(counter));
-
-  const initInlineDashboardCarousel = (inlineDashboardGallery) => {
-    if (!inlineDashboardGallery) return;
-
-    const carouselTrack = inlineDashboardGallery.querySelector('.carousel-track');
-    const prevButton = inlineDashboardGallery.querySelector('.carousel-prev');
-    const nextButton = inlineDashboardGallery.querySelector('.carousel-next');
-
-    if (!carouselTrack) return;
-
-    const getSlideStep = () => {
-      const slide = carouselTrack.querySelector('.gallery-slide');
-      if (!slide) return carouselTrack.clientWidth || 240;
-
-      const trackStyles = window.getComputedStyle(carouselTrack);
-      const gap = Number.parseFloat(trackStyles.columnGap || trackStyles.gap) || 0;
-      return slide.getBoundingClientRect().width + gap;
-    };
-
-    const scrollGallery = (direction) => {
-      const maxScrollLeft = Math.max(carouselTrack.scrollWidth - carouselTrack.clientWidth, 0);
-      const nextPosition = carouselTrack.scrollLeft + (direction * getSlideStep());
-
-      if (direction > 0 && nextPosition >= maxScrollLeft - 1) {
-        carouselTrack.scrollTo({ left: 0, behavior: 'smooth' });
-      } else if (direction < 0 && nextPosition <= 0) {
-        carouselTrack.scrollTo({ left: maxScrollLeft, behavior: 'smooth' });
-      } else {
-        carouselTrack.scrollTo({ left: nextPosition, behavior: 'smooth' });
-      }
-    };
-
-    let carouselTimer = null;
-
-    const startCarousel = () => {
-      if (carouselTimer) return;
-
-      carouselTimer = setInterval(() => {
-        scrollGallery(1);
-      }, 2200);
-    };
-
-    const stopCarousel = () => {
-      if (carouselTimer) {
-        clearInterval(carouselTimer);
-        carouselTimer = null;
-      }
-    };
-
-    if (prevButton) {
-      prevButton.addEventListener('click', () => {
-        stopCarousel();
-        scrollGallery(-1);
-        startCarousel();
-      });
-    }
-
-    if (nextButton) {
-      nextButton.addEventListener('click', () => {
-        stopCarousel();
-        scrollGallery(1);
-        startCarousel();
-      });
-    }
-
-    inlineDashboardGallery.addEventListener('mouseenter', stopCarousel);
-    inlineDashboardGallery.addEventListener('mouseleave', startCarousel);
-    inlineDashboardGallery.addEventListener('focusin', stopCarousel);
-    inlineDashboardGallery.addEventListener('focusout', startCarousel);
-
-    startCarousel();
-  };
-
-  document.querySelectorAll('.dashboard-inline-gallery').forEach(initInlineDashboardCarousel);
-
-  const modal = document.getElementById('projectModal');
-  const modalContent = document.getElementById('modalContent');
-  const closeModal = document.getElementById('modalClose');
-  const projectData = {
-    cpc: {
-      title: 'CPC Centralized System',
-      subtitle: 'Production, Inventory, Sales, and Logistics Platform',
-      detail: 'A centralized solution designed to support operations across sales, production, inventory, and logistics data.',
-      bullets: ['Unified operational reporting', 'User-friendly dashboard experience', 'Designed for scalable process visibility']
-    },
-    dashboard: {
-      title: 'CPC Dashboard Experience',
-      subtitle: 'Frontend UI concept for system monitoring',
-      detail: 'A dashboard-first experience for visualizing system data and operational indicators.',
-      bullets: ['Role-focused UI structure', 'Responsive design system', 'Project monitoring and reporting panels'],
-      gallery: Array.from({ length: 13 }, (_, index) => ({ src: 'assets/ui-placeholder.svg', label: `UI Snapshot ${index + 1}` }))
-    },
-    automation: {
-      title: 'Process Automation Workflow',
-      subtitle: 'Operational data integration and automation layer',
-      detail: 'A workflow-focused project that reduces manual work and supports organization-wide visibility.',
-      bullets: ['Operational process mapping', 'Shared data workflow design', 'System feasibility and reporting support']
-    },
-    gamemechanics: {
-      title: 'Game Mechanics Website',
-      subtitle: 'Masters of World Literature group project',
-      detail: 'A website created during first-year IT studies to present the game mechanics and interactive concepts for Masters of World Literature.',
-      bullets: ['Collaborative group project delivery', 'Game mechanics and content presentation', 'Built with HTML, CSS, and JavaScript']
-    },
-    cinemabuddy: {
-      title: 'CinemaBuddy',
-      subtitle: 'Movie discovery and viewing companion app concept',
-      detail: 'A mobile UI/UX concept for helping users discover films, sign in securely, and personalize their viewing journey.',
-      bullets: ['Mobile-first interface design', 'Movie discovery and account flows', 'Interactive Figma prototype screens']
-    },
-    cinemabuddyux: {
-      title: 'CinemaBuddy UX Walkthrough',
-      subtitle: 'End-to-end mobile prototype experience',
-      detail: 'A video walkthrough that demonstrates CinemaBuddy’s main user experience, from onboarding and account access to exploring films.',
-      bullets: ['Autoplaying prototype walkthrough', 'Key account and discovery flows', 'Designed for a clear mobile viewing experience']
-    }
-  };
-
-  document.querySelectorAll('[data-project]').forEach((button) => {
-    button.addEventListener('click', () => {
-      const project = projectData[button.dataset.project];
-      if (!project) return;
-
-      modalContent.innerHTML = `
-        <span class="overline">Project Detail</span>
-        <h3>${project.title}</h3>
-        <p class="modal-subtitle">${project.subtitle}</p>
-        <p>${project.detail}</p>
-        <ul>
-          ${project.bullets.map((bullet) => `<li>${bullet}</li>`).join('')}
-        </ul>
-      `;
-
-      modal.showModal();
-    });
-  });
-
-  closeModal.addEventListener('click', () => {
-    modal.close();
-    const carouselTrack = modalContent.querySelector('.carousel-track');
-    if (carouselTrack) {
-      carouselTrack.scrollTo({ left: 0, behavior: 'instant' });
-    }
-  });
-
-  modal.addEventListener('click', (event) => {
-    if (event.target === modal) {
-      modal.close();
-    }
-  });
-
-  const certModal = document.getElementById('certificateModal');
-  const certModalImage = document.getElementById('certModalImage');
-  const certModalCaption = document.getElementById('certModalCaption');
-  const certModalClose = document.getElementById('certModalClose');
-
-  document.querySelectorAll('#certifications .cert-link').forEach((link) => {
-    link.addEventListener('click', (event) => {
-      event.preventDefault();
-
-      const img = link.querySelector('img');
-      const title = link.dataset.title || img?.alt || 'Certificate';
-
-      certModalImage.src = link.href;
-      certModalImage.alt = title;
-      certModalCaption.textContent = title;
-      certModal.showModal();
-    });
-  });
-
-  document.querySelectorAll('.dashboard-inline-gallery .gallery-slide img').forEach((image) => {
-    image.tabIndex = 0;
-    image.setAttribute('role', 'button');
-    image.setAttribute('aria-label', `View ${image.alt} in full size`);
-
-    const openGalleryImage = () => {
-      certModalImage.src = image.currentSrc || image.src;
-      certModalImage.alt = image.alt;
-      certModalCaption.textContent = image.alt;
-      certModal.showModal();
-    };
-
-    image.addEventListener('click', openGalleryImage);
-    image.addEventListener('keydown', (event) => {
-      if (event.key === 'Enter' || event.key === ' ') {
-        event.preventDefault();
-        openGalleryImage();
-      }
-    });
-  });
-
-  certModalClose.addEventListener('click', () => {
-    certModal.close();
-  });
-
-  certModal.addEventListener('click', (event) => {
-    if (event.target === certModal) {
-      certModal.close();
-    }
-  });
-
-  const contactForm = document.getElementById('contactForm');
-  const submitButton = document.getElementById('submitButton');
-  const loader = document.getElementById('loader');
-  const formStatus = document.getElementById('formStatus');
-
-  // Optional Formspree configuration. Replace the string below with your actual Formspree endpoint.
-  // Example: window.FORMSPREE_ENDPOINT = 'https://formspree.io/f/your-form-id';
-  // You can keep this as an empty string to use the local front-end demo fallback.
-  const formspreeEndpoint = window.FORMSPREE_ENDPOINT || '';
-
-  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-  const validateField = (fieldName) => {
-    const field = contactForm.elements[fieldName];
-    const fieldGroup = field.closest('.form-row');
-    const errorElement = document.getElementById(`${fieldName}Error`);
-
-    if (!field || !fieldGroup || !errorElement) return true;
-
-    const value = field.value.trim();
-    let valid = true;
-
-    if (fieldName === 'name' && value.length < 2) {
-      errorElement.textContent = 'Please enter your name.';
-      fieldGroup.classList.add('has-error');
-      valid = false;
-    } else if (fieldName === 'email' && !emailPattern.test(value)) {
-      errorElement.textContent = 'Please enter a valid email address.';
-      fieldGroup.classList.add('has-error');
-      valid = false;
-    } else if (fieldName === 'message' && value.length < 10) {
-      errorElement.textContent = 'Please enter a message with at least 10 characters.';
-      fieldGroup.classList.add('has-error');
-      valid = false;
-    } else {
-      errorElement.textContent = '';
-      fieldGroup.classList.remove('has-error');
-      fieldGroup.classList.add('success');
-    }
-
-    return valid;
-  };
-
-  contactForm.elements.name.addEventListener('blur', () => validateField('name'));
-  contactForm.elements.email.addEventListener('blur', () => validateField('email'));
-  contactForm.elements.message.addEventListener('blur', () => validateField('message'));
-
-  contactForm.addEventListener('submit', async (event) => {
-    event.preventDefault();
-
-    const name = contactForm.elements.name;
-    const email = contactForm.elements.email;
-    const message = contactForm.elements.message;
-
-    const validName = validateField('name');
-    const validEmail = validateField('email');
-    const validMessage = validateField('message');
-
-    if (!validName || !validEmail || !validMessage) {
-      formStatus.textContent = 'Please correct the highlighted fields.';
-      formStatus.classList.add('error');
-      return;
-    }
-
-    submitButton.disabled = true;
-    loader.classList.remove('hidden');
-    submitButton.querySelector('.button-text').textContent = 'Sending...';
-    formStatus.classList.remove('error');
-    formStatus.textContent = '';
-
-    try {
-      if (formspreeEndpoint) {
-        const response = await fetch(formspreeEndpoint, {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            name: name.value.trim(),
-            email: email.value.trim(),
-            message: message.value.trim()
-          })
-        });
-
-        if (!response.ok) {
-          const errorData = await response.json().catch(() => ({}));
-          throw new Error(errorData.error || 'Unable to send message.');
-        }
-      } else {
-        // Local static-site placeholder. This allows the site to demo a real loading/success/error cycle
-        // without an API credential. Replace the endpoint above with a Formspree or EmailJS integration.
-        await new Promise((resolve) => setTimeout(resolve, 800));
-      }
-
-      formStatus.textContent = 'Thank you. Your message has been sent successfully.';
-      formStatus.classList.remove('error');
-      contactForm.reset();
-    } catch (error) {
-      formStatus.textContent = 'Something went wrong. Please try again later.';
-      formStatus.classList.add('error');
-    } finally {
-      submitButton.disabled = false;
-      loader.classList.add('hidden');
-      submitButton.querySelector('.button-text').textContent = 'Send Message';
-    }
-  });
-
-  const scrollProgress = document.getElementById('scrollProgress');
-  const updateScrollProgress = () => {
-    const doc = document.documentElement;
-    const scrollable = doc.scrollHeight - window.innerHeight;
-    const progress = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0;
-    scrollProgress.style.width = `${Math.min(progress, 100)}%`;
-  };
-
-  window.addEventListener('scroll', updateScrollProgress, { passive: true });
-  updateScrollProgress();
-
-  const year = document.getElementById('year');
-  if (year) {
-    year.textContent = new Date().getFullYear();
-  }
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('in-view');
-      } else if (entry.target.matches('.experience-slide-left, .experience-slide-right, .about-typewriter-section')) {
-        entry.target.classList.remove('in-view');
-      }
-    });
-  }, { threshold: 0.2 });
-
-  document.querySelectorAll('[data-typewriter]').forEach((element) => {
-    const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
-    const textNodes = [];
-    while (walker.nextNode()) textNodes.push(walker.currentNode);
-
-    let characterIndex = 0;
-    textNodes.forEach((textNode) => {
-      const fragment = document.createDocumentFragment();
-      Array.from(textNode.textContent).forEach((character) => {
-        const span = document.createElement('span');
-        span.className = 'typing-char';
-        span.style.animationDelay = (characterIndex++ * 4) + 'ms';
-        span.textContent = character;
-        fragment.appendChild(span);
-      });
-      textNode.replaceWith(fragment);
-    });
-  });
-  document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
-  const sections = document.querySelectorAll('main .section');
-  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  if (finePointer.matches && !reduceMotion.matches) {
-    sections.forEach((section) => {
-      let pointerFrame = 0;
-      section.addEventListener('pointermove', (event) => {
-        section.classList.add('cursor-active');
-        if (pointerFrame) cancelAnimationFrame(pointerFrame);
-        pointerFrame = requestAnimationFrame(() => {
-          const bounds = section.getBoundingClientRect();
-          section.style.setProperty('--pointer-x', `${event.clientX - bounds.left}px`);
-          section.style.setProperty('--pointer-y', `${event.clientY - bounds.top}px`);
-          pointerFrame = 0;
-        });
-      }, { passive: true });
-      section.addEventListener('pointerleave', () => {
-        if (pointerFrame) cancelAnimationFrame(pointerFrame);
-        pointerFrame = 0;
-        section.classList.remove('cursor-active');
-      }, { passive: true });
-    });
-  }
+/**
+ * Reusable native components for the portfolio prototype.
+ * Status-button interaction adapted from Animata's MIT-licensed Status Button
+ * by hari: https://animata.design/docs/button/status-button
+ * Ported to native buttons without React, Motion, demo timers or decorative icons.
+ * Case-study hover-depth pattern adapted from Animata Case Study Card by
+ * Adriana Fruchter: https://animata.design/docs/card/case-study-card
+ * Simplified to one face, no book tab or hidden layers.
+ */
+const data = fetch(new URL('../data/content.json', import.meta.url)).then(response => {
+  if (!response.ok) throw new Error('Content unavailable');
+  return response.json();
 });
+const node = (tag, className, text) => {
+  const element = document.createElement(tag);
+  if (className) element.className = className;
+  if (text) element.textContent = text;
+  return element;
+};
+const imageURL = (file, width) => new URL(`../assets/${file}-${width}.webp`, import.meta.url).href;
+function fillImage(image, file, sizes) {
+  image.srcset = [480,960,1440].map(width => `${imageURL(file,width)} ${width}w`).join(', ');
+  image.sizes = sizes;
+  image.src = imageURL(file,960);
+  image.width = 1440;
+  image.height = 720;
+  image.decoding = 'async';
+}
+
+export function setButtonStatus(button, state) {
+  const labels = {idle:'Send message',pending:'Sending',success:'Message submitted',error:'Try again'};
+  button.dataset.state = state;
+  button.disabled = state === 'pending';
+  button.setAttribute('aria-busy', String(state === 'pending'));
+  button.textContent = labels[state];
+}
+
+export function createField(field) {
+  const wrapper = node('div','ui-field');
+  const label = node('label','ui-label',field.label);
+  const input = node(field.type === 'textarea' ? 'textarea' : 'input','ui-input');
+  input.id = `contact-${field.name}`;
+  input.name = field.name;
+  input.required = true;
+  input.maxLength = field.maxLength;
+  if (field.type !== 'textarea') input.type = field.type;
+  if (field.autocomplete) input.autocomplete = field.autocomplete;
+  if (field.type === 'textarea') input.rows = 5;
+  label.htmlFor = input.id;
+  wrapper.append(label,input);
+  return wrapper;
+}
+
+class PortfolioProjects extends HTMLElement {
+  async connectedCallback() {
+    try {
+      const config = await data;
+      const list = node('div','work-list');
+      const picker=node('div','project-picker');
+      picker.setAttribute('aria-label','Choose a project');
+      const covers=config.projects.map(project=>project.id==='dashboard'?project.gallery[2].image:project.id==='cinemabuddyux'?'screen-fig3':project.image);
+      config.projects.forEach((project,index) => {
+        const button = node('button','work-item');
+        button.hidden=index!==0;
+        button.type = 'button';
+        button.dataset.project = project.id;
+        const text = node('div','work-copy');
+        text.append(node('span','work-category',index===0?'Featured project':project.categories.join(' · ')));
+        text.append(node('h3','',project.title),node('p','',project.summary),node('p','role',project.role));
+        const tags=node('div','work-tags');
+        project.tags.forEach(tag=>tags.append(node('span','',tag)));
+        text.append(tags);
+        const action=node('div','work-footer');
+        action.append(node('span','project-action',project.video?'Watch walkthrough':'Explore project'),node('span','work-count',project.video?'Video walkthrough':`${project.gallery.length} screens`));
+        text.append(action);
+        const visual = node('div','work-visual');
+        const display = node('div','work-display');
+        const chrome = node('div','work-chrome');
+        chrome.append(node('span','',index===0?'CPC / Centralized platform':project.title),node('span','',project.video?'Walkthrough':'Interface preview'));
+        const thumb = node('div','thumb');
+        const image = node('img');
+        const cover=project.id==='dashboard'?project.gallery[2].image:project.id==='cinemabuddyux'?'screen-fig3':project.image;
+        fillImage(image, cover, index===0?'(max-width:950px) 90vw, 780px':'(max-width:600px) 85vw, (max-width:950px) 44vw, 380px');
+        image.alt = `${project.title} interface preview`;
+        image.loading = 'lazy';
+        thumb.append(image);
+        display.append(chrome,thumb);
+        visual.append(display);
+        [-1,1].forEach(direction=>{
+          const ghost=node('img','deck-wing '+(direction<0?'deck-left':'deck-right'));
+          fillImage(ghost,covers[(index+direction+config.projects.length)%config.projects.length],'220px');
+          ghost.alt='';ghost.loading='lazy';ghost.setAttribute('aria-hidden','true');visual.prepend(ghost);
+        });
+        button.append(visual,text);
+        list.append(button);
+        const choice=node('button','project-choice');choice.type='button';
+        choice.setAttribute('aria-label','Show '+project.title);
+        choice.setAttribute('aria-pressed',String(index===0));
+        const mini=node('img');fillImage(mini,cover,'100px');mini.alt='';mini.loading='lazy';
+        choice.append(mini,node('span','',String(index+1).padStart(2,'0')));
+        choice.addEventListener('click',()=>select(index));picker.append(choice);
+      });
+      let current=0;
+      const controls=node('div','project-controls');
+      const previous=node('button','','Previous');const next=node('button','','Next');
+      previous.type=next.type='button';
+      const count=node('span','','1 / '+config.projects.length);count.setAttribute('aria-live','polite');
+      controls.append(previous,count,next);
+      function select(index){
+        current=(index+config.projects.length)%config.projects.length;
+        [...list.children].forEach((slide,i)=>slide.hidden=i!==current);
+        [...picker.children].forEach((choice,i)=>choice.setAttribute('aria-pressed',String(i===current)));
+        count.textContent=`${current+1} / ${config.projects.length}`;
+      }
+      previous.addEventListener('click',()=>select(current-1));next.addEventListener('click',()=>select(current+1));
+      picker.addEventListener('keydown',event=>{
+        if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;
+        event.preventDefault();select(event.key==='Home'?0:event.key==='End'?config.projects.length-1:current+(event.key==='ArrowRight'?1:-1));picker.children[current].focus();
+      });
+      this.replaceChildren(list,controls,picker);
+    } catch {
+      this.replaceChildren(node('p','component-error','Project previews could not load. Please refresh to try again.'));
+    }
+  }
+}
+
+class PortfolioContactForm extends HTMLElement {
+  async connectedCallback() {
+    try {
+      const {contact} = await data;
+      const form = node('form','contact-form');
+      form.setAttribute('aria-label','Contact Brad');
+      const fields = node('div','form-fields');
+      contact.fields.forEach(field => fields.append(createField(field)));
+      const note = node('p','form-note',contact.endpoint ? 'All fields are required.' : 'Preview only. Messages are not sent yet.');
+      note.id = 'contact-note';
+      form.setAttribute('aria-describedby','contact-note');
+      const status = node('p','form-status');
+      status.id = 'contact-status';
+      status.setAttribute('role','status');
+      status.setAttribute('aria-live','polite');
+      const submit = node('button','primary ui-button');
+      submit.type = 'submit';
+      setButtonStatus(submit,'idle');
+      const actions = node('div','form-actions');
+      actions.append(submit,note);
+      form.append(fields,actions,status);
+      form.addEventListener('submit', async event => {
+        event.preventDefault();
+        if (submit.disabled) return;
+        if (!form.reportValidity()) return;
+        const payload = Object.fromEntries(new FormData(form));
+        for (const field of contact.fields) {
+          if (!String(payload[field.name] || '').trim()) {
+            form.elements.namedItem(field.name).focus();
+            status.textContent = 'Please complete every field.';
+            return;
+          }
+        }
+        if (!contact.endpoint) {
+          status.textContent = 'Sending is not available in this preview. Your message has been kept here.';
+          return;
+        }
+        setButtonStatus(submit,'pending');
+        fields.querySelectorAll('input, textarea').forEach(input => { input.disabled = true; });
+        status.textContent = '';
+        try {
+          const response = await fetch(contact.endpoint, {
+            method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'},
+            body:JSON.stringify(payload), signal:AbortSignal.timeout(15000)
+          });
+          if (!response.ok) throw new Error('Submission rejected');
+          setButtonStatus(submit,'success');
+          status.textContent = 'Your message was submitted. Thank you for getting in touch.';
+          form.reset();
+        } catch {
+          setButtonStatus(submit,'error');
+          status.textContent = 'Your message could not be sent. Please try again. Your text is still here.';
+        } finally {
+          fields.querySelectorAll('input, textarea').forEach(input => { input.disabled = false; });
+        }
+      });
+      form.addEventListener('input', () => {
+        if (!submit.disabled) {
+          setButtonStatus(submit,'idle');
+          status.textContent = '';
+        }
+      });
+      this.replaceChildren(form);
+      revealOnce(form);
+    } catch {
+      this.replaceChildren(node('p','component-error','The contact form could not load. Please refresh to try again.'));
+    }
+  }
+}
+class PortfolioStack extends HTMLElement {
+  async connectedCallback() {
+    try {
+      const {stack} = await data;
+      const list = node('ul','tech-list');
+      list.id = 'tech-list';
+      const extra = [];
+      stack.forEach(item => {
+        const chip = node('li','tech-chip');
+        const logo = node('img','tech-logo');
+        logo.src = new URL('../'+item.logo,import.meta.url).href;
+        logo.alt = '';
+        logo.width = 22;
+        logo.height = 22;
+        logo.loading = 'lazy';
+        logo.decoding = 'async';
+        chip.append(logo,node('span','',item.name));
+        if (!item.featured) { chip.hidden = true; extra.push(chip); }
+        list.append(chip);
+      });
+      const control = node('li','tech-control');
+      const toggle = node('button','tech-toggle',`+${extra.length} more`);
+      toggle.type = 'button';
+      toggle.setAttribute('aria-expanded','false');
+      toggle.setAttribute('aria-controls','tech-list');
+      toggle.addEventListener('click',()=>{
+        const expanded = toggle.getAttribute('aria-expanded') !== 'true';
+        extra.forEach(chip=>{chip.hidden=!expanded;});
+        toggle.setAttribute('aria-expanded',String(expanded));
+        toggle.textContent = expanded ? 'Show less' : `+${extra.length} more`;
+      });
+      control.append(toggle);
+      list.append(control);
+      this.replaceChildren(list);
+    } catch {
+      this.replaceChildren(node('p','component-error','The technology list could not load. Please refresh to try again.'));
+    }
+  }
+}
+
+class PortfolioCertificates extends HTMLElement {
+  async connectedCallback() {
+    try {
+      const {certificates} = await data;
+      const list = node('div','certificate-list');
+      const choices=node('div','certificate-choices');
+      choices.setAttribute('aria-label','Choose a certificate');
+      certificates.forEach((certificate,index)=>{
+        const link = node('a','certificate-item');
+        link.hidden=index!==0;
+        link.href = new URL('../'+certificate.image,import.meta.url).href;
+        link.setAttribute('aria-label',`Enlarge ${certificate.title} certificate`);
+        const image = node('img','certificate-thumb');
+        image.src = new URL('../'+certificate.preview,import.meta.url).href;
+        image.alt = '';
+        image.width = certificate.width;
+        image.height = certificate.height;
+        image.loading = 'lazy';
+        image.decoding = 'async';
+        const text = node('div','certificate-copy');
+        text.append(node('h3','',certificate.title),node('p','',certificate.issuer+' · '+certificate.year));
+        link.append(image,text,node('span','certificate-action','View certificate'));
+        list.append(link);
+        const choice=node('button','certificate-choice');choice.type='button';
+        choice.setAttribute('aria-pressed',String(index===0));
+        const miniature=node('img','credential-miniature');
+        miniature.src=new URL('../'+certificate.thumbnail,import.meta.url).href;
+        miniature.alt='';miniature.width=72;miniature.height=54;miniature.loading='lazy';
+        choice.append(miniature,node('span','',certificate.title),node('small','',certificate.issuer+' · '+certificate.year));
+        choice.addEventListener('click',()=>{
+          [...list.children].forEach((panel,i)=>panel.hidden=i!==index);
+          [...choices.children].forEach((item,i)=>item.setAttribute('aria-pressed',String(i===index)));
+        });
+        choices.append(choice);
+      });
+      const showcase=node('div','credential-showcase');showcase.append(list,choices);
+      this.replaceChildren(showcase);
+    } catch {
+      this.replaceChildren(node('p','component-error','Certificates could not load. Please refresh to try again.'));
+    }
+  }
+}
+const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+const arrivalObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    arrivalObserver.unobserve(entry.target);
+    if (!reducedMotion.matches) entry.target.classList.add('arrive');
+  });
+}, {threshold:.12});
+function revealOnce(element) { arrivalObserver.observe(element); }
+reducedMotion.addEventListener('change',()=>{
+  if(reducedMotion.matches)document.getAnimations().forEach(animation=>animation.cancel());
+});
+customElements.define('portfolio-projects',PortfolioProjects);
+customElements.define('portfolio-contact-form',PortfolioContactForm);
+customElements.define('portfolio-stack',PortfolioStack);
+customElements.define('portfolio-certificates',PortfolioCertificates);
+
+const dialog = document.getElementById('projectDialog');
+const imageDialog=document.getElementById('imageDialog');
+const fullImage=document.getElementById('fullImage');
+const imageStatus=document.getElementById('imageStatus');
+function openImage(source,title){
+  document.getElementById('imageTitle').textContent=title;
+  fullImage.alt=title;
+  fullImage.hidden=true;
+  imageStatus.textContent='Loading full-size image…';
+  fullImage.onload=()=>{fullImage.hidden=false;imageStatus.textContent='';};
+  fullImage.onerror=()=>{imageStatus.textContent='This image could not load. Close the viewer and try again.';};
+  fullImage.src=source;
+  imageDialog.showModal();
+}
+document.getElementById('closeImage').addEventListener('click',()=>imageDialog.close());
+imageDialog.addEventListener('keydown',event=>{
+  if(event.key!=='Escape')return;
+  event.preventDefault();event.stopPropagation();imageDialog.close();
+});
+imageDialog.addEventListener('cancel',event=>{
+  event.preventDefault();
+  event.stopPropagation();
+  imageDialog.close();
+});
+imageDialog.addEventListener('click',event=>{
+  if(event.target!==imageDialog)return;
+  const rect=imageDialog.getBoundingClientRect();
+  if(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom)imageDialog.close();
+});
+document.addEventListener('click',event=>{
+  const link=event.target.closest('.certificate-item,#galleryOriginal,#enlargePreview');
+  if(!link)return;
+  event.preventDefault();
+  const certificate=link.matches('.certificate-item');
+  openImage(link.href||document.getElementById('galleryOriginal').href,certificate?link.querySelector('h3').textContent:document.getElementById('detailTitle').textContent+' / '+document.getElementById('galleryCount').textContent);
+});
+const detailVideo = document.getElementById('detailVideo');
+let gallery = [];
+let galleryIndex = 0;
+function showGalleryImage(index) {
+  galleryIndex = Math.max(0,Math.min(index,gallery.length-1));
+  const item=gallery[galleryIndex];
+  if(!item)return;
+  const image=document.getElementById('detailImage');
+  fillImage(image,item.image,'(max-width:600px) 90vw, 820px');
+  image.alt=item.label;
+  document.getElementById('galleryCount').textContent=`${galleryIndex+1} of ${gallery.length}`;
+  document.getElementById('galleryPrevious').disabled=galleryIndex===0;
+  document.getElementById('galleryNext').disabled=galleryIndex===gallery.length-1;
+  document.getElementById('galleryOriginal').href=new URL('../'+item.original,import.meta.url).href;
+  document.querySelectorAll('.gallery-thumbnail').forEach((button,i)=>button.setAttribute('aria-pressed',String(i===galleryIndex)));
+}
+const filmstrip=node('div','gallery-filmstrip');
+filmstrip.setAttribute('aria-label','Choose a project screen');
+document.getElementById('detailGallery').append(filmstrip);
+filmstrip.addEventListener('keydown',event=>{
+  if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;
+  event.preventDefault();
+  showGalleryImage(event.key==='Home'?0:event.key==='End'?gallery.length-1:galleryIndex+(event.key==='ArrowRight'?1:-1));
+  filmstrip.children[galleryIndex].focus();
+});
+document.getElementById('galleryPrevious').addEventListener('click',()=>showGalleryImage(galleryIndex-1));
+document.getElementById('galleryNext').addEventListener('click',()=>showGalleryImage(galleryIndex+1));
+document.addEventListener('click', async event => {
+  const button = event.target.closest('[data-project]');
+  if (!button) return;
+  const config = await data;
+  const project = config.projects.find(item => item.id === button.dataset.project);
+  if (!project || dialog.open) return;
+  document.getElementById('detailTitle').textContent = project.title;
+  document.getElementById('detailRole').textContent = project.role;
+  document.getElementById('detailHeadline').textContent=project.headline!==project.title?project.headline:'';
+  document.getElementById('detailCategories').textContent=project.categories.join(' · ');
+  document.getElementById('detailTags').textContent=project.tags.join(' · ');
+  document.getElementById('detailCopy').textContent = project.description;
+  const bullets=document.getElementById('detailBullets');
+  bullets.replaceChildren(...project.bullets.map(bullet=>node('li','',bullet)));
+  gallery=project.gallery;
+  filmstrip.replaceChildren(...gallery.map((screen,index)=>{
+    const button=node('button','gallery-thumbnail');button.type='button';
+    button.setAttribute('aria-label',`Show ${screen.label}, screen ${index+1}`);
+    button.setAttribute('aria-pressed',String(index===0));
+    const miniature=node('img');fillImage(miniature,screen.image,'100px');miniature.alt='';miniature.loading='lazy';
+    button.append(miniature,node('span','',String(index+1).padStart(2,'0')));
+    button.addEventListener('click',()=>showGalleryImage(index));return button;
+  }));
+  document.getElementById('detailGallery').hidden=gallery.length===0;
+  if(gallery.length)showGalleryImage(0);
+  detailVideo.hidden=!project.video;
+  if(project.video){detailVideo.poster=imageURL('screen-fig1',960);detailVideo.src=new URL('../'+project.video,import.meta.url).href;}
+  dialog.showModal();
+  dialog.scrollTop = 0;
+});
+document.getElementById('closeDialog').addEventListener('click',()=>dialog.close());
+dialog.addEventListener('close',()=>{
+  if(dialog.open)return;
+  detailVideo.pause();detailVideo.removeAttribute('src');detailVideo.load();
+});
+dialog.addEventListener('click',event=>{
+  if(event.target!==dialog)return;
+  const rect=dialog.getBoundingClientRect();
+  if(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom)dialog.close();
+});
+document.getElementById('theme').addEventListener('click',event=>{
+  const light=document.body.classList.toggle('light');
+  try{localStorage.setItem('brad-theme',light?'light':'dark');}catch{}
+  event.currentTarget.setAttribute('aria-label',light?'Switch to dark theme':'Switch to light theme');
+});
+const sidebar=document.querySelector('.sidebar');
+const mobileMenu=document.getElementById('mobileMenu');
+mobileMenu.addEventListener('click',()=>{
+  const open=sidebar.classList.toggle('nav-open');
+  mobileMenu.setAttribute('aria-expanded',String(open));
+});
+sidebar.querySelectorAll('a[href^="#"]').forEach(link=>link.addEventListener('click',()=>{
+  sidebar.classList.remove('nav-open');mobileMenu.setAttribute('aria-expanded','false');
+}));
+const sectionObserver=new IntersectionObserver(entries=>{
+  const active=entries.find(entry=>entry.isIntersecting);
+  if(!active)return;
+  sidebar.querySelectorAll('nav a').forEach(link=>{
+    if(link.hash==='#'+active.target.id)link.setAttribute('aria-current','location');
+    else link.removeAttribute('aria-current');
+  });
+},{rootMargin:'-8% 0px -62% 0px'});
+document.querySelectorAll('main section[id]').forEach(section=>sectionObserver.observe(section));
+
+try{if(localStorage.getItem('brad-theme')==='dark'){document.body.classList.remove('light');document.getElementById('theme').setAttribute('aria-label','Switch to light theme');}}catch{}

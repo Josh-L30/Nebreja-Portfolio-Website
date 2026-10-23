@@ -1,0 +1,688 @@
+{
+  "projects": [
+    {
+      "id": "cpc",
+      "title": "CPC Centralized System",
+      "headline": "Production & Operations Centralization",
+      "summary": "A centralized digital platform for supply, production, inventory, logistics, and sales visibility.",
+      "role": "Production, Inventory, Sales, and Logistics Platform",
+      "description": "A centralized solution designed to support operations across sales, production, inventory, and logistics data.",
+      "bullets": [
+        "Unified operational reporting",
+        "User-friendly dashboard experience",
+        "Designed for scalable process visibility"
+      ],
+      "categories": [
+        "CPC Centralized System"
+      ],
+      "tags": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "PHP",
+        "Laravel WebSocket",
+        "React",
+        "Express.js",
+        "MS SQL"
+      ],
+      "image": "screen-Pic1",
+      "gallery": [
+        {
+          "image": "screen-Pic1",
+          "label": "UI Snapshot 1",
+          "original": "assets/UI/Pic1.png"
+        },
+        {
+          "image": "screen-Pic2",
+          "label": "UI Snapshot 2",
+          "original": "assets/UI/Pic2.png"
+        },
+        {
+          "image": "screen-Pic3",
+          "label": "UI Snapshot 3",
+          "original": "assets/UI/Pic3.png"
+        },
+        {
+          "image": "screen-Pic4",
+          "label": "UI Snapshot 4",
+          "original": "assets/UI/Pic4.png"
+        },
+        {
+          "image": "screen-Pic5",
+          "label": "UI Snapshot 5",
+          "original": "assets/UI/Pic5.png"
+        },
+        {
+          "image": "screen-Pic6",
+          "label": "UI Snapshot 6",
+          "original": "assets/UI/Pic6.png"
+        },
+        {
+          "image": "screen-Pic7",
+          "label": "UI Snapshot 7",
+          "original": "assets/UI/Pic7.png"
+        },
+        {
+          "image": "screen-Pic8",
+          "label": "UI Snapshot 8",
+          "original": "assets/UI/Pic8.png"
+        },
+        {
+          "image": "screen-Pic9",
+          "label": "UI Snapshot 9",
+          "original": "assets/UI/Pic9.png"
+        },
+        {
+          "image": "screen-Pic10",
+          "label": "UI Snapshot 10",
+          "original": "assets/UI/Pic10.png"
+        },
+        {
+          "image": "screen-Pic11",
+          "label": "UI Snapshot 11",
+          "original": "assets/UI/Pic11.png"
+        },
+        {
+          "image": "screen-Pic12",
+          "label": "UI Snapshot 12",
+          "original": "assets/UI/Pic12.png"
+        },
+        {
+          "image": "screen-Pic13",
+          "label": "UI Snapshot 13",
+          "original": "assets/UI/Pic13.png"
+        }
+      ],
+      "video": null
+    },
+    {
+      "id": "dashboard",
+      "title": "CPC Dashboard Experience",
+      "headline": "CPC Dashboard Experience",
+      "summary": "UI/UX-focused dashboard concepts that align production, inventory, sales, and logistics operations.",
+      "role": "Frontend UI concept for system monitoring",
+      "description": "A dashboard-first experience for visualizing system data and operational indicators.",
+      "bullets": [
+        "Role-focused UI structure",
+        "Responsive design system",
+        "Project monitoring and reporting panels"
+      ],
+      "categories": [
+        "User Interface"
+      ],
+      "tags": [
+        "Figma",
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "image": "screen-Pic1",
+      "gallery": [
+        {
+          "image": "screen-Pic1",
+          "label": "UI Snapshot 1",
+          "original": "assets/UI/Pic1.png"
+        },
+        {
+          "image": "screen-Pic2",
+          "label": "UI Snapshot 2",
+          "original": "assets/UI/Pic2.png"
+        },
+        {
+          "image": "screen-Pic3",
+          "label": "UI Snapshot 3",
+          "original": "assets/UI/Pic3.png"
+        },
+        {
+          "image": "screen-Pic4",
+          "label": "UI Snapshot 4",
+          "original": "assets/UI/Pic4.png"
+        },
+        {
+          "image": "screen-Pic5",
+          "label": "UI Snapshot 5",
+          "original": "assets/UI/Pic5.png"
+        },
+        {
+          "image": "screen-Pic6",
+          "label": "UI Snapshot 6",
+          "original": "assets/UI/Pic6.png"
+        },
+        {
+          "image": "screen-Pic7",
+          "label": "UI Snapshot 7",
+          "original": "assets/UI/Pic7.png"
+        },
+        {
+          "image": "screen-Pic8",
+          "label": "UI Snapshot 8",
+          "original": "assets/UI/Pic8.png"
+        },
+        {
+          "image": "screen-Pic9",
+          "label": "UI Snapshot 9",
+          "original": "assets/UI/Pic9.png"
+        },
+        {
+          "image": "screen-Pic10",
+          "label": "UI Snapshot 10",
+          "original": "assets/UI/Pic10.png"
+        },
+        {
+          "image": "screen-Pic11",
+          "label": "UI Snapshot 11",
+          "original": "assets/UI/Pic11.png"
+        },
+        {
+          "image": "screen-Pic12",
+          "label": "UI Snapshot 12",
+          "original": "assets/UI/Pic12.png"
+        },
+        {
+          "image": "screen-Pic13",
+          "label": "UI Snapshot 13",
+          "original": "assets/UI/Pic13.png"
+        }
+      ],
+      "video": null
+    },
+    {
+      "id": "gamemechanics",
+      "title": "Game Mechanics Website",
+      "headline": "Game Mechanics Website",
+      "summary": "Website made as 1st year IT student for our group project focused on game mechanics of Masters of World Literature.",
+      "role": "Masters of World Literature group project",
+      "description": "A website created during first-year IT studies to present the game mechanics and interactive concepts for Masters of World Literature.",
+      "bullets": [
+        "Collaborative group project delivery",
+        "Game mechanics and content presentation",
+        "Built with HTML, CSS, and JavaScript"
+      ],
+      "categories": [
+        "User Interface",
+        "User Experience"
+      ],
+      "tags": [
+        "HTML",
+        "CSS",
+        "JS"
+      ],
+      "image": "screen-ter1",
+      "gallery": [
+        {
+          "image": "screen-ter1",
+          "label": "Game Mechanics Website screenshot 1",
+          "original": "assets/UI/ter1.png"
+        },
+        {
+          "image": "screen-ter2",
+          "label": "Game Mechanics Website screenshot 2",
+          "original": "assets/UI/ter2.png"
+        },
+        {
+          "image": "screen-ter3",
+          "label": "Game Mechanics Website screenshot 3",
+          "original": "assets/UI/ter3.png"
+        },
+        {
+          "image": "screen-ter4",
+          "label": "Game Mechanics Website screenshot 4",
+          "original": "assets/UI/ter4.png"
+        },
+        {
+          "image": "screen-ter5",
+          "label": "Game Mechanics Website screenshot 5",
+          "original": "assets/UI/ter5.png"
+        },
+        {
+          "image": "screen-ter6",
+          "label": "Game Mechanics Website screenshot 6",
+          "original": "assets/UI/ter6.png"
+        },
+        {
+          "image": "screen-ter7",
+          "label": "Game Mechanics Website screenshot 7",
+          "original": "assets/UI/ter7.png"
+        },
+        {
+          "image": "screen-ter8",
+          "label": "Game Mechanics Website screenshot 8",
+          "original": "assets/UI/ter8.png"
+        },
+        {
+          "image": "screen-ter9",
+          "label": "Game Mechanics Website screenshot 9",
+          "original": "assets/UI/ter9.png"
+        }
+      ],
+      "video": null
+    },
+    {
+      "id": "cinemabuddy",
+      "title": "CinemaBuddy",
+      "headline": "CinemaBuddy",
+      "summary": "A mobile app interface concept for discovering movies and managing a personalized viewing experience. Project for our Interactive Media Design course.",
+      "role": "Movie discovery and viewing companion app concept",
+      "description": "A mobile UI/UX concept for helping users discover films, sign in securely, and personalize their viewing journey.",
+      "bullets": [
+        "Mobile-first interface design",
+        "Movie discovery and account flows",
+        "Interactive Figma prototype screens"
+      ],
+      "categories": [
+        "User Interface",
+        "User Experience"
+      ],
+      "tags": [
+        "Figma",
+        "UI Design",
+        "UX Design"
+      ],
+      "image": "screen-fig1",
+      "gallery": [
+        {
+          "image": "screen-fig1",
+          "label": "CinemaBuddy interface design 1",
+          "original": "assets/UI/fig1.png"
+        },
+        {
+          "image": "screen-fig2",
+          "label": "CinemaBuddy interface design 2",
+          "original": "assets/UI/fig2.png"
+        },
+        {
+          "image": "screen-fig3",
+          "label": "CinemaBuddy interface design 3",
+          "original": "assets/UI/fig3.png"
+        },
+        {
+          "image": "screen-fig4",
+          "label": "CinemaBuddy interface design 4",
+          "original": "assets/UI/fig4.png"
+        },
+        {
+          "image": "screen-fig5",
+          "label": "CinemaBuddy interface design 5",
+          "original": "assets/UI/fig5.png"
+        },
+        {
+          "image": "screen-fig6",
+          "label": "CinemaBuddy interface design 6",
+          "original": "assets/UI/fig6.png"
+        },
+        {
+          "image": "screen-fig7",
+          "label": "CinemaBuddy interface design 7",
+          "original": "assets/UI/fig7.png"
+        }
+      ],
+      "video": null
+    },
+    {
+      "id": "cinemabuddyux",
+      "title": "CinemaBuddy UX Walkthrough",
+      "headline": "CinemaBuddy UX Walkthrough",
+      "summary": "A looping walkthrough of the CinemaBuddy experience, showing the key user flows from onboarding and account access to movie discovery.",
+      "role": "End-to-end mobile prototype experience",
+      "description": "A video walkthrough that demonstrates CinemaBuddyâ€™s main user experience, from onboarding and account access to exploring films.",
+      "bullets": [
+        "Autoplaying prototype walkthrough",
+        "Key account and discovery flows",
+        "Designed for a clear mobile viewing experience"
+      ],
+      "categories": [
+        "User Experience",
+        "Prototype Walkthrough"
+      ],
+      "tags": [
+        "Figma",
+        "UX Design",
+        "User Flows"
+      ],
+      "image": "screen-fig1",
+      "gallery": [],
+      "video": "assets/video/Dagooc_Nebreja_INMEDIA FINALS.mp4"
+    }
+  ],
+  "contact": {
+    "endpoint": null,
+    "fields": [
+      {
+        "name": "name",
+        "label": "Name",
+        "type": "text",
+        "autocomplete": "name",
+        "maxLength": 100
+      },
+      {
+        "name": "email",
+        "label": "Email",
+        "type": "email",
+        "autocomplete": "email",
+        "maxLength": 254
+      },
+      {
+        "name": "message",
+        "label": "Message",
+        "type": "textarea",
+        "maxLength": 5000
+      }
+    ]
+  },
+  "stack": [
+    {
+      "name": "JavaScript",
+      "logo": "assets/logo-javascript.svg",
+      "featured": true,
+      "source": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
+    },
+    {
+      "name": "HTML",
+      "logo": "assets/logo-html5.svg",
+      "featured": true,
+      "source": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"
+    },
+    {
+      "name": "CSS",
+      "logo": "assets/logo-css3.svg",
+      "featured": true,
+      "source": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg"
+    },
+    {
+      "name": "PHP",
+      "logo": "assets/logo-php.svg",
+      "featured": true,
+      "source": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg"
+    },
+    {
+      "name": "React",
+      "logo": "assets/logo-react.svg",
+      "featured": true,
+      "source": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
+    },
+    {
+      "name": "Express.js",
+      "logo": "assets/logo-express.svg",
+      "featured": true,
+      "source": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg"
+    },
+    {
+      "name": "MS SQL",
+      "logo": "assets/logo-microsoftsqlserver.svg",
+      "featured": true,
+      "source": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-original.svg"
+    },
+    {
+      "name": "Figma",
+      "logo": "assets/logo-figma.svg",
+      "featured": true,
+      "source": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg"
+    },
+    {
+      "name": "Java",
+      "logo": "assets/logo-java.svg",
+      "featured": false,
+      "source": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg"
+    },
+    {
+      "name": "Python",
+      "logo": "assets/logo-python.svg",
+      "featured": false,
+      "source": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+    },
+    {
+      "name": "C++",
+      "logo": "assets/logo-cplusplus.svg",
+      "featured": false,
+      "source": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg"
+    },
+    {
+      "name": "Firebase",
+      "logo": "assets/logo-firebase.svg",
+      "featured": false,
+      "source": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-original.svg"
+    },
+    {
+      "name": "Laravel WebSocket",
+      "logo": "assets/logo-laravel.svg",
+      "featured": false,
+      "source": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg"
+    },
+    {
+      "name": "Visual Studio Code",
+      "logo": "assets/logo-vscode.svg",
+      "featured": false,
+      "source": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg"
+    },
+    {
+      "name": "Canva",
+      "logo": "assets/logo-canva.svg",
+      "featured": false,
+      "source": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/canva/canva-original.svg"
+    },
+    {
+      "name": "Microsoft 365",
+      "logo": "assets/logo-m365.webp",
+      "featured": false,
+      "source": "Original portfolio asset: assets/UI/M365.png"
+    },
+    {
+      "name": "Microsoft Loop",
+      "logo": "assets/logo-mloop.webp",
+      "featured": false,
+      "source": "Original portfolio asset: assets/UI/MLoop.png"
+    }
+  ],
+  "certificates": [
+    {
+      "title": "Information Technology Specialist – Network Security",
+      "issuer": "Certiport",
+      "year": "2026",
+      "image": "assets/certificates/NetworkSecurity.png",
+      "thumbnail": "assets/certificate-NetworkSecurity-320.webp",
+      "width": 309,
+      "height": 240,
+      "preview": "assets/certificate-NetworkSecurity-960.webp"
+    },
+    {
+      "title": "Information Technology Specialist – Databases",
+      "issuer": "Certiport",
+      "year": "2025",
+      "image": "assets/certificates/Databases.png",
+      "thumbnail": "assets/certificate-Databases-320.webp",
+      "width": 312,
+      "height": 240,
+      "preview": "assets/certificate-Databases-960.webp"
+    },
+    {
+      "title": "LearnKey (LK) Database Certification",
+      "issuer": "LearnKey",
+      "year": "2025",
+      "image": "assets/certificates/LearnKey.jpg",
+      "thumbnail": "assets/certificate-LearnKey-320.webp",
+      "width": 320,
+      "height": 180,
+      "preview": "assets/certificate-LearnKey-960.webp"
+    },
+    {
+      "title": "Automation with MS Excel VBA",
+      "issuer": "Ask Lex PH Academy",
+      "year": "2024",
+      "image": "assets/certificates/MSExcelVBA.jpg",
+      "thumbnail": "assets/certificate-MSExcelVBA-320.webp",
+      "width": 320,
+      "height": 180,
+      "preview": "assets/certificate-MSExcelVBA-960.webp"
+    },
+    {
+      "title": "CodeCombat",
+      "issuer": "NU Laguna",
+      "year": "2023",
+      "image": "assets/certificates/CodeCombat.jpg",
+      "thumbnail": "assets/certificate-CodeCombat-320.webp",
+      "width": 320,
+      "height": 180,
+      "preview": "assets/certificate-CodeCombat-960.webp"
+    }
+  ],
+  "profile": {
+    "name": "Brad Josh Nebreja",
+    "roles": [
+      "Web Developer",
+      "UI/UX Designer",
+      "Project Lead"
+    ],
+    "lede": "I design and build polished digital experiences that turn ideas into efficient, user-focused systems.",
+    "location": "Calamba City, Laguna • Philippines",
+    "availability": "Open to projects",
+    "aboutHeading": "Information Technology student with a passion for building useful digital tools.",
+    "about": [
+      "I’m Brad Josh Nebreja , a motivated and detail-oriented Information Technology student with a strong foundation in programming, object-oriented analysis, and design. I enjoy turning ideas into practical software that helps teams work smarter.",
+      "I demonstrate leadership, project management, and collaborative problem-solving skills. I’m eager to apply data-analytical expertise to data-driven projects within a dynamic organization."
+    ],
+    "stats": [
+      {
+        "value": "2",
+        "label": "Years Experience"
+      },
+      {
+        "value": "5",
+        "label": "Certifications"
+      },
+      {
+        "value": "3",
+        "label": "Projects"
+      }
+    ]
+  },
+  "experience": [
+    {
+      "title": "Capstone Project Lead",
+      "company": "Containerboard Packaging Corporation (CPC)",
+      "location": "Carmelray Industrial Park II, Calamba City, Laguna",
+      "date": "June 2025 – March 2026",
+      "bullets": [
+        "Led the capstone project through successful implementation of a centralized system for CPC.",
+        "Managed the development team by assigning tasks, monitoring progress, and ensuring project goals were met.",
+        "Collaborated with team members to design and implement a system centralizing Sales, Production, Inventory, and Logistics operations."
+      ]
+    },
+    {
+      "title": "Capstone UI/UX Designer Lead",
+      "company": "CPC Centralized System",
+      "location": "Calamba City, Laguna",
+      "date": "June 2025 – March 2026",
+      "bullets": [
+        "Led the UI/UX design to establish the frontend of a centralized system.",
+        "Assisted the main web developer as a backup web developer for the system.",
+        "Applied HTML, JavaScript, CSS, and PHP to develop a user-friendly and fully functional centralized system."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "Bachelor of Science in Information Technology",
+      "place": "National University Laguna x Asia Pacific College",
+      "date": "Calamba City, Laguna • Expected July 2027"
+    },
+    {
+      "degree": "General Academic Strand (GAS)",
+      "place": "Saint Benilde International School (SBIS)",
+      "date": "Calamba City, Laguna • 2021–2023"
+    }
+  ],
+  "skillGroups": [
+    {
+      "title": "Programming Languages",
+      "items": [
+        "Java",
+        "Python",
+        "C++",
+        "JavaScript",
+        "HTML",
+        "CSS",
+        "PHP"
+      ]
+    },
+    {
+      "title": "Database",
+      "items": [
+        "MS SQL",
+        "Firebase"
+      ]
+    },
+    {
+      "title": "Frameworks",
+      "items": [
+        "Laravel WebSocket",
+        "React",
+        "Express.js"
+      ]
+    },
+    {
+      "title": "Software & Tools",
+      "items": [
+        "Microsoft Office 365",
+        "Microsoft Loop",
+        "Visual Studio Code",
+        "Figma",
+        "Canva"
+      ]
+    },
+    {
+      "title": "Other Skills",
+      "items": [
+        "Problem-Solving",
+        "Project Management"
+      ]
+    },
+    {
+      "title": "Languages",
+      "items": [
+        "Filipino (Native)",
+        "English (Proficient)"
+      ]
+    }
+  ],
+  "contactDetails": [
+    {
+      "label": "Location",
+      "value": "Calamba City, Laguna, Philippines",
+      "href": null
+    },
+    {
+      "label": "Phone",
+      "value": "+63 969 314 8752",
+      "href": "tel:+639693148752"
+    },
+    {
+      "label": "Email",
+      "value": "bradjosh.nebreja05@gmail.com",
+      "href": "mailto:bradjosh.nebreja05@gmail.com"
+    },
+    {
+      "label": "GitHub",
+      "value": "github.com/Josh-L30",
+      "href": "https://github.com/Josh-L30"
+    },
+    {
+      "label": "LinkedIn",
+      "value": "josh-nebreja-894248402",
+      "href": "https://www.linkedin.com/in/josh-nebreja-894248402/"
+    }
+  ],
+  "contactHeading": "Let’s build something useful.",
+  "contactIntro": "I’m available for web development, UI/UX design, and project collaboration opportunities.",
+  "unlistedProjectDetails": {
+    "automation": {
+      "title": "Process Automation Workflow",
+      "subtitle": "Operational data integration and automation layer",
+      "detail": "A workflow-focused project that reduces manual work and supports organization-wide visibility.",
+      "bullets": [
+        "Operational process mapping",
+        "Shared data workflow design",
+        "System feasibility and reporting support"
+      ]
+    }
+  }
+}
