@@ -15,7 +15,7 @@ Open http://localhost:8000. Use HTTP rather than opening index.html directly bec
 - Three-link top navigation (Projects, Experience, Contact) and a compact profile, full experience, education, About and contact details.
 - Manual 3D project carousel with five entries, thumbnail controls and keyboard navigation. Image-first project details include a keyboard-operable thumbnail filmstrip, all 29 unique source screenshots and an on-demand video walkthrough.
 - Certificate folio with five thumbnail credential selectors and an in-page full-size image viewer.
-- Original-color local tool logos, light/dark themes with saved preference, reduced-motion and reduced-transparency fallbacks.
+- Six categorized groups of original-color local tool logos, light/dark themes with saved preference, reduced-motion and reduced-transparency fallbacks.
 - locally hosted Nunito Sans typography, responsive WebP previews, lazy images and no carousel autoplay or animation library.
 
 ## Files to edit

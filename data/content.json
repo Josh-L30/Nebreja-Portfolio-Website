@@ -373,103 +373,86 @@
     {
       "name": "JavaScript",
       "logo": "assets/logo-javascript.svg",
-      "featured": true,
       "source": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
     },
     {
       "name": "HTML",
       "logo": "assets/logo-html5.svg",
-      "featured": true,
       "source": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"
     },
     {
       "name": "CSS",
       "logo": "assets/logo-css3.svg",
-      "featured": true,
       "source": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg"
     },
     {
       "name": "PHP",
       "logo": "assets/logo-php.svg",
-      "featured": true,
       "source": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg"
     },
     {
       "name": "React",
       "logo": "assets/logo-react.svg",
-      "featured": true,
       "source": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
     },
     {
       "name": "Express.js",
       "logo": "assets/logo-express.svg",
-      "featured": true,
       "source": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg"
     },
     {
       "name": "MS SQL",
       "logo": "assets/logo-microsoftsqlserver.svg",
-      "featured": true,
       "source": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-original.svg"
     },
     {
       "name": "Figma",
       "logo": "assets/logo-figma.svg",
-      "featured": true,
       "source": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg"
     },
     {
       "name": "Java",
       "logo": "assets/logo-java.svg",
-      "featured": false,
       "source": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg"
     },
     {
       "name": "Python",
       "logo": "assets/logo-python.svg",
-      "featured": false,
       "source": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
     },
     {
       "name": "C++",
       "logo": "assets/logo-cplusplus.svg",
-      "featured": false,
       "source": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg"
     },
     {
       "name": "Firebase",
       "logo": "assets/logo-firebase.svg",
-      "featured": false,
       "source": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-original.svg"
     },
     {
       "name": "Laravel WebSocket",
       "logo": "assets/logo-laravel.svg",
-      "featured": false,
       "source": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg"
     },
     {
       "name": "Visual Studio Code",
       "logo": "assets/logo-vscode.svg",
-      "featured": false,
       "source": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg"
     },
     {
       "name": "Canva",
       "logo": "assets/logo-canva.svg",
-      "featured": false,
       "source": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/canva/canva-original.svg"
     },
     {
       "name": "Microsoft 365",
       "logo": "assets/logo-m365.webp",
-      "featured": false,
       "source": "Original portfolio asset: assets/UI/M365.png"
     },
     {
       "name": "Microsoft Loop",
       "logo": "assets/logo-mloop.webp",
-      "featured": false,
       "source": "Original portfolio asset: assets/UI/MLoop.png"
     }
   ],
@@ -694,5 +677,54 @@
         "System feasibility and reporting support"
       ]
     }
-  }
+  },
+  "stackGroups": [
+    {
+      "title": "Frontend",
+      "tools": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "React"
+      ]
+    },
+    {
+      "title": "Backend",
+      "tools": [
+        "PHP",
+        "Express.js",
+        "Laravel WebSocket"
+      ]
+    },
+    {
+      "title": "Databases & services",
+      "tools": [
+        "MS SQL",
+        "Firebase"
+      ]
+    },
+    {
+      "title": "Programming languages",
+      "tools": [
+        "Java",
+        "Python",
+        "C++"
+      ]
+    },
+    {
+      "title": "Design",
+      "tools": [
+        "Figma",
+        "Canva"
+      ]
+    },
+    {
+      "title": "Development & collaboration",
+      "tools": [
+        "Visual Studio Code",
+        "Microsoft 365",
+        "Microsoft Loop"
+      ]
+    }
+  ]
 }

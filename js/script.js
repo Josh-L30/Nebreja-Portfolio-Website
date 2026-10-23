@@ -198,11 +198,16 @@ class PortfolioContactForm extends HTMLElement {
 class PortfolioStack extends HTMLElement {
   async connectedCallback() {
     try {
-      const {stack} = await data;
-      const list = node('ul','tech-list');
-      list.id = 'tech-list';
-      const extra = [];
-      stack.forEach(item => {
+      const {stack,stackGroups} = await data;
+      const groups=node('div','stack-groups');
+      stackGroups.forEach(group=>{
+        const section=node('div','tech-group');
+        const list=node('ul','tech-list');
+        list.setAttribute('aria-label',group.title);
+        section.append(node('h3','tech-group-title',group.title),list);
+        group.tools.forEach(name=>{
+        const item=stack.find(tool=>tool.name===name);
+        if(!item)return;
         const chip = node('li','tech-chip');
         const logo = node('img','tech-logo');
         logo.src = new URL('../'+item.logo,import.meta.url).href;
@@ -212,23 +217,12 @@ class PortfolioStack extends HTMLElement {
         logo.loading = 'lazy';
         logo.decoding = 'async';
         chip.append(logo,node('span','',item.name));
-        if (!item.featured) { chip.hidden = true; extra.push(chip); }
         list.append(chip);
+        });
+        groups.append(section);
       });
-      const control = node('li','tech-control');
-      const toggle = node('button','tech-toggle',`+${extra.length} more`);
-      toggle.type = 'button';
-      toggle.setAttribute('aria-expanded','false');
-      toggle.setAttribute('aria-controls','tech-list');
-      toggle.addEventListener('click',()=>{
-        const expanded = toggle.getAttribute('aria-expanded') !== 'true';
-        extra.forEach(chip=>{chip.hidden=!expanded;});
-        toggle.setAttribute('aria-expanded',String(expanded));
-        toggle.textContent = expanded ? 'Show less' : `+${extra.length} more`;
-      });
-      control.append(toggle);
-      list.append(control);
-      this.replaceChildren(list);
+      this.replaceChildren(groups);
+      groups.querySelectorAll('.tech-group').forEach(revealOnce);
     } catch {
       this.replaceChildren(node('p','component-error','The technology list could not load. Please refresh to try again.'));
     }

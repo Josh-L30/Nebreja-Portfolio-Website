@@ -68,3 +68,6 @@ portfolio-certificates:has(>p){display:block;min-height:460px}
 portfolio-contact-form:has(>p){display:block;min-height:480px}
 @container(max-width:1100px){portfolio-projects:has(>p){min-height:760px}}
 @container(max-width:600px){portfolio-projects:has(>p){min-height:720px}portfolio-certificates:has(>p){min-height:540px}}
+/* Categorized tools keep each discipline easy to scan. */
+.stack-groups{display:flex;flex-direction:column;gap:28px}.tech-group{display:grid;grid-template-columns:190px minmax(0,1fr);gap:20px;align-items:start}.tech-group-title{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--soft);line-height:1.6;margin:10px 0 0}.tech-group .tech-list{gap:9px}.tech-group .tech-chip{font-size:14px;min-height:40px;padding:8px 12px}.supporting-skills{border-top:1px solid var(--line);padding-top:24px;margin-top:30px}
+@container(max-width:600px){.stack-groups{gap:26px}.tech-group{grid-template-columns:1fr;gap:12px}.tech-group-title{margin:0}.tech-group .tech-chip{font-size:13px}}

@@ -1,3 +1,5 @@
+Current tech stack: six data-driven categories (Frontend, Backend, Databases & services, Programming languages, Design, Development & collaboration). All 17 existing tools and original logos are visible once, without the older expand/collapse control. Group membership is defined in data/content.json under stackGroups. Verified category headings, unique tool count, image decoding and no overflow at 320/390/768/1440px.
+
 Mobile certificates: the folio now has Previous/Next with a live count and a five-thumbnail picker beneath it. Desktop keeps the title-based selector. Keyboard arrow/Home/End support and wrapping controls share one selection handler. Verified at 320/390/768/1440px, including a single thumbnail row on mobile and no horizontal overflow.
 
 Mobile project layout: at 600px and below, the screen is followed by Previous/Next, the thumbnail picker, then the project copy. Checked at 320/390px with project selection, plus 768/1440px regression checks and no horizontal overflow.
