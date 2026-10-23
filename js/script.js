@@ -80,7 +80,7 @@ class PortfolioProjects extends HTMLElement {
         const thumb = node('div','thumb');
         const image = node('img');
         const cover=project.id==='dashboard'?project.gallery[2].image:project.id==='cinemabuddyux'?'screen-fig3':project.image;
-        fillImage(image, cover, index===0?'(max-width:950px) 90vw, 780px':'(max-width:600px) 85vw, (max-width:950px) 44vw, 380px');
+        fillImage(image, cover, '(max-width:600px) calc(100vw - 108px), (max-width:1100px) 480px, 510px');
         image.alt = `${project.title} interface preview`;
         image.loading = 'lazy';
         thumb.append(image);
@@ -94,7 +94,7 @@ class PortfolioProjects extends HTMLElement {
         button.append(visual,text);
         list.append(button);
         const choice=node('button','project-choice');choice.type='button';
-        choice.setAttribute('aria-label','Show '+project.title);
+        choice.setAttribute('aria-label',String(index+1).padStart(2,'0')+' Show '+project.title);
         choice.setAttribute('aria-pressed',String(index===0));
         const mini=node('img');fillImage(mini,cover,'100px');mini.alt='';mini.loading='lazy';
         choice.append(mini,node('span','',String(index+1).padStart(2,'0')));
@@ -118,6 +118,7 @@ class PortfolioProjects extends HTMLElement {
         event.preventDefault();select(event.key==='Home'?0:event.key==='End'?config.projects.length-1:current+(event.key==='ArrowRight'?1:-1));picker.children[current].focus();
       });
       this.replaceChildren(list,controls,picker);
+      revealOnce(this);
     } catch {
       this.replaceChildren(node('p','component-error','Project previews could not load. Please refresh to try again.'));
     }
@@ -187,6 +188,7 @@ class PortfolioContactForm extends HTMLElement {
         }
       });
       this.replaceChildren(form);
+      revealOnce(this);
       revealOnce(form);
     } catch {
       this.replaceChildren(node('p','component-error','The contact form could not load. Please refresh to try again.'));
@@ -240,13 +242,32 @@ class PortfolioCertificates extends HTMLElement {
       const list = node('div','certificate-list');
       const choices=node('div','certificate-choices');
       choices.setAttribute('aria-label','Choose a certificate');
+      let current=0;
+      const controls=node('div','certificate-controls');
+      const previous=node('button','','Previous');const next=node('button','','Next');
+      previous.type=next.type='button';
+      const count=node('span','','1 / '+certificates.length);count.setAttribute('aria-live','polite');
+      controls.append(previous,count,next);
+      function select(index){
+        current=(index+certificates.length)%certificates.length;
+        [...list.children].forEach((panel,i)=>panel.hidden=i!==current);
+        [...choices.children].forEach((item,i)=>item.setAttribute('aria-pressed',String(i===current)));
+        count.textContent=`${current+1} / ${certificates.length}`;
+      }
+      previous.addEventListener('click',()=>select(current-1));next.addEventListener('click',()=>select(current+1));
+      choices.addEventListener('keydown',event=>{
+        if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;
+        event.preventDefault();select(event.key==='Home'?0:event.key==='End'?certificates.length-1:current+(event.key==='ArrowRight'?1:-1));choices.children[current].focus();
+      });
       certificates.forEach((certificate,index)=>{
         const link = node('a','certificate-item');
         link.hidden=index!==0;
         link.href = new URL('../'+certificate.image,import.meta.url).href;
-        link.setAttribute('aria-label',`Enlarge ${certificate.title} certificate`);
+        link.setAttribute('aria-label',`View certificate: ${certificate.title}`);
         const image = node('img','certificate-thumb');
         image.src = new URL('../'+certificate.preview,import.meta.url).href;
+        image.srcset=`${new URL('../'+certificate.medium,import.meta.url).href} 480w, ${image.src} 960w`;
+        image.sizes='(max-width:600px) calc(100vw - 80px), 520px';
         image.alt = '';
         image.width = certificate.width;
         image.height = certificate.height;
@@ -257,19 +278,19 @@ class PortfolioCertificates extends HTMLElement {
         link.append(image,text,node('span','certificate-action','View certificate'));
         list.append(link);
         const choice=node('button','certificate-choice');choice.type='button';
+        choice.setAttribute('aria-label',String(index+1).padStart(2,'0')+' Show '+certificate.title);
+        choice.dataset.number=String(index+1).padStart(2,'0');
         choice.setAttribute('aria-pressed',String(index===0));
         const miniature=node('img','credential-miniature');
-        miniature.src=new URL('../'+certificate.thumbnail,import.meta.url).href;
+        miniature.src=new URL('../'+certificate.miniature,import.meta.url).href;
         miniature.alt='';miniature.width=72;miniature.height=54;miniature.loading='lazy';
         choice.append(miniature,node('span','',certificate.title),node('small','',certificate.issuer+' · '+certificate.year));
-        choice.addEventListener('click',()=>{
-          [...list.children].forEach((panel,i)=>panel.hidden=i!==index);
-          [...choices.children].forEach((item,i)=>item.setAttribute('aria-pressed',String(i===index)));
-        });
+        choice.addEventListener('click',()=>select(index));
         choices.append(choice);
       });
-      const showcase=node('div','credential-showcase');showcase.append(list,choices);
+      const showcase=node('div','credential-showcase');showcase.append(list,controls,choices);
       this.replaceChildren(showcase);
+      revealOnce(this);
     } catch {
       this.replaceChildren(node('p','component-error','Certificates could not load. Please refresh to try again.'));
     }
@@ -280,12 +301,18 @@ const arrivalObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (!entry.isIntersecting) return;
     arrivalObserver.unobserve(entry.target);
-    if (!reducedMotion.matches) entry.target.classList.add('arrive');
+    if (!reducedMotion.matches && !navigator.connection?.saveData) {
+      entry.target.classList.add('arrive');
+      entry.target.addEventListener('animationend',()=>entry.target.classList.remove('arrive'),{once:true});
+    }
   });
 }, {threshold:.12});
 function revealOnce(element) { arrivalObserver.observe(element); }
 reducedMotion.addEventListener('change',()=>{
-  if(reducedMotion.matches)document.getAnimations().forEach(animation=>animation.cancel());
+  if(reducedMotion.matches){
+    document.getAnimations().forEach(animation=>animation.cancel());
+    document.querySelectorAll('.arrive').forEach(element=>element.classList.remove('arrive'));
+  }
 });
 customElements.define('portfolio-projects',PortfolioProjects);
 customElements.define('portfolio-contact-form',PortfolioContactForm);
@@ -372,7 +399,7 @@ document.addEventListener('click', async event => {
   gallery=project.gallery;
   filmstrip.replaceChildren(...gallery.map((screen,index)=>{
     const button=node('button','gallery-thumbnail');button.type='button';
-    button.setAttribute('aria-label',`Show ${screen.label}, screen ${index+1}`);
+    button.setAttribute('aria-label',`${String(index+1).padStart(2,'0')} Show ${screen.label}`);
     button.setAttribute('aria-pressed',String(index===0));
     const miniature=node('img');fillImage(miniature,screen.image,'100px');miniature.alt='';miniature.loading='lazy';
     button.append(miniature,node('span','',String(index+1).padStart(2,'0')));
@@ -420,3 +447,4 @@ const sectionObserver=new IntersectionObserver(entries=>{
 document.querySelectorAll('main section[id]').forEach(section=>sectionObserver.observe(section));
 
 try{if(localStorage.getItem('brad-theme')==='dark'){document.body.classList.remove('light');document.getElementById('theme').setAttribute('aria-label','Switch to light theme');}}catch{}
+document.querySelectorAll('.section-top,.experience-entry,.education-entry,.about>p,.contact-details,.supporting-skills').forEach(revealOnce);

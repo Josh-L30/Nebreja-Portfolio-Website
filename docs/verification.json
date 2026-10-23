@@ -1,15 +1,13 @@
 {
-  "concept": "Minimal portfolio with top navigation, local Nunito Sans, project deck and in-page image viewers",
+  "concept": "Full source content with sidebar portfolio flow",
   "checks": [
     "320px: project picker, next/wrap and keyboard End, certificate selector, all deck images decode, 8/17 stack expansion and collapse, all 17 logos and 5 certificate previews decode, all 5 original certificate files respond, no decorative arrows, form validation and unsent-text retention, light/dark, no overflow, dialogs/Escape, no JS exceptions",
     "390px: project picker, next/wrap and keyboard End, certificate selector, all deck images decode, 8/17 stack expansion and collapse, all 17 logos and 5 certificate previews decode, all 5 original certificate files respond, no decorative arrows, form validation and unsent-text retention, light/dark, no overflow, dialogs/Escape, no JS exceptions",
     "768px: project picker, next/wrap and keyboard End, certificate selector, all deck images decode, 8/17 stack expansion and collapse, all 17 logos and 5 certificate previews decode, all 5 original certificate files respond, no decorative arrows, form validation and unsent-text retention, light/dark, no overflow, dialogs/Escape, no JS exceptions",
     "1440px: project picker, next/wrap and keyboard End, certificate selector, all deck images decode, 8/17 stack expansion and collapse, all 17 logos and 5 certificate previews decode, all 5 original certificate files respond, no decorative arrows, form validation and unsent-text retention, light/dark, no overflow, dialogs/Escape, no JS exceptions",
     "Reduced motion: no portrait transform or entrance animation; form stays readable.",
-    "Local mock only: pending state, duplicate prevention, failed request retains text, accepted request clears form, fields restored. Not proof of live delivery.",
-    "Separate image-viewer checks at 390/1440px: original project/certificate image decoding, near-fullscreen sizing, Close/Escape, parent-dialog retention, focus restoration and failed-image feedback passed."
+    "Local mock only: pending state, duplicate prevention, failed request retains text, accepted request clears form, fields restored. Not proof of live delivery."
   ],
   "limitations": "No sending endpoint is configured. Tests confirm validation and honest preview behavior, not real message delivery. Local Chrome viewport emulation, not physical-device evidence.",
-  "passed": true,
-  "release": "Local assets and HTTP smoke checks pass. Physical-device testing unavailable; no analytics/backend introduced; contact endpoint remains null."
+  "passed": true
 }

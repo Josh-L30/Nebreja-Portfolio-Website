@@ -50,3 +50,7 @@ Asset verification checks local HTML and JSON references, responsive galleries a
 Personal content, CV, certificates and project media belong to Brad and their respective owners. Third-party component adaptations and logo licenses are documented in docs/.
 
 Full-size project screens and certificates open in a near-fullscreen native dialog, with loading/error feedback and Close/Escape dismissal. Closing the image returns to the underlying project and restores focus. No image preview opens a new tab.
+
+## Scroll motion and performance
+
+Sections use short one-time transform/opacity reveals. Reduced-motion and data-saver users skip them. See docs/PERFORMANCE.md for measured Lighthouse results and test limitations. The local variable font is preloaded once, async content reserves space, and certificate/portrait images use responsive sizes.

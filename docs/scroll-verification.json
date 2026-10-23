@@ -1,0 +1,38 @@
+[
+  {
+    "mode": "mobile",
+    "cpuSlowdown": 4,
+    "count": 15,
+    "unique": 15,
+    "idle": 0,
+    "overflow": false,
+    "passed": true
+  },
+  {
+    "mode": "desktop",
+    "cpuSlowdown": 4,
+    "count": 15,
+    "unique": 15,
+    "idle": 0,
+    "overflow": false,
+    "passed": true
+  },
+  {
+    "mode": "reduced-motion",
+    "cpuSlowdown": 4,
+    "count": 0,
+    "unique": 0,
+    "idle": 0,
+    "overflow": false,
+    "passed": true
+  },
+  {
+    "mode": "save-data",
+    "cpuSlowdown": 4,
+    "count": 0,
+    "unique": 0,
+    "idle": 0,
+    "overflow": false,
+    "passed": true
+  }
+]

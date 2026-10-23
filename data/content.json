@@ -482,7 +482,9 @@
       "thumbnail": "assets/certificate-NetworkSecurity-320.webp",
       "width": 309,
       "height": 240,
-      "preview": "assets/certificate-NetworkSecurity-960.webp"
+      "preview": "assets/certificate-NetworkSecurity-960.webp",
+      "miniature": "assets/certificate-NetworkSecurity-128.webp",
+      "medium": "assets/certificate-NetworkSecurity-480.webp"
     },
     {
       "title": "Information Technology Specialist – Databases",
@@ -492,7 +494,9 @@
       "thumbnail": "assets/certificate-Databases-320.webp",
       "width": 312,
       "height": 240,
-      "preview": "assets/certificate-Databases-960.webp"
+      "preview": "assets/certificate-Databases-960.webp",
+      "miniature": "assets/certificate-Databases-128.webp",
+      "medium": "assets/certificate-Databases-480.webp"
     },
     {
       "title": "LearnKey (LK) Database Certification",
@@ -502,7 +506,9 @@
       "thumbnail": "assets/certificate-LearnKey-320.webp",
       "width": 320,
       "height": 180,
-      "preview": "assets/certificate-LearnKey-960.webp"
+      "preview": "assets/certificate-LearnKey-960.webp",
+      "miniature": "assets/certificate-LearnKey-128.webp",
+      "medium": "assets/certificate-LearnKey-480.webp"
     },
     {
       "title": "Automation with MS Excel VBA",
@@ -512,7 +518,9 @@
       "thumbnail": "assets/certificate-MSExcelVBA-320.webp",
       "width": 320,
       "height": 180,
-      "preview": "assets/certificate-MSExcelVBA-960.webp"
+      "preview": "assets/certificate-MSExcelVBA-960.webp",
+      "miniature": "assets/certificate-MSExcelVBA-128.webp",
+      "medium": "assets/certificate-MSExcelVBA-480.webp"
     },
     {
       "title": "CodeCombat",
@@ -522,7 +530,9 @@
       "thumbnail": "assets/certificate-CodeCombat-320.webp",
       "width": 320,
       "height": 180,
-      "preview": "assets/certificate-CodeCombat-960.webp"
+      "preview": "assets/certificate-CodeCombat-960.webp",
+      "miniature": "assets/certificate-CodeCombat-128.webp",
+      "medium": "assets/certificate-CodeCombat-480.webp"
     }
   ],
   "profile": {
