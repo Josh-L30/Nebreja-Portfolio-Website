@@ -423,13 +423,22 @@ document.getElementById('theme').addEventListener('click',event=>{
 });
 const sidebar=document.querySelector('.sidebar');
 const mobileMenu=document.getElementById('mobileMenu');
-mobileMenu.addEventListener('click',()=>{
-  const open=sidebar.classList.toggle('nav-open');
+function setNavigation(open){
+  sidebar.classList.toggle('nav-open',open);
   mobileMenu.setAttribute('aria-expanded',String(open));
+  mobileMenu.setAttribute('aria-label',open?'Close navigation':'Open navigation');
+}
+mobileMenu.addEventListener('click',()=>{
+  setNavigation(!sidebar.classList.contains('nav-open'));
 });
 sidebar.querySelectorAll('a[href^="#"]').forEach(link=>link.addEventListener('click',()=>{
-  sidebar.classList.remove('nav-open');mobileMenu.setAttribute('aria-expanded','false');
+  setNavigation(false);
 }));
+sidebar.addEventListener('keydown',event=>{
+  if(event.key==='Escape'&&sidebar.classList.contains('nav-open')){
+    event.preventDefault();setNavigation(false);mobileMenu.focus();
+  }
+});
 const sectionObserver=new IntersectionObserver(entries=>{
   const active=entries.find(entry=>entry.isIntersecting);
   if(!active)return;
