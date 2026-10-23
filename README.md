@@ -34,9 +34,11 @@ Profile, experience, education and About values are also retained in JSON for re
 
 ## Contact form
 
-No sending endpoint is configured. The form validates name, email and message, clearly states that messages are not sent, and retains unsent text. It never displays simulated success.
+Direct sending uses the Web3Forms browser API. Generate a public access key for bradjosh.nebreja05@gmail.com at https://web3forms.com/#start, retrieve it from Brad's email and set contact.accessKey in data/content.json. The access key aliases the recipient email and is intended for public client-side use; never enter an email password or private API token. Provider documentation: https://docs.web3forms.com/getting-started/installation and https://docs.web3forms.com/getting-started/api-reference.
 
-To connect a service, set contact.endpoint in data/content.json to a verified endpoint that accepts a JSON POST containing name, email and message, supports browser CORS and returns a successful HTTP status only after acceptance. Test real delivery before publishing. Never put private credentials in client-side files. Local mock checks do not prove email delivery.
+Until the key is supplied, the form is clearly labelled Open email draft and opens the visitor's email app with Brad's address, subject and entered text. It retains the text and never claims to have sent it. With a key, it POSTs the validated name, email and message to Web3Forms. Success requires both a successful HTTP response and success === true in the JSON body. Rejections, malformed responses, network failures and timeouts retain the text. Pending submissions disable repeat requests. A hidden botcheck field is included. Messages are not stored by this site; the configured service processes them.
+
+Mock tests cover provider acceptance, JSON rejection (including the string false), HTTP failure, malformed JSON, network failure and duplicate prevention. No real email delivery has been verified until the recipient's access key is configured and a live test is acknowledged.
 
 ## Verification
 
@@ -58,3 +60,5 @@ Sections use short one-time transform/opacity reveals. Reduced-motion and data-s
 ## Website icon and social sharing
 
 The browser favicon and Apple touch icon use Brad's existing portrait. Open Graph and Twitter large-card metadata are included directly in the HTML head, with absolute public URLs. The 1200x630 JPEG at assets/brad-hero-social-v1.jpg is captured from the actual light-theme hero design. Regenerate the image and update its versioned filename in the metadata when the hero changes. Previously cached platform previews may require a rescrape after publishing.
+
+CinemaBuddy video is available through the always-visible Watch CinemaBuddy video demo button under the project picker and inside the CinemaBuddy project. The native player appears near the top of the details dialog, uses preload none and never autoplays. Original video metadata verified locally: 204.513 seconds, 1920x1080. Mobile navigation opens a separate absolute-positioned dropdown, leaving the sticky navbar's height unchanged; outside clicks, Escape and anchor selection dismiss it.

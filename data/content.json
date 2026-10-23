@@ -316,7 +316,7 @@
           "original": "assets/UI/fig7.png"
         }
       ],
-      "video": null
+      "video": "assets/video/Dagooc_Nebreja_INMEDIA FINALS.mp4"
     },
     {
       "id": "cinemabuddyux",
@@ -345,7 +345,7 @@
     }
   ],
   "contact": {
-    "endpoint": null,
+    "endpoint": "https://api.web3forms.com/submit",
     "fields": [
       {
         "name": "name",
@@ -367,7 +367,10 @@
         "type": "textarea",
         "maxLength": 5000
       }
-    ]
+    ],
+    "provider": "web3forms",
+    "accessKey": null,
+    "recipient": "bradjosh.nebreja05@gmail.com"
   },
   "stack": [
     {

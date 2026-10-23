@@ -1,0 +1,69 @@
+[
+  {
+    "width": 320,
+    "navbarHeightStable": true,
+    "demoAccessible": true,
+    "passed": true
+  },
+  {
+    "video": {
+      "duration": 204.512993,
+      "width": 1920,
+      "height": 1080
+    }
+  },
+  {
+    "width": 390,
+    "navbarHeightStable": true,
+    "demoAccessible": true,
+    "passed": true
+  },
+  {
+    "width": 768,
+    "navbarHeightStable": true,
+    "demoAccessible": true,
+    "passed": true
+  },
+  {
+    "width": 1100,
+    "navbarHeightStable": true,
+    "demoAccessible": true,
+    "passed": true
+  },
+  {
+    "width": 1440,
+    "navbarHeightStable": true,
+    "demoAccessible": true,
+    "passed": true
+  },
+  {
+    "scenario": "success",
+    "mocked": true,
+    "passed": true
+  },
+  {
+    "scenario": "rejected",
+    "mocked": true,
+    "passed": true
+  },
+  {
+    "scenario": "string-false",
+    "mocked": true,
+    "passed": true
+  },
+  {
+    "scenario": "http-error",
+    "mocked": true,
+    "passed": true
+  },
+  {
+    "scenario": "malformed",
+    "mocked": true,
+    "passed": true
+  },
+  {
+    "scenario": "network-error",
+    "mocked": true,
+    "passed": true
+  }
+]

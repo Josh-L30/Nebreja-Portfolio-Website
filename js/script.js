@@ -71,7 +71,7 @@ class PortfolioProjects extends HTMLElement {
         project.tags.forEach(tag=>tags.append(node('span','',tag)));
         text.append(tags);
         const action=node('div','work-footer');
-        action.append(node('span','project-action',project.video?'Watch walkthrough':'Explore project'),node('span','work-count',project.video?'Video walkthrough':`${project.gallery.length} screens`));
+        action.append(node('span','project-action',project.video?'Watch demo & view project':'Explore project'),node('span','work-count',project.video?'Video walkthrough':`${project.gallery.length} screens`));
         text.append(action);
         const visual = node('div','work-visual');
         const display = node('div','work-display');
@@ -117,7 +117,9 @@ class PortfolioProjects extends HTMLElement {
         if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;
         event.preventDefault();select(event.key==='Home'?0:event.key==='End'?config.projects.length-1:current+(event.key==='ArrowRight'?1:-1));picker.children[current].focus();
       });
-      this.replaceChildren(list,controls,picker);
+      const demo=node('button','cinema-demo-link','Watch CinemaBuddy video demo');
+      demo.type='button';demo.dataset.project='cinemabuddyux';
+      this.replaceChildren(list,controls,picker,demo);
       revealOnce(this);
     } catch {
       this.replaceChildren(node('p','component-error','Project previews could not load. Please refresh to try again.'));
@@ -129,23 +131,26 @@ class PortfolioContactForm extends HTMLElement {
   async connectedCallback() {
     try {
       const {contact} = await data;
+      const canSend=Boolean(contact.endpoint&&(contact.provider!=='web3forms'||contact.accessKey));
       const form = node('form','contact-form');
       form.setAttribute('aria-label','Contact Brad');
       const fields = node('div','form-fields');
       contact.fields.forEach(field => fields.append(createField(field)));
-      const note = node('p','form-note',contact.endpoint ? 'All fields are required.' : 'Preview only. Messages are not sent yet.');
+      const note = node('p','form-note',canSend ? 'All fields are required. Messages are processed by Web3Forms.' : 'Opens your email app with a draft addressed to Brad.');
       note.id = 'contact-note';
       form.setAttribute('aria-describedby','contact-note');
       const status = node('p','form-status');
       status.id = 'contact-status';
       status.setAttribute('role','status');
       status.setAttribute('aria-live','polite');
+      const botcheck=node('input');botcheck.type='checkbox';botcheck.name='botcheck';botcheck.hidden=true;botcheck.tabIndex=-1;botcheck.setAttribute('aria-hidden','true');
       const submit = node('button','primary ui-button');
       submit.type = 'submit';
-      setButtonStatus(submit,'idle');
+      function resetSubmit(){setButtonStatus(submit,'idle');if(!canSend)submit.textContent='Open email draft';}
+      resetSubmit();
       const actions = node('div','form-actions');
       actions.append(submit,note);
-      form.append(fields,actions,status);
+      form.append(fields,botcheck,actions,status);
       form.addEventListener('submit', async event => {
         event.preventDefault();
         if (submit.disabled) return;
@@ -158,10 +163,15 @@ class PortfolioContactForm extends HTMLElement {
             return;
           }
         }
-        if (!contact.endpoint) {
-          status.textContent = 'Sending is not available in this preview. Your message has been kept here.';
+        if(botcheck.checked){status.textContent='Your message could not be submitted. Please try again.';return;}
+        if (!canSend) {
+          const subject='Portfolio collaboration inquiry';
+          const body=`Name: ${payload.name}\nEmail: ${payload.email}\n\n${payload.message}`;
+          location.href=`mailto:${contact.recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+          status.textContent = 'Your email draft has been opened. Send it from your email app. Your text is kept here.';
           return;
         }
+        if(contact.provider==='web3forms')Object.assign(payload,{access_key:contact.accessKey,subject:'New portfolio collaboration inquiry',from_name:'Brad Nebreja Portfolio',botcheck:false});
         setButtonStatus(submit,'pending');
         fields.querySelectorAll('input, textarea').forEach(input => { input.disabled = true; });
         status.textContent = '';
@@ -171,6 +181,8 @@ class PortfolioContactForm extends HTMLElement {
             body:JSON.stringify(payload), signal:AbortSignal.timeout(15000)
           });
           if (!response.ok) throw new Error('Submission rejected');
+          const result=await response.json();
+          if(result.success!==true)throw new Error('Provider did not accept submission');
           setButtonStatus(submit,'success');
           status.textContent = 'Your message was submitted. Thank you for getting in touch.';
           form.reset();
@@ -183,7 +195,7 @@ class PortfolioContactForm extends HTMLElement {
       });
       form.addEventListener('input', () => {
         if (!submit.disabled) {
-          setButtonStatus(submit,'idle');
+          resetSubmit();
           status.textContent = '';
         }
       });
@@ -438,6 +450,9 @@ sidebar.addEventListener('keydown',event=>{
   if(event.key==='Escape'&&sidebar.classList.contains('nav-open')){
     event.preventDefault();setNavigation(false);mobileMenu.focus();
   }
+});
+document.addEventListener('click',event=>{
+  if(sidebar.classList.contains('nav-open')&&!sidebar.contains(event.target))setNavigation(false);
 });
 const sectionObserver=new IntersectionObserver(entries=>{
   const active=entries.find(entry=>entry.isIntersecting);
