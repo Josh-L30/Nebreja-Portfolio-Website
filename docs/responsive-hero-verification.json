@@ -1,0 +1,182 @@
+[
+  {
+    "width": 320,
+    "enlargedText": false,
+    "position": "static",
+    "intersects": [],
+    "overflow": false,
+    "portraitBottom": 232.921875,
+    "introTop": 258.34375,
+    "passed": true
+  },
+  {
+    "width": 320,
+    "enlargedText": true,
+    "position": "static",
+    "intersects": [],
+    "overflow": false,
+    "portraitBottom": 232.921875,
+    "introTop": 475.03125,
+    "passed": true
+  },
+  {
+    "width": 360,
+    "enlargedText": false,
+    "position": "static",
+    "intersects": [],
+    "overflow": false,
+    "portraitBottom": 232.921875,
+    "introTop": 258.34375,
+    "passed": true
+  },
+  {
+    "width": 360,
+    "enlargedText": true,
+    "position": "static",
+    "intersects": [],
+    "overflow": false,
+    "portraitBottom": 232.921875,
+    "introTop": 380.25,
+    "passed": true
+  },
+  {
+    "width": 390,
+    "enlargedText": false,
+    "position": "static",
+    "intersects": [],
+    "overflow": false,
+    "portraitBottom": 232.921875,
+    "introTop": 252.921875,
+    "passed": true
+  },
+  {
+    "width": 390,
+    "enlargedText": true,
+    "position": "static",
+    "intersects": [],
+    "overflow": false,
+    "portraitBottom": 232.921875,
+    "introTop": 380.25,
+    "passed": true
+  },
+  {
+    "width": 430,
+    "enlargedText": false,
+    "position": "static",
+    "intersects": [],
+    "overflow": false,
+    "portraitBottom": 232.921875,
+    "introTop": 252.921875,
+    "passed": true
+  },
+  {
+    "width": 430,
+    "enlargedText": true,
+    "position": "static",
+    "intersects": [],
+    "overflow": false,
+    "portraitBottom": 232.921875,
+    "introTop": 340.65625,
+    "passed": true
+  },
+  {
+    "width": 600,
+    "enlargedText": false,
+    "position": "static",
+    "intersects": [],
+    "overflow": false,
+    "portraitBottom": 232.921875,
+    "introTop": 252.921875,
+    "passed": true
+  },
+  {
+    "width": 600,
+    "enlargedText": true,
+    "position": "static",
+    "intersects": [],
+    "overflow": false,
+    "portraitBottom": 232.921875,
+    "introTop": 285.46875,
+    "passed": true
+  },
+  {
+    "width": 601,
+    "enlargedText": false,
+    "position": "static",
+    "intersects": [],
+    "overflow": false,
+    "portraitBottom": 362.4521484375,
+    "introTop": 220.875,
+    "passed": true
+  },
+  {
+    "width": 601,
+    "enlargedText": true,
+    "position": "static",
+    "intersects": [],
+    "overflow": false,
+    "portraitBottom": 503.2333984375,
+    "introTop": 335.78125,
+    "passed": true
+  },
+  {
+    "width": 768,
+    "enlargedText": false,
+    "position": "static",
+    "intersects": [],
+    "overflow": false,
+    "portraitBottom": 346.7021484375,
+    "introTop": 220.875,
+    "passed": true
+  },
+  {
+    "width": 768,
+    "enlargedText": true,
+    "position": "static",
+    "intersects": [],
+    "overflow": false,
+    "portraitBottom": 412.3740234375,
+    "introTop": 242.4375,
+    "passed": true
+  },
+  {
+    "width": 1024,
+    "enlargedText": false,
+    "position": "static",
+    "intersects": [],
+    "overflow": false,
+    "portraitBottom": 346.7021484375,
+    "introTop": 220.875,
+    "passed": true
+  },
+  {
+    "width": 1024,
+    "enlargedText": true,
+    "position": "static",
+    "intersects": [],
+    "overflow": false,
+    "portraitBottom": 389.6240234375,
+    "introTop": 242.4375,
+    "passed": true
+  },
+  {
+    "width": 1440,
+    "enlargedText": false,
+    "position": "static",
+    "intersects": [],
+    "overflow": false,
+    "portraitBottom": 352.9521484375,
+    "introTop": 242.875,
+    "passed": true
+  },
+  {
+    "width": 1440,
+    "enlargedText": true,
+    "position": "static",
+    "intersects": [],
+    "overflow": false,
+    "portraitBottom": 411.6240234375,
+    "introTop": 264.4375,
+    "passed": true
+  }
+]
