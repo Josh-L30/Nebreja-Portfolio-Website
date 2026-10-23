@@ -108,3 +108,12 @@ portfolio-contact-form:has(>p){display:block;min-height:480px}
 }
 
 .contact .form-note{max-width:none;white-space:nowrap;font-size:12px}
+@supports(view-transition-name:root){
+  ::view-transition-old(root){animation:none}
+  ::view-transition-new(root){animation:theme-circle-reveal .65s cubic-bezier(.22,1,.36,1) both}
+  @keyframes theme-circle-reveal{
+    from{clip-path:circle(0 at var(--theme-origin-x) var(--theme-origin-y))}
+    to{clip-path:circle(150vmax at var(--theme-origin-x) var(--theme-origin-y))}
+  }
+}
+@media(prefers-reduced-motion:reduce){::view-transition-new(root){animation:none}}

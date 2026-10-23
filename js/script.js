@@ -457,9 +457,17 @@ dialog.addEventListener('click',event=>{
   if(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom)dialog.close();
 });
 document.getElementById('theme').addEventListener('click',event=>{
-  const light=document.body.classList.toggle('light');
-  try{localStorage.setItem('brad-theme',light?'light':'dark');}catch{}
-  event.currentTarget.setAttribute('aria-label',light?'Switch to dark theme':'Switch to light theme');
+  const button=event.currentTarget;
+  const toggleTheme=()=>{
+    const light=document.body.classList.toggle('light');
+    try{localStorage.setItem('brad-theme',light?'light':'dark');}catch{}
+    button.setAttribute('aria-label',light?'Switch to dark theme':'Switch to light theme');
+  };
+  if(!document.startViewTransition||reducedMotion.matches){toggleTheme();return;}
+  const rect=button.getBoundingClientRect();
+  document.documentElement.style.setProperty('--theme-origin-x',`${rect.left+rect.width/2}px`);
+  document.documentElement.style.setProperty('--theme-origin-y',`${rect.top+rect.height/2}px`);
+  document.startViewTransition(toggleTheme);
 });
 const sidebar=document.querySelector('.sidebar');
 const mobileMenu=document.getElementById('mobileMenu');
