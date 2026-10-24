@@ -93,7 +93,12 @@
           "original": "assets/UI/Pic13.png"
         }
       ],
-      "video": null
+      "video": null,
+      "caseStudy": {
+        "status": "Capstone system",
+        "problem": "A centralized solution designed to support operations across sales, production, inventory, and logistics data.",
+        "contribution": "Capstone project leadership, UI/UX design leadership, and support with web development."
+      }
     },
     {
       "id": "dashboard",
@@ -184,7 +189,12 @@
           "original": "assets/UI/Pic13.png"
         }
       ],
-      "video": null
+      "video": null,
+      "caseStudy": {
+        "status": "UI design concept",
+        "problem": "A dashboard-first experience for visualizing system data and operational indicators.",
+        "contribution": "Frontend UI concept for system monitoring"
+      }
     },
     {
       "id": "gamemechanics",
@@ -255,7 +265,12 @@
           "original": "assets/UI/ter9.png"
         }
       ],
-      "video": null
+      "video": null,
+      "caseStudy": {
+        "status": "Group web project",
+        "problem": "A website created during first-year IT studies to present the game mechanics and interactive concepts for Masters of World Literature.",
+        "contribution": "Masters of World Literature group project"
+      }
     },
     {
       "id": "cinemabuddy",
@@ -316,7 +331,12 @@
           "original": "assets/UI/fig7.png"
         }
       ],
-      "video": null
+      "video": null,
+      "caseStudy": {
+        "status": "UI design concept",
+        "problem": "A mobile UI/UX concept for helping users discover films, sign in securely, and personalize their viewing journey.",
+        "contribution": "Movie discovery and viewing companion app concept"
+      }
     },
     {
       "id": "cinemabuddyux",
@@ -324,9 +344,9 @@
       "headline": "CinemaBuddy UX Walkthrough",
       "summary": "A looping walkthrough of the CinemaBuddy experience, showing the key user flows from onboarding and account access to movie discovery.",
       "role": "End-to-end mobile prototype experience",
-      "description": "A video walkthrough that demonstrates CinemaBuddyâ€™s main user experience, from onboarding and account access to exploring films.",
+      "description": "A video walkthrough that demonstrates CinemaBuddy’s main user experience, from onboarding and account access to exploring films.",
       "bullets": [
-        "Autoplaying prototype walkthrough",
+        "On-demand prototype walkthrough",
         "Key account and discovery flows",
         "Designed for a clear mobile viewing experience"
       ],
@@ -341,7 +361,12 @@
       ],
       "image": "screen-fig1",
       "gallery": [],
-      "video": "assets/video/Dagooc_Nebreja_INMEDIA FINALS.mp4"
+      "video": "assets/video/Dagooc_Nebreja_INMEDIA FINALS.mp4",
+      "caseStudy": {
+        "status": "UX prototype walkthrough",
+        "problem": "A video walkthrough that demonstrates CinemaBuddy’s main user experience, from onboarding and account access to exploring films.",
+        "contribution": "End-to-end mobile prototype experience"
+      }
     }
   ],
   "contact": {
@@ -489,36 +514,39 @@
       "issuer": "LearnKey",
       "year": "2025",
       "image": "assets/certificates/LearnKey.jpg",
-      "thumbnail": "assets/certificate-LearnKey-320.webp",
-      "width": 320,
-      "height": 180,
-      "preview": "assets/certificate-LearnKey-960.webp",
-      "miniature": "assets/certificate-LearnKey-128.webp",
-      "medium": "assets/certificate-LearnKey-480.webp"
+      "thumbnail": "assets/certificates/LearnKey-clean-v2.png",
+      "width": 1672,
+      "height": 941,
+      "preview": "assets/certificates/LearnKey-clean-v2.png",
+      "miniature": "assets/certificates/LearnKey-clean-v2.png",
+      "medium": "assets/certificates/LearnKey-clean-v2.png",
+      "displayImage": "assets/certificates/LearnKey-clean-v2.png"
     },
     {
       "title": "Automation with MS Excel VBA",
       "issuer": "Ask Lex PH Academy",
       "year": "2024",
       "image": "assets/certificates/MSExcelVBA.jpg",
-      "thumbnail": "assets/certificate-MSExcelVBA-320.webp",
-      "width": 320,
-      "height": 180,
-      "preview": "assets/certificate-MSExcelVBA-960.webp",
-      "miniature": "assets/certificate-MSExcelVBA-128.webp",
-      "medium": "assets/certificate-MSExcelVBA-480.webp"
+      "thumbnail": "assets/certificates/MSExcelVBA-clean-v2.png",
+      "width": 1672,
+      "height": 941,
+      "preview": "assets/certificates/MSExcelVBA-clean-v2.png",
+      "miniature": "assets/certificates/MSExcelVBA-clean-v2.png",
+      "medium": "assets/certificates/MSExcelVBA-clean-v2.png",
+      "displayImage": "assets/certificates/MSExcelVBA-clean-v2.png"
     },
     {
       "title": "CodeCombat",
       "issuer": "NU Laguna",
       "year": "2023",
       "image": "assets/certificates/CodeCombat.jpg",
-      "thumbnail": "assets/certificate-CodeCombat-320.webp",
-      "width": 320,
-      "height": 180,
-      "preview": "assets/certificate-CodeCombat-960.webp",
-      "miniature": "assets/certificate-CodeCombat-128.webp",
-      "medium": "assets/certificate-CodeCombat-480.webp"
+      "thumbnail": "assets/certificates/CodeCombat-clean-v2.png",
+      "width": 1672,
+      "height": 941,
+      "preview": "assets/certificates/CodeCombat-clean-v2.png",
+      "miniature": "assets/certificates/CodeCombat-clean-v2.png",
+      "medium": "assets/certificates/CodeCombat-clean-v2.png",
+      "displayImage": "assets/certificates/CodeCombat-clean-v2.png"
     }
   ],
   "profile": {
@@ -728,6 +756,37 @@
         "Microsoft 365",
         "Microsoft Loop"
       ]
+    }
+  ],
+  "projectGroups": [
+    {
+      "id": "cpc",
+      "title": "CPC Centralized System",
+      "projectIds": [
+        "cpc",
+        "dashboard"
+      ],
+      "description": "One connected view of sales, production, inventory, and logistics.",
+      "focus": "System design & team leadership"
+    },
+    {
+      "id": "gamemechanics",
+      "title": "Game Mechanics Website",
+      "projectIds": [
+        "gamemechanics"
+      ],
+      "description": "Making a literature group project an interactive web experience.",
+      "focus": "Web development"
+    },
+    {
+      "id": "cinemabuddy",
+      "title": "CinemaBuddy",
+      "projectIds": [
+        "cinemabuddy",
+        "cinemabuddyux"
+      ],
+      "description": "Exploring a clearer way to discover movies, from interface concept to mobile walkthrough.",
+      "focus": "UI/UX design & prototyping"
     }
   ]
 }

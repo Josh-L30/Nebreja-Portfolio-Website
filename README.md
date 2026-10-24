@@ -1,64 +1,48 @@
-# Brad Josh Nebreja | Portfolio
+﻿# Brad Josh Nebreja — cinematic portfolio
 
-Responsive static portfolio built with HTML, CSS and native JavaScript components. No build step or package install is required.
+Static HTML, CSS, native JavaScript components and JSON content. No build step or package installation is required.
 
-## Run locally
+## Local preview
 
-```sh
-python -m http.server 8000
-```
+From this directory run Python 3.10+:
 
-Open http://localhost:8000. Use HTTP rather than opening index.html directly because the components fetch JSON and use ES modules.
+    python -m http.server 8000 --bind 127.0.0.1
 
-## Design and content
+Open http://127.0.0.1:8000 over HTTP, not file://, because components fetch JSON and use ES modules.
 
-- Three-link top navigation (Projects, Experience, Contact) and a compact profile, full experience, education, About and contact details.
-- Manual 3D project carousel with five entries, thumbnail controls and keyboard navigation. Image-first project details include a keyboard-operable thumbnail filmstrip, all 29 unique source screenshots and an on-demand video walkthrough.
-- Certificate folio with five thumbnail credential selectors and an in-page full-size image viewer.
-- Six categorized groups of original-color local tool logos, light/dark themes with saved preference, reduced-motion and reduced-transparency fallbacks.
-- locally hosted Nunito Sans typography, responsive WebP previews, lazy images and no carousel autoplay or animation library.
+## Design and behavior
 
-## Files to edit
+The approved cinematic studio direction uses a dark background, local Clash Display and Satoshi typography, authentic project imagery and a strictly black/white interface. A redesigned optional light appearance uses the same layout. The saved brad-theme preference is respected; the default is dark.
 
-| Content | Location |
-| --- | --- |
-| Main page copy and section structure | index.html |
-| Projects, galleries, tools, certificates and contact configuration | data/content.json |
-| Page layout and effects | css/style.css |
-| Shared form styles | css/components.css |
-| Components, selectors, dialogs and navigation | js/script.js |
-| Original media and optimized previews | assets/ |
-| Component sources and license notices | docs/ |
+Three visible project families contain all five original work entries: CPC system/dashboard, Game Mechanics, and CinemaBuddy/concept walkthrough. All 29 unique original screenshots, responsive previews, certificates, tools, education details, CV and professional links remain available. Large native dialogs open project stories within the page; nested full-image views preserve gallery selection. Closing each layer restores focus; closing the project restores page position. Video is opt-in, never autoplays, and is paused/released on close.
 
-Profile, experience, education and About values are also retained in JSON for reference; those sections currently render from index.html. Edit their HTML when changing visible copy.
+Motion is progressive enhancement in js/motion.js. Headings fill from outline to solid and words rise and sharpen continuously with scrolling, including reverse scrolling at all widths. Phones avoid continuous blur. The layered hero has a restrained desktop exit; smaller screens keep it static. Other entrances are short. Reduced motion and Save-Data disable travel and dialog animations; motion-module failure does not prevent controls or content from working. Normal wheel/touch scrolling is never intercepted.
 
-## Contact form
+## Files
 
-Direct sending is enabled with the recipient-provided public key and verified through one successful production-browser submission. Brad still needs to confirm inbox/spam receipt. Direct sending uses the Web3Forms browser API. To replace its key, generate a public access key for bradjosh.nebreja05@gmail.com at https://web3forms.com/#start, retrieve it from Brad's email and set contact.accessKey in data/content.json. The access key aliases the recipient email and is intended for public client-side use; never enter an email password or private API token. Provider documentation: https://docs.web3forms.com/getting-started/installation and https://docs.web3forms.com/getting-started/api-reference.
+- index.html: page structure, direct CV/contact fallbacks and metadata.
+- data/content.json: five work entries, three project groups, galleries, credentials, tools and existing contact configuration.
+- css/style.css: layout, theme tokens, dialogs, responsive and motion presentation.
+- css/components.css: shared contact form styling.
+- js/script.js: native components, data loading, galleries, dialogs, navigation, appearance and preserved contact behavior.
+- js/motion.js: optional continuous word reveals, entrances and hero exit.
+- DESIGN.md and docs/superpowers/: approved design and implementation plan.
 
-Until the key is supplied, the form is clearly labelled Open email draft and opens the visitor's email app with Brad's address, subject and entered text. It retains the text and never claims to have sent it. With a key, it POSTs the validated name, email and message to Web3Forms. Success requires both a successful HTTP response and success === true in the JSON body. Rejections, malformed responses, network failures and timeouts retain the text. Pending submissions disable repeat requests. A hidden botcheck field is included. Messages are not stored by this site; the configured service processes them.
+Visible profile, experience, education and About copy still lives in index.html; duplicate JSON fields are reference content. No framework/backend migration was performed. The nested Nebreja-Portfolio-Website directory was not modified.
 
-Mock tests cover provider acceptance, JSON rejection (including the string false), HTTP failure, malformed JSON, network failure and duplicate prevention. No real email delivery has been verified until the recipient's access key is configured and a live test is acknowledged.
+## Contact integrity
+
+The current public configuration enables Web3Forms. The contact component and its configuration were preserved during the redesign. Existing validation, honeypot, pending-state duplicate prevention, 15-second timeout, text retention on failure, and strict success === true checking remain intact. No real message was submitted during redesign verification; tests intercept every POST locally. Provider acceptance is not proof of inbox delivery. A missing endpoint/key retains the email-draft fallback. Never enter an email password or private token into the public configuration.
 
 ## Verification
 
-```sh
-python verify_assets.py
-python verify.py
-```
+    python verify_assets.py
+    python verify.py http://127.0.0.1:8000
+    python -m unittest discover -s tests -p "test_*.py"
+    node --test tests/motion.test.mjs tests/word-motion.test.mjs
 
-Asset verification checks local HTML and JSON references, responsive galleries and certificate previews. Browser smoke verification expects the HTTP server on port 8000, or pass its URL as the first argument. Latest local Chrome evidence is recorded in docs/verification.json. The 320, 390, 768 and 1440px checks are viewport emulation, not physical-device tests. No deployment has been performed.
+For in-browser interaction checks open /tests/browser.html and press Run checks. All POSTs are intercepted by the test page; it does not send messages. /tests/visual.html is a development-only responsive review harness. Neither harness is linked from the portfolio. See docs/cinematic-browser-checks.md and docs/PERFORMANCE.md for results and limits. Physical devices and real inbox delivery have not been tested in this redesign.
 
-Personal content, CV, certificates and project media belong to Brad and their respective owners. Third-party component adaptations and logo licenses are documented in docs/.
+Social sharing uses assets/brad-hero-social-v3.jpg, a 1200x630 crop/resize of an actual final dark-hero browser capture. Regenerate it when the hero changes. Existing canonical and professional destination URLs are preserved. No push or deployment was performed.
 
-Full-size project screens and certificates open in a near-fullscreen native dialog, with loading/error feedback and Close/Escape dismissal. Closing the image returns to the underlying project and restores focus. No image preview opens a new tab.
-
-## Scroll motion and performance
-
-Sections use short one-time transform/opacity reveals. Reduced-motion and data-saver users skip them. See docs/PERFORMANCE.md for measured Lighthouse results and test limitations. The local variable font is preloaded once, async content reserves space, and certificate/portrait images use responsive sizes.
-
-## Website icon and social sharing
-
-The browser favicon and Apple touch icon use Brad's existing portrait. Open Graph and Twitter large-card metadata are included directly in the HTML head, with absolute public URLs. The 1200x630 JPEG at assets/brad-hero-social-v1.jpg is captured from the actual light-theme hero design. Regenerate the image and update its versioned filename in the metadata when the hero changes. Previously cached platform previews may require a rescrape after publishing.
-
-CinemaBuddy video is available through the contextual Watch CinemaBuddy video demo button shown when the CinemaBuddy UX Walkthrough is selected under the project picker in the fifth project entry. The native player appears near the top of the details dialog, uses preload none and never autoplays. Original video metadata verified locally: 204.513 seconds, 1920x1080. Mobile navigation opens a separate absolute-positioned dropdown, leaving the sticky navbar's height unchanged; outside clicks, Escape and anchor selection dismiss it.
+Personal content, CV and media belong to Brad and their respective owners. Existing third-party logo/component notices remain in docs/; no external imagery or new runtime dependency was added.
