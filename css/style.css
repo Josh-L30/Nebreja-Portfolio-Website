@@ -364,3 +364,21 @@ body.light .hero-type .name-first,body.light .hero-type .name-last{text-shadow:n
 .hero .name-last{right:14%}
 .hero .portrait{left:56%}
 @media(max-width:767px){.hero .name-last{right:12%}.hero .portrait{left:17%}}
+
+/* Original flat text colors; glass bevels removed at the user's request. */
+.hero .name-first,.hero .name-last,body.light .hero .name-first,body.light .hero .name-last{text-shadow:none;filter:none}
+.hero-type .name-first,.hero-type .name-last,body.light .hero-type .name-first,body.light .hero-type .name-last{-webkit-text-stroke:0;color:var(--ink);-webkit-text-fill-color:currentColor}
+.name-outline .name-last,body.light .name-outline .name-last{color:transparent;-webkit-text-fill-color:transparent;-webkit-text-stroke:1px var(--outline);text-shadow:none}
+main h2 .word-piece,.project-story h3 .word-piece,.project-proof h3 .word-piece,body.light main h2 .word-piece,body.light .project-story h3 .word-piece,body.light .project-proof h3 .word-piece{text-shadow:none}
+#detailLiveSite{display:inline-block;margin:12px 0 24px;min-height:36px}#detailLiveSite[hidden]{display:none}
+
+.gallery-controls{display:flex;align-items:center;gap:16px;margin-block:18px}.gallery-controls button{min-height:44px;padding:9px 15px}.gallery-controls[hidden],.gallery-filmstrip[hidden]{display:none}
+
+/* CV action visibly inverts with the theme, with explicit glyph fill in both states. */
+body:not(.light) .hero .button.secondary{background:#f2f2f2;color:#111;-webkit-text-fill-color:#111;border-color:#f2f2f2}
+body:not(.light) .hero .button.secondary:hover{background:#dcdcdc;border-color:#dcdcdc;color:#111;-webkit-text-fill-color:#111}
+body.light .hero .button.secondary{background:#111;color:#fff;-webkit-text-fill-color:#fff;border-color:#111}
+body.light .hero .button.secondary:hover{background:#303030;border-color:#303030;color:#fff;-webkit-text-fill-color:#fff}
+.word-piece{filter:none!important}
+
+.project-privacy-note{font-size:14px;line-height:1.6;color:var(--soft);margin-block:16px;max-width:55ch}.project-privacy-note[hidden]{display:none}

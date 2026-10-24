@@ -14,7 +14,7 @@ for marker in ('portfolio-projects', 'portfolio-certificates', 'portfolio-contac
     assert marker in html, marker
 for marker in ('project-showcase', 'certificate-choice', 'dialog.showModal()', 'gallery-filmstrip'):
     assert marker in script, marker
-assert len(config['projects']) == 5 and len(config['certificates']) == 5
+assert len(config['projects']) == 4 and len(config['certificates']) == 5
 get('/css/style.css')
 get('/css/components.css')
-print('PASS: HTTP page, module, styles and five project/certificate data entries.')
+print('PASS: HTTP page, module, styles and four projects and five certificates.')
