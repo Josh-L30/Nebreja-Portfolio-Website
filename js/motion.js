@@ -13,6 +13,7 @@ export function initMotion(root = document) {
   const blurCapable = matchMedia('(min-width: 768px) and (hover: hover) and (pointer: fine)');
   const connection = navigator.connection;
   const targets = new Map(), near = new Set(), observed = new WeakSet();
+  const stackTargets=new Map(), stackNear=new Set();
   const doc = root === document ? root : root.ownerDocument;
   const hero = root.querySelector('.hero'), scene = root.querySelector('.hero-scene');
   let frame = 0, disposed = false, listening = false, heroNear = false;
@@ -43,6 +44,15 @@ export function initMotion(root = document) {
         word.style.setProperty('--word-fill', `${(local * 100).toFixed(2)}%`);
       });
     }
+    for(const group of stackNear){
+      const progress=clamp((innerHeight*.92-group.getBoundingClientRect().top)/(innerHeight*.44));
+      const rest=1-progress*progress*(3-2*progress);
+      stackTargets.get(group).forEach((tile,index)=>{
+        const direction=index%2?1:-1;
+        const distance=innerWidth<768?14:32;
+        tile.style.transform=`translate3d(${direction*distance*rest}px,${direction*(innerWidth<768?65:90)*(1+(index%3)*.18)*rest}px,0) rotate(${direction*(8+index%4*2)*rest}deg)`;
+      });
+    }
     if (scene && heroNear && innerWidth >= 768) {
       const progress = clamp(scrollY / (hero.offsetHeight * .9));
       scene.style.transform = `translateY(${progress * 65}px) scale(${1 - progress * .07}) rotateX(${progress * -4}deg)`;
@@ -60,11 +70,12 @@ export function initMotion(root = document) {
     doc.documentElement.toggleAttribute('data-motion-static', !allowed());
     if (!allowed()) {
       targets.forEach(clearTarget);
+      stackTargets.forEach(tiles=>tiles.forEach(tile=>tile.style.removeProperty('transform')));
       root.querySelectorAll('.reveal-enter').forEach(el => el.classList.remove('reveal-enter'));
       if (scene) { scene.style.transform = ''; scene.style.opacity = ''; }
     }
     if (scene && innerWidth < 768) { scene.style.transform = ''; scene.style.opacity = ''; }
-    watch(allowed() && !doc.hidden && !doc.body.classList.contains('modal-open') && (heroNear || near.size > 0));
+    watch(allowed() && !doc.hidden && !doc.body.classList.contains('modal-open') && (heroNear || near.size > 0 || stackNear.size > 0));
     if (listening) request();
   }
   const wordsObserver = new IntersectionObserver(entries => {
@@ -73,6 +84,9 @@ export function initMotion(root = document) {
       if (entry.isIntersecting) near.add(target); else near.delete(target);
     }); configure();
   }, { rootMargin: '80px 0px', threshold: 0 });
+  const stackObserver=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>entry.isIntersecting?stackNear.add(entry.target):stackNear.delete(entry.target));configure();
+  },{rootMargin:'100px 0px'});
   const entrances = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
@@ -108,6 +122,11 @@ export function initMotion(root = document) {
     const target = { element, words, type }; targets.set(element, target); wordsObserver.observe(element);
   }
   function discover() {
+    root.querySelectorAll('.tech-group').forEach(group=>{
+      if(stackTargets.has(group))return;
+      stackTargets.set(group,[...group.querySelectorAll('.tech-chip')]);
+      group.dataset.stackMotion='ready';stackObserver.observe(group);
+    });
     root.querySelectorAll('main h2,.project-story h3,.project-proof h3').forEach(el => split(el, 'heading'));
     root.querySelectorAll('.about .statement,.contact-intro').forEach(el => split(el, 'statement'));
     root.querySelectorAll('[data-reveal]').forEach(el => {
@@ -127,7 +146,8 @@ export function initMotion(root = document) {
   doc.documentElement.dataset.wordMotion = 'ready'; doc.documentElement.dataset.wordMode = 'scroll-linked';
   function cleanup() {
     disposed = true; watch(false); changes.disconnect(); bodyChanges.disconnect();
-    wordsObserver.disconnect(); entrances.disconnect(); heroObserver.disconnect();
+    wordsObserver.disconnect(); entrances.disconnect(); heroObserver.disconnect(); stackObserver.disconnect();
+    stackTargets.forEach(tiles=>tiles.forEach(tile=>tile.style.removeProperty('transform')));
     reduced.removeEventListener('change', configure); blurCapable.removeEventListener('change', configure);
     connection?.removeEventListener('change', configure); removeEventListener('resize', configure);
     doc.removeEventListener('visibilitychange', configure); targets.forEach(clearTarget);

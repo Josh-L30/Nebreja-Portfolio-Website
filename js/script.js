@@ -210,6 +210,7 @@ class PortfolioStack extends HTMLElement {
 }
 
 class PortfolioCertificates extends HTMLElement {
+  disconnectedCallback(){this.cleanup?.();}
   async connectedCallback() {
     try {
       const {certificates} = await data;
@@ -236,7 +237,7 @@ class PortfolioCertificates extends HTMLElement {
       certificates.forEach((certificate,index)=>{
         const link = node('a','certificate-item');
         link.hidden=index!==0;
-        link.href = new URL('../'+certificate.image,import.meta.url).href;
+        link.href = new URL('../'+(certificate.displayImage||certificate.image),import.meta.url).href;
         link.setAttribute('aria-label',`View certificate: ${certificate.title}`);
         const image = node('img','certificate-thumb');
         image.src = new URL('../'+certificate.preview,import.meta.url).href;
@@ -264,6 +265,7 @@ class PortfolioCertificates extends HTMLElement {
       });
       const showcase=node('div','credential-showcase');showcase.append(list,controls,choices);
       this.replaceChildren(showcase);
+      select(0);
       revealOnce(this);
     } catch {
       this.replaceChildren(node('p','component-error','Certificates could not load. Please refresh to try again.'));
@@ -440,10 +442,26 @@ function updateThemeControl(){
  document.getElementById('themeColor').content=light?'#f5f5f5':'#090909';
  document.getElementById('theme').setAttribute('aria-label',light?'Switch to dark theme':'Switch to light theme');
 }
-document.getElementById('theme').addEventListener('click',()=>{
- const light=document.body.classList.toggle('light');
- try{localStorage.setItem('brad-theme',light?'light':'dark')}catch{}
- updateThemeControl();
+let themeTransition;
+const themeButton=document.getElementById('theme');
+themeButton.addEventListener('click',async()=>{
+ const apply=()=>{
+  const light=document.body.classList.toggle('light');
+  try{localStorage.setItem('brad-theme',light?'light':'dark')}catch{}
+  updateThemeControl();
+ };
+ if(!document.startViewTransition||reducedMotion.matches||navigator.connection?.saveData){apply();return;}
+ if(themeTransition)return;
+ const rect=themeButton.getBoundingClientRect();
+ const x=rect.left+rect.width/2,y=rect.top+rect.height/2;
+ const radius=Math.hypot(Math.max(x,innerWidth-x),Math.max(y,innerHeight-y));
+ const transition=document.startViewTransition(apply);themeTransition=transition;
+ try{
+  await transition.ready;
+  document.documentElement.animate({clipPath:[`circle(0px at ${x}px ${y}px)`,`circle(${radius}px at ${x}px ${y}px)`]},
+   {duration:560,easing:'cubic-bezier(.22,1,.36,1)',pseudoElement:'::view-transition-new(root)',fill:'both'});
+  await transition.finished;
+ }catch{transition.skipTransition();}finally{themeTransition=null;}
 });
 try{document.body.classList.toggle('light',localStorage.getItem('brad-theme')==='light')}catch{}
 updateThemeControl();

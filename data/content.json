@@ -514,36 +514,39 @@
       "issuer": "LearnKey",
       "year": "2025",
       "image": "assets/certificates/LearnKey.jpg",
-      "thumbnail": "assets/certificate-LearnKey-320.webp",
-      "width": 320,
-      "height": 180,
-      "preview": "assets/certificate-LearnKey-960.webp",
-      "miniature": "assets/certificate-LearnKey-128.webp",
-      "medium": "assets/certificate-LearnKey-480.webp"
+      "thumbnail": "assets/certificates/LearnKey-clean-v2.png",
+      "width": 1672,
+      "height": 941,
+      "preview": "assets/certificates/LearnKey-clean-v2.png",
+      "miniature": "assets/certificates/LearnKey-clean-v2.png",
+      "medium": "assets/certificates/LearnKey-clean-v2.png",
+      "displayImage": "assets/certificates/LearnKey-clean-v2.png"
     },
     {
       "title": "Automation with MS Excel VBA",
       "issuer": "Ask Lex PH Academy",
       "year": "2024",
       "image": "assets/certificates/MSExcelVBA.jpg",
-      "thumbnail": "assets/certificate-MSExcelVBA-320.webp",
-      "width": 320,
-      "height": 180,
-      "preview": "assets/certificate-MSExcelVBA-960.webp",
-      "miniature": "assets/certificate-MSExcelVBA-128.webp",
-      "medium": "assets/certificate-MSExcelVBA-480.webp"
+      "thumbnail": "assets/certificates/MSExcelVBA-clean-v2.png",
+      "width": 1672,
+      "height": 941,
+      "preview": "assets/certificates/MSExcelVBA-clean-v2.png",
+      "miniature": "assets/certificates/MSExcelVBA-clean-v2.png",
+      "medium": "assets/certificates/MSExcelVBA-clean-v2.png",
+      "displayImage": "assets/certificates/MSExcelVBA-clean-v2.png"
     },
     {
       "title": "CodeCombat",
       "issuer": "NU Laguna",
       "year": "2023",
       "image": "assets/certificates/CodeCombat.jpg",
-      "thumbnail": "assets/certificate-CodeCombat-320.webp",
-      "width": 320,
-      "height": 180,
-      "preview": "assets/certificate-CodeCombat-960.webp",
-      "miniature": "assets/certificate-CodeCombat-128.webp",
-      "medium": "assets/certificate-CodeCombat-480.webp"
+      "thumbnail": "assets/certificates/CodeCombat-clean-v2.png",
+      "width": 1672,
+      "height": 941,
+      "preview": "assets/certificates/CodeCombat-clean-v2.png",
+      "miniature": "assets/certificates/CodeCombat-clean-v2.png",
+      "medium": "assets/certificates/CodeCombat-clean-v2.png",
+      "displayImage": "assets/certificates/CodeCombat-clean-v2.png"
     }
   ],
   "profile": {
