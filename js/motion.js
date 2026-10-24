@@ -10,7 +10,6 @@ export function initMotion(root = document) {
   activeRoots.get(root)?.();
   if (!('IntersectionObserver' in window)) return () => {};
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  const blurCapable = matchMedia('(min-width: 768px) and (hover: hover) and (pointer: fine)');
   const connection = navigator.connection;
   const targets = new Map(), near = new Set(), observed = new WeakSet();
   const stackTargets=new Map(), stackNear=new Set();
@@ -39,8 +38,8 @@ export function initMotion(root = document) {
         const local = clamp((progress - offset) / (1 - spread));
         const eased = 1 - (1 - local) ** 3;
         word.style.opacity = String(.55 + .45 * eased);
-        word.style.filter = `blur(${((1 - eased) * (blurCapable.matches ? (target.type === 'statement' ? 4 : 1.5) : 0)).toFixed(2)}px)`;
-        word.style.transform = `translateY(${((1 - eased) * 24).toFixed(2)}px)`;
+        word.style.removeProperty('filter');
+        word.style.transform = `translateY(${Math.round((1 - eased) * 24)}px)`;
         word.style.setProperty('--word-fill', `${(local * 100).toFixed(2)}%`);
       });
     }
@@ -55,7 +54,7 @@ export function initMotion(root = document) {
     }
     if (scene && heroNear && innerWidth >= 768) {
       const progress = clamp(scrollY / (hero.offsetHeight * .9));
-      scene.style.transform = `translateY(${progress * 65}px) scale(${1 - progress * .07}) rotateX(${progress * -4}deg)`;
+      scene.style.transform = `translateY(${Math.round(progress * 65)}px)`;
       scene.style.opacity = String(1 - progress * .65);
     } else if (scene && innerWidth < 768) { scene.style.transform = ''; scene.style.opacity = ''; }
   }
@@ -137,7 +136,7 @@ export function initMotion(root = document) {
   const changes = new MutationObserver(() => { discover(); configure(); });
   changes.observe(root === document ? doc.documentElement : root, { childList: true, subtree: true });
   const bodyChanges = new MutationObserver(configure); bodyChanges.observe(doc.body, { attributes: true, attributeFilter: ['class'] });
-  reduced.addEventListener('change', configure); blurCapable.addEventListener('change', configure);
+  reduced.addEventListener('change', configure);
   connection?.addEventListener('change', configure); addEventListener('resize', configure, { passive: true });
   doc.addEventListener('visibilitychange', configure);
   discover(); configure();
@@ -148,7 +147,7 @@ export function initMotion(root = document) {
     disposed = true; watch(false); changes.disconnect(); bodyChanges.disconnect();
     wordsObserver.disconnect(); entrances.disconnect(); heroObserver.disconnect(); stackObserver.disconnect();
     stackTargets.forEach(tiles=>tiles.forEach(tile=>tile.style.removeProperty('transform')));
-    reduced.removeEventListener('change', configure); blurCapable.removeEventListener('change', configure);
+    reduced.removeEventListener('change', configure);
     connection?.removeEventListener('change', configure); removeEventListener('resize', configure);
     doc.removeEventListener('visibilitychange', configure); targets.forEach(clearTarget);
     if (scene) { scene.style.transform = ''; scene.style.opacity = ''; }

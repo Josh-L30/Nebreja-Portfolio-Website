@@ -1,18 +1,30 @@
 import json, pathlib, unittest
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 class ContentTests(unittest.TestCase):
- def test_families_preserve_every_entry_once(self):
-  content=json.loads((ROOT/'data/content.json').read_text(encoding='utf-8-sig'))
-  groups=content.get('projectGroups',[])
-  self.assertEqual(len(groups),3,'Three project families must be browsable')
-  ids=[i for g in groups for i in g['projectIds']]
-  self.assertCountEqual(ids,['cpc','dashboard','gamemechanics','cinemabuddy','cinemabuddyux'])
- def test_original_media_preserved(self):
-  content=json.loads((ROOT/'data/content.json').read_text(encoding='utf-8-sig'))
-  baseline=json.loads((ROOT/'docs/cinematic-content-baseline.json').read_text(encoding='utf-8-sig'))
-  self.assertEqual(sorted({s['original'] for p in content['projects'] for s in p['gallery']}),sorted(baseline['originals']))
-  self.assertEqual(len(content['certificates']),5)
-  self.assertEqual(sorted(c['image'] for c in content['certificates']),sorted(baseline['certificates']))
-  self.assertEqual(sorted(p['video'] for p in content['projects'] if p.get('video')),baseline['videos'])
+ def setUp(self):self.content=json.loads((ROOT/'data/content.json').read_text(encoding='utf-8'))
+ def test_current_project_inventory(self):
+  ids=[i for g in self.content['projectGroups'] for i in g['projectIds']]
+  self.assertCountEqual(ids,['cpc','dashboard','checkpoint','cinemabuddy'])
+  self.assertEqual(len(self.content['projectGroups']),3)
+ def test_requested_replacements(self):
+  projects={p['id']:p for p in self.content['projects']}
+  self.assertEqual(len(projects['checkpoint']['gallery']),2)
+  self.assertEqual(len(projects['cinemabuddy']['gallery']),1)
+  self.assertEqual(projects['checkpoint']['liveUrl'],'https://onroute.cloud/')
+  self.assertEqual(projects['cinemabuddy']['liveUrl'],'https://cinema-buddy.vercel.app/')
+  self.assertFalse(any(p.get('video') for p in projects.values()))
+  self.assertEqual(len(self.content['certificates']),5)
+  for p in projects.values():
+   for s in p['gallery']:self.assertTrue((ROOT/s['original']).is_file())
+ def test_new_stack_tools(self):
+  names={t['name'] for t in self.content['stack']}
+  self.assertTrue({'Node.js','MongoDB','Tailwind CSS','Vite'}<=names)
+ def test_privacy_stack_and_checkpoint_experience(self):
+  for project in self.content['projects']:
+   if project['id'] in ['cpc','dashboard']:self.assertIn('privacy',project['privacyNote'])
+  self.assertFalse({'Leaflet','Motion'}&{t['name'] for t in self.content['stack']})
+  self.assertFalse({'Leaflet','Motion'}&{n for g in self.content['stackGroups'] for n in g['tools']})
+  entry=next(e for e in self.content['experience'] if e['company']=='Checkpoint')
+  self.assertEqual(entry['date'],'2026')
+  self.assertIn('QA Tester',entry['title'])
 if __name__=='__main__':unittest.main()
-

@@ -19,6 +19,10 @@ const node = (tag, className, text) => {
 };
 const imageURL = (file, width) => new URL(`../assets/${file}-${width}.webp`, import.meta.url).href;
 function fillImage(image, file, sizes) {
+  if(file.startsWith('assets/')){
+    image.srcset='';image.src=new URL('../'+file,import.meta.url).href;
+    image.width=1895;image.height=867;image.decoding='async';return;
+  }
   image.srcset = [480,960,1440].map(width => `${imageURL(file,width)} ${width}w`).join(', ');
   image.sizes = sizes;
   image.src = imageURL(file,960);
@@ -63,7 +67,7 @@ class PortfolioProjects extends HTMLElement {
       const stories=node('div','project-copy');
       const choices=node('div','thumbnails');choices.setAttribute('role','group');choices.setAttribute('aria-label','Choose a project family');
       const slides=[],panels=[],buttons=[];
-      const covers={cpc:'screen-Pic2',gamemechanics:'screen-ter1',cinemabuddy:'screen-fig3'};
+      const covers={cpc:'screen-Pic2',checkpoint:'assets/checkpoint-arrivals.png',cinemabuddy:'assets/cinemabuddy-overview.png'};
       groups.forEach((group,index)=>{
         const projects=group.projectIds.map(id=>config.projects.find(p=>p.id===id)).filter(Boolean);
         if(!projects.length)throw new Error('Missing project');
@@ -75,12 +79,14 @@ class PortfolioProjects extends HTMLElement {
         deck.append(slide);slides.push(slide);
         const story=node('article','project-story');story.dataset.family=group.id;story.hidden=index!==0;
         story.append(node('h3','',group.title),node('p','summary',group.description),node('p','role',group.focus));
+        if(group.privacyNote)story.append(node('p','project-privacy-note',group.privacyNote));
         const tags=node('div','tags');projects[0].tags.slice(0,5).forEach(tag=>tags.append(node('span','',tag)));story.append(tags);
         const launches=node('div','project-launches');
-        projects.forEach(project=>{const label=project.id==='dashboard'?'Explore the dashboard':project.id==='cinemabuddyux'?'Watch UX walkthrough':'Explore project';const launch=node('button','project-launch',label+' ↗');launch.type='button';launch.dataset.project=project.id;launch.setAttribute('aria-label',label+': '+project.title);launches.append(launch)});
+        projects.filter(project=>project.id!=='dashboard').forEach(project=>{const label='Explore project';const launch=node('button','project-launch',label+' ↗');launch.type='button';launch.dataset.project=project.id;launch.setAttribute('aria-label',label+': '+project.title);launches.append(launch)});
+        if(projects[0].liveUrl){const live=node('a','project-launch','Live site ↗');live.href=projects[0].liveUrl;live.target='_blank';live.rel='noopener noreferrer';live.setAttribute('aria-label','Live site: '+group.title);launches.append(live);}
         story.append(launches);stories.append(story);panels.push(story);
         const choice=node('button','thumbnail family-choice');choice.type='button';choice.dataset.familySelect=group.id;choice.setAttribute('aria-label','Show '+group.title);
-        const thumb=node('img');fillImage(thumb,covers[group.id]||projects[0].image,'100px');thumb.alt='';thumb.loading='lazy';choice.append(thumb,node('span','',group.id==='cpc'?'CPC System':group.id==='gamemechanics'?'Game Mechanics':'CinemaBuddy'));
+        const thumb=node('img');fillImage(thumb,covers[group.id]||projects[0].image,'100px');thumb.alt='';thumb.loading='lazy';choice.append(thumb,node('span','',group.id==='cpc'?'CPC System':group.id==='checkpoint'?'Checkpoint':'CinemaBuddy'));
         choice.addEventListener('click',()=>select(index));choices.append(choice);buttons.push(choice);
       });
       const controls=node('div','deck-controls');const previous=node('button','','←'),next=node('button','','→'),count=node('span','deck-count');previous.type=next.type='button';previous.setAttribute('aria-label','Previous project');next.setAttribute('aria-label','Next project');count.setAttribute('aria-live','polite');controls.append(previous,count,next);deck.append(controls);
@@ -363,7 +369,6 @@ document.addEventListener('click',event=>{
   const certificate=link.matches('.certificate-item');
   openImage(link.href||document.getElementById('galleryOriginal').href,certificate?link.querySelector('h3').textContent:document.getElementById('detailTitle').textContent+' / '+document.getElementById('galleryCount').textContent,!certificate);
 });
-const detailVideo = document.getElementById('detailVideo');
 let gallery = [];
 let galleryIndex = 0;
 function showGalleryImage(index) {
@@ -398,6 +403,12 @@ async function openProject(projectId, button) {
   const config = await data;
   const project = config.projects.find(item => item.id === projectId);
   if (!project || dialog.open) return;
+  let liveLink=document.getElementById('detailLiveSite');
+  if(!liveLink){liveLink=node('a','text-link');liveLink.id='detailLiveSite';liveLink.target='_blank';liveLink.rel='noopener noreferrer';document.getElementById('detailTitle').after(liveLink);}
+  liveLink.hidden=!project.liveUrl;liveLink.textContent='Live site ↗';if(project.liveUrl)liveLink.href=project.liveUrl;else liveLink.removeAttribute('href');
+  let privacy=document.getElementById('detailPrivacyNote');
+  if(!privacy){privacy=node('p','project-privacy-note');privacy.id='detailPrivacyNote';liveLink.after(privacy);}
+  privacy.hidden=!project.privacyNote;privacy.textContent=project.privacyNote||'';
   const caseCopy=document.getElementById('caseStudy');
   caseCopy.replaceChildren();
   Object.entries(project.caseStudy||{}).forEach(([key,value])=>{if(!value)return;const section=node('section');section.append(node('h3','',({status:'Project type',problem:'The brief',contribution:'My contribution',approach:'Approach',result:'Result'})[key]||key),node('p','',value));caseCopy.append(section)});
@@ -419,9 +430,8 @@ async function openProject(projectId, button) {
     button.addEventListener('click',()=>showGalleryImage(index));return button;
   }));
   document.getElementById('detailGallery').hidden=gallery.length===0;
+  document.querySelector('.gallery-controls').hidden=gallery.length<2;filmstrip.hidden=gallery.length<2;
   if(gallery.length)showGalleryImage(0);
-  detailVideo.hidden=!project.video;
-  if(project.video){detailVideo.poster=imageURL('screen-fig1',960);detailVideo.src=new URL('../'+project.video,import.meta.url).href;}
   beginLayer(dialog,button);
   dialog.showModal();
   dialog.scrollTop = 0;
@@ -430,7 +440,6 @@ document.addEventListener('click',event=>{const button=event.target.closest('[da
 document.getElementById('closeDialog').addEventListener('click',()=>dialog.close());
 dialog.addEventListener('close',()=>{
   if(dialog.open)return;
-  detailVideo.pause();detailVideo.removeAttribute('src');detailVideo.load();
 });
 dialog.addEventListener('click',event=>{
   if(event.target!==dialog)return;

@@ -43,9 +43,9 @@
           "original": "assets/UI/Pic3.png"
         },
         {
-          "image": "screen-Pic4",
+          "image": "assets/UI/Pic4-clean.svg",
           "label": "UI Snapshot 4",
-          "original": "assets/UI/Pic4.png"
+          "original": "assets/UI/Pic4-clean.svg"
         },
         {
           "image": "screen-Pic5",
@@ -98,7 +98,8 @@
         "status": "Capstone system",
         "problem": "A centralized solution designed to support operations across sales, production, inventory, and logistics data.",
         "contribution": "Capstone project leadership, UI/UX design leadership, and support with web development."
-      }
+      },
+      "privacyNote": "No public live site is available for this system to protect the client’s privacy."
     },
     {
       "id": "dashboard",
@@ -139,9 +140,9 @@
           "original": "assets/UI/Pic3.png"
         },
         {
-          "image": "screen-Pic4",
+          "image": "assets/UI/Pic4-clean.svg",
           "label": "UI Snapshot 4",
-          "original": "assets/UI/Pic4.png"
+          "original": "assets/UI/Pic4-clean.svg"
         },
         {
           "image": "screen-Pic5",
@@ -194,95 +195,69 @@
         "status": "UI design concept",
         "problem": "A dashboard-first experience for visualizing system data and operational indicators.",
         "contribution": "Frontend UI concept for system monitoring"
-      }
+      },
+      "privacyNote": "No public live site is available for this system to protect the client’s privacy."
     },
     {
-      "id": "gamemechanics",
-      "title": "Game Mechanics Website",
-      "headline": "Game Mechanics Website",
-      "summary": "Website made as 1st year IT student for our group project focused on game mechanics of Masters of World Literature.",
-      "role": "Masters of World Literature group project",
-      "description": "A website created during first-year IT studies to present the game mechanics and interactive concepts for Masters of World Literature.",
+      "id": "checkpoint",
+      "title": "Checkpoint",
+      "headline": "Bus arrivals, built around confirmed checkpoints",
+      "summary": "A checkpoint-based bus arrival tracker for Philippine provincial routes.",
+      "role": "Full-stack web application",
+      "description": "Checkpoint estimates provincial bus arrivals from conductor-confirmed checkpoints and baseline travel times, rather than continuous bus GPS tracking. Guests can find stops and inbound buses without an account, while conductors and operations staff use role-based tools.",
       "bullets": [
-        "Collaborative group project delivery",
-        "Game mechanics and content presentation",
-        "Built with HTML, CSS, and JavaScript"
+        "Public station search and arrivals board with map-based stop discovery",
+        "Conductor checkpoint updates with offline queuing and synchronization",
+        "Role-based staff access and administration for routes, fleet, schedules and trips"
       ],
       "categories": [
-        "User Interface",
-        "User Experience"
+        "Web Application",
+        "Transport & Operations"
       ],
       "tags": [
-        "HTML",
-        "CSS",
-        "JS"
+        "React",
+        "Node.js",
+        "Express.js",
+        "MongoDB",
+        "Tailwind CSS",
+        "Vite",
+        "Leaflet",
+        "Motion"
       ],
-      "image": "screen-ter1",
+      "image": "assets/checkpoint-arrivals.png",
+      "video": null,
+      "liveUrl": "https://onroute.cloud/",
+      "repositoryUrl": "https://github.com/Josh-L30/Checkpoint",
       "gallery": [
         {
-          "image": "screen-ter1",
-          "label": "Game Mechanics Website screenshot 1",
-          "original": "assets/UI/ter1.png"
+          "image": "assets/checkpoint-arrivals.png",
+          "original": "assets/checkpoint-arrivals.png",
+          "label": "Checkpoint public arrivals and stop search"
         },
         {
-          "image": "screen-ter2",
-          "label": "Game Mechanics Website screenshot 2",
-          "original": "assets/UI/ter2.png"
-        },
-        {
-          "image": "screen-ter3",
-          "label": "Game Mechanics Website screenshot 3",
-          "original": "assets/UI/ter3.png"
-        },
-        {
-          "image": "screen-ter4",
-          "label": "Game Mechanics Website screenshot 4",
-          "original": "assets/UI/ter4.png"
-        },
-        {
-          "image": "screen-ter5",
-          "label": "Game Mechanics Website screenshot 5",
-          "original": "assets/UI/ter5.png"
-        },
-        {
-          "image": "screen-ter6",
-          "label": "Game Mechanics Website screenshot 6",
-          "original": "assets/UI/ter6.png"
-        },
-        {
-          "image": "screen-ter7",
-          "label": "Game Mechanics Website screenshot 7",
-          "original": "assets/UI/ter7.png"
-        },
-        {
-          "image": "screen-ter8",
-          "label": "Game Mechanics Website screenshot 8",
-          "original": "assets/UI/ter8.png"
-        },
-        {
-          "image": "screen-ter9",
-          "label": "Game Mechanics Website screenshot 9",
-          "original": "assets/UI/ter9.png"
+          "image": "assets/checkpoint-staff.png",
+          "original": "assets/checkpoint-staff.png",
+          "label": "Checkpoint shared staff sign-in"
         }
       ],
-      "video": null,
       "caseStudy": {
-        "status": "Group web project",
-        "problem": "A website created during first-year IT studies to present the game mechanics and interactive concepts for Masters of World Literature.",
-        "contribution": "Masters of World Literature group project"
+        "status": "Full-stack bus arrival tracking application",
+        "problem": "Help passengers discover inbound buses on provincial routes without relying on continuous GPS hardware.",
+        "approach": "Conductor-confirmed checkpoints feed arrival estimates; separate guest, conductor and administrator experiences support the operational workflow.",
+        "contribution": "Helped build the website and contributed as a QA tester in 2026."
       }
     },
     {
       "id": "cinemabuddy",
       "title": "CinemaBuddy",
       "headline": "CinemaBuddy",
-      "summary": "A mobile app interface concept for discovering movies and managing a personalized viewing experience. Project for our Interactive Media Design course.",
-      "role": "Movie discovery and viewing companion app concept",
-      "description": "A mobile UI/UX concept for helping users discover films, sign in securely, and personalize their viewing journey.",
+      "summary": "A movie discovery experience created for Interactive Media Design.",
+      "role": "Movie discovery interface and experience",
+      "description": "CinemaBuddy is a movie discovery project developed for Interactive Media Design, presented through a mobile-focused interface and an accessible live website.",
       "bullets": [
-        "Mobile-first interface design",
-        "Movie discovery and account flows",
-        "Interactive Figma prototype screens"
+        "Mobile-focused movie discovery design",
+        "CinemaBuddy identity and interface presentation",
+        "Explore the working experience through the live website"
       ],
       "categories": [
         "User Interface",
@@ -293,80 +268,22 @@
         "UI Design",
         "UX Design"
       ],
-      "image": "screen-fig1",
+      "image": "assets/cinemabuddy-overview.png",
       "gallery": [
         {
-          "image": "screen-fig1",
-          "label": "CinemaBuddy interface design 1",
-          "original": "assets/UI/fig1.png"
-        },
-        {
-          "image": "screen-fig2",
-          "label": "CinemaBuddy interface design 2",
-          "original": "assets/UI/fig2.png"
-        },
-        {
-          "image": "screen-fig3",
-          "label": "CinemaBuddy interface design 3",
-          "original": "assets/UI/fig3.png"
-        },
-        {
-          "image": "screen-fig4",
-          "label": "CinemaBuddy interface design 4",
-          "original": "assets/UI/fig4.png"
-        },
-        {
-          "image": "screen-fig5",
-          "label": "CinemaBuddy interface design 5",
-          "original": "assets/UI/fig5.png"
-        },
-        {
-          "image": "screen-fig6",
-          "label": "CinemaBuddy interface design 6",
-          "original": "assets/UI/fig6.png"
-        },
-        {
-          "image": "screen-fig7",
-          "label": "CinemaBuddy interface design 7",
-          "original": "assets/UI/fig7.png"
+          "image": "assets/cinemabuddy-overview.png",
+          "original": "assets/cinemabuddy-overview.png",
+          "label": "CinemaBuddy movie application overview"
         }
       ],
       "video": null,
       "caseStudy": {
-        "status": "UI design concept",
-        "problem": "A mobile UI/UX concept for helping users discover films, sign in securely, and personalize their viewing journey.",
-        "contribution": "Movie discovery and viewing companion app concept"
-      }
-    },
-    {
-      "id": "cinemabuddyux",
-      "title": "CinemaBuddy UX Walkthrough",
-      "headline": "CinemaBuddy UX Walkthrough",
-      "summary": "A looping walkthrough of the CinemaBuddy experience, showing the key user flows from onboarding and account access to movie discovery.",
-      "role": "End-to-end mobile prototype experience",
-      "description": "A video walkthrough that demonstrates CinemaBuddy’s main user experience, from onboarding and account access to exploring films.",
-      "bullets": [
-        "On-demand prototype walkthrough",
-        "Key account and discovery flows",
-        "Designed for a clear mobile viewing experience"
-      ],
-      "categories": [
-        "User Experience",
-        "Prototype Walkthrough"
-      ],
-      "tags": [
-        "Figma",
-        "UX Design",
-        "User Flows"
-      ],
-      "image": "screen-fig1",
-      "gallery": [],
-      "video": "assets/video/Dagooc_Nebreja_INMEDIA FINALS.mp4",
-      "caseStudy": {
-        "status": "UX prototype walkthrough",
-        "problem": "A video walkthrough that demonstrates CinemaBuddy’s main user experience, from onboarding and account access to exploring films.",
-        "contribution": "End-to-end mobile prototype experience"
-      }
+        "status": "Interactive Media Design project",
+        "problem": "Create a clear and engaging movie discovery experience.",
+        "approach": "A mobile-focused interface brings CinemaBuddy’s film-discovery concept into a live website.",
+        "contribution": "Designed the interface and created the interactive prototype using Figma for a school project in 2023."
+      },
+      "liveUrl": "https://cinema-buddy.vercel.app/"
     }
   ],
   "contact": {
@@ -482,6 +399,26 @@
       "name": "Microsoft Loop",
       "logo": "assets/logo-mloop.webp",
       "source": "Original portfolio asset: assets/UI/MLoop.png"
+    },
+    {
+      "name": "Node.js",
+      "logo": "assets/logo-nodejs.svg",
+      "source": "https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original.svg"
+    },
+    {
+      "name": "MongoDB",
+      "logo": "assets/logo-mongodb.svg",
+      "source": "https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original.svg"
+    },
+    {
+      "name": "Tailwind CSS",
+      "logo": "assets/logo-tailwindcss.svg",
+      "source": "https://raw.githubusercontent.com/devicons/devicon/master/icons/tailwindcss/tailwindcss-original.svg"
+    },
+    {
+      "name": "Vite",
+      "logo": "assets/logo-vitejs.svg",
+      "source": "https://raw.githubusercontent.com/devicons/devicon/master/icons/vitejs/vitejs-original.svg"
     }
   ],
   "certificates": [
@@ -601,6 +538,24 @@
         "Assisted the main web developer as a backup web developer for the system.",
         "Applied HTML, JavaScript, CSS, and PHP to develop a user-friendly and fully functional centralized system."
       ]
+    },
+    {
+      "title": "Development Contributor & QA Tester",
+      "company": "Checkpoint",
+      "date": "2026",
+      "bullets": [
+        "Helped build the Checkpoint website.",
+        "Contributed to quality assurance and tested the website’s functionality and user experience."
+      ]
+    },
+    {
+      "title": "UI Designer & Prototype Designer",
+      "company": "CinemaBuddy — School Project",
+      "date": "2023",
+      "bullets": [
+        "Designed the CinemaBuddy interface in Figma for a school project.",
+        "Created an interactive prototype to demonstrate the app’s screens and user flows."
+      ]
     }
   ],
   "education": [
@@ -716,7 +671,8 @@
         "HTML",
         "CSS",
         "JavaScript",
-        "React"
+        "React",
+        "Tailwind CSS"
       ]
     },
     {
@@ -724,14 +680,16 @@
       "tools": [
         "PHP",
         "Express.js",
-        "Laravel WebSocket"
+        "Laravel WebSocket",
+        "Node.js"
       ]
     },
     {
       "title": "Databases & services",
       "tools": [
         "MS SQL",
-        "Firebase"
+        "Firebase",
+        "MongoDB"
       ]
     },
     {
@@ -754,7 +712,8 @@
       "tools": [
         "Visual Studio Code",
         "Microsoft 365",
-        "Microsoft Loop"
+        "Microsoft Loop",
+        "Vite"
       ]
     }
   ],
@@ -767,26 +726,26 @@
         "dashboard"
       ],
       "description": "One connected view of sales, production, inventory, and logistics.",
-      "focus": "System design & team leadership"
+      "focus": "System design & team leadership",
+      "privacyNote": "No public live site is available for this system to protect the client’s privacy."
     },
     {
-      "id": "gamemechanics",
-      "title": "Game Mechanics Website",
+      "id": "checkpoint",
+      "title": "Checkpoint",
       "projectIds": [
-        "gamemechanics"
+        "checkpoint"
       ],
-      "description": "Making a literature group project an interactive web experience.",
-      "focus": "Web development"
+      "description": "Bus arrival estimates from confirmed checkpoints, with public discovery and staff operations.",
+      "focus": "Full-stack web application"
     },
     {
       "id": "cinemabuddy",
       "title": "CinemaBuddy",
       "projectIds": [
-        "cinemabuddy",
-        "cinemabuddyux"
+        "cinemabuddy"
       ],
-      "description": "Exploring a clearer way to discover movies, from interface concept to mobile walkthrough.",
-      "focus": "UI/UX design & prototyping"
+      "description": "A mobile-focused movie discovery experience, from interface design to a live website.",
+      "focus": "UI/UX design & movie discovery"
     }
   ]
 }
