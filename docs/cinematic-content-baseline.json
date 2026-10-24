@@ -1,0 +1,51 @@
+{
+    "originals":  [
+                      "assets/UI/fig1.png",
+                      "assets/UI/fig2.png",
+                      "assets/UI/fig3.png",
+                      "assets/UI/fig4.png",
+                      "assets/UI/fig5.png",
+                      "assets/UI/fig6.png",
+                      "assets/UI/fig7.png",
+                      "assets/UI/Pic1.png",
+                      "assets/UI/Pic10.png",
+                      "assets/UI/Pic11.png",
+                      "assets/UI/Pic12.png",
+                      "assets/UI/Pic13.png",
+                      "assets/UI/Pic2.png",
+                      "assets/UI/Pic3.png",
+                      "assets/UI/Pic4.png",
+                      "assets/UI/Pic5.png",
+                      "assets/UI/Pic6.png",
+                      "assets/UI/Pic7.png",
+                      "assets/UI/Pic8.png",
+                      "assets/UI/Pic9.png",
+                      "assets/UI/ter1.png",
+                      "assets/UI/ter2.png",
+                      "assets/UI/ter3.png",
+                      "assets/UI/ter4.png",
+                      "assets/UI/ter5.png",
+                      "assets/UI/ter6.png",
+                      "assets/UI/ter7.png",
+                      "assets/UI/ter8.png",
+                      "assets/UI/ter9.png"
+                  ],
+    "videos":  [
+                   "assets/video/Dagooc_Nebreja_INMEDIA FINALS.mp4"
+               ],
+    "cv":  "assets/Nebreja_CV.pdf",
+    "certificates":  [
+                         "assets/certificates/CodeCombat.jpg",
+                         "assets/certificates/Databases.png",
+                         "assets/certificates/LearnKey.jpg",
+                         "assets/certificates/MSExcelVBA.jpg",
+                         "assets/certificates/NetworkSecurity.png"
+                     ],
+    "projectIds":  [
+                       "cpc",
+                       "dashboard",
+                       "gamemechanics",
+                       "cinemabuddy",
+                       "cinemabuddyux"
+                   ]
+}

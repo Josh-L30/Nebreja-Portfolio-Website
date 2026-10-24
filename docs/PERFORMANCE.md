@@ -1,17 +1,11 @@
-# Scroll motion and performance verification
+﻿# Cinematic redesign performance record
 
-Local Lighthouse 13.5.0 in headless Microsoft Edge against the HTTP-served repository, cold navigation. Standard Lighthouse mobile simulated throttling and desktop preset, separate sequential runs. These are synthetic measurements, not physical-device or field guarantees.
+24 October 2026. Earlier Lighthouse scores described a previous visual design and are not performance evidence for this redesign.
 
-| Run | Performance | Accessibility | Best practices | SEO | LCP | CLS | TBT |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| Mobile before | 75 | 100 | 96 | 100 | 2.3 s | 0.55 | 0 ms |
-| Mobile after | 99 | 100 | 100 | 100 | 1.8 s | 0.003 | 0 ms |
-| Desktop after | 100 | 100 | 100 | 100 | 0.5 s | 0 | 0 ms |
+The redesigned site adds no runtime dependency or build process. It retains one locally hosted font and existing responsive WebP previews. Original images load only through galleries; video remains preload none, opt-in, and released when its dialog closes. Image boxes reserve dimensions. The native motion module uses one-time IntersectionObservers, one near-viewport signature scene, and at most one scheduled animation frame; it has no continuous idle animation loop. Reduced-motion/Save-Data disable travel, including CSS dialog entrances.
 
-Changes target measured issues: consolidate identical weight files into one preloaded variable font; preload content JSON; reserve async-component layout space; responsive certificate and portrait images; tiny certificate-picker previews; local favicon; visible-number accessible names. Large original images and video remain on demand. Source files stay readable rather than adding a build step for a small minification saving.
+Local verification used the in-app Chromium browser. Both themes fit at 320/390/768/1440px; text enlargement, nested dialogs, failed images, and motion fallbacks pass. Browser rendering and smooth interaction were visually checked. This is viewport emulation, not physical-device or field evidence.
 
-Scroll entrances use one IntersectionObserver with transform/opacity keyframes lasting 360ms. Each target is unobserved on first intersection; its animation class is removed on completion. Content is never hidden pending JavaScript. Reduced-motion and Save-Data users skip entrances. No scroll handler, requestAnimationFrame loop, WebGL or animation dependency is added.
+The standalone headless Chrome/Edge inspector was attempted but failed with browser/CDP timeouts. Lighthouse is not installed and no new Lighthouse score, throttled LCP/CLS, or guaranteed frame rate is claimed. Before public release, run Lighthouse against this version under a documented mobile throttle and test on a real phone. Targets from the approved plan remain LCP <=2.5s, CLS <=.1, and mobile Lighthouse performance >=90; these targets are not measured results.
 
-With 4x CPU slowdown in local Edge viewport emulation, mobile and desktop each recorded 15 distinct one-time reveal events, no repeated event on revisiting, zero idle animations and no horizontal overflow. Reduced-motion and Save-Data modes recorded zero reveal events. This proves the implementation behavior, not a universal frame-rate guarantee.
-
-Existing 320/390/768/1440px component checks and 390/1440px full-image-dialog checks pass. Contact endpoint remains null; no message is sent. Only the theme preference is stored locally; no analytics, tracking or backend was introduced. Production delivery is verified separately after pushing. Full Lighthouse HTML/JSON reports are kept with the conversation outputs.
+Contact-provider response cases were intercepted locally; no real network message or inbox-delivery verification was performed. Public deployment was not changed.

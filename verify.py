@@ -12,7 +12,7 @@ script = get('/js/script.js')
 config = json.loads(get('/data/content.json'))
 for marker in ('portfolio-projects', 'portfolio-certificates', 'portfolio-contact-form', 'type="module"'):
     assert marker in html, marker
-for marker in ('project-picker', 'certificate-choice', 'dialog.showModal()', 'gallery-filmstrip'):
+for marker in ('project-showcase', 'certificate-choice', 'dialog.showModal()', 'gallery-filmstrip'):
     assert marker in script, marker
 assert len(config['projects']) == 5 and len(config['certificates']) == 5
 get('/css/style.css')

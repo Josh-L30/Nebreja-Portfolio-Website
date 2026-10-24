@@ -93,7 +93,12 @@
           "original": "assets/UI/Pic13.png"
         }
       ],
-      "video": null
+      "video": null,
+      "caseStudy": {
+        "status": "Capstone system",
+        "problem": "A centralized solution designed to support operations across sales, production, inventory, and logistics data.",
+        "contribution": "Capstone project leadership, UI/UX design leadership, and support with web development."
+      }
     },
     {
       "id": "dashboard",
@@ -184,7 +189,12 @@
           "original": "assets/UI/Pic13.png"
         }
       ],
-      "video": null
+      "video": null,
+      "caseStudy": {
+        "status": "UI design concept",
+        "problem": "A dashboard-first experience for visualizing system data and operational indicators.",
+        "contribution": "Frontend UI concept for system monitoring"
+      }
     },
     {
       "id": "gamemechanics",
@@ -255,7 +265,12 @@
           "original": "assets/UI/ter9.png"
         }
       ],
-      "video": null
+      "video": null,
+      "caseStudy": {
+        "status": "Group web project",
+        "problem": "A website created during first-year IT studies to present the game mechanics and interactive concepts for Masters of World Literature.",
+        "contribution": "Masters of World Literature group project"
+      }
     },
     {
       "id": "cinemabuddy",
@@ -316,7 +331,12 @@
           "original": "assets/UI/fig7.png"
         }
       ],
-      "video": null
+      "video": null,
+      "caseStudy": {
+        "status": "UI design concept",
+        "problem": "A mobile UI/UX concept for helping users discover films, sign in securely, and personalize their viewing journey.",
+        "contribution": "Movie discovery and viewing companion app concept"
+      }
     },
     {
       "id": "cinemabuddyux",
@@ -341,7 +361,12 @@
       ],
       "image": "screen-fig1",
       "gallery": [],
-      "video": "assets/video/Dagooc_Nebreja_INMEDIA FINALS.mp4"
+      "video": "assets/video/Dagooc_Nebreja_INMEDIA FINALS.mp4",
+      "caseStudy": {
+        "status": "UX prototype walkthrough",
+        "problem": "A video walkthrough that demonstrates CinemaBuddyâ€™s main user experience, from onboarding and account access to exploring films.",
+        "contribution": "End-to-end mobile prototype experience"
+      }
     }
   ],
   "contact": {
@@ -728,6 +753,37 @@
         "Microsoft 365",
         "Microsoft Loop"
       ]
+    }
+  ],
+  "projectGroups": [
+    {
+      "id": "cpc",
+      "title": "CPC Centralized System",
+      "projectIds": [
+        "cpc",
+        "dashboard"
+      ],
+      "description": "One connected view of sales, production, inventory, and logistics.",
+      "focus": "System design & team leadership"
+    },
+    {
+      "id": "gamemechanics",
+      "title": "Game Mechanics Website",
+      "projectIds": [
+        "gamemechanics"
+      ],
+      "description": "Making a literature group project an interactive web experience.",
+      "focus": "Web development"
+    },
+    {
+      "id": "cinemabuddy",
+      "title": "CinemaBuddy",
+      "projectIds": [
+        "cinemabuddy",
+        "cinemabuddyux"
+      ],
+      "description": "Exploring a clearer way to discover movies, from interface concept to mobile walkthrough.",
+      "focus": "UI/UX design & prototyping"
     }
   ]
 }

@@ -55,77 +55,25 @@ class PortfolioProjects extends HTMLElement {
   async connectedCallback() {
     try {
       const config = await data;
-      const list = node('div','work-list');
-      const picker=node('div','project-picker');
-      picker.setAttribute('aria-label','Choose a project');
-      const covers=config.projects.map(project=>project.id==='dashboard'?project.gallery[2].image:project.id==='cinemabuddyux'?'screen-fig3':project.image);
-      config.projects.forEach((project,index) => {
-        const button = node('button','work-item');
-        button.hidden=index!==0;
-        button.type = 'button';
-        button.dataset.project = project.id;
-        const text = node('div','work-copy');
-        text.append(node('span','work-category',index===0?'Featured project':project.categories.join(' · ')));
-        text.append(node('h3','',project.title),node('p','',project.summary),node('p','role',project.role));
-        const tags=node('div','work-tags');
-        project.tags.forEach(tag=>tags.append(node('span','',tag)));
-        text.append(tags);
-        const action=node('div','work-footer');
-        action.append(node('span','project-action',project.video?'Watch demo & view project':'Explore project'),node('span','work-count',project.video?'Video walkthrough':`${project.gallery.length} screens`));
-        text.append(action);
-        const visual = node('div','work-visual');
-        const display = node('div','work-display');
-        const chrome = node('div','work-chrome');
-        chrome.append(node('span','',index===0?'CPC / Centralized platform':project.title),node('span','',project.video?'Walkthrough':'Interface preview'));
-        const thumb = node('div','thumb');
-        const image = node('img');
-        const cover=project.id==='dashboard'?project.gallery[2].image:project.id==='cinemabuddyux'?'screen-fig3':project.image;
-        fillImage(image, cover, '(max-width:600px) calc(100vw - 108px), (max-width:1100px) 480px, 510px');
-        image.alt = `${project.title} interface preview`;
-        image.loading = 'lazy';
-        thumb.append(image);
-        display.append(chrome,thumb);
-        visual.append(display);
-        [-1,1].forEach(direction=>{
-          const ghost=node('img','deck-wing '+(direction<0?'deck-left':'deck-right'));
-          fillImage(ghost,covers[(index+direction+config.projects.length)%config.projects.length],'220px');
-          ghost.alt='';ghost.loading='lazy';ghost.setAttribute('aria-hidden','true');visual.prepend(ghost);
-        });
-        button.append(visual,text);
-        list.append(button);
-        const choice=node('button','project-choice');choice.type='button';
-        choice.setAttribute('aria-label',String(index+1).padStart(2,'0')+' Show '+project.title);
-        choice.setAttribute('aria-pressed',String(index===0));
-        const mini=node('img');fillImage(mini,cover,'100px');mini.alt='';mini.loading='lazy';
-        choice.append(mini,node('span','',String(index+1).padStart(2,'0')));
-        choice.addEventListener('click',()=>select(index));picker.append(choice);
+      const list = node('div','project-families');
+      config.projectGroups.forEach((group,index) => {
+        const projects=group.projectIds.map(id=>config.projects.find(p=>p.id===id)).filter(Boolean);
+        const project=projects[0];
+        const article=node('article','project-showcase');
+        article.dataset.family=group.id;
+        const visual=node('div','showcase-visual');
+        if(index===0)visual.dataset.signatureVisual='';
+        const image=node('img');fillImage(image,group.id==='cpc'?'screen-Pic2':project.image,'(max-width:768px) 92vw, 1100px');
+        image.alt=project.title+' interface preview';image.loading='lazy';visual.append(image);
+        const copy=node('div','showcase-copy');copy.dataset.reveal='';
+        const heading=node('div');heading.append(node('h3','',group.title),node('p','project-focus',group.focus));
+        const story=node('div','showcase-story');story.append(node('p','',group.description));
+        const actions=node('div','project-launches');
+        projects.forEach(p=>{const button=node('button','project-launch',p.id==='dashboard'?'Explore the dashboard ↗':p.id==='cinemabuddyux'?'Watch UX walkthrough ↗':'Explore project ↗');button.type='button';button.dataset.project=p.id;button.setAttribute('aria-label',button.textContent.replace(' ↗','')+': '+p.title);actions.append(button)});
+        story.append(actions);copy.append(heading,story);article.append(visual,copy);list.append(article);
       });
-      let current=0;
-      const controls=node('div','project-controls');
-      const previous=node('button','','Previous');const next=node('button','','Next');
-      previous.type=next.type='button';
-      const count=node('span','','1 / '+config.projects.length);count.setAttribute('aria-live','polite');
-      controls.append(previous,count,next);
-      function select(index){
-        current=(index+config.projects.length)%config.projects.length;
-        [...list.children].forEach((slide,i)=>slide.hidden=i!==current);
-        [...picker.children].forEach((choice,i)=>choice.setAttribute('aria-pressed',String(i===current)));
-        count.textContent=`${current+1} / ${config.projects.length}`;
-        demo.hidden=!config.projects[current].video;
-      }
-      previous.addEventListener('click',()=>select(current-1));next.addEventListener('click',()=>select(current+1));
-      picker.addEventListener('keydown',event=>{
-        if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;
-        event.preventDefault();select(event.key==='Home'?0:event.key==='End'?config.projects.length-1:current+(event.key==='ArrowRight'?1:-1));picker.children[current].focus();
-      });
-      const demo=node('button','cinema-demo-link','Watch CinemaBuddy video demo');
-      demo.type='button';demo.dataset.project='cinemabuddyux';
-      demo.hidden=!config.projects[0].video;
-      this.replaceChildren(list,controls,picker,demo);
-      revealOnce(this);
-    } catch {
-      this.replaceChildren(node('p','component-error','Project previews could not load. Please refresh to try again.'));
-    }
+      this.replaceChildren(list);
+    } catch {this.replaceChildren(node('p','component-error','Project previews could not load. Please refresh to try again.'))}
   }
 }
 
@@ -285,8 +233,8 @@ class PortfolioCertificates extends HTMLElement {
         link.append(image,text,node('span','certificate-action','View certificate'));
         list.append(link);
         const choice=node('button','certificate-choice');choice.type='button';
-        choice.setAttribute('aria-label',String(index+1).padStart(2,'0')+' Show '+certificate.title);
-        choice.dataset.number=String(index+1).padStart(2,'0');
+        choice.setAttribute('aria-label',String(index+1)+' Show '+certificate.title);
+        choice.dataset.number=String(index+1);
         choice.setAttribute('aria-pressed',String(index===0));
         const miniature=node('img','credential-miniature');
         miniature.src=new URL('../'+certificate.miniature,import.meta.url).href;
@@ -304,23 +252,13 @@ class PortfolioCertificates extends HTMLElement {
   }
 }
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
-const arrivalObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (!entry.isIntersecting) return;
-    arrivalObserver.unobserve(entry.target);
-    if (!reducedMotion.matches && !navigator.connection?.saveData) {
-      entry.target.classList.add('arrive');
-      entry.target.addEventListener('animationend',()=>entry.target.classList.remove('arrive'),{once:true});
-    }
-  });
-}, {threshold:.16,rootMargin:'0px 0px -64px 0px'});
-function revealOnce(element) { arrivalObserver.observe(element); }
-reducedMotion.addEventListener('change',()=>{
-  if(reducedMotion.matches){
-    document.getAnimations().forEach(animation=>animation.cancel());
-    document.querySelectorAll('.arrive').forEach(element=>element.classList.remove('arrive'));
-  }
-});
+const syncMotionPreference=()=>document.documentElement.toggleAttribute('data-motion-static',reducedMotion.matches||Boolean(navigator.connection?.saveData));
+syncMotionPreference();
+reducedMotion.addEventListener('change',syncMotionPreference);
+navigator.connection?.addEventListener('change',syncMotionPreference);
+function revealOnce(element) { element.dataset.reveal=''; }
+// Motion is optional: a failed module cannot disable the site's controls.
+import('./motion.js').then(({initMotion})=>initMotion(document)).catch(()=>{});
 customElements.define('portfolio-projects',PortfolioProjects);
 customElements.define('portfolio-contact-form',PortfolioContactForm);
 customElements.define('portfolio-stack',PortfolioStack);
@@ -328,6 +266,20 @@ customElements.define('portfolio-certificates',PortfolioCertificates);
 
 const dialog = document.getElementById('projectDialog');
 const imageDialog=document.getElementById('imageDialog');
+const layers=[];
+function beginLayer(modal,trigger){
+ if(layers.some(layer=>layer.modal===modal))return;
+ if(!layers.length){document.body.style.setProperty('--locked-top',`-${scrollY}px`);document.body.dataset.lockY=String(scrollY);document.body.classList.add('modal-open')}
+ layers.push({modal,trigger});
+}
+function endLayer(modal){
+ const index=layers.findIndex(layer=>layer.modal===modal);if(index<0)return;
+ const [layer]=layers.splice(index,1);
+ if(!layers.length){const y=Number(document.body.dataset.lockY||0);document.body.classList.remove('modal-open');document.body.style.removeProperty('--locked-top');window.scrollTo({top:y,behavior:'instant'})}
+ if(layer.trigger?.isConnected)layer.trigger.focus({preventScroll:true});
+}
+dialog.addEventListener('close',()=>endLayer(dialog));
+imageDialog.addEventListener('close',()=>endLayer(imageDialog));
 const fullImage=document.getElementById('fullImage');
 const imageStatus=document.getElementById('imageStatus');
 const imageFilmstrip=node('div','image-filmstrip');
@@ -353,10 +305,10 @@ function openImage(source,title,projectGallery=false){
   imageFilmstrip.replaceChildren();
   if(projectGallery)gallery.forEach((screen,index)=>{
     const button=node('button','gallery-thumbnail');button.type='button';
-    button.setAttribute('aria-label',`${String(index+1).padStart(2,'0')} Show ${screen.label}`);
+    button.setAttribute('aria-label',`${String(index+1)} Show ${screen.label}`);
     button.setAttribute('aria-pressed',String(index===galleryIndex));
     const image=node('img');fillImage(image,screen.image,'100px');image.alt='';image.loading='lazy';
-    button.append(image,node('span','',String(index+1).padStart(2,'0')));
+    button.append(image,node('span','',String(index+1)));
     button.addEventListener('click',()=>{
       showGalleryImage(index);
       loadFullImage(new URL('../'+screen.original,import.meta.url).href,document.getElementById('detailTitle').textContent+' / '+document.getElementById('galleryCount').textContent);
@@ -365,6 +317,7 @@ function openImage(source,title,projectGallery=false){
     imageFilmstrip.append(button);
   });
   loadFullImage(source,title);
+  beginLayer(imageDialog,document.activeElement);
   imageDialog.showModal();
 }
 document.getElementById('closeImage').addEventListener('click',()=>imageDialog.close());
@@ -399,6 +352,10 @@ function showGalleryImage(index) {
   const image=document.getElementById('detailImage');
   fillImage(image,item.image,'(max-width:600px) 90vw, 820px');
   image.alt=item.label;
+  const status=document.getElementById('galleryStatus');
+  image.onload=()=>{status.textContent=''};
+  image.onerror=()=>{status.textContent='This preview could not load. Try another image or open the full-size view.'};
+  status.textContent=image.complete&&image.naturalWidth?'':'Loading preview…';
   document.getElementById('galleryCount').textContent=`${galleryIndex+1} of ${gallery.length}`;
   document.getElementById('galleryPrevious').disabled=galleryIndex===0;
   document.getElementById('galleryNext').disabled=galleryIndex===gallery.length-1;
@@ -416,12 +373,13 @@ filmstrip.addEventListener('keydown',event=>{
 });
 document.getElementById('galleryPrevious').addEventListener('click',()=>showGalleryImage(galleryIndex-1));
 document.getElementById('galleryNext').addEventListener('click',()=>showGalleryImage(galleryIndex+1));
-document.addEventListener('click', async event => {
-  const button = event.target.closest('[data-project]');
-  if (!button) return;
+async function openProject(projectId, button) {
   const config = await data;
-  const project = config.projects.find(item => item.id === button.dataset.project);
+  const project = config.projects.find(item => item.id === projectId);
   if (!project || dialog.open) return;
+  const caseCopy=document.getElementById('caseStudy');
+  caseCopy.replaceChildren();
+  Object.entries(project.caseStudy||{}).forEach(([key,value])=>{if(!value)return;const section=node('section');section.append(node('h3','',({status:'Project type',problem:'The brief',contribution:'My contribution',approach:'Approach',result:'Result'})[key]||key),node('p','',value));caseCopy.append(section)});
   document.getElementById('detailTitle').textContent = project.title;
   document.getElementById('detailRole').textContent = project.role;
   document.getElementById('detailHeadline').textContent=project.headline!==project.title?project.headline:'';
@@ -433,19 +391,21 @@ document.addEventListener('click', async event => {
   gallery=project.gallery;
   filmstrip.replaceChildren(...gallery.map((screen,index)=>{
     const button=node('button','gallery-thumbnail');button.type='button';
-    button.setAttribute('aria-label',`${String(index+1).padStart(2,'0')} Show ${screen.label}`);
+    button.setAttribute('aria-label',`${String(index+1)} Show ${screen.label}`);
     button.setAttribute('aria-pressed',String(index===0));
     const miniature=node('img');fillImage(miniature,screen.image,'100px');miniature.alt='';miniature.loading='lazy';
-    button.append(miniature,node('span','',String(index+1).padStart(2,'0')));
+    button.append(miniature,node('span','',String(index+1)));
     button.addEventListener('click',()=>showGalleryImage(index));return button;
   }));
   document.getElementById('detailGallery').hidden=gallery.length===0;
   if(gallery.length)showGalleryImage(0);
   detailVideo.hidden=!project.video;
   if(project.video){detailVideo.poster=imageURL('screen-fig1',960);detailVideo.src=new URL('../'+project.video,import.meta.url).href;}
+  beginLayer(dialog,button);
   dialog.showModal();
   dialog.scrollTop = 0;
-});
+}
+document.addEventListener('click',event=>{const button=event.target.closest('[data-project]');if(button)openProject(button.dataset.project,button).catch(()=>{})});
 document.getElementById('closeDialog').addEventListener('click',()=>dialog.close());
 dialog.addEventListener('close',()=>{
   if(dialog.open)return;
@@ -456,18 +416,17 @@ dialog.addEventListener('click',event=>{
   const rect=dialog.getBoundingClientRect();
   if(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom)dialog.close();
 });
-document.getElementById('theme').addEventListener('click',event=>{
-  const button=event.currentTarget;
-  const toggleTheme=()=>{
-    const light=document.body.classList.toggle('light');
-    try{localStorage.setItem('brad-theme',light?'light':'dark');}catch{}
-    button.setAttribute('aria-label',light?'Switch to dark theme':'Switch to light theme');
-  };
-  if(!document.startViewTransition||reducedMotion.matches){toggleTheme();return;}
-  const rect=button.getBoundingClientRect();
-  document.documentElement.style.setProperty('--theme-origin-x',`${rect.left+rect.width/2}px`);
-  document.documentElement.style.setProperty('--theme-origin-y',`${rect.top+rect.height/2}px`);
-  document.startViewTransition(toggleTheme);
+function updateThemeControl(){
+ const light=document.body.classList.contains('light');
+ const button=document.getElementById('theme');
+ document.getElementById('themeColor').content=light?'#f5f6f1':'#101719';
+ button.textContent=light?'Dark mode':'Light mode';
+ button.setAttribute('aria-label',light?'Switch to dark theme':'Switch to light theme');
+}
+document.getElementById('theme').addEventListener('click',()=>{
+ const light=document.body.classList.toggle('light');
+ try{localStorage.setItem('brad-theme',light?'light':'dark')}catch{}
+ updateThemeControl();
 });
 const sidebar=document.querySelector('.sidebar');
 const mobileMenu=document.getElementById('mobileMenu');
@@ -475,6 +434,7 @@ function setNavigation(open){
   sidebar.classList.toggle('nav-open',open);
   mobileMenu.setAttribute('aria-expanded',String(open));
   mobileMenu.setAttribute('aria-label',open?'Close navigation':'Open navigation');
+  mobileMenu.textContent=open?'Close':'Menu';
 }
 mobileMenu.addEventListener('click',()=>{
   setNavigation(!sidebar.classList.contains('nav-open'));
@@ -500,5 +460,6 @@ const sectionObserver=new IntersectionObserver(entries=>{
 },{rootMargin:'-8% 0px -62% 0px'});
 document.querySelectorAll('main section[id]').forEach(section=>sectionObserver.observe(section));
 
-try{if(localStorage.getItem('brad-theme')==='dark'){document.body.classList.remove('light');document.getElementById('theme').setAttribute('aria-label','Switch to light theme');}}catch{}
-document.querySelectorAll('.section-top,.experience-entry,.education-entry,.about>p,.contact-details,.supporting-skills').forEach(revealOnce);
+try{document.body.classList.toggle('light',localStorage.getItem('brad-theme')==='light')}catch{}
+updateThemeControl();
+document.querySelectorAll('.section-heading,.experience-entry,.education-entry,.about>p,.contact-details,.supporting-skills').forEach(revealOnce);
