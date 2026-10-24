@@ -344,9 +344,9 @@
       "headline": "CinemaBuddy UX Walkthrough",
       "summary": "A looping walkthrough of the CinemaBuddy experience, showing the key user flows from onboarding and account access to movie discovery.",
       "role": "End-to-end mobile prototype experience",
-      "description": "A video walkthrough that demonstrates CinemaBuddyâ€™s main user experience, from onboarding and account access to exploring films.",
+      "description": "A video walkthrough that demonstrates CinemaBuddy’s main user experience, from onboarding and account access to exploring films.",
       "bullets": [
-        "Autoplaying prototype walkthrough",
+        "On-demand prototype walkthrough",
         "Key account and discovery flows",
         "Designed for a clear mobile viewing experience"
       ],
@@ -364,7 +364,7 @@
       "video": "assets/video/Dagooc_Nebreja_INMEDIA FINALS.mp4",
       "caseStudy": {
         "status": "UX prototype walkthrough",
-        "problem": "A video walkthrough that demonstrates CinemaBuddyâ€™s main user experience, from onboarding and account access to exploring films.",
+        "problem": "A video walkthrough that demonstrates CinemaBuddy’s main user experience, from onboarding and account access to exploring films.",
         "contribution": "End-to-end mobile prototype experience"
       }
     }

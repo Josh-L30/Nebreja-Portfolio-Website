@@ -54,25 +54,44 @@ export function createField(field) {
 class PortfolioProjects extends HTMLElement {
   async connectedCallback() {
     try {
-      const config = await data;
-      const list = node('div','project-families');
-      config.projectGroups.forEach((group,index) => {
+      const config=await data;
+      const groups=config.projectGroups;
+      if(!groups?.length)throw new Error('No project groups');
+      let current=0;
+      const layout=node('div','showcase');
+      const deck=node('div','deck');deck.setAttribute('role','group');deck.setAttribute('aria-label','Featured project previews');
+      const stories=node('div','project-copy');
+      const choices=node('div','thumbnails');choices.setAttribute('role','group');choices.setAttribute('aria-label','Choose a project family');
+      const slides=[],panels=[],buttons=[];
+      const covers={cpc:'screen-Pic2',gamemechanics:'screen-ter1',cinemabuddy:'screen-fig3'};
+      groups.forEach((group,index)=>{
         const projects=group.projectIds.map(id=>config.projects.find(p=>p.id===id)).filter(Boolean);
-        const project=projects[0];
-        const article=node('article','project-showcase');
-        article.dataset.family=group.id;
-        const visual=node('div','showcase-visual');
-        if(index===0)visual.dataset.signatureVisual='';
-        const image=node('img');fillImage(image,group.id==='cpc'?'screen-Pic2':project.image,'(max-width:768px) 92vw, 1100px');
-        image.alt=project.title+' interface preview';image.loading='lazy';visual.append(image);
-        const copy=node('div','showcase-copy');copy.dataset.reveal='';
-        const heading=node('div');heading.append(node('h3','',group.title),node('p','project-focus',group.focus));
-        const story=node('div','showcase-story');story.append(node('p','',group.description));
-        const actions=node('div','project-launches');
-        projects.forEach(p=>{const button=node('button','project-launch',p.id==='dashboard'?'Explore the dashboard ↗':p.id==='cinemabuddyux'?'Watch UX walkthrough ↗':'Explore project ↗');button.type='button';button.dataset.project=p.id;button.setAttribute('aria-label',button.textContent.replace(' ↗','')+': '+p.title);actions.append(button)});
-        story.append(actions);copy.append(heading,story);article.append(visual,copy);list.append(article);
+        if(!projects.length)throw new Error('Missing project');
+        const slide=node('button','deck-slide project-showcase');slide.type='button';slide.dataset.family=group.id;
+        const chrome=node('span','window-bar');const dots=node('span','dots');dots.setAttribute('aria-hidden','true');for(let i=0;i<3;i++)dots.append(node('i'));
+        chrome.append(dots,node('span','window-label',group.title));
+        const image=node('img');fillImage(image,covers[group.id]||projects[0].image,'(max-width:767px) 76vw, (max-width:1100px) 43vw, 46vw');image.alt=group.title+' interface preview';image.loading='lazy';
+        slide.append(chrome,image);slide.addEventListener('click',()=>{if(current!==index)select(index);else openProject(projects[0].id,slide).catch(()=>{})});
+        deck.append(slide);slides.push(slide);
+        const story=node('article','project-story');story.dataset.family=group.id;story.hidden=index!==0;
+        story.append(node('h3','',group.title),node('p','summary',group.description),node('p','role',group.focus));
+        const tags=node('div','tags');projects[0].tags.slice(0,5).forEach(tag=>tags.append(node('span','',tag)));story.append(tags);
+        const launches=node('div','project-launches');
+        projects.forEach(project=>{const label=project.id==='dashboard'?'Explore the dashboard':project.id==='cinemabuddyux'?'Watch UX walkthrough':'Explore project';const launch=node('button','project-launch',label+' ↗');launch.type='button';launch.dataset.project=project.id;launch.setAttribute('aria-label',label+': '+project.title);launches.append(launch)});
+        story.append(launches);stories.append(story);panels.push(story);
+        const choice=node('button','thumbnail family-choice');choice.type='button';choice.dataset.familySelect=group.id;choice.setAttribute('aria-label','Show '+group.title);
+        const thumb=node('img');fillImage(thumb,covers[group.id]||projects[0].image,'100px');thumb.alt='';thumb.loading='lazy';choice.append(thumb,node('span','',group.id==='cpc'?'CPC System':group.id==='gamemechanics'?'Game Mechanics':'CinemaBuddy'));
+        choice.addEventListener('click',()=>select(index));choices.append(choice);buttons.push(choice);
       });
-      this.replaceChildren(list);
+      const controls=node('div','deck-controls');const previous=node('button','','←'),next=node('button','','→'),count=node('span','deck-count');previous.type=next.type='button';previous.setAttribute('aria-label','Previous project');next.setAttribute('aria-label','Next project');count.setAttribute('aria-live','polite');controls.append(previous,count,next);deck.append(controls);
+      function select(index){
+        current=(index+groups.length)%groups.length;
+        slides.forEach((slide,i)=>{const relative=(i-current+groups.length)%groups.length;slide.dataset.position=relative===0?'active':relative===1?'right':'left';slide.setAttribute('aria-label',groups[i].title+(i===current?'. Open project details':'. Show project preview'))});
+        panels.forEach((panel,i)=>panel.hidden=i!==current);buttons.forEach((button,i)=>button.setAttribute('aria-pressed',String(i===current)));count.textContent=`${current+1} / ${groups.length}`;
+      }
+      previous.addEventListener('click',()=>select(current-1));next.addEventListener('click',()=>select(current+1));
+      choices.addEventListener('keydown',event=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;event.preventDefault();select(event.key==='Home'?0:event.key==='End'?groups.length-1:current+(event.key==='ArrowRight'?1:-1));buttons[current].focus()});
+      layout.append(deck,stories);this.replaceChildren(layout,choices);select(0);
     } catch {this.replaceChildren(node('p','component-error','Project previews could not load. Please refresh to try again.'))}
   }
 }
@@ -86,7 +105,7 @@ class PortfolioContactForm extends HTMLElement {
       form.setAttribute('aria-label','Contact Brad');
       const fields = node('div','form-fields');
       contact.fields.forEach(field => fields.append(createField(field)));
-      const note = node('p','form-note',canSend ? 'Required fields · via Web3Forms' : 'Opens a draft in your email app.');
+      const note = node('p','form-note',canSend ? 'Your name, email and message go to Web3Forms for delivery.' : 'Opens a draft in your email app.');
       note.id = 'contact-note';
       form.setAttribute('aria-describedby','contact-note');
       const status = node('p','form-status');
@@ -258,7 +277,7 @@ reducedMotion.addEventListener('change',syncMotionPreference);
 navigator.connection?.addEventListener('change',syncMotionPreference);
 function revealOnce(element) { element.dataset.reveal=''; }
 // Motion is optional: a failed module cannot disable the site's controls.
-import('./motion.js').then(({initMotion})=>initMotion(document)).catch(()=>{});
+import('./motion.js').then(({initMotion})=>initMotion(document)).catch(()=>{document.documentElement.dataset.wordMotion='unavailable';});
 customElements.define('portfolio-projects',PortfolioProjects);
 customElements.define('portfolio-contact-form',PortfolioContactForm);
 customElements.define('portfolio-stack',PortfolioStack);
@@ -418,48 +437,25 @@ dialog.addEventListener('click',event=>{
 });
 function updateThemeControl(){
  const light=document.body.classList.contains('light');
- const button=document.getElementById('theme');
- document.getElementById('themeColor').content=light?'#f5f6f1':'#101719';
- button.textContent=light?'Dark mode':'Light mode';
- button.setAttribute('aria-label',light?'Switch to dark theme':'Switch to light theme');
+ document.getElementById('themeColor').content=light?'#f5f5f5':'#090909';
+ document.getElementById('theme').setAttribute('aria-label',light?'Switch to dark theme':'Switch to light theme');
 }
 document.getElementById('theme').addEventListener('click',()=>{
  const light=document.body.classList.toggle('light');
  try{localStorage.setItem('brad-theme',light?'light':'dark')}catch{}
  updateThemeControl();
 });
-const sidebar=document.querySelector('.sidebar');
-const mobileMenu=document.getElementById('mobileMenu');
-function setNavigation(open){
-  sidebar.classList.toggle('nav-open',open);
-  mobileMenu.setAttribute('aria-expanded',String(open));
-  mobileMenu.setAttribute('aria-label',open?'Close navigation':'Open navigation');
-  mobileMenu.textContent=open?'Close':'Menu';
-}
-mobileMenu.addEventListener('click',()=>{
-  setNavigation(!sidebar.classList.contains('nav-open'));
-});
-sidebar.querySelectorAll('a[href^="#"]').forEach(link=>link.addEventListener('click',()=>{
-  setNavigation(false);
-}));
-sidebar.addEventListener('keydown',event=>{
-  if(event.key==='Escape'&&sidebar.classList.contains('nav-open')){
-    event.preventDefault();setNavigation(false);mobileMenu.focus();
-  }
-});
-document.addEventListener('click',event=>{
-  if(sidebar.classList.contains('nav-open')&&!sidebar.contains(event.target))setNavigation(false);
-});
-const sectionObserver=new IntersectionObserver(entries=>{
-  const active=entries.find(entry=>entry.isIntersecting);
-  if(!active)return;
-  sidebar.querySelectorAll('nav a').forEach(link=>{
-    if(link.hash==='#'+active.target.id)link.setAttribute('aria-current','location');
-    else link.removeAttribute('aria-current');
-  });
-},{rootMargin:'-8% 0px -62% 0px'});
-document.querySelectorAll('main section[id]').forEach(section=>sectionObserver.observe(section));
-
 try{document.body.classList.toggle('light',localStorage.getItem('brad-theme')==='light')}catch{}
 updateThemeControl();
-document.querySelectorAll('.section-heading,.experience-entry,.education-entry,.about>p,.contact-details,.supporting-skills').forEach(revealOnce);
+const navigation=document.getElementById('sectionNav');
+if('ResizeObserver' in window)new ResizeObserver(()=>document.documentElement.style.setProperty('--nav-height',navigation.getBoundingClientRect().height+'px')).observe(navigation);
+if('IntersectionObserver' in window){
+ const sectionObserver=new IntersectionObserver(entries=>{
+  for(const entry of entries){if(!entry.isIntersecting)continue;const id=entry.target.id;
+   const destination=['about','experience','stack'].includes(id)?'about':['certifications','education'].includes(id)?'certifications':id;
+   navigation.querySelectorAll('a').forEach(link=>{if(link.hash==='#'+destination)link.setAttribute('aria-current','location');else link.removeAttribute('aria-current')});
+  }
+ },{rootMargin:'-15% 0px -65% 0px'});
+ document.querySelectorAll('main>section[id]').forEach(section=>sectionObserver.observe(section));
+}
+document.querySelectorAll('.education-entry,.supporting-skills').forEach(revealOnce);

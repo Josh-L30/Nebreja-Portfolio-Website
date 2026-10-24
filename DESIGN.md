@@ -1,5 +1,9 @@
-﻿# Cinematic studio design system
+# Approved cinematic portfolio
 
-Approved direction B: a dark, cinematic portfolio with restrained motion and one CPC screenshot scale scene. Near-black ground (#101719), off-white ink (#f1f2ed), muted mint accent (#b7d8c7). The optional light appearance uses #f5f6f1, #172c24, and #255c42. Local Nunito Sans, bold display typography, flat surfaces, real imagery, simple rectangular controls. No gradients, glass panels, artificial stats or decorative animation.
+The accepted v10 preview supersedes the earlier mint/Nunito design. Near-black #090909, off-white #f2f2f2, local Clash Display display type and Satoshi body type. Optional light appearance is a neutral inversion. Content imagery, certificates, logos and video retain original color and brightness.
 
-The source of visual authority is docs/superpowers/specs/2026-10-24-cinematic-portfolio-design.md. Preserve the agreed dark direction rather than dealing another style. All project and credential images belong to Brad or their respective owners; no stock assets were added.
+Oversized stacked name, portrait between filled and outlined surname layers, floating capsule navigation and professional social rail. A manual three-family perspective deck exposes all five projects through in-page native dialogs. All original galleries, certificates, tools, education, full experience details and contact behavior remain.
+
+Continuous scroll-linked word rise/sharpen and outline-to-solid fill work at all widths and reverse with scroll. Phones avoid blur; reduced motion and Save-Data restore readable static content. Scrolling stays native. No autoplay video, invented stats or stock imagery.
+
+Solid-color gradient masks are intentional text-fill/portrait-alpha techniques permitted by the accepted design. They are not decorative multicolor gradients. Inactive deck screenshots remain unfiltered.
