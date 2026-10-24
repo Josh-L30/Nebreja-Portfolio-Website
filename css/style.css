@@ -382,3 +382,133 @@ body.light .hero .button.secondary:hover{background:#303030;border-color:#303030
 .word-piece{filter:none!important}
 
 .project-privacy-note{font-size:14px;line-height:1.6;color:var(--soft);margin-block:16px;max-width:55ch}.project-privacy-note[hidden]{display:none}
+
+/* Thin hollow glass rim only: the name's original solid fill stays unchanged. */
+.name-glass-edge{position:absolute;inset:0;z-index:4;pointer-events:none}
+.name-glass-edge .name-first,.name-glass-edge .name-last{
+ color:transparent!important;-webkit-text-fill-color:transparent!important;
+ -webkit-text-stroke:.55px #ffffff99;text-shadow:none;
+ filter:drop-shadow(0 -.45px 0 #ffffff66) drop-shadow(0 .65px 0 #00000080);
+}
+body.light .name-glass-edge .name-first,body.light .name-glass-edge .name-last{
+ -webkit-text-stroke:.55px #88888880;
+ filter:drop-shadow(0 -.45px 0 #ffffffb3) drop-shadow(0 .65px 0 #00000040);
+}
+@media(max-width:767px){.name-glass-edge .name-first,.name-glass-edge .name-last,body.light .name-glass-edge .name-first,body.light .name-glass-edge .name-last{-webkit-text-stroke-width:.4px}}
+@media(forced-colors:active){.name-glass-edge{display:none}}
+
+/* Reference name treatment: Clash Display 700, open tracking, flat fill and outline. */
+.hero .name-first,.hero .name-last{
+ font-family:Clash,Satoshi,Arial,sans-serif;font-weight:700;letter-spacing:.015em;line-height:1;
+ overflow:hidden;padding:.08em 6px;margin-block:-.08em;
+}
+.hero .name-inner{display:block;color:inherit;-webkit-text-fill-color:currentColor;text-shadow:none;filter:none}
+.hero .hero-type{z-index:1}
+.hero .name-outline{position:absolute;inset:0;z-index:3;pointer-events:none}
+.hero .name-outline .name-first,.hero .name-outline .name-last,
+body.light .hero .name-outline .name-first,body.light .hero .name-outline .name-last{
+ color:transparent;-webkit-text-fill-color:transparent;-webkit-text-stroke:0;text-shadow:none;filter:none;
+}
+.hero .name-outline .name-inner,body.light .hero .name-outline .name-inner{
+ color:transparent;-webkit-text-fill-color:transparent;-webkit-text-stroke:1.5px var(--ink);text-shadow:none;filter:none;
+}
+.hero.entrance-ready .name-first,.hero.entrance-ready .hero-type .name-last{animation:none}
+.hero.entrance-ready .name-inner{animation:reference-name-rise 1s cubic-bezier(.165,.84,.44,1) both}
+.hero.entrance-ready .name-last .name-inner{animation-delay:90ms}
+@keyframes reference-name-rise{from{transform:translateY(115%)}to{transform:translateY(0)}}
+@media(max-width:1023px){.hero .name-outline .name-inner,body.light .hero .name-outline .name-inner{-webkit-text-stroke-width:1px}}
+@media(prefers-reduced-motion:reduce){.hero.entrance-ready .name-inner{animation:none;transform:none}}
+:root[data-motion-static] .hero.entrance-ready .name-inner{animation:none;transform:none}
+
+/* Responsive composition adapted from the reference's phone/tablet hero. */
+.hero-socials{display:none}
+@media(min-width:768px) and (max-width:1023px){
+ .hero .name-first,.hero .name-last{left:6%;right:auto;font-size:clamp(54px,8vw,82px)}
+ .hero .name-first{top:40%}.hero .name-last{top:53%}
+ .hero .portrait{left:43%;top:8%;width:55%;height:70%}
+ .hero-bottom{bottom:13%;left:6%;right:6%;gap:25px}
+}
+@media(max-width:767px){
+ html{scroll-padding-top:24px}
+ body{padding-bottom:100px}
+ .container{width:calc(100% - 40px)}
+ .floating-nav{top:auto;bottom:calc(20px + env(safe-area-inset-bottom));left:50%;max-width:calc(100% - 32px);padding:6px;gap:2px;flex-wrap:nowrap;justify-content:center}
+ .floating-nav a{font-size:12px;padding:10px 12px;min-height:46px}.theme{min-height:46px;min-width:40px}
+ .social-rail{display:none}
+ .hero{height:max(740px,100svh);min-height:740px;max-height:none;overflow:clip}
+ .hero-scene{padding-inline:24px;display:flex;flex-direction:column;transform:none!important;opacity:1!important}
+ .hero .portrait{left:0;top:22px;width:100%;height:620px;max-width:none;margin:0;aspect-ratio:auto;mask-image:linear-gradient(#000 0%,#000 55%,transparent 92%);-webkit-mask-image:linear-gradient(#000 0%,#000 55%,transparent 92%)}
+ .hero .portrait img{position:absolute;left:-5%;top:0;width:110%;height:auto;max-width:none;object-fit:initial;object-position:center top}
+ .hero .hero-type{position:relative;inset:auto;display:flex;flex-direction:column;margin-top:clamp(260px,40svh,370px);z-index:1}
+ .hero .name-first,.hero .name-last,.hero h1 .name-first{position:relative;inset:auto;width:max-content;max-width:100%;font-size:11.5vw;line-height:1;letter-spacing:.015em;padding:.08em 0;margin-block:-.08em}
+ .hero .name-outline{inset:auto 24px auto;top:clamp(260px,40svh,370px);display:flex;flex-direction:column}
+ .hero-bottom{position:relative;inset:auto;flex-direction:column;align-items:flex-start;gap:18px;margin-top:24px;z-index:4}
+ .hero-intro{font-size:18px;line-height:1.5;max-width:30ch}
+ .hero-actions{width:100%;display:flex;flex-wrap:nowrap;gap:12px}.hero-actions .button{flex:1;min-width:0;padding:12px 14px;font-size:11px;min-height:46px;gap:12px}
+ .hero-socials{display:flex;gap:8px;margin-left:-10px;position:relative;inset:auto}
+ .hero-socials a{display:grid;place-items:center;width:44px;height:44px;color:var(--soft)}
+ .hero-socials svg{width:18px;height:18px;fill:currentColor}.hero-socials .linkedin{font:700 20px Arial}.hero-socials .mail{fill:none;stroke:currentColor;stroke-width:1.5}
+ .section-head,.section-top{flex-wrap:wrap;gap:20px}.section-head h2{font-size:34px}.section-head .quiet-link{font-size:12px}
+ .work{padding-top:45px;padding-bottom:65px}.section,.experience,.credentials-section,.education-section{padding-block:45px}
+ .about-bottom{gap:26px}.project-proof{gap:24px}.experience summary{grid-template-columns:48px minmax(0,1fr) auto;gap:14px}
+ .experience .title{font-size:21px}.experience .year{font-size:12px}
+ .footer{padding-bottom:20px}
+}
+@media(max-width:767px) and (max-height:720px){
+ .hero .hero-type{margin-top:230px}.hero .name-outline{top:230px}
+ .hero .portrait{top:8px}.hero-bottom{margin-top:18px;gap:14px}
+}
+@media(max-width:360px){.floating-nav a{padding-inline:9px;font-size:11px}.hero .name-first,.hero .name-last,.hero h1 .name-first{font-size:11.3vw}}
+/* Contact's large closing statement follows the reference's word-rise treatment. */
+.contact h2[data-word-reveal=statement] .word-piece{color:inherit;-webkit-text-fill-color:currentColor;background:none;-webkit-text-stroke:0;filter:none!important;text-shadow:none}
+
+@media(max-width:767px){.floating-nav{flex-wrap:wrap}.floating-nav a{padding-inline:10px}}
+@media(max-width:767px){.hero-actions .button{white-space:nowrap;padding-inline:10px;gap:8px}}
+
+/* Centered phone composition with a top navigation capsule. */
+@media(max-width:767px){
+ html{scroll-padding-top:calc(var(--nav-height,60px) + 30px)}
+ body{padding-bottom:0}
+ .floating-nav{top:calc(12px + env(safe-area-inset-top));bottom:auto;max-width:calc(100% - 20px);gap:0;padding:6px;flex-wrap:wrap}
+ .floating-nav a{font-size:11px;padding:10px 8px;min-height:44px}.theme{min-width:36px;min-height:44px;padding:8px}
+ .hero{height:max(820px,100svh);min-height:820px}
+ .hero .portrait{top:80px}
+ .hero .hero-type{margin-top:clamp(320px,46svh,420px);align-items:center;text-align:center}
+ .hero .name-first,.hero .name-last,.hero h1 .name-first{margin-inline:auto;text-align:center}
+ .hero .name-outline{top:clamp(320px,46svh,420px);align-items:center;text-align:center}
+ .hero-bottom{align-items:center;text-align:center}
+ .hero-intro{margin-inline:auto;text-align:center}
+ .hero-actions{justify-content:center}
+ .hero-socials{margin-left:0;justify-content:center;align-self:center}
+ .section-head,.section-top{flex-direction:column;align-items:center;text-align:center}
+ .section-head h2,.section h2,.experience h2,.about .section-label{text-align:center;margin-inline:auto}
+ .project-copy,.project-story,.project-proof,.about-bottom,.education-grid,.supporting-skills,.footer{text-align:center}
+ .project-copy .tags,.project-launches,.thumbnails{justify-content:center}
+ .project-launch{text-align:center}
+ .about .statement{margin-inline:auto;text-align:center}
+ .about-bottom p,.about-side{text-align:center;max-width:100%;margin-inline:auto}
+ .about-side{align-self:center}
+ .experience summary .title{text-align:center}
+ .experience details>p,.experience details>ul{text-align:center}
+ .experience details>ul{list-style-position:inside;padding-left:0}
+ .education-entry{text-align:center}
+ .contact-details>div{text-align:center;justify-items:center}
+ .contact-details dd,.contact-details a{justify-content:center;text-align:center}
+ .footer{align-items:center}
+ .contact .ui-label,.contact .ui-input,.contact .form-actions{text-align:left}
+ .contact .form-actions{justify-content:center}.contact .form-note{text-align:center}
+}
+@media(max-width:767px) and (max-height:720px){
+ .hero{height:760px;min-height:760px}
+ .hero .hero-type{margin-top:285px}.hero .name-outline{top:285px}
+ .hero .portrait{top:70px}
+}
+
+/* User-requested reversible word blur, limited to animated words. */
+html:not([data-motion-static]) [data-word-reveal] .word-piece{filter:var(--word-blur,blur(0px))!important}
+.footer{display:flex;justify-content:space-between;align-items:center;gap:24px}
+.footer-copyright{margin:0;font-size:13px;color:var(--soft)}
+.footer-links{display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:20px}
+.footer-links a{display:inline-flex;align-items:center;min-height:44px;font-size:13px}
+@media(max-width:767px){.footer{flex-direction:row;flex-wrap:wrap;text-align:left;align-items:center;gap:6px 20px}.footer-copyright{text-align:left;margin-right:auto}.footer-links{gap:16px;margin-left:auto}}
+@media(prefers-reduced-motion:reduce){html:not([data-motion-static]) [data-word-reveal] .word-piece{filter:none!important}}

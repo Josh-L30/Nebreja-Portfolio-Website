@@ -48,3 +48,5 @@ Social sharing uses assets/brad-hero-social-v3.jpg, a 1200x630 crop/resize of an
 Personal content, CV and media belong to Brad and their respective owners. Existing third-party logo/component notices remain in docs/; no external imagery or new runtime dependency was added.
 
 Latest content: Checkpoint replaces Game Mechanics; repository README and package manifests reviewed at 8aee85c. Added Node.js, MongoDB, Tailwind CSS, Vite, Leaflet and Motion to the tech stack. Flat original text replaces the glass bevel. User-supplied live URLs: https://onroute.cloud/ and https://cinema-buddy.vercel.app/.
+
+Privacy and Terms pages: privacy.html and terms.html describe this portfolio's contact form, theme preference storage, hosting/external services, project/CV content and appropriate use. The footer links to both. Update these pages if the site's data flows change. Reversible word blur is now explicitly enabled by user request; reduced-motion/Save-Data stay static.

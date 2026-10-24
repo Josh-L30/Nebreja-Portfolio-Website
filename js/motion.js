@@ -3,9 +3,10 @@ const activeRoots = new WeakMap();
 const clamp = value => Math.min(1, Math.max(0, value));
 export function sceneProgress(top, height) { return clamp((height * .85 - top) / (height * .65)); }
 export function wordProgress(top, height, textHeight = 0, type = 'heading') {
-  const range = type === 'statement' ? Math.max(height * .62, textHeight * .9) : height * .55;
-  return clamp((height * .9 - top) / range);
+  const range = type === 'statement' ? Math.max(height * .62, textHeight * .9) : height * .37;
+  return clamp((height * (type==='statement'?.9:.92) - top) / range);
 }
+export function wordExitProgress(bottom,height){return clamp((height*.2-bottom)/(height*.2+80));}
 export function initMotion(root = document) {
   activeRoots.get(root)?.();
   if (!('IntersectionObserver' in window)) return () => {};
@@ -21,7 +22,7 @@ export function initMotion(root = document) {
     target.element.style.setProperty('--text-fill', '100%');
     target.words.forEach(word => {
       word.style.removeProperty('opacity'); word.style.removeProperty('filter');
-      word.style.removeProperty('transform'); word.style.removeProperty('--word-fill');
+      word.style.removeProperty('transform'); word.style.removeProperty('--word-fill');word.style.removeProperty('--word-blur');
     });
   }
   function paint() {
@@ -32,14 +33,19 @@ export function initMotion(root = document) {
       const rect = target.element.getBoundingClientRect();
       const progress = wordProgress(rect.top, innerHeight, rect.height, target.type);
       target.element.style.setProperty('--text-fill', `${(progress * 100).toFixed(2)}%`);
+      const exit=wordExitProgress(rect.bottom,innerHeight);
       const spread = target.type === 'statement' ? .68 : .45;
       target.words.forEach((word, index) => {
         const offset = target.words.length > 1 ? index / (target.words.length - 1) * spread : 0;
-        const local = clamp((progress - offset) / (1 - spread));
+        const local = target.type==='heading'?clamp(progress*target.words.length-index):clamp((progress - offset) / (1 - spread));
         const eased = 1 - (1 - local) ** 3;
-        word.style.opacity = String(.55 + .45 * eased);
+        const exitOffset=target.words.length>1?index/(target.words.length-1)*.25:0;
+        const visibility=1-clamp(exit*1.25-exitOffset);
+        word.style.opacity=String((target.type==='heading'?1:(.55+.45*eased))*visibility);
         word.style.removeProperty('filter');
-        word.style.transform = `translateY(${Math.round((1 - eased) * 24)}px)`;
+        const blur=Math.max(target.type==='heading'?0:(1-eased)*4,(1-visibility)*5);
+        word.style.setProperty('--word-blur',`blur(${blur.toFixed(2)}px)`);
+        word.style.transform = target.type==='heading'?'none':`translateY(${Math.round((1 - eased) * 24)}px)`;
         word.style.setProperty('--word-fill', `${(local * 100).toFixed(2)}%`);
       });
     }
@@ -126,8 +132,8 @@ export function initMotion(root = document) {
       stackTargets.set(group,[...group.querySelectorAll('.tech-chip')]);
       group.dataset.stackMotion='ready';stackObserver.observe(group);
     });
-    root.querySelectorAll('main h2,.project-story h3,.project-proof h3').forEach(el => split(el, 'heading'));
-    root.querySelectorAll('.about .statement,.contact-intro').forEach(el => split(el, 'statement'));
+    root.querySelectorAll('main h2,.project-story h3,.project-proof h3').forEach(el => {if(!el.closest('.contact'))split(el, 'heading');});
+    root.querySelectorAll('.about .statement,.contact h2,.contact-intro').forEach(el => split(el, 'statement'));
     root.querySelectorAll('[data-reveal]').forEach(el => {
       if (observed.has(el) || el.hasAttribute('data-word-reveal')) return;
       observed.add(el); entrances.observe(el);

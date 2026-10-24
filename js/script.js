@@ -474,6 +474,11 @@ themeButton.addEventListener('click',async()=>{
 });
 try{document.body.classList.toggle('light',localStorage.getItem('brad-theme')==='light')}catch{}
 updateThemeControl();
+const heroFoot=document.querySelector('.hero-bottom');
+if(heroFoot&&!heroFoot.querySelector('.hero-socials')){
+ const social=document.querySelector('.social-rail').cloneNode(true);
+ social.className='hero-socials';social.setAttribute('aria-label','Professional profiles');heroFoot.append(social);
+}
 const navigation=document.getElementById('sectionNav');
 if('ResizeObserver' in window)new ResizeObserver(()=>document.documentElement.style.setProperty('--nav-height',navigation.getBoundingClientRect().height+'px')).observe(navigation);
 if('IntersectionObserver' in window){
