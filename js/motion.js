@@ -16,6 +16,7 @@ export function initMotion(root = document) {
   const stackTargets=new Map(), stackNear=new Set();
   const doc = root === document ? root : root.ownerDocument;
   const hero = root.querySelector('.hero'), scene = root.querySelector('.hero-scene');
+  let lastPaint=0;
   let frame = 0, disposed = false, listening = false, heroNear = false;
   const allowed = () => !reduced.matches && !connection?.saveData;
   function clearTarget(target) {
@@ -25,27 +26,39 @@ export function initMotion(root = document) {
       word.style.removeProperty('transform'); word.style.removeProperty('--word-fill');word.style.removeProperty('--word-blur');
     });
   }
-  function paint() {
+  function paint(timestamp) {
     frame = 0;
     if (!allowed() || doc.hidden || doc.body.classList.contains('modal-open')) return;
+    const delta=lastPaint?Math.min(64,timestamp-lastPaint):16;lastPaint=timestamp;
+    let settling=false;
     for (const target of near) {
       if (!target.element.isConnected) { near.delete(target); targets.delete(target.element); continue; }
       const rect = target.element.getBoundingClientRect();
-      const progress = wordProgress(rect.top, innerHeight, rect.height, target.type);
+      const destination = wordProgress(rect.top, innerHeight, rect.height, target.type);
+      let progress=destination;
+      if(target.type==='heading'){
+        target.progress??=destination;
+        target.progress+=(destination-target.progress)*(1-Math.exp(-delta/120));
+        if(Math.abs(destination-target.progress)<.001)target.progress=destination;else settling=true;
+        progress=target.progress;
+      }
       target.element.style.setProperty('--text-fill', `${(progress * 100).toFixed(2)}%`);
       const exit=wordExitProgress(rect.bottom,innerHeight);
       const spread = target.type === 'statement' ? .68 : .45;
+      const widths=target.type==='heading'?target.words.map(word=>word.getBoundingClientRect().width):[];
+      const totalWidth=widths.reduce((sum,width)=>sum+width,0);let usedWidth=0;
       target.words.forEach((word, index) => {
         const offset = target.words.length > 1 ? index / (target.words.length - 1) * spread : 0;
-        const local = target.type==='heading'?clamp(progress*target.words.length-index):clamp((progress - offset) / (1 - spread));
+        const local = target.type==='heading'?clamp((progress*totalWidth-usedWidth)/(widths[index]||1)):clamp((progress - offset) / (1 - spread));
+        usedWidth+=widths[index]||0;
         const eased = 1 - (1 - local) ** 3;
         const exitOffset=target.words.length>1?index/(target.words.length-1)*.25:0;
         const visibility=1-clamp(exit*1.25-exitOffset);
         word.style.opacity=String((target.type==='heading'?1:(.55+.45*eased))*visibility);
         word.style.removeProperty('filter');
         const blur=Math.max(target.type==='heading'?0:(1-eased)*4,(1-visibility)*5);
-        word.style.setProperty('--word-blur',`blur(${blur.toFixed(2)}px)`);
-        word.style.transform = target.type==='heading'?'none':`translateY(${Math.round((1 - eased) * 24)}px)`;
+        word.style.setProperty('--word-blur',blur<.01?'none':`blur(${blur.toFixed(2)}px)`);
+        word.style.transform = target.type==='heading'||eased>.999?'none':`translateY(${((1 - eased) * 24).toFixed(2)}px)`;
         word.style.setProperty('--word-fill', `${(local * 100).toFixed(2)}%`);
       });
     }
@@ -63,6 +76,7 @@ export function initMotion(root = document) {
       scene.style.transform = `translateY(${Math.round(progress * 65)}px)`;
       scene.style.opacity = String(1 - progress * .65);
     } else if (scene && innerWidth < 768) { scene.style.transform = ''; scene.style.opacity = ''; }
+    if(settling)request();
   }
   function request() { if (!frame && !disposed && allowed()) frame = requestAnimationFrame(paint); }
   function watch(enabled) {
@@ -107,6 +121,7 @@ export function initMotion(root = document) {
     if (targets.has(element)) return;
     const existing = [...element.querySelectorAll('.word-piece')];
     if (existing.length) {
+      existing.forEach(word=>word.dataset.word=word.textContent);
       targets.set(element, { element, words: existing, type });
       wordsObserver.observe(element);
       return;
@@ -119,7 +134,7 @@ export function initMotion(root = document) {
       text.textContent.split(/(\s+)/).forEach(part => {
         if (!part) return;
         if (/^\s+$/.test(part)) { fragment.append(doc.createTextNode(part)); return; }
-        const word = doc.createElement('span'); word.className = 'word-piece'; word.textContent = part;
+        const word = doc.createElement('span'); word.className = 'word-piece'; word.textContent = part;word.dataset.word=part;
         words.push(word); fragment.append(word);
       }); text.replaceWith(fragment);
     });

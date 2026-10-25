@@ -23,7 +23,7 @@
         "Laravel WebSocket",
         "React",
         "Express.js",
-        "MS SQL"
+        "MY SQL"
       ],
       "image": "screen-Pic1",
       "gallery": [
@@ -281,7 +281,7 @@
         "status": "Interactive Media Design project",
         "problem": "Create a clear and engaging movie discovery experience.",
         "approach": "A mobile-focused interface brings CinemaBuddy’s film-discovery concept into a live website.",
-        "contribution": "Designed the interface and created the interactive prototype using Figma for a school project in 2023."
+        "contribution": "Designed the interface and created the interactive prototype using Figma for a school project in 2024."
       },
       "liveUrl": "https://cinema-buddy.vercel.app/"
     }
@@ -346,9 +346,9 @@
       "source": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg"
     },
     {
-      "name": "MS SQL",
-      "logo": "assets/logo-microsoftsqlserver.svg",
-      "source": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-original.svg"
+      "name": "MY SQL",
+      "logo": "assets/logo-mysql.svg",
+      "source": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
     },
     {
       "name": "Figma",
@@ -551,7 +551,7 @@
     {
       "title": "UI Designer & Prototype Designer",
       "company": "CinemaBuddy — School Project",
-      "date": "2023",
+      "date": "2024",
       "bullets": [
         "Designed the CinemaBuddy interface in Figma for a school project.",
         "Created an interactive prototype to demonstrate the app’s screens and user flows."
@@ -586,7 +586,7 @@
     {
       "title": "Database",
       "items": [
-        "MS SQL",
+        "MY SQL",
         "Firebase"
       ]
     },
@@ -687,7 +687,7 @@
     {
       "title": "Databases & services",
       "tools": [
-        "MS SQL",
+        "MY SQL",
         "Firebase",
         "MongoDB"
       ]

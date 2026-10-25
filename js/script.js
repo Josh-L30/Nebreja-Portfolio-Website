@@ -67,7 +67,7 @@ class PortfolioProjects extends HTMLElement {
       const stories=node('div','project-copy');
       const choices=node('div','thumbnails');choices.setAttribute('role','group');choices.setAttribute('aria-label','Choose a project family');
       const slides=[],panels=[],buttons=[];
-      const covers={cpc:'screen-Pic2',checkpoint:'assets/checkpoint-arrivals.png',cinemabuddy:'assets/cinemabuddy-overview.png'};
+      const covers={cpc:'screen-Pic1',checkpoint:'assets/checkpoint-arrivals.png',cinemabuddy:'assets/cinemabuddy-overview.png'};
       groups.forEach((group,index)=>{
         const projects=group.projectIds.map(id=>config.projects.find(p=>p.id===id)).filter(Boolean);
         if(!projects.length)throw new Error('Missing project');
@@ -346,6 +346,7 @@ function openImage(source,title,projectGallery=false){
   loadFullImage(source,title);
   beginLayer(imageDialog,document.activeElement);
   imageDialog.showModal();
+  document.getElementById('closeImage').focus({preventScroll:true});imageDialog.scrollTop=0;
 }
 document.getElementById('closeImage').addEventListener('click',()=>imageDialog.close());
 imageDialog.addEventListener('keydown',event=>{
@@ -434,6 +435,7 @@ async function openProject(projectId, button) {
   if(gallery.length)showGalleryImage(0);
   beginLayer(dialog,button);
   dialog.showModal();
+  document.getElementById('closeDialog').focus({preventScroll:true});
   dialog.scrollTop = 0;
 }
 document.addEventListener('click',event=>{const button=event.target.closest('[data-project]');if(button)openProject(button.dataset.project,button).catch(()=>{})});
@@ -446,34 +448,8 @@ dialog.addEventListener('click',event=>{
   const rect=dialog.getBoundingClientRect();
   if(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom)dialog.close();
 });
-function updateThemeControl(){
- const light=document.body.classList.contains('light');
- document.getElementById('themeColor').content=light?'#f5f5f5':'#090909';
- document.getElementById('theme').setAttribute('aria-label',light?'Switch to dark theme':'Switch to light theme');
-}
-let themeTransition;
-const themeButton=document.getElementById('theme');
-themeButton.addEventListener('click',async()=>{
- const apply=()=>{
-  const light=document.body.classList.toggle('light');
-  try{localStorage.setItem('brad-theme',light?'light':'dark')}catch{}
-  updateThemeControl();
- };
- if(!document.startViewTransition||reducedMotion.matches||navigator.connection?.saveData){apply();return;}
- if(themeTransition)return;
- const rect=themeButton.getBoundingClientRect();
- const x=rect.left+rect.width/2,y=rect.top+rect.height/2;
- const radius=Math.hypot(Math.max(x,innerWidth-x),Math.max(y,innerHeight-y));
- const transition=document.startViewTransition(apply);themeTransition=transition;
- try{
-  await transition.ready;
-  document.documentElement.animate({clipPath:[`circle(0px at ${x}px ${y}px)`,`circle(${radius}px at ${x}px ${y}px)`]},
-   {duration:560,easing:'cubic-bezier(.22,1,.36,1)',pseudoElement:'::view-transition-new(root)',fill:'both'});
-  await transition.finished;
- }catch{transition.skipTransition();}finally{themeTransition=null;}
-});
-try{document.body.classList.toggle('light',localStorage.getItem('brad-theme')==='light')}catch{}
-updateThemeControl();
+document.body.classList.remove('light');
+try{localStorage.removeItem('brad-theme')}catch{}
 const heroFoot=document.querySelector('.hero-bottom');
 if(heroFoot&&!heroFoot.querySelector('.hero-socials')){
  const social=document.querySelector('.social-rail').cloneNode(true);
@@ -491,3 +467,17 @@ if('IntersectionObserver' in window){
  document.querySelectorAll('main>section[id]').forEach(section=>sectionObserver.observe(section));
 }
 document.querySelectorAll('.education-entry,.supporting-skills').forEach(revealOnce);
+
+const mobileMenu=document.getElementById('mobileMenu');
+const menuToggle=document.getElementById('menuToggle');
+const menuSocials=document.querySelector('.social-rail').cloneNode(true);
+menuSocials.className='menu-profile-links';document.querySelector('.menu-socials').append(menuSocials);
+menuToggle.addEventListener('click',()=>{beginLayer(mobileMenu,menuToggle);mobileMenu.showModal();menuToggle.setAttribute('aria-expanded','true')});
+document.getElementById('closeMenu').addEventListener('click',()=>mobileMenu.close());
+let menuDestination=null;
+mobileMenu.addEventListener('close',()=>{endLayer(mobileMenu);menuToggle.setAttribute('aria-expanded','false');if(menuDestination){menuDestination.scrollIntoView({behavior:reducedMotion.matches?'instant':'smooth'});menuDestination=null}});
+mobileMenu.querySelectorAll('a[href^="#"]').forEach(link=>link.addEventListener('click',event=>{
+ event.preventDefault();menuDestination=document.querySelector(link.getAttribute('href'));mobileMenu.close();
+}));
+mobileMenu.addEventListener('click',event=>{if(event.target===mobileMenu){const rect=mobileMenu.getBoundingClientRect();if(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom)mobileMenu.close()}});
+matchMedia('(min-width:768px)').addEventListener('change',event=>{if(event.matches&&mobileMenu.open)mobileMenu.close()});

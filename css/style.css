@@ -142,9 +142,9 @@ dialog h2 {
   justify-content:space-between;
   gap:20px;
   align-items:center;
-  position:sticky;
-  top:-1px;
-  background:var(--bg);
+  position:relative;
+  top:0;
+  background:transparent;
   z-index:1;
   padding-bottom:10px
 }
@@ -512,3 +512,56 @@ html:not([data-motion-static]) [data-word-reveal] .word-piece{filter:var(--word-
 .footer-links a{display:inline-flex;align-items:center;min-height:44px;font-size:13px}
 @media(max-width:767px){.footer{flex-direction:row;flex-wrap:wrap;text-align:left;align-items:center;gap:6px 20px}.footer-copyright{text-align:left;margin-right:auto}.footer-links{gap:16px;margin-left:auto}}
 @media(prefers-reduced-motion:reduce){html:not([data-motion-static]) [data-word-reveal] .word-piece{filter:none!important}}
+/* Dark glass overlays and distinct hero actions. */
+#projectDialog,#imageDialog,#mobileMenu{position:fixed;inset:0;margin:auto;width:min(1080px,calc(100% - 48px));height:auto;max-height:88svh;border:1px solid #ffffff32;border-radius:24px;background:linear-gradient(135deg,#242424de,#101010e8);color:#f2f2f2;box-shadow:0 24px 90px #0007,inset 0 1px #ffffff20;backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);padding:30px;scrollbar-gutter:stable;transform-origin:center center}
+#projectDialog::backdrop,#imageDialog::backdrop,#mobileMenu::backdrop{background:#0006;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+#projectDialog[open],#imageDialog[open],#mobileMenu[open]{animation:glass-pop 440ms cubic-bezier(.22,1,.36,1) both}
+@keyframes glass-pop{0%{opacity:0;transform:translateY(80px) scale(.95,.92)}65%{opacity:1;transform:translateY(-7px) scale(1.012,1.018)}83%{transform:translateY(3px) scale(.997,.992)}100%{opacity:1;transform:translateY(0) scale(1)}}
+#imageDialog{width:min(1440px,calc(100% - 48px))}#fullImage{height:auto;max-height:68svh;min-height:0;object-fit:contain}.image-viewer-header{display:flex;align-items:center;justify-content:space-between;gap:20px}.image-viewer-header h2{margin:0;padding:0}.image-viewer-header #closeImage{float:none;flex-shrink:0}
+.menu-toggle{display:none}#mobileMenu{max-width:520px;padding:24px}#mobileMenu header{display:flex;align-items:center;justify-content:space-between;gap:20px}#mobileMenu h2{font:600 28px Clash;margin:0;padding:0}#closeMenu{width:44px;height:44px;border-radius:50%;background:#ffffff18;color:white;font-size:26px}#mobileMenu nav{display:grid;margin-top:20px}#mobileMenu nav>a{display:flex;justify-content:space-between;align-items:center;padding:12px 0;min-height:44px;border-bottom:1px solid #ffffff18;font-size:20px}#mobileMenu nav>a span{color:#999}.menu-profile-links{display:flex;gap:20px;align-items:center;margin-top:25px}.menu-profile-links a{width:28px;height:36px;display:grid;place-items:center}.menu-profile-links svg{width:22px;height:22px;fill:currentColor}.menu-profile-links svg.mail{fill:none;stroke:currentColor;stroke-width:1.5}
+@media(max-width:767px){.menu-toggle{display:flex;flex-direction:column;justify-content:center;gap:6px;width:44px;height:44px;border-radius:50%;background:#ffffff12;color:white;padding:12px;flex-shrink:0}.menu-toggle span{display:block;height:1px;width:20px;background:currentColor}.floating-nav{max-width:calc(100% - 20px);gap:0!important}.floating-nav>a{padding-inline:7px!important;font-size:10px!important}.hero-socials{justify-content:flex-start!important;width:100%;align-self:flex-start;margin-inline:0!important}.hero-bottom .hero-socials{justify-content:flex-start!important}#projectDialog,#imageDialog,#mobileMenu{width:calc(100% - 24px);height:auto;max-height:90svh;padding:20px 16px;border-radius:20px;margin:auto}#projectDialog h2{font-size:28px}#detailImage{height:auto;max-height:40svh;object-fit:contain}#fullImage{max-height:65svh}.image-viewer-header h2{font-size:16px;overflow-wrap:anywhere}#mobileMenu nav>a{font-size:18px;padding:10px 0}}
+@media(prefers-reduced-motion:reduce){#projectDialog[open],#imageDialog[open],#mobileMenu[open]{animation:none}}
+
+#projectDialog,#imageDialog,#mobileMenu{height:fit-content}
+html[data-motion-static] #projectDialog[open],html[data-motion-static] #imageDialog[open],html[data-motion-static] #mobileMenu[open]{animation:none}
+
+/* Reference hero.css: filled primary and hairline ghost, monochrome. */
+#home .hero-actions{align-items:center;gap:12px}
+#home .hero-actions .button,#home .hero-actions .button.secondary{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 24px;border:1px solid transparent;border-radius:0;background:#fff;color:#090909;-webkit-text-fill-color:#090909;font-family:HeroMono,ui-monospace,SFMono-Regular,Consolas,monospace;font-size:clamp(12px,11.68px + .1vw,13px);font-weight:500;line-height:1.4;letter-spacing:.16em;text-transform:uppercase;box-shadow:none;transform:none;transition:transform 180ms cubic-bezier(.23,1,.32,1),background-color 180ms cubic-bezier(.23,1,.32,1),color 180ms cubic-bezier(.23,1,.32,1),border-color 180ms cubic-bezier(.23,1,.32,1)}
+#home .hero-actions .button.secondary{background:transparent;color:#fff;-webkit-text-fill-color:#fff;border-color:#ffffff2e}
+#home .hero-actions .button:focus-visible{outline:2px solid #fff;outline-offset:5px}
+#home .hero-actions .button.secondary:focus-visible{border-color:#fff;background:#ffffff0a}
+@media(hover:hover) and (pointer:fine){#home .hero-actions .button:hover{background:#e8e8e8;color:#090909;transform:none}#home .hero-actions .button.secondary:hover{background:transparent;color:#fff;-webkit-text-fill-color:#fff;border-color:#fff;transform:none}}
+#home .hero-actions .button:active{opacity:.8}
+@media(max-width:767px){#home .hero-actions{width:100%}#home .hero-actions .button,#home .hero-actions .button.secondary{flex:1;min-width:0;padding-inline:16px}}
+@media(prefers-reduced-motion:reduce){#home .hero-actions .button{transition:none}}
+
+@font-face{font-family:HeroMono;src:url(../assets/jetbrains-mono.woff2) format("woff2");font-weight:100 800;font-style:normal;font-display:swap}
+
+/* Reference title treatment: outlined glyphs with a clipped solid layer. */
+@font-face{font-family:Clash;src:url('../assets/fonts/clash-display-600.woff2') format('woff2');font-weight:600;font-style:normal;font-display:swap}
+main [data-word-reveal=heading]{font-family:Clash,Satoshi,sans-serif;font-weight:600;letter-spacing:-.02em;line-height:1.08;word-spacing:.12em}
+main [data-word-reveal=heading] .word-piece{position:relative;display:inline-block;color:transparent;-webkit-text-fill-color:transparent;-webkit-text-stroke:max(1px,.012em) #aaa;background:none!important;background-clip:initial;text-shadow:none!important;white-space:normal;overflow-wrap:anywhere}
+main [data-word-reveal=heading] .word-piece::after{content:attr(data-word);content:attr(data-word) / "";position:absolute;inset:0;color:var(--ink);-webkit-text-fill-color:var(--ink);-webkit-text-stroke:0;clip-path:inset(0 calc(100% - var(--word-fill,100%)) 0 0);pointer-events:none}
+html[data-motion-static] main [data-word-reveal=heading] .word-piece{color:var(--ink);-webkit-text-fill-color:var(--ink);-webkit-text-stroke:0}
+@media(hover:hover) and (pointer:fine){#home .hero-actions .button:not(.secondary):hover{background:#090909;border-color:#fff;color:#fff;-webkit-text-fill-color:#fff;transform:translateY(-2px);box-shadow:0 5px 20px #ffffff12}}
+#home .hero-actions .button:not(.secondary):focus-visible{background:#090909;border-color:#fff;color:#fff;-webkit-text-fill-color:#fff}
+@media(prefers-reduced-motion:reduce){#home .hero-actions .button:not(.secondary):hover{transform:none}}
+
+@font-face{font-family:Satoshi;src:url('../assets/fonts/satoshi-500.woff2') format('woff2');font-weight:500;font-style:normal;font-display:swap}
+.about .statement,.contact h2{font-family:Clash,Satoshi,sans-serif;font-weight:600;line-height:1.02;letter-spacing:-.01em}
+/* Clear the face from the last hero letter on wider layouts. */
+@media(min-width:1024px){.hero .portrait{left:calc(56% + clamp(24px,2.6vw,42px))}}
+@media(min-width:768px) and (max-width:1023px){.hero .portrait{left:calc(43% + 24px)}}
+/* Bust framing: retain the face scale and fade out at mid-chest. */
+.hero .portrait{mask-image:linear-gradient(#000 0%,#000 59%,transparent 79%);-webkit-mask-image:linear-gradient(#000 0%,#000 59%,transparent 79%)}
+@media(max-width:767px){.hero .portrait{mask-image:linear-gradient(#000 0%,#000 48%,transparent 73%);-webkit-mask-image:linear-gradient(#000 0%,#000 48%,transparent 73%)}}
+/* Mobile: centered portrait with an editorial, left-aligned name and intro. */
+@media(max-width:767px){
+ .hero .portrait{left:0;width:100%}
+ .hero .portrait img{left:50%;transform:translateX(-50%);object-position:center top}
+ .hero .hero-type,.hero .name-outline{align-items:flex-start;text-align:left}
+ .hero .name-first,.hero .name-last,.hero h1 .name-first{margin-inline:0;text-align:left}
+ .hero .hero-bottom{align-items:flex-start;text-align:left}
+ .hero .hero-intro{margin-inline:0;text-align:left}
+}
