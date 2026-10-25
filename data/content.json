@@ -309,11 +309,11 @@
         "Web Components",
         "Vercel"
       ],
-      "image": "assets/portfolio-overview.png",
+      "image": "assets/portfolio-overview-v2.png",
       "gallery": [
         {
-          "image": "assets/portfolio-overview.png",
-          "original": "assets/portfolio-overview.png",
+          "image": "assets/portfolio-overview-v2.png",
+          "original": "assets/portfolio-overview-v2.png",
           "label": "Brad Josh Nebreja portfolio hero and navigation"
         }
       ],

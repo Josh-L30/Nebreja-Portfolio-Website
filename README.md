@@ -1,52 +1,98 @@
-﻿# Brad Josh Nebreja — cinematic portfolio
+# Brad Josh Nebreja — Personal Portfolio
 
-Static HTML, CSS, native JavaScript components and JSON content. No build step or package installation is required.
+A cinematic portfolio showcasing my web development, UI/UX design, and QA work, alongside my experience, skills, education, certifications, and CV.
 
-## Local preview
+**[Visit my portfolio](https://nebreja-portfolio-website.vercel.app/)**
 
-From this directory run Python 3.10+:
+## Features
 
-    python -m http.server 8000 --bind 127.0.0.1
+- Responsive desktop and mobile layouts with a black-and-white interface and original-color media.
+- Glass navigation, animated mobile menu, and professional social links.
+- Reversible scroll-driven typography with reduced-motion and Save-Data support.
+- In-page project stories and certificate previews in glass dialogs.
+- Four Selected Works, five certifications, Tech Stack, experience, and education.
+- Downloadable CV, contact form, Privacy, and Terms pages.
 
-Open http://127.0.0.1:8000 over HTTP, not file://, because components fetch JSON and use ES modules.
+## Selected Works
 
-## Design and behavior
+| Project | Overview | Live site |
+| --- | --- | --- |
+| CPC Centralized System | Sales, production, inventory, and logistics operations. | Private to protect client information. |
+| Checkpoint | Bus-stop and arrivals website, with development and QA contributions. | [Checkpoint](https://onroute.cloud/) |
+| CinemaBuddy | A 2024 school project featuring UI design and a Figma prototype. | [CinemaBuddy](https://cinema-buddy.vercel.app/) |
+| Personal Portfolio | This website, presenting my work and professional background. | [Portfolio](https://nebreja-portfolio-website.vercel.app/) |
 
-The approved cinematic studio direction uses a dark background, local Clash Display and Satoshi typography, authentic project imagery and a strictly black/white interface. A redesigned optional light appearance uses the same layout. The saved brad-theme preference is respected; the default is dark.
+## Technology
 
-Three visible project families contain four current work entries: CPC system/dashboard, Checkpoint, and CinemaBuddy. All 16 current screenshots, responsive previews, certificates, tools, education details, CV and professional links remain available. Large native dialogs open project stories within the page; nested full-image views preserve gallery selection. Closing each layer restores focus; closing the project restores page position. Checkpoint uses two supplied screenshots; CinemaBuddy uses one supplied image. Retired galleries and the walkthrough are no longer exposed. Both projects have live-site links.
+HTML, CSS, JavaScript ES modules, native Web Components, and JSON. Fonts are served locally using Clash Display and Satoshi. Web3Forms handles contact submissions; Vercel hosts the public website.
 
-Motion is progressive enhancement in js/motion.js. Headings fill from outline to solid and words rise and sharpen continuously with scrolling, including reverse scrolling at all widths. Phones avoid continuous blur. The layered hero has a restrained desktop exit; smaller screens keep it static. Other entrances are short. Reduced motion and Save-Data disable travel and dialog animations; motion-module failure does not prevent controls or content from working. Normal wheel/touch scrolling is never intercepted.
+No build step or package installation is required. The Tech Stack section represents my broader skills, rather than this website's runtime dependencies.
 
-## Files
+## Run Locally
 
-- index.html: page structure, direct CV/contact fallbacks and metadata.
-- data/content.json: four work entries, three project groups, galleries, credentials, tools and existing contact configuration.
-- css/style.css: layout, theme tokens, dialogs, responsive and motion presentation.
-- css/components.css: shared contact form styling.
-- js/script.js: native components, data loading, galleries, dialogs, navigation, appearance and preserved contact behavior.
-- js/motion.js: optional continuous word reveals, entrances and hero exit.
-- DESIGN.md and docs/superpowers/: approved design and implementation plan.
+From the repository root, start a static HTTP server:
 
-Visible profile, experience, education and About copy still lives in index.html; duplicate JSON fields are reference content. No framework/backend migration was performed. The nested Nebreja-Portfolio-Website directory was not modified.
+```sh
+python -m http.server 8000 --bind 127.0.0.1
+```
 
-## Contact integrity
+Open [localhost:8000](http://127.0.0.1:8000/). Use HTTP instead of opening index.html directly because the site fetches JSON and uses JavaScript modules. XAMPP or a VS Code static server can also serve the project root.
 
-The current public configuration enables Web3Forms. The contact component and its configuration were preserved during the redesign. Existing validation, honeypot, pending-state duplicate prevention, 15-second timeout, text retention on failure, and strict success === true checking remain intact. No real message was submitted during redesign verification; tests intercept every POST locally. Provider acceptance is not proof of inbox delivery. A missing endpoint/key retains the email-draft fallback. Never enter an email password or private token into the public configuration.
+## Project Structure
+
+| Path | Purpose |
+| --- | --- |
+| index.html | Main page, hero, About me, experience, education, and contact |
+| privacy.html / terms.html | Portfolio policies |
+| data/content.json | Projects, galleries, certificates, tools, and contact configuration |
+| css/ | Main, component, and legal-page styles |
+| js/script.js | Components, navigation, dialogs, galleries, and contact behavior |
+| js/motion.js | Scroll-driven typography and section animations |
+| assets/ | Portraits, screenshots, certificates, fonts, logos, and CV |
+| tests/ | Browser, content, and motion checks |
+| docs/ | Design notes and development documentation |
+
+## Updating Content
+
+- Edit data/content.json for Selected Works, project galleries, certificates, and Tech Stack.
+- Edit index.html for the hero, About me, experience, education, and contact details.
+- Save media in assets/ and update the corresponding paths and alternative text.
+- When replacing the CV, update both the hero and contact download links.
+- Adjust presentation in css/ and animation in js/motion.js.
+- Keep Privacy and Terms accurate when changing external services or contact handling.
+
+HTML files use two-space indentation for readable editing in VS Code.
+
+## Contact Form
+
+The form uses public configuration from data/content.json. It includes validation, spam protection, duplicate-submission prevention, timeout handling, and an email-draft fallback when configuration is missing. Never add private credentials or email passwords to frontend files.
+
+Browser checks intercept contact requests locally and do not send real messages or verify inbox delivery.
 
 ## Verification
 
-    python verify_assets.py
-    python verify.py http://127.0.0.1:8000
-    python -m unittest discover -s tests -p "test_*.py"
-    node --test tests/motion.test.mjs tests/word-motion.test.mjs
+Run from the project root with Python and Node.js installed:
 
-For in-browser interaction checks open /tests/browser.html and press Run checks. All POSTs are intercepted by the test page; it does not send messages. /tests/visual.html is a development-only responsive review harness. Neither harness is linked from the portfolio. See docs/cinematic-browser-checks.md and docs/PERFORMANCE.md for results and limits. Physical devices and real inbox delivery have not been tested in this redesign.
+```sh
+python verify_assets.py
+python -m unittest discover -s tests -p "test_*.py"
+node --test tests/motion.test.mjs tests/word-motion.test.mjs
+```
 
-Social sharing uses assets/brad-hero-social-v3.jpg, a 1200x630 crop/resize of an actual final dark-hero browser capture. Regenerate it when the hero changes. Existing canonical and professional destination URLs are preserved. No push or deployment was performed.
+With the local server running:
 
-Personal content, CV and media belong to Brad and their respective owners. Existing third-party logo/component notices remain in docs/; no external imagery or new runtime dependency was added.
+```sh
+python verify.py http://127.0.0.1:8000
+```
 
-Latest content: Checkpoint replaces Game Mechanics; repository README and package manifests reviewed at 8aee85c. Added Node.js, MongoDB, Tailwind CSS, Vite, Leaflet and Motion to the tech stack. Flat original text replaces the glass bevel. User-supplied live URLs: https://onroute.cloud/ and https://cinema-buddy.vercel.app/.
+Open /tests/browser.html and click **Run checks** for interaction checks. /tests/visual.html provides a responsive review harness. Viewport emulation does not replace physical-device testing.
 
-Privacy and Terms pages: privacy.html and terms.html describe this portfolio's contact form, theme preference storage, hosting/external services, project/CV content and appropriate use. The footer links to both. Update these pages if the site's data flows change. Reversible word blur is now explicitly enabled by user request; reduced-motion/Save-Data stay static.
+## Deployment
+
+The public website is hosted on Vercel. Local changes appear publicly after the configured production branch is pushed and Vercel completes deployment. Serve the repository root as a static website; no build command is required.
+
+## Contact and Ownership
+
+[GitHub](https://github.com/Josh-L30) · [LinkedIn](https://www.linkedin.com/in/josh-nebreja-894248402/) · [Facebook](https://www.facebook.com/brad.josh.nebreja) · [Email](mailto:bradjosh.nebreja05@gmail.com)
+
+Personal content, CV, and portraits belong to Brad Josh Nebreja. Project materials, certification marks, fonts, and third-party logos belong to their respective owners. See existing notices in docs/.
