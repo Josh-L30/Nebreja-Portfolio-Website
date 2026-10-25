@@ -471,7 +471,13 @@ document.querySelectorAll('.education-entry,.supporting-skills').forEach(revealO
 const mobileMenu=document.getElementById('mobileMenu');
 const menuToggle=document.getElementById('menuToggle');
 const menuSocials=document.querySelector('.social-rail').cloneNode(true);
-menuSocials.className='menu-profile-links';document.querySelector('.menu-socials').append(menuSocials);
+menuSocials.className='menu-profile-links';
+menuSocials.querySelectorAll('a').forEach(link=>{
+ const label=link.getAttribute('aria-label').replace('Brad on ','').replace('Email Brad','Email');
+ if(link.classList.contains('linkedin')&&!link.querySelector('svg')){link.textContent='';const icon=node('span','social-linkedin-mark','in');icon.setAttribute('aria-hidden','true');link.append(icon)}
+ link.append(node('span','social-label',label));
+});
+document.querySelector('.menu-socials').append(menuSocials);
 menuToggle.addEventListener('click',()=>{beginLayer(mobileMenu,menuToggle);mobileMenu.showModal();menuToggle.setAttribute('aria-expanded','true')});
 document.getElementById('closeMenu').addEventListener('click',()=>mobileMenu.close());
 let menuDestination=null;
