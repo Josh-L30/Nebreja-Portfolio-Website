@@ -639,3 +639,28 @@ html[data-motion-static] #mobileMenu[open] nav>a,html[data-motion-static] #mobil
 @media(hover:hover) and (pointer:fine){:is(#projectDialog #closeDialog,#imageDialog #closeImage):hover{background:#ffffff18;border-color:#ffffff70}}
 :is(#projectDialog #closeDialog,#imageDialog #closeImage):active{transform:scale(.94);background:#ffffff22}
 @media(prefers-reduced-motion:reduce){:is(#projectDialog #closeDialog,#imageDialog #closeImage){transition:none}:is(#projectDialog #closeDialog,#imageDialog #closeImage):active{transform:none}}
+
+/* Compact mobile certificate selector; full desktop list is retained. */
+.certificate-strip-hint,.certificate-title-short{display:none}
+@media(max-width:767px){
+ .credentials-section .certificate-thumb{height:225px;aspect-ratio:auto;padding:8px;object-fit:contain;border-radius:12px}
+ .credentials-section .certificate-copy h3{line-height:1.2;margin-top:20px}
+ .credentials-section .certificate-controls{margin-top:22px}
+ .certificate-strip-hint{display:flex;justify-content:space-between;gap:12px;margin:24px 0 10px;font:500 10px/1.5 HeroMono,monospace;letter-spacing:.1em;color:#999;text-transform:uppercase}
+ .credentials-section .certificate-choices{position:relative;display:flex;flex-direction:row;flex-wrap:nowrap;justify-content:flex-start;gap:10px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x proximity;scroll-padding-inline:1px;scrollbar-width:thin;scrollbar-color:#555 transparent;padding:2px 1px 12px;margin-top:0;width:100%;max-width:100%;touch-action:auto}
+ .credentials-section .certificate-choice{display:grid;grid-template-columns:62px minmax(0,1fr);grid-template-rows:auto auto;align-content:center;align-items:center;column-gap:12px;row-gap:4px;flex:0 0 228px;width:228px;min-height:84px;padding:12px;border-radius:12px;border:1px solid #ffffff1c;background:#ffffff03;scroll-snap-align:start;text-align:left;color:#eee;transition:border-color 180ms ease,background-color 180ms ease}
+ .credentials-section .certificate-choice::before{content:none}.credentials-section .certificate-choice>*{display:block}
+ .credentials-section .certificate-choice .credential-miniature{grid-column:1;grid-row:1/3;width:62px;height:46px;object-fit:contain;background:#fff;padding:3px;border-radius:5px}
+ .credentials-section .certificate-choice>span{grid-column:2;grid-row:1;font:500 13px/1.3 Satoshi}
+ .certificate-choice .certificate-title-full{display:none}.certificate-choice .certificate-title-short{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+ .credentials-section .certificate-choice>small{grid-column:2;grid-row:2;font:400 11px/1.3 Satoshi;color:#999}
+ .credentials-section .certificate-choice[aria-pressed=true]{border-color:#ffffff85;background:#ffffff0c;color:#fff}
+ .credentials-section .certificate-choice:focus-visible{outline:2px solid #fff;outline-offset:-3px}
+}
+@media(prefers-reduced-motion:reduce){.credentials-section .certificate-choice{transition:none}}
+/* Shared action geometry keeps anchors and buttons on the same text baseline. */
+.project-copy .project-launches{align-items:center}
+.project-copy .project-launch{display:inline-flex;align-items:center;justify-content:flex-start;box-sizing:border-box;min-height:44px;margin:0;padding:8px 0;border:0;font-family:inherit;font-size:15px;font-weight:400;line-height:1.5;vertical-align:middle;text-align:left}
+@media(max-width:767px){.project-copy,.project-copy .project-story{text-align:left}.project-copy .tags,.project-copy .project-launches{justify-content:flex-start}.project-copy .project-launch{font-size:14px}}
+
+.project-copy .summary .project-privacy-note{display:inline;font:inherit;color:inherit;margin:0;max-width:none}

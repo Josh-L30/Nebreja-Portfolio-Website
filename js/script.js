@@ -78,8 +78,9 @@ class PortfolioProjects extends HTMLElement {
         slide.append(chrome,image);slide.addEventListener('click',()=>{if(current!==index)select(index);else openProject(projects[0].id,slide).catch(()=>{})});
         deck.append(slide);slides.push(slide);
         const story=node('article','project-story');story.dataset.family=group.id;story.hidden=index!==0;
-        story.append(node('h3','',group.title),node('p','summary',group.description),node('p','role',group.focus));
-        if(group.privacyNote)story.append(node('p','project-privacy-note',group.privacyNote));
+        const summary=node('p','summary',group.description);
+        if(group.privacyNote)summary.append(document.createTextNode(' '),node('span','project-privacy-note',group.privacyNote));
+        story.append(node('h3','',group.title),summary,node('p','role',group.focus));
         const tags=node('div','tags');projects[0].tags.slice(0,5).forEach(tag=>tags.append(node('span','',tag)));story.append(tags);
         const launches=node('div','project-launches');
         projects.filter(project=>project.id!=='dashboard').forEach(project=>{const label='Explore project';const launch=node('button','project-launch',label+' ↗');launch.type='button';launch.dataset.project=project.id;launch.setAttribute('aria-label',label+': '+project.title);launches.append(launch)});
@@ -229,16 +230,22 @@ class PortfolioCertificates extends HTMLElement {
       previous.type=next.type='button';
       const count=node('span','','1 / '+certificates.length);count.setAttribute('aria-live','polite');
       controls.append(previous,count,next);
-      function select(index){
+      function select(index,reveal=false,behavior='smooth'){
         current=(index+certificates.length)%certificates.length;
         [...list.children].forEach((panel,i)=>panel.hidden=i!==current);
         [...choices.children].forEach((item,i)=>item.setAttribute('aria-pressed',String(i===current)));
         count.textContent=`${current+1} / ${certificates.length}`;
+        if(reveal&&matchMedia('(max-width:767px)').matches){
+          const item=choices.children[current];let left=choices.scrollLeft;
+          if(item.offsetLeft<left)left=item.offsetLeft;
+          else if(item.offsetLeft+item.offsetWidth>left+choices.clientWidth)left=item.offsetLeft+item.offsetWidth-choices.clientWidth;
+          choices.scrollTo({left,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches||navigator.connection?.saveData?'instant':behavior});
+        }
       }
-      previous.addEventListener('click',()=>select(current-1));next.addEventListener('click',()=>select(current+1));
+      previous.addEventListener('click',()=>select(current-1,true));next.addEventListener('click',()=>select(current+1,true));
       choices.addEventListener('keydown',event=>{
         if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;
-        event.preventDefault();select(event.key==='Home'?0:event.key==='End'?certificates.length-1:current+(event.key==='ArrowRight'?1:-1));choices.children[current].focus();
+        event.preventDefault();select(event.key==='Home'?0:event.key==='End'?certificates.length-1:current+(event.key==='ArrowRight'?1:-1),true,'instant');choices.children[current].focus({preventScroll:true});
       });
       certificates.forEach((certificate,index)=>{
         const link = node('a','certificate-item');
@@ -265,11 +272,13 @@ class PortfolioCertificates extends HTMLElement {
         const miniature=node('img','credential-miniature');
         miniature.src=new URL('../'+certificate.miniature,import.meta.url).href;
         miniature.alt='';miniature.width=72;miniature.height=54;miniature.loading='lazy';
-        choice.append(miniature,node('span','',certificate.title),node('small','',certificate.issuer+' · '+certificate.year));
-        choice.addEventListener('click',()=>select(index));
+        const title=node('span','certificate-choice-title');title.append(node('span','certificate-title-full',certificate.title),node('span','certificate-title-short',certificate.shortTitle||certificate.title));
+        choice.append(miniature,title,node('small','',certificate.issuer+' · '+certificate.year));
+        choice.addEventListener('click',()=>select(index,true));
         choices.append(choice);
       });
-      const showcase=node('div','credential-showcase');showcase.append(list,controls,choices);
+      const hint=node('p','certificate-strip-hint');hint.append(node('span','','Browse credentials'),node('span','','Swipe to explore →'));
+      const showcase=node('div','credential-showcase');showcase.append(list,controls,hint,choices);
       this.replaceChildren(showcase);
       select(0);
       revealOnce(this);

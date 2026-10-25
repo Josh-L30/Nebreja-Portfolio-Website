@@ -474,7 +474,8 @@
       "height": 240,
       "preview": "assets/certificate-NetworkSecurity-960.webp",
       "miniature": "assets/certificate-NetworkSecurity-128.webp",
-      "medium": "assets/certificate-NetworkSecurity-480.webp"
+      "medium": "assets/certificate-NetworkSecurity-480.webp",
+      "shortTitle": "Network Security"
     },
     {
       "title": "Information Technology Specialist – Databases",
@@ -486,7 +487,8 @@
       "height": 240,
       "preview": "assets/certificate-Databases-960.webp",
       "miniature": "assets/certificate-Databases-128.webp",
-      "medium": "assets/certificate-Databases-480.webp"
+      "medium": "assets/certificate-Databases-480.webp",
+      "shortTitle": "Databases"
     },
     {
       "title": "LearnKey (LK) Database Certification",
@@ -499,7 +501,8 @@
       "preview": "assets/certificates/LearnKey-clean-v2.png",
       "miniature": "assets/certificates/LearnKey-clean-v2.png",
       "medium": "assets/certificates/LearnKey-clean-v2.png",
-      "displayImage": "assets/certificates/LearnKey-clean-v2.png"
+      "displayImage": "assets/certificates/LearnKey-clean-v2.png",
+      "shortTitle": "LearnKey Database"
     },
     {
       "title": "Automation with MS Excel VBA",
@@ -512,7 +515,8 @@
       "preview": "assets/certificates/MSExcelVBA-clean-v2.png",
       "miniature": "assets/certificates/MSExcelVBA-clean-v2.png",
       "medium": "assets/certificates/MSExcelVBA-clean-v2.png",
-      "displayImage": "assets/certificates/MSExcelVBA-clean-v2.png"
+      "displayImage": "assets/certificates/MSExcelVBA-clean-v2.png",
+      "shortTitle": "Excel VBA"
     },
     {
       "title": "CodeCombat",
@@ -525,7 +529,8 @@
       "preview": "assets/certificates/CodeCombat-clean-v2.png",
       "miniature": "assets/certificates/CodeCombat-clean-v2.png",
       "medium": "assets/certificates/CodeCombat-clean-v2.png",
-      "displayImage": "assets/certificates/CodeCombat-clean-v2.png"
+      "displayImage": "assets/certificates/CodeCombat-clean-v2.png",
+      "shortTitle": "CodeCombat"
     }
   ],
   "profile": {
