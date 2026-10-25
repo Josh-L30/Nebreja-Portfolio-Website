@@ -6,7 +6,7 @@ A cinematic portfolio showcasing my web development, UI/UX design, and QA work, 
 
 ## Features
 
-- Responsive desktop and mobile layouts with a black-and-white interface and original-color media.
+- Responsive desktop and mobile layouts with a black, white, and orange interface with original-color media.
 - Glass navigation, animated mobile menu, and professional social links.
 - Reversible scroll-driven typography with reduced-motion and Save-Data support.
 - In-page project stories and certificate previews in glass dialogs.
