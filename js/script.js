@@ -86,13 +86,13 @@ class PortfolioProjects extends HTMLElement {
         if(projects[0].liveUrl){const live=node('a','project-launch','Live site ↗');live.href=projects[0].liveUrl;live.target='_blank';live.rel='noopener noreferrer';live.setAttribute('aria-label','Live site: '+group.title);launches.append(live);}
         story.append(launches);stories.append(story);panels.push(story);
         const choice=node('button','thumbnail family-choice');choice.type='button';choice.dataset.familySelect=group.id;choice.setAttribute('aria-label','Show '+group.title);
-        const thumb=node('img');fillImage(thumb,covers[group.id]||projects[0].image,'100px');thumb.alt='';thumb.loading='lazy';choice.append(thumb,node('span','',group.id==='cpc'?'CPC System':group.id==='checkpoint'?'Checkpoint':'CinemaBuddy'));
+        const thumb=node('img');fillImage(thumb,covers[group.id]||projects[0].image,'100px');thumb.alt='';thumb.loading='lazy';choice.append(thumb,node('span','',group.shortTitle||(group.id==='cpc'?'CPC System':group.title)));
         choice.addEventListener('click',()=>select(index));choices.append(choice);buttons.push(choice);
       });
       const controls=node('div','deck-controls');const previous=node('button','','←'),next=node('button','','→'),count=node('span','deck-count');previous.type=next.type='button';previous.setAttribute('aria-label','Previous project');next.setAttribute('aria-label','Next project');count.setAttribute('aria-live','polite');controls.append(previous,count,next);deck.append(controls);
       function select(index){
         current=(index+groups.length)%groups.length;
-        slides.forEach((slide,i)=>{const relative=(i-current+groups.length)%groups.length;slide.dataset.position=relative===0?'active':relative===1?'right':'left';slide.setAttribute('aria-label',groups[i].title+(i===current?'. Open project details':'. Show project preview'))});
+        slides.forEach((slide,i)=>{const relative=(i-current+groups.length)%groups.length;slide.dataset.position=relative===0?'active':relative===1?'right':relative===groups.length-1?'left':'parked';slide.inert=slide.dataset.position==='parked';slide.setAttribute('aria-label',groups[i].title+(i===current?'. Open project details':'. Show project preview'))});
         panels.forEach((panel,i)=>panel.hidden=i!==current);buttons.forEach((button,i)=>button.setAttribute('aria-pressed',String(i===current)));count.textContent=`${current+1} / ${groups.length}`;
       }
       previous.addEventListener('click',()=>select(current-1));next.addEventListener('click',()=>select(current+1));

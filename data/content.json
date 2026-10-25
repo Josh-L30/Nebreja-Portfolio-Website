@@ -284,6 +284,48 @@
         "contribution": "Designed the interface and created the interactive prototype using Figma for a school project in 2024."
       },
       "liveUrl": "https://cinema-buddy.vercel.app/"
+    },
+    {
+      "id": "portfolio",
+      "title": "Personal Portfolio",
+      "headline": "Design, development & cinematic interaction",
+      "summary": "A responsive portfolio presenting my projects, experience, credentials and design approach.",
+      "role": "Personal website design and frontend implementation",
+      "description": "A monochrome portfolio built to help employers explore my work, skills, experience and credentials. It combines responsive layouts with restrained cinematic motion and in-page project details.",
+      "bullets": [
+        "Responsive desktop and mobile layouts with accessible navigation",
+        "Reversible scroll-linked typography and reduced-motion fallbacks",
+        "In-page project galleries and certificate viewing",
+        "Contact form validation and downloadable CV"
+      ],
+      "categories": [
+        "Web Development",
+        "UI/UX Design"
+      ],
+      "tags": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "Web Components",
+        "Vercel"
+      ],
+      "image": "assets/portfolio-overview.png",
+      "gallery": [
+        {
+          "image": "assets/portfolio-overview.png",
+          "original": "assets/portfolio-overview.png",
+          "label": "Brad Josh Nebreja portfolio hero and navigation"
+        }
+      ],
+      "video": null,
+      "caseStudy": {
+        "status": "Personal portfolio website",
+        "problem": "Give potential employers a clear way to understand my design decisions, technical skills and project contributions.",
+        "contribution": "Designed and implemented the responsive interface, project presentation, scroll effects and interactive viewing experiences.",
+        "approach": "Native HTML, CSS and JavaScript components deliver a monochrome interface, progressive motion, keyboard-accessible dialogs and contact validation.",
+        "result": "A live portfolio with four Selected Works, experience, tech stack, certifications, education, contact options and a downloadable CV."
+      },
+      "liveUrl": "https://nebreja-portfolio-website.vercel.app/"
     }
   ],
   "contact": {
@@ -746,6 +788,16 @@
       ],
       "description": "A mobile-focused movie discovery experience, from interface design to a live website.",
       "focus": "UI/UX design & movie discovery"
+    },
+    {
+      "id": "portfolio",
+      "title": "Personal Portfolio",
+      "shortTitle": "Portfolio",
+      "projectIds": [
+        "portfolio"
+      ],
+      "description": "My own portfolio, bringing together thoughtful design, responsive development and cinematic interaction.",
+      "focus": "Website design & frontend development"
     }
   ]
 }

@@ -29,6 +29,6 @@ for project in config['projects']:
     for screen in project['gallery']:
         for width in (() if screen['image'].startswith('assets/') else (480, 960, 1440)): check(f"assets/{screen['image']}-{width}.webp")
 for certificate in config['certificates']: check(certificate['preview'])
-assert len(config['projects']) == 4 and len(config['certificates']) == 5
+assert len(config['projects']) == 5 and len(config['certificates']) == 5
 assert not missing, 'Missing assets: ' + ', '.join(sorted(missing))
-print('PASS: local references, four work entries, five certificates and responsive galleries.')
+print('PASS: local references, four Selected Works (five project entries), five certificates and responsive galleries.')

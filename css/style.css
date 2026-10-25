@@ -615,3 +615,27 @@ html[data-motion-static] .hero .hero-bottom,html[data-motion-static] .hero .hero
 @media(hover:hover) and (pointer:fine){.back-to-top:hover .back-top-icon{transform:translateY(-3px)}}
 @media(max-width:767px){.back-to-top .back-top-label{display:none}.footer-links .back-to-top{width:44px;height:44px;border:1px solid #ffffff38;border-radius:50%;background:linear-gradient(#ffffff0d,#ffffff03);box-shadow:inset 0 1px #ffffff14}.back-top-icon{width:20px;height:20px}.footer-links{align-items:center}#sectionNav .menu-toggle{gap:4px}}
 @media(prefers-reduced-motion:reduce){.back-top-icon{transition:none;transform:none!important}}
+
+/* Four projects retain a three-card stage; the opposite card stays out of the way. */
+.deck-slide[data-position=parked]{visibility:hidden;opacity:0;pointer-events:none;transform:translateY(40px) scale(.8);z-index:0}
+.thumbnails{flex-wrap:wrap}
+@media(max-width:767px){
+ #mobileMenu[open]{animation:menu-reveal 240ms cubic-bezier(.23,1,.32,1) both}
+ #mobileMenu[open] nav>a{animation:menu-content-in 280ms cubic-bezier(.23,1,.32,1) both;animation-delay:calc(90ms + var(--menu-order,0)*25ms)}
+ #mobileMenu nav>a:nth-child(2){--menu-order:1}#mobileMenu nav>a:nth-child(3){--menu-order:2}#mobileMenu nav>a:nth-child(4){--menu-order:3}#mobileMenu nav>a:nth-child(5){--menu-order:4}#mobileMenu nav>a:nth-child(6){--menu-order:5}#mobileMenu nav>a:nth-child(7){--menu-order:6}#mobileMenu nav>a:nth-child(8){--menu-order:7}
+ #mobileMenu[open] .menu-socials{animation:menu-content-in 280ms 290ms cubic-bezier(.23,1,.32,1) both}
+ .hero .hero-socials{margin-top:12px;margin-left:-12px!important;gap:4px}
+ .hero .hero-socials svg{width:20px;height:20px}
+}
+@keyframes menu-content-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+html[data-motion-static] #mobileMenu[open] nav>a,html[data-motion-static] #mobileMenu[open] .menu-socials{animation:none!important}
+@media(prefers-reduced-motion:reduce){#mobileMenu[open],#mobileMenu[open] nav>a,#mobileMenu[open] .menu-socials{animation:none!important}}
+.deck-slide[data-family=portfolio] img{object-fit:contain;background:#090909}
+
+/* A precise icon and quiet glass surface replace the oversized text glyph. */
+:is(#projectDialog #closeDialog,#imageDialog #closeImage){display:grid;place-items:center;width:44px;height:44px;min-width:44px;min-height:44px;padding:0;border:1px solid #ffffff38;border-radius:50%;background:#ffffff0a;color:#f2f2f2;box-shadow:inset 0 1px #ffffff12;line-height:1;font-size:0;transition:background-color 180ms ease,border-color 180ms ease,transform 140ms cubic-bezier(.23,1,.32,1)}
+:is(#closeDialog,#closeImage) svg{display:block;width:20px;height:20px;pointer-events:none}
+:is(#projectDialog #closeDialog,#imageDialog #closeImage):focus-visible{outline:2px solid #eee;outline-offset:3px}
+@media(hover:hover) and (pointer:fine){:is(#projectDialog #closeDialog,#imageDialog #closeImage):hover{background:#ffffff18;border-color:#ffffff70}}
+:is(#projectDialog #closeDialog,#imageDialog #closeImage):active{transform:scale(.94);background:#ffffff22}
+@media(prefers-reduced-motion:reduce){:is(#projectDialog #closeDialog,#imageDialog #closeImage){transition:none}:is(#projectDialog #closeDialog,#imageDialog #closeImage):active{transform:none}}
