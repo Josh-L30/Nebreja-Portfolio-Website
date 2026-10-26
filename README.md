@@ -1,98 +1,47 @@
-# Brad Josh Nebreja — Personal Portfolio
+<p><a href="https://nebreja-portfolio-website.vercel.app/"><img src="assets/readme/nav-brand.svg" alt="Brad Josh Nebreja" width="30%" /></a><a href="#about"><img src="assets/readme/nav-about.svg" alt="About" width="8%" /></a><a href="#work"><img src="assets/readme/nav-work.svg" alt="Work" width="7%" /></a><a href="#experience"><img src="assets/readme/nav-experience.svg" alt="Experience" width="13%" /></a><a href="#stack"><img src="assets/readme/nav-stack.svg" alt="Stack" width="8%" /></a><a href="#certifications"><img src="assets/readme/nav-certifications.svg" alt="Certifications" width="15%" /></a><a href="#education"><img src="assets/readme/nav-education.svg" alt="Education" width="11%" /></a><a href="#contact"><img src="assets/readme/nav-contact.svg" alt="Contact" width="8%" /></a></p>
 
-A cinematic portfolio showcasing my web development, UI/UX design, and QA work, alongside my experience, skills, education, certifications, and CV.
+<a href="https://nebreja-portfolio-website.vercel.app/"><img src="assets/readme/hero.jpg" width="100%" alt="Brad Josh Nebreja. Web development, UI/UX design, and quality assurance. I design the experience. I build what makes it work." /></a>
 
-**[Visit my portfolio](https://nebreja-portfolio-website.vercel.app/)**
+<p align="center"><a href="https://nebreja-portfolio-website.vercel.app/"><img src="assets/readme/link-portfolio.svg" alt="Portfolio" width="120" /></a> <a href="https://www.linkedin.com/in/josh-nebreja-894248402/"><img src="assets/readme/link-linkedin.svg" alt="Linkedin" width="120" /></a> <a href="https://www.facebook.com/brad.josh.nebreja"><img src="assets/readme/link-facebook.svg" alt="Facebook" width="120" /></a> <a href="mailto:bradjosh.nebreja05@gmail.com"><img src="assets/readme/link-email.svg" alt="Email" width="120" /></a> </p>
 
-## Features
+<a id="about" name="about"></a>
 
-- Responsive desktop and mobile layouts with a black, white, and orange interface with original-color media.
-- Glass navigation, animated mobile menu, and professional social links.
-- Reversible scroll-driven typography with reduced-motion and Save-Data support.
-- In-page project stories and certificate previews in glass dialogs.
-- Four Selected Works, five certifications, Tech Stack, experience, and education.
-- Downloadable CV, contact form, Privacy, and Terms pages.
+<a href="https://nebreja-portfolio-website.vercel.app/#about"><img src="assets/readme/about.svg" alt="About me: I turn complex ideas into clear, useful digital experiences. Thoughtful interface design, practical web development, and careful testing. Based in Calamba City, Laguna, Philippines. BS Information Technology. Filipino and English." width="100%" /></a>
 
-## Selected Works
+<a id="work" name="work"></a>
 
-| Project | Overview | Live site |
-| --- | --- | --- |
-| CPC Centralized System | Sales, production, inventory, and logistics operations. | Private to protect client information. |
-| Checkpoint | Bus-stop and arrivals website, with development and QA contributions. | [Checkpoint](https://onroute.cloud/) |
-| CinemaBuddy | A 2024 school project featuring UI design and a Figma prototype. | [CinemaBuddy](https://cinema-buddy.vercel.app/) |
-| Personal Portfolio | This website, presenting my work and professional background. | [Portfolio](https://nebreja-portfolio-website.vercel.app/) |
+<a href="https://nebreja-portfolio-website.vercel.app/#work"><img src="assets/readme/work.svg" alt="Selected Works: CPC Centralized System, a private client system for sales, production, inventory and logistics; Checkpoint, bus-stop search and arrivals; CinemaBuddy, movie discovery interface and Figma prototype; Personal Portfolio, my projects, credentials and experience." width="100%" /></a>
 
-## Technology
+<p align="center"><a href="https://onroute.cloud/">Checkpoint ↗</a> · <a href="https://cinema-buddy.vercel.app/">CinemaBuddy ↗</a> · <a href="https://nebreja-portfolio-website.vercel.app/">Personal Portfolio ↗</a></p>
 
-HTML, CSS, JavaScript ES modules, native Web Components, and JSON. Fonts are served locally using Clash Display and Satoshi. Web3Forms handles contact submissions; Vercel hosts the public website.
+<a id="experience" name="experience"></a>
 
-No build step or package installation is required. The Tech Stack section represents my broader skills, rather than this website's runtime dependencies.
+<a href="https://nebreja-portfolio-website.vercel.app/#experience"><img src="assets/readme/experience.svg" alt="Experience: Capstone Project Lead and UI/UX Designer Lead for CPC Centralized System, 2025–2026; Checkpoint Development Contributor and QA Tester, 2026; CinemaBuddy UI Designer and Prototype Designer, school project, 2024." width="100%" /></a>
 
-## Run Locally
+<a id="stack" name="stack"></a>
 
-From the repository root, start a static HTTP server:
+<a href="https://nebreja-portfolio-website.vercel.app/#stack"><img src="assets/readme/stack.svg" alt="Tech Stack. Frontend: HTML, CSS, JavaScript, React, Tailwind CSS. Backend: PHP, Node.js, Express.js, Laravel WebSocket. Databases: MySQL, MongoDB, Firebase. Languages: Java, Python, C++. Design: Figma, Canva. Development and collaboration: VS Code, Microsoft 365, Microsoft Loop, Vite. Open Tech Stack on my portfolio for full details." width="100%" /></a>
 
-```sh
-python -m http.server 8000 --bind 127.0.0.1
-```
+<a id="certifications" name="certifications"></a>
 
-Open [localhost:8000](http://127.0.0.1:8000/). Use HTTP instead of opening index.html directly because the site fetches JSON and uses JavaScript modules. XAMPP or a VS Code static server can also serve the project root.
+<a href="https://nebreja-portfolio-website.vercel.app/#certifications"><img src="assets/readme/certifications.svg" alt="Certifications: Information Technology Specialist Network Security, Certiport 2026; Information Technology Specialist Databases, Certiport 2025; LearnKey Database Certification, 2025; Automation with MS Excel VBA, Ask Lex PH Academy 2024; CodeCombat, NU Laguna 2023." width="100%" /></a>
 
-## Project Structure
+<a id="education" name="education"></a>
 
-| Path | Purpose |
-| --- | --- |
-| index.html | Main page, hero, About me, experience, education, and contact |
-| privacy.html / terms.html | Portfolio policies |
-| data/content.json | Projects, galleries, certificates, tools, and contact configuration |
-| css/ | Main, component, and legal-page styles |
-| js/script.js | Components, navigation, dialogs, galleries, and contact behavior |
-| js/motion.js | Scroll-driven typography and section animations |
-| assets/ | Portraits, screenshots, certificates, fonts, logos, and CV |
-| tests/ | Browser, content, and motion checks |
-| docs/ | Design notes and development documentation |
+<a href="https://nebreja-portfolio-website.vercel.app/#education"><img src="assets/readme/education.svg" alt="Education: BS Information Technology, National University Laguna x Asia Pacific College, expected July 2027. General Academic Strand, Saint Benilde International School, 2021–2023." width="100%" /></a>
 
-## Updating Content
+<a id="contact" name="contact"></a>
 
-- Edit data/content.json for Selected Works, project galleries, certificates, and Tech Stack.
-- Edit index.html for the hero, About me, experience, education, and contact details.
-- Save media in assets/ and update the corresponding paths and alternative text.
-- When replacing the CV, update both the hero and contact download links.
-- Adjust presentation in css/ and animation in js/motion.js.
-- Keep Privacy and Terms accurate when changing external services or contact handling.
+<a href="https://nebreja-portfolio-website.vercel.app/#contact"><img src="assets/readme/contact.svg" alt="Contact: Let’s make it work. Web development, UI/UX design, or an opportunity to build something useful. Email bradjosh.nebreja05@gmail.com. Calamba City, Philippines." width="100%" /></a>
 
-HTML files use two-space indentation for readable editing in VS Code.
+<p align="center"><a href="https://nebreja-portfolio-website.vercel.app/"><img src="assets/readme/link-portfolio.svg" alt="Portfolio" width="120" /></a> <a href="https://www.linkedin.com/in/josh-nebreja-894248402/"><img src="assets/readme/link-linkedin.svg" alt="Linkedin" width="120" /></a> <a href="https://www.facebook.com/brad.josh.nebreja"><img src="assets/readme/link-facebook.svg" alt="Facebook" width="120" /></a> <a href="mailto:bradjosh.nebreja05@gmail.com"><img src="assets/readme/link-email.svg" alt="Email" width="120" /></a> </p>
 
-## Contact Form
+<details><summary>Portfolio setup and source</summary>
 
-The form uses public configuration from data/content.json. It includes validation, spam protection, duplicate-submission prevention, timeout handling, and an email-draft fallback when configuration is missing. Never add private credentials or email passwords to frontend files.
+Built with HTML, CSS, JavaScript ES modules, native Web Components, JSON, Web3Forms, and Vercel. No build step is required.
 
-Browser checks intercept contact requests locally and do not send real messages or verify inbox delivery.
+Run `python -m http.server 8000 --bind 127.0.0.1` from the repository root, then open http://127.0.0.1:8000/.
 
-## Verification
+[Source code](https://github.com/Josh-L30/Nebreja-Portfolio-Website) · [Development documentation](https://github.com/Josh-L30/Nebreja-Portfolio-Website/blob/main/docs/portfolio-development.md)
 
-Run from the project root with Python and Node.js installed:
-
-```sh
-python verify_assets.py
-python -m unittest discover -s tests -p "test_*.py"
-node --test tests/motion.test.mjs tests/word-motion.test.mjs
-```
-
-With the local server running:
-
-```sh
-python verify.py http://127.0.0.1:8000
-```
-
-Open /tests/browser.html and click **Run checks** for interaction checks. /tests/visual.html provides a responsive review harness. Viewport emulation does not replace physical-device testing.
-
-## Deployment
-
-The public website is hosted on Vercel. Local changes appear publicly after the configured production branch is pushed and Vercel completes deployment. Serve the repository root as a static website; no build command is required.
-
-## Contact and Ownership
-
-[GitHub](https://github.com/Josh-L30) · [LinkedIn](https://www.linkedin.com/in/josh-nebreja-894248402/) · [Facebook](https://www.facebook.com/brad.josh.nebreja) · [Email](mailto:bradjosh.nebreja05@gmail.com)
-
-Personal content, CV, and portraits belong to Brad Josh Nebreja. Project materials, certification marks, fonts, and third-party logos belong to their respective owners. See existing notices in docs/.
+</details>
