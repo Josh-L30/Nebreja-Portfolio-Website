@@ -746,3 +746,12 @@ html[data-motion-static] #mobileMenu[open] nav>a,html[data-motion-static] #mobil
   .contact .ui-button:not(:disabled):hover { transform: none; }
   .contact .ui-button { transition: none; }
 }
+
+/* About emphasis and clean project actions retain the existing scroll motion. */
+#about .statement .muted {
+  color: var(--brand-orange);
+}
+:is(.project-copy .project-launch, #detailLiveSite),
+:is(.project-copy .project-launch, #detailLiveSite):hover {
+  text-decoration: none;
+}
