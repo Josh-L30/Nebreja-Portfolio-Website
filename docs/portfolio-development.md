@@ -1,6 +1,6 @@
 # Brad Josh Nebreja — Personal Portfolio
 
-A cinematic portfolio showcasing my web development, UI/UX design, and QA work, alongside my experience, skills, education, certifications, and CV.
+A cinematic portfolio showcasing my web development, UI/UX design, and QA work, alongside my experience, skills, certifications, and CV.
 
 **[Visit my portfolio](https://nebreja-portfolio-website.vercel.app/)**
 
@@ -10,7 +10,7 @@ A cinematic portfolio showcasing my web development, UI/UX design, and QA work, 
 - Glass navigation, animated mobile menu, and professional social links.
 - Reversible scroll-driven typography with reduced-motion and Save-Data support.
 - In-page project stories and certificate previews in glass dialogs.
-- Four Selected Works, five certifications, Tech Stack, experience, and education.
+- Four Selected Works, five certifications, Tech Stack, experience..
 - Downloadable CV, contact form, Privacy, and Terms pages.
 
 ## Selected Works
@@ -42,7 +42,7 @@ Open [localhost:8000](http://127.0.0.1:8000/). Use HTTP instead of opening index
 
 | Path | Purpose |
 | --- | --- |
-| index.html | Main page, hero, About me, experience, education, and contact |
+| index.html | Main page, hero, About, experience, and contact |
 | privacy.html / terms.html | Portfolio policies |
 | data/content.json | Projects, galleries, certificates, tools, and contact configuration |
 | css/ | Main, component, and legal-page styles |
@@ -55,7 +55,7 @@ Open [localhost:8000](http://127.0.0.1:8000/). Use HTTP instead of opening index
 ## Updating Content
 
 - Edit data/content.json for Selected Works, project galleries, certificates, and Tech Stack.
-- Edit index.html for the hero, About me, experience, education, and contact details.
+- Edit index.html for the hero, About, experience, and contact details.
 - Save media in assets/ and update the corresponding paths and alternative text.
 - When replacing the CV, update both the hero and contact download links.
 - Adjust presentation in css/ and animation in js/motion.js.

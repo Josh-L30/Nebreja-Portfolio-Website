@@ -1,0 +1,8 @@
+# Local environments and caches; never part of the static website.
+.venv/
+__pycache__/
+*.py[cod]
+.DS_Store
+Thumbs.db
+# Do not reintroduce the retired nested checkout.
+Nebreja-Portfolio-Website/

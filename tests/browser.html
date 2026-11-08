@@ -94,15 +94,15 @@
         check(d.querySelector(".hero-type") !== null, "Approved layered name hero is implemented");
         check(d.querySelector(".deck") !== null, "Perspective project deck is implemented");
         check(
-          d.querySelectorAll("main section[id]").length >= 8,
-          "Complete portfolio sections restored",
+          ["home", "work", "about", "experience", "stack", "certifications", "contact"].every(id => d.getElementById(id)) && !d.querySelector("#education, a[href=\"#education\"]"),
+          "Current sections present; Education and its navigation removed",
         );
         check(
           d.querySelector("#stack h2").textContent.trim() === "Tech Stack",
           "Stack uses requested heading",
         );
         check(
-          d.querySelector("#about h2").textContent.trim() === "About me",
+          d.querySelector("#about h2").textContent.trim() === "About",
           "About heading updated",
         );
         check(
@@ -257,7 +257,7 @@
             "22px",
           "Menu uses reference text size",
         );
-        check(d.querySelectorAll("#mobileMenu nav a").length === 8, "Mobile menu has all sections");
+        check(d.querySelectorAll("#mobileMenu nav a").length === 7, "Mobile menu has all sections");
         check(
           f.contentWindow.getComputedStyle(d.querySelector("#mobileMenu nav a")).animationDelay ===
             "0.09s",
@@ -689,8 +689,8 @@
           "Mobile socials align left",
         );
         check(
-          d.querySelector(".hero .button.secondary").href.endsWith("CV-2026-v4.pdf"),
-          "Current CV download is v4",
+          d.querySelector(".hero .button.secondary").href.endsWith("CV-2026-v6.pdf"),
+          "Current CV download is v6",
         );
         check(d.querySelector(".deck-slide img").src.includes("screen-Pic1"), "CPC uses picture 1");
         for (const mode of ["reject", "http", "malformed", "network", "timeout", "accept"]) {

@@ -32,8 +32,7 @@
   <header>
     <span>Responsive review</span><button data-width="320">320</button
     ><button data-width="390">390</button><button data-width="768">768</button
-    ><button data-width="1440">1440</button><button id="theme">Toggle appearance</button
-    ><button id="top">Hero</button><button id="work">Projects</button
+    ><button data-width="1440">1440</button><button id="top">Hero</button><button id="work">Projects</button
     ><button id="about">About</button><button id="credentials">Credentials</button
     ><button id="contact">Contact</button>
   </header>
@@ -54,8 +53,6 @@
           resize();
         }),
     );
-    document.getElementById("theme").onclick = () =>
-      f.contentDocument.getElementById("theme").click();
     for (const [button, target] of Object.entries({
       top: "home",
       work: "work",

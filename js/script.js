@@ -469,13 +469,13 @@ if('ResizeObserver' in window)new ResizeObserver(()=>document.documentElement.st
 if('IntersectionObserver' in window){
  const sectionObserver=new IntersectionObserver(entries=>{
   for(const entry of entries){if(!entry.isIntersecting)continue;const id=entry.target.id;
-   const destination=['about','experience','stack'].includes(id)?'about':['certifications','education'].includes(id)?'certifications':id;
+   const destination=['about','experience','stack'].includes(id)?'about':id==='certifications'?'certifications':id;
    navigation.querySelectorAll('a').forEach(link=>{if(link.hash==='#'+destination)link.setAttribute('aria-current','location');else link.removeAttribute('aria-current')});
   }
  },{rootMargin:'-15% 0px -65% 0px'});
  document.querySelectorAll('main>section[id]').forEach(section=>sectionObserver.observe(section));
 }
-document.querySelectorAll('.education-entry,.supporting-skills').forEach(revealOnce);
+document.querySelectorAll('.supporting-skills').forEach(revealOnce);
 
 const mobileMenu=document.getElementById('mobileMenu');
 const menuToggle=document.getElementById('menuToggle');
