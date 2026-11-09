@@ -333,3 +333,30 @@ Service scroll units now span one full scene height on compact screens, matching
 ## Accepted covered-photo reveal on compact screens
 
 The first laptop retains its existing scale entrance. Scenes2and3 keep their full photos stationary within the pinned viewport and are progressively uncovered bottom-to-top with an inset clip mask. Each later scene is stacked above the earlier one; the unmasked portion covers the previous photo. Scrolling upward reverses the same mask. This replaces the prior compact sliding-strip interpretation; desktop retains its existing translated cards and image parallax. No extra overscan, cropping, image scaling, framing or new photography is added. Number navigation, title choreography, scene-height pacing and reduced-motion/Save-Data fallback remain.
+
+
+### Edge-to-edge laptop scenes
+
+Compact laptop scenes now pin at viewport top0 and use the full innerHeight. The fixed navigation overlays the photograph; no header-height spacer or rectangular black band is reserved. First-scene scale entrance and scenes2/3 covered-photo masks remain.
+
+
+### Compact top-edge reveal correction
+
+Only the top edge of scenes2/3 is masked (8% maximum, capped64px). Incoming photos overlay the previous scene with a short upward slide; the outgoing photo remains underneath. Each transition takes0.6viewport of scrolling instead of1.2; first entrance stays1viewport. Total pinned scroll is2.2viewports instead of3.4. Navigation destinations use1,1.6,2.2units. Full-screen coverage, approved photo framing, desktop motion and reduced-motion fallback remain. This supersedes the earlier whole-photo compact mask.
+
+
+### Stationary-photo correction for compact top-edge reveals
+
+Photos2/3 now have zero translation throughout their transitions. Only the top inset cover animates (maximum8%/64px); the image and card bounds remain fixed at the viewport origin. A brief0.1viewport opacity blend introduces the incoming fixed image, avoiding a panel slide or full-height wipe. The narrow cover then clears within the retained0.6viewport reveal phase. First entrance, full-screen layout and desktop animation are unchanged. This supersedes the previous incoming-slide wording.
+
+
+### Shared desktop edge choreography — supersedes compact mask experiments
+
+All viewports now render the same serviceState card translations and inner media counter-motion. Each outgoing bottom edge and incoming top edge form one continuous boundary. The inner photo moves at0.712of the edge velocity, reproducing desktop parallax and the progressive reveal of the following photograph. Removed custom inset masks, opacity blends and fixed-card overrides. Compact still uses shorter0.6viewport transition distances and the original1viewport entrance.
+
+To preserve the full laptop framing without black gaps, the compact media surface is160% high at top−30%, matching desktop’s motion surface. The photo inside is viewport-sized (62.5% of that surface) and centered at18.75%. The card clips the counter-moving photo, whose bounds cover every exposed part throughout either transition. Fullscreen pinning, approved responsive images, navigation and reduced-motion fallback remain.
+
+
+### Immediate About messages
+
+All nine highlighted About words show their full message synchronously on pointer entry, with no fade/slide entrance. Ongoing page scroll preserves the popup while its word remains hovered, retaining the latest pointer position. Keyboard focus, touch activation, Escape and outside dismissal remain.

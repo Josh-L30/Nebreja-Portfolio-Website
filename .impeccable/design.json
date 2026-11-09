@@ -401,10 +401,28 @@
       "verification": "Sample actual touch-scroll frames and test all four experience rows at1032×1376 and1376×1032."
     },
     "coveredPhotoReveal": {
-      "scope": "Compact tablet and mobile scenes2and3; desktop and first entrance unchanged.",
-      "behavior": "Layered stationary photos; inset clip top progresses100% to0% from scroll. Visible incoming area covers earlier photo. Reverse scroll restores the cover.",
-      "framing": "Existing full-laptop portrait/wide sources; no new crop, overscan or zoom.",
-      "verification": "Both50% masks show preceding scene above the edge and incoming scene below; touch swipe moves edge while photo bounding rectangle stays fixed."
+      "status": "Superseded by sharedDesktopEdgeMotion; do not restore custom masks/fades."
+    },
+    "fullscreenLaptopScenes": {
+      "pinTop": 0,
+      "height": "Full viewport innerHeight",
+      "navigation": "Fixed controls overlay photography; no reserved header strip.",
+      "retained": "First scale entrance, masked stationary second/third photos, reversible scroll and native touch input."
+    },
+    "compactTopEdgeReveal": {
+      "status": "Superseded by sharedDesktopEdgeMotion; do not restore custom masks/fades."
+    },
+    "sharedDesktopEdgeMotion": {
+      "motion": "Use serviceState.y and serviceState.mediaY for every viewport. Compact only remaps time to shorten transition distance.",
+      "join": "Outgoing bottom edge and next top edge remain coincident. Inner photo counter-motion has the same0.712velocity ratio as desktop.",
+      "framing": "Compact160% media surface at−30%; viewport-sized photo at18.75%,height62.5%. Exposed card area always covered; no zoom or black bands.",
+      "removed": "Custom clip-path, opacity blend and fixed-card compact variants.",
+      "verification": "Compare desktop and four compact viewport poses and native gesture samples; both edges, inner-image transforms, coverage, reverse scrolling and navigation."
+    },
+    "instantAboutHover": {
+      "entrance": "No animation or delay; full opacity synchronously on pointerenter.",
+      "scroll": "Keep message visible while word stays hovered or focused; preserve pointer position.",
+      "verification": "All nine messages checked at pointer entry; keyboard and Escape retained."
     }
   },
   "components": [

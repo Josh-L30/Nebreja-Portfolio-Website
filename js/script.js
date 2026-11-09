@@ -512,7 +512,7 @@ document.querySelectorAll("#about strong").forEach((strong) => {
     aboutTrigger?.removeAttribute("aria-describedby");
     aboutTrigger = button;
     button.setAttribute("aria-describedby", "aboutPreview");
-    positionAbout = () => position();
+    positionAbout = () => position(event);
     aboutPreviewCaption.textContent = aboutMessages[label];
     aboutPreview.hidden = false;
     position(event);
@@ -521,8 +521,10 @@ document.querySelectorAll("#about strong").forEach((strong) => {
     if (event.pointerType === "mouse") show(event);
   });
   button.addEventListener("pointermove", (event) => {
-    if (aboutTrigger === button && event.pointerType === "mouse")
+    if (aboutTrigger === button && event.pointerType === "mouse") {
+      positionAbout = () => position(event);
       position(event);
+    }
   });
   button.addEventListener("pointerleave", () => {
     if (document.activeElement !== button) hideAboutPreview();
@@ -541,7 +543,12 @@ window.addEventListener(
   "scroll",
   () => {
     const r = aboutTrigger?.getBoundingClientRect();
-    if (r && document.activeElement === aboutTrigger) positionAbout?.();
+    if (
+      r &&
+      (document.activeElement === aboutTrigger ||
+        aboutTrigger.matches(":hover"))
+    )
+      positionAbout?.();
     else hideAboutPreview();
   },
   { passive: true },
@@ -584,7 +591,7 @@ const deviceLoader = new IntersectionObserver(
 document
   .querySelectorAll(".workflow,.experience")
   .forEach((section) => deviceLoader.observe(section));
-import("./services.js?v=covered-reveal-4")
+import("./services.js?v=desktop-edge-8")
   .then(({ initServices }) => {
     initServices();
   })

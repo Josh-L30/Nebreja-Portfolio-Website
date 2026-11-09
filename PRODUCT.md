@@ -99,3 +99,30 @@ Fixed the1032px gap in compact Experience/Workflow rules: the brief explanation 
 ### Covered-image motion clarification
 
 User clarified that the second and third laptop photos must be revealed from behind a covering edge, rather than move as an adjacent photo strip. Compact scenes now use stationary full-frame photos and reversible bottom-up overlay masks. First scene entrance and desktop choreography are retained. Verification measures the stationary photo bounds, advancing mask, and correct visible scene on each side of the edge for both transitions, including real touch swipes. Prior strip-motion assertions are superseded for compact screens.
+
+
+### Edge-to-edge laptop scenes
+
+Removed the tablet/mobile header spacer above laptop scenes. All three scenes use the full viewport, behind navigation, while preserving the covered-photo reveal and reverse scrolling.
+
+
+### Compact top-edge reveal correction
+
+Only the top edge of scenes2/3 is masked (8% maximum, capped64px). Incoming photos overlay the previous scene with a short upward slide; the outgoing photo remains underneath. Each transition takes0.6viewport of scrolling instead of1.2; first entrance stays1viewport. Total pinned scroll is2.2viewports instead of3.4. Navigation destinations use1,1.6,2.2units. Full-screen coverage, approved photo framing, desktop motion and reduced-motion fallback remain. This supersedes the earlier whole-photo compact mask.
+
+
+### Stationary photo clarification
+
+Removed incoming card translation from compact scenes2/3. Their only spatial animation is the narrow top mask; the photos remain fixed. Retained short2.2viewport timeline, fullscreen coverage and first-scene entrance. Swipe-frame tests assert zero photo/card translation while mask values change.
+
+
+### Shared desktop edge choreography — supersedes compact mask experiments
+
+All viewports now render the same serviceState card translations and inner media counter-motion. Each outgoing bottom edge and incoming top edge form one continuous boundary. The inner photo moves at0.712of the edge velocity, reproducing desktop parallax and the progressive reveal of the following photograph. Removed custom inset masks, opacity blends and fixed-card overrides. Compact still uses shorter0.6viewport transition distances and the original1viewport entrance.
+
+To preserve the full laptop framing without black gaps, the compact media surface is160% high at top−30%, matching desktop’s motion surface. The photo inside is viewport-sized (62.5% of that surface) and centered at18.75%. The card clips the counter-moving photo, whose bounds cover every exposed part throughout either transition. Fullscreen pinning, approved responsive images, navigation and reduced-motion fallback remain.
+
+
+### About hover responsiveness
+
+Removed the320ms tooltip entrance and corrected scroll dismissal for hovered keywords. Verified all nine messages are fully visible in the pointerenter handler, plus keyboard focus/Escape behavior.

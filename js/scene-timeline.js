@@ -10,13 +10,19 @@ export function serviceState(progress) {
     scale: 0.72 + 0.28 * expansion,
     radius: 24 * (1 - expansion),
     y: [-100 * first, 100 * (1 - first) - 100 * second, 100 * (1 - second)],
-    reveal: [0, 100 * (1 - first), 100 * (1 - second)],
     mediaY: [18 * first, -18 * (1 - first) + 18 * second, -18 * (1 - second)],
     mediaScale: 1 / 0.72 + (1 - 1 / 0.72) * expansion,
     indicator: first + second,
     active: t >= 2.8 ? 2 : t >= 1.6 ? 1 : 0,
     titles: [0.78, 1.95, 2.85].map((start) => t - start),
   };
+}
+// Compact screens use the exact desktop pose, with shorter transition distances.
+export function compactServiceState(progress) {
+  const distance = clamp(progress) * 2.2;
+  return serviceState(
+    (distance <= 1 ? distance : 1 + (distance - 1) * 2) / 3.4,
+  );
 }
 export function devicePose(progress, type = "laptop", drag = { x: 0, y: 0 }) {
   const p = clamp(progress) - 0.5,

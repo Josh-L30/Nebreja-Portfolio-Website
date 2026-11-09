@@ -1,5 +1,9 @@
 import { scrollController } from "./smooth-scroll.js";
-import { clamp, serviceState } from "./scene-timeline.js?v=covered-reveal-4";
+import {
+  clamp,
+  serviceState,
+  compactServiceState,
+} from "./scene-timeline.js?v=desktop-edge-8";
 export function initServices() {
   const section = document.querySelector(".services"),
     track = section.querySelector(".service-track");
@@ -14,21 +18,20 @@ export function initServices() {
   const enabled = () => !reduced.matches && !navigator.connection?.saveData;
   function metrics() {
     const compact = !desktop.matches;
-    const top = compact
-      ? Math.min(
-          120,
-          document.querySelector(".site-header")?.getBoundingClientRect()
-            .bottom || 76,
-        )
-      : 0;
-    const sceneHeight = compact
-      ? Math.max(120, innerHeight - top)
-      : innerHeight;
+    // Pin edge-to-edge behind the fixed navigation, without a header spacer.
+    const top = 0;
+    const sceneHeight = innerHeight;
     const photoHeight = Math.min(track.clientWidth / 1.6, sceneHeight);
-    // Match desktop pacing: each timeline unit spans a full scene height.
-    // Touch scrolling remains native; the two upward slides each span1.2units.
+    // Keep the first entrance; compact top-edge reveals take0.6viewport each.
     const unit = compact ? sceneHeight : innerHeight;
-    return { compact, top, sceneHeight, photoHeight, unit };
+    return {
+      compact,
+      top,
+      sceneHeight,
+      photoHeight,
+      unit,
+      duration: compact ? 2.2 : 3.4,
+    };
   }
   const letters = cards.map((card) => {
     const title = card.querySelector("h3"),
@@ -54,12 +57,12 @@ export function initServices() {
   function paint() {
     frame = 0;
     const pinned = enabled(),
-      { compact, top, sceneHeight, photoHeight, unit } = metrics();
+      { compact, top, sceneHeight, photoHeight, unit, duration } = metrics();
     section.style.setProperty("--service-scene-height", sceneHeight + "px");
     section.style.setProperty("--service-photo-height", photoHeight + "px");
     section.style.setProperty(
       "--service-track-height",
-      sceneHeight + unit * 3.4 + "px",
+      sceneHeight + unit * duration + "px",
     );
     section.style.setProperty("--service-sticky-top", top + "px");
     section.classList.toggle("is-animated", pinned);
@@ -70,18 +73,15 @@ export function initServices() {
     });
     const height = innerHeight,
       rect = track.getBoundingClientRect(),
-      state = serviceState((top - rect.top) / (unit * 3.4));
+      progress = (top - rect.top) / (unit * duration),
+      state = compact ? compactServiceState(progress) : serviceState(progress);
     cards.forEach((card, index) => {
       const media = card.querySelector(".service-media");
       if (pinned) {
-        // On compact screens the next photo is uncovered through a moving mask,
-        // rather than travelling with the edge like a sliding image strip.
-        card.style.transform = `translateY(${compact ? 0 : state.y[index]}%) scale(${index === 0 ? state.scale : 1})`;
-        card.style.clipPath =
-          compact && index > 0 ? `inset(${state.reveal[index]}% 0 0 0)` : "";
-        card.style.zIndex = compact ? String(index + 1) : "";
+        // All viewports share desktop's connected edges and inner counter-motion.
+        card.style.transform = `translateY(${state.y[index]}%) scale(${index === 0 ? state.scale : 1})`;
         card.style.borderRadius = index === 0 ? state.radius + "px" : "0";
-        media.style.transform = `translateY(${state.mediaY[index] * (compact ? 0 : 1)}%) scale(${index === 0 ? state.mediaScale : 1})`;
+        media.style.transform = `translateY(${state.mediaY[index]}%) scale(${index === 0 ? state.mediaScale : 1})`;
         card.style.pointerEvents = state.active === index ? "auto" : "none";
         letters[index].forEach((letter, i) => {
           const p = clamp((state.titles[index] - i * 0.007) / 0.25),
@@ -90,8 +90,6 @@ export function initServices() {
         });
       } else {
         card.style.transform = "";
-        card.style.clipPath = "";
-        card.style.zIndex = "";
         card.style.borderRadius = "";
         card.style.pointerEvents = "";
         media.style.transform = "";
@@ -120,7 +118,7 @@ export function initServices() {
       scrollController.to(
         scrollY +
           track.getBoundingClientRect().top +
-          [1, 2.2, 3.4][i] * unit -
+          (desktop.matches ? [1, 2.2, 3.4] : [1, 1.6, 2.2])[i] * unit -
           top,
       );
     }),

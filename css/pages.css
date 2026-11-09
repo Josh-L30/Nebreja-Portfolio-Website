@@ -1381,3 +1381,14 @@
 .services.is-compact .service-indicator {
   height: 44px;
 }
+
+/* Same160% inner motion surface as desktop, with a viewport-sized photo.
+   The moving card clips the counter-moving photograph: no image zoom is needed. */
+.services.is-compact.is-animated .service-media {
+  top: -30%;
+  height: 160%;
+}
+.services.is-compact.is-animated .service-media img {
+  top: 18.75%;
+  height: 62.5%;
+}

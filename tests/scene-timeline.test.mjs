@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {serviceState, devicePose} from '../js/scene-timeline.js';
+import {serviceState, devicePose, compactServiceState} from '../js/scene-timeline.js';
 test('service expansion, two upward wipes and parallax reverse at the reference milestones',()=>{
  const a=serviceState(0),b=serviceState(1/3.4),c=serviceState(1.6/3.4),d=serviceState(2.2/3.4),e=serviceState(1);
  assert.equal(a.scale,.72); assert.equal(a.radius,24); assert.deepEqual(a.y.map(n=>n||0),[0,100,100]);
@@ -19,13 +19,11 @@ test('laptop and keyboard rotate on all axes with scroll and retain bounded drag
  assert.ok(Math.abs(devicePose(.5,'laptop',{x:0,y:.4}).y+.2)<.0001);
 });
 
-test('compact masks progressively uncover stationary second and third photos and reverse',()=>{
- const start=serviceState(0), first=serviceState(1.6/3.4), second=serviceState(2.8/3.4), end=serviceState(1);
- assert.deepEqual(start.reveal,[0,100,100]);
- assert.ok(Math.abs(first.reveal[1]-50)<.0001);
- assert.equal(first.reveal[2],100);
- assert.equal(second.reveal[1],0);
- assert.ok(Math.abs(second.reveal[2]-50)<.0001);
- assert.deepEqual(end.reveal.map(Math.round),[0,0,0]);
- assert.deepEqual(serviceState(1.6/3.4).reveal,first.reveal);
+test('compact uses the identical desktop edge and inner-image poses at every transition phase',()=>{
+ for(const distance of [0,.5,1,1.15,1.3,1.45,1.6,1.75,1.9,2.05,2.2]) {
+   const time=distance<=1?distance:1+(distance-1)*2;
+   const compact=compactServiceState(distance/2.2),desktop=serviceState(time/3.4);
+   for(const key of ['y','mediaY','titles']) compact[key].forEach((value,i)=>assert.ok(Math.abs(value-desktop[key][i])<1e-9));
+   for(const key of ['scale','radius','mediaScale','indicator']) assert.ok(Math.abs(compact[key]-desktop[key])<1e-9);
+ }
 });

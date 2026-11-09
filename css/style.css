@@ -806,7 +806,7 @@ svg {
   z-index: 60;
   pointer-events: none;
   box-shadow: 0 20px 40px #0008;
-  animation: entrance 0.32s var(--ease);
+  animation: none;
 }
 .about-preview p {
   font-size: 15px;
