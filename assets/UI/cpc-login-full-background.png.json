@@ -1,0 +1,6 @@
+{
+  "prompt": "Edit the supplied CPC Centralized System login screenshot. Extend its existing photographic factory/building background naturally downwards to cover ALL the navy-blue blank rectangle between approximately y=410 and y=651, behind the login card. Continue the lawn, sidewalk and road with correct perspective and realistic texture; do not stretch or vertically distort the existing photo, factory, palms or architecture. Keep the upper photo, building/logo/signage, centered 'CPC Nexboard' and 'Manufacturing Coordination System' titles, white login card with Username/Password/Show/Remember me/Sign In, and bottom brown copyright footer exactly in their current locations, proportions, wording and colors. Preserve the original screenshot composition and aspect ratio 1377x683. The only change is seamlessly extending the background photo through the plain navy region, with the same dark overlay for readability. No new UI, objects, text or cropping.",
+  "tool": "built-in image_gen",
+  "source": "User supplied CPC login screenshot; background extended naturally.",
+  "generatedFile": "exec-69168ccb-7ad1-4b1a-996b-402f1f910f7c.png"
+}

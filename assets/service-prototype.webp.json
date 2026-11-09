@@ -1,0 +1,9 @@
+{
+  "option": 3,
+  "prompt": "Option 3: Prototype Lab. Original photorealistic editorial photo, landscape 16:9. A genuine slim silver laptop and a single smartphone on a charcoal concrete studio workbench, photographed in a disciplined overhead three-quarter composition, open laptop at 110 degree hinge, phone flat at its right. Laptop screen displays a dark prototyping canvas with three simple white/caramel mobile wireframes joined by fine connector arrows, phone displays the same tasteful simple interface. No readable text, no logos. Soft large studio light overhead, black surrounding room, sculptural natural shadows, subdued warm caramel notebook edge, exact plausible keyboard and trackpad, real metal and glass material texture. Black-white-caramel photographic palette, laptop main subject centered lower-right, restrained negative space at upper left for site title. Not CGI, no floating laptop, no people, no copied reference composition.",
+  "tool": "built-in image_gen",
+  "status": "User approved and applied",
+  "selection": "Prototype Lab, selected for Prototyping",
+  "encoding": "WebP quality92, original dimensions/aspect preserved",
+  "source": "outputs\\refinement-round\\laptop-options\\option-3.png"
+}

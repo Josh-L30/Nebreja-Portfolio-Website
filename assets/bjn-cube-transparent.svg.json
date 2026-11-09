@@ -1,0 +1,5 @@
+{
+  "source": "assets/bjn-logo-original.png, user supplied NBJ cube logo",
+  "method": "SVG luminance mask, original raster embedded unchanged; black becomes transparent; white silhouette preserved",
+  "note": "Imagegen cutout attempts rejected because they altered negative spaces; no generated raster ships."
+}

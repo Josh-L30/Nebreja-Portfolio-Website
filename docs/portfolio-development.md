@@ -6,11 +6,13 @@ A cinematic portfolio showcasing my web development, UI/UX design, and QA work, 
 
 ## Features
 
-- Responsive desktop and mobile layouts with a black, white, and orange interface with original-color media.
-- Glass navigation, animated mobile menu, and professional social links.
+- Responsive desktop and mobile layouts with a black, white, and mocha interface with original-color media.
+- Circular navigation control, a curved side-panel menu, and professional social icons.
+- A centered portrait, large mobile name marquee, and reversible scroll-filled typography.
+- Scroll-stacked services and original, lazily loaded 3D device scenes using self-hosted Three.js.
 - Reversible scroll-driven typography with reduced-motion and Save-Data support.
 - In-page project stories and certificate previews in glass dialogs.
-- Four Selected Works, five certifications, Tech Stack, experience..
+- Four Selected Works, a five-certificate carousel, Tech Stack, experience, and public GitHub activity.
 - Downloadable CV, contact form, Privacy, and Terms pages.
 
 ## Selected Works
@@ -24,7 +26,7 @@ A cinematic portfolio showcasing my web development, UI/UX design, and QA work, 
 
 ## Technology
 
-HTML, CSS, JavaScript ES modules, native Web Components, and JSON. Fonts are served locally using Clash Display and Satoshi. Web3Forms handles contact submissions; Vercel hosts the public website.
+HTML, CSS, JavaScript ES modules, native Web Components, and JSON. General Sans is served locally with its Fontshare license. The optional device scenes use self-hosted MIT-licensed Three.js 0.180.0 and original procedural geometry, with existing screenshots as screen textures. Web3Forms handles contact submissions; Vercel hosts the public website and the read-only GitHub activity function.
 
 No build step or package installation is required. The Tech Stack section represents my broader skills, rather than this website's runtime dependencies.
 
@@ -48,6 +50,10 @@ Open [localhost:8000](http://127.0.0.1:8000/). Use HTTP instead of opening index
 | css/ | Main, component, and legal-page styles |
 | js/script.js | Components, navigation, dialogs, galleries, and contact behavior |
 | js/motion.js | Scroll-driven typography and section animations |
+| js/devices.js | Optional 3D device scenes, loaded near their sections |
+| js/contributions.js | Accessible contribution calendar and dated fallback |
+| api/github.js | Cached public GitHub activity endpoint for Vercel |
+| data/github-contributions.json | Verified GitHub snapshot for network/service outages |
 | assets/ | Portraits, screenshots, certificates, fonts, logos, and CV |
 | tests/ | Browser, content, and motion checks |
 | docs/ | Design notes and development documentation |
@@ -77,6 +83,7 @@ Run from the project root with Python and Node.js installed:
 python verify_assets.py
 python -m unittest discover -s tests -p "test_*.py"
 node --test tests/motion.test.mjs tests/word-motion.test.mjs
+node --test tests/github.test.cjs tests/contributions.test.mjs
 ```
 
 With the local server running:
@@ -90,6 +97,10 @@ Open /tests/browser.html and click **Run checks** for interaction checks. /tests
 ## Deployment
 
 The public website is hosted on Vercel. Local changes appear publicly after the configured production branch is pushed and Vercel completes deployment. Serve the repository root as a static website; no build command is required.
+
+Vercel runs the Node.js function in api/github.js without an additional npm dependency. It reads only the owner's fixed public GitHub calendar URL, validates the returned days/counts, and caches activity for an hour. It accepts GET/HEAD only and requires no GitHub token. On a plain static server, the calendar keeps its dated verified snapshot when the live endpoint is unavailable. Development design metadata is excluded from Vercel with .vercelignore.
+
+The 3D runtime is optional: project media and all site controls remain available without it. Rendering pauses offscreen, uses a 30fps ceiling and a maximum 1.5 device pixel ratio, and honors reduced motion/Save-Data. Existing raster media carry source provenance in metadata or format-compatible JSON sidecars; these are source records, not duplicate image versions. Media pixels were verified unchanged against the pre-redesign backup.
 
 ## Contact and Ownership
 

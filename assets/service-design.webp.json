@@ -1,0 +1,9 @@
+{
+  "option": 3,
+  "prompt": "Option 3 — Front Midnight. Original photorealistic cinematic editorial laptop photograph, wide landscape16:9. A genuine black aluminum laptop facing EXACTLY FRONT ON, centered symmetrical composition, straight rectangular screen with horizontal top/bottom edges, equal left/right bezels, no three-quarter angle or sideways perspective. Full laptop in frame including detailed evenly seen keyboard and centered trackpad. On a dark concrete desk in a moody black studio, a warm caramel practical lamp far right, subtle night-window reflections in deep background, soft neutral white light on laptop face. Screen displays three minimal white/caramel mobile prototype screens connected with fine lines on near-black, no readable text or logos. Realistic metal, hinge, fine key legends, optical glass highlights, shallow depth of field, understated premium camera photograph not CGI. Spacious black breathing room and grounded shadows, no people, no floating objects.",
+  "tool": "built-in image_gen",
+  "status": "User approved and applied",
+  "selection": "Midnight front-facing, selected for UI/UX Design",
+  "encoding": "WebP quality92, original dimensions/aspect preserved",
+  "source": "outputs\\front-facing-laptops\\03-front-midnight.png"
+}

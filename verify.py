@@ -10,11 +10,13 @@ def get(path):
 html = get('/')
 script = get('/js/script.js')
 config = json.loads(get('/data/content.json'))
-for marker in ('portfolio-projects', 'portfolio-certificates', 'portfolio-contact-form', 'type="module"'):
+for marker in ('portfolio-projects', 'portfolio-certificates', 'type="module"'):
     assert marker in html, marker
-for marker in ('project-showcase', 'certificate-choice', 'dialog.showModal()', 'gallery-filmstrip'):
+for marker in ('project-row', 'certificate-dot', 'project.html?project=', 'initMediaViewer()'):
     assert marker in script, marker
 assert len(config['projects']) == 5 and len(config['certificates']) == 5
 get('/css/style.css')
 get('/css/components.css')
+for page in ('project.html','works.html','stack.html','contact.html'): get('/'+page)
+assert 'portfolio-contact-form' in get('/contact.html')
 print('PASS: HTTP page, module, styles and five project entries and five certificates.')

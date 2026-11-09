@@ -1,178 +1,202 @@
-﻿// Optional native motion: controls and content remain usable if this module fails to load.
-const activeRoots = new WeakMap();
-const clamp = value => Math.min(1, Math.max(0, value));
-export function sceneProgress(top, height) { return clamp((height * .85 - top) / (height * .65)); }
-export function wordProgress(top, height, textHeight = 0, type = 'heading') {
-  const range = type === 'statement' ? Math.max(height * .62, textHeight * .9) : height * .37;
-  return clamp((height * (type==='statement'?.9:.92) - top) / range);
+// Optional browser-native motion. Content and controls work without this module.
+const roots = new WeakMap();
+const clamp = (value) => Math.min(1, Math.max(0, value));
+export function sceneProgress(top, height) {
+  return clamp((height * 0.85 - top) / (height * 0.65));
 }
-export function wordExitProgress(bottom,height){return clamp((height*.2-bottom)/(height*.2+80));}
+export function wordProgress(top, height, textHeight = 0, type = "heading") {
+  const range =
+    type === "statement"
+      ? Math.max(height * 0.62, textHeight * 0.9)
+      : height * 0.37;
+  return clamp((height * (type === "statement" ? 0.9 : 0.92) - top) / range);
+}
+export function wordExitProgress(bottom, height) {
+  return clamp((height * 0.2 - bottom) / (height * 0.2 + 80));
+}
+
 export function initMotion(root = document) {
-  activeRoots.get(root)?.();
-  if (!('IntersectionObserver' in window)) return () => {};
-  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  const connection = navigator.connection;
-  const targets = new Map(), near = new Set(), observed = new WeakSet();
-  const stackTargets=new Map(), stackNear=new Set();
-  const doc = root === document ? root : root.ownerDocument;
-  const hero = root.querySelector('.hero'), scene = root.querySelector('.hero-scene');
-  let lastPaint=0;
-  let frame = 0, disposed = false, listening = false, heroNear = false;
-  const allowed = () => !reduced.matches && !connection?.saveData;
-  function clearTarget(target) {
-    target.element.style.setProperty('--text-fill', '100%');
-    target.words.forEach(word => {
-      word.style.removeProperty('opacity'); word.style.removeProperty('filter');
-      word.style.removeProperty('transform'); word.style.removeProperty('--word-fill');word.style.removeProperty('--word-blur');
-    });
-  }
-  function paint(timestamp) {
-    frame = 0;
-    if (!allowed() || doc.hidden || doc.body.classList.contains('modal-open')) return;
-    const delta=lastPaint?Math.min(64,timestamp-lastPaint):16;lastPaint=timestamp;
-    let settling=false;
-    for (const target of near) {
-      if (!target.element.isConnected) { near.delete(target); targets.delete(target.element); continue; }
-      const rect = target.element.getBoundingClientRect();
-      const destination = wordProgress(rect.top, innerHeight, rect.height, target.type);
-      let progress=destination;
-      if(target.type==='heading'){
-        target.progress??=destination;
-        target.progress+=(destination-target.progress)*(1-Math.exp(-delta/120));
-        if(Math.abs(destination-target.progress)<.001)target.progress=destination;else settling=true;
-        progress=target.progress;
-      }
-      target.element.style.setProperty('--text-fill', `${(progress * 100).toFixed(2)}%`);
-      const exit=wordExitProgress(rect.bottom,innerHeight);
-      const spread = target.type === 'statement' ? .68 : .45;
-      const widths=target.type==='heading'?target.words.map(word=>word.getBoundingClientRect().width):[];
-      const totalWidth=widths.reduce((sum,width)=>sum+width,0);let usedWidth=0;
-      target.words.forEach((word, index) => {
-        const offset = target.words.length > 1 ? index / (target.words.length - 1) * spread : 0;
-        const local = target.type==='heading'?clamp((progress*totalWidth-usedWidth)/(widths[index]||1)):clamp((progress - offset) / (1 - spread));
-        usedWidth+=widths[index]||0;
-        const eased = 1 - (1 - local) ** 3;
-        const exitOffset=target.words.length>1?index/(target.words.length-1)*.25:0;
-        const visibility=1-clamp(exit*1.25-exitOffset);
-        word.style.opacity=String((target.type==='heading'?1:(.55+.45*eased))*visibility);
-        word.style.removeProperty('filter');
-        const blur=Math.max(target.type==='heading'?0:(1-eased)*4,(1-visibility)*5);
-        word.style.setProperty('--word-blur',blur<.01?'none':`blur(${blur.toFixed(2)}px)`);
-        word.style.transform = target.type==='heading'||eased>.999?'none':`translateY(${((1 - eased) * 24).toFixed(2)}px)`;
-        word.style.setProperty('--word-fill', `${(local * 100).toFixed(2)}%`);
-      });
-    }
-    for(const group of stackNear){
-      const progress=clamp((innerHeight*.92-group.getBoundingClientRect().top)/(innerHeight*.44));
-      const rest=1-progress*progress*(3-2*progress);
-      stackTargets.get(group).forEach((tile,index)=>{
-        const direction=index%2?1:-1;
-        const distance=innerWidth<768?14:32;
-        tile.style.transform=`translate3d(${direction*distance*rest}px,${direction*(innerWidth<768?65:90)*(1+(index%3)*.18)*rest}px,0) rotate(${direction*(8+index%4*2)*rest}deg)`;
-      });
-    }
-    if (scene && heroNear && innerWidth >= 768) {
-      const progress = clamp(scrollY / (hero.offsetHeight * .9));
-      scene.style.transform = `translateY(${Math.round(progress * 65)}px)`;
-      scene.style.opacity = String(1 - progress * .65);
-    } else if (scene && innerWidth < 768) { scene.style.transform = ''; scene.style.opacity = ''; }
-    if(settling)request();
-  }
-  function request() { if (!frame && !disposed && allowed()) frame = requestAnimationFrame(paint); }
-  function watch(enabled) {
-    if (enabled === listening) return;
-    listening = enabled;
-    if (enabled) addEventListener('scroll', request, { passive: true });
-    else { removeEventListener('scroll', request); cancelAnimationFrame(frame); frame = 0; }
-  }
-  function configure() {
-    doc.documentElement.toggleAttribute('data-motion-static', !allowed());
-    if (!allowed()) {
-      targets.forEach(clearTarget);
-      stackTargets.forEach(tiles=>tiles.forEach(tile=>tile.style.removeProperty('transform')));
-      root.querySelectorAll('.reveal-enter').forEach(el => el.classList.remove('reveal-enter'));
-      if (scene) { scene.style.transform = ''; scene.style.opacity = ''; }
-    }
-    if (scene && innerWidth < 768) { scene.style.transform = ''; scene.style.opacity = ''; }
-    watch(allowed() && !doc.hidden && !doc.body.classList.contains('modal-open') && (heroNear || near.size > 0 || stackNear.size > 0));
-    if (listening) request();
-  }
-  const wordsObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      const target = targets.get(entry.target); if (!target) return;
-      if (entry.isIntersecting) near.add(target); else near.delete(target);
-    }); configure();
-  }, { rootMargin: '80px 0px', threshold: 0 });
-  const stackObserver=new IntersectionObserver(entries=>{
-    entries.forEach(entry=>entry.isIntersecting?stackNear.add(entry.target):stackNear.delete(entry.target));configure();
-  },{rootMargin:'100px 0px'});
-  const entrances = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      entrances.unobserve(entry.target);
-      if (!allowed()) return;
-      entry.target.classList.add('reveal-enter');
-      entry.target.addEventListener('animationend', () => entry.target.classList.remove('reveal-enter'), { once: true });
-    });
-  }, { threshold: .08 });
-  const heroObserver = new IntersectionObserver(entries => { heroNear = entries[0]?.isIntersecting || false; configure(); }, { rootMargin: '120px' });
-  if (hero) heroObserver.observe(hero);
-  function split(element, type) {
-    if (targets.has(element)) return;
-    const existing = [...element.querySelectorAll('.word-piece')];
-    if (existing.length) {
-      existing.forEach(word=>word.dataset.word=word.textContent);
-      targets.set(element, { element, words: existing, type });
-      wordsObserver.observe(element);
-      return;
-    }
-    const nodes = [], walker = doc.createTreeWalker(element, NodeFilter.SHOW_TEXT);
-    while (walker.nextNode()) if (walker.currentNode.textContent.trim()) nodes.push(walker.currentNode);
-    const words = [];
-    nodes.forEach(text => {
-      const fragment = doc.createDocumentFragment();
-      text.textContent.split(/(\s+)/).forEach(part => {
+  roots.get(root)?.();
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)");
+  const allowed = () => !reduced.matches && !navigator.connection?.saveData;
+  const titleTargets = [...root.querySelectorAll(".reveal-title")];
+  const copies = [...root.querySelectorAll(".scroll-copy")];
+  const fills = [...root.querySelectorAll(".scroll-fill")];
+  const laptop = root.querySelector(".mini-laptop");
+  const workflow = root.querySelector(".workflow-stage");
+  const listenerCleanups = [];
+  let frame = 0;
+
+  function splitWords(element) {
+    if (element.dataset.wordsReady) return;
+    const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
+    const nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    let index = 0;
+    nodes.forEach((text) => {
+      const fragment = document.createDocumentFragment();
+      text.textContent.split(/(\s+)/).forEach((part) => {
         if (!part) return;
-        if (/^\s+$/.test(part)) { fragment.append(doc.createTextNode(part)); return; }
-        const word = doc.createElement('span'); word.className = 'word-piece'; word.textContent = part;word.dataset.word=part;
-        words.push(word); fragment.append(word);
-      }); text.replaceWith(fragment);
+        if (/^\s+$/.test(part)) fragment.append(document.createTextNode(part));
+        else {
+          const span = document.createElement("span");
+          span.className = "word";
+          span.textContent = part;
+          span.style.setProperty("--i", String(index++));
+          fragment.append(span);
+        }
+      });
+      text.replaceWith(fragment);
     });
-    element.dataset.wordReveal = type;
-    const target = { element, words, type }; targets.set(element, target); wordsObserver.observe(element);
+    element.dataset.wordsReady = "true";
   }
-  function discover() {
-    root.querySelectorAll('.tech-group').forEach(group=>{
-      if(stackTargets.has(group))return;
-      stackTargets.set(group,[...group.querySelectorAll('.tech-chip')]);
-      group.dataset.stackMotion='ready';stackObserver.observe(group);
+  [...titleTargets, ...copies].forEach(splitWords);
+  titleTargets.forEach((title) => {
+    if (title.dataset.lettersReady) return;
+    let index = 0;
+    title.querySelectorAll(".word").forEach((word) => {
+      const letters = [...word.textContent].map((character) => {
+        const span = document.createElement("span");
+        span.className = "letter";
+        span.textContent = character;
+        span.style.setProperty("--letter-index", String(index++));
+        return span;
+      });
+      word.replaceChildren(...letters);
     });
-    root.querySelectorAll('main h2,.project-story h3,.project-proof h3').forEach(el => {if(!el.closest('.contact'))split(el, 'heading');});
-    root.querySelectorAll('.about .statement,.contact h2,.contact-intro').forEach(el => split(el, 'statement'));
-    root.querySelectorAll('[data-reveal]').forEach(el => {
-      if (observed.has(el) || el.hasAttribute('data-word-reveal')) return;
-      observed.add(el); entrances.observe(el);
+    title.dataset.lettersReady = "true";
+  });
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) =>
+        entry.target.classList.toggle(
+          "in-view",
+          entry.isIntersecting || entry.boundingClientRect.top < 0,
+        ),
+      );
+    },
+    { rootMargin: "0px 0px -8% 0px", threshold: 0.05 },
+  );
+  titleTargets.forEach((target) => observer.observe(target));
+
+  function paint() {
+    frame = 0;
+    if (document.hidden || document.body.classList.contains("modal-open"))
+      return;
+    const height = innerHeight;
+    const enabled = allowed();
+    const hero = root.querySelector(".hero");
+    if (hero) {
+      const travel = enabled ? Math.min(scrollY, hero.offsetHeight) : 0;
+      hero.style.setProperty("--hero-shift", -travel * 0.4 + "px");
+      hero.style.setProperty("--copy-shift", -travel * 0.28 + "px");
+      hero.style.setProperty("--portrait-scroll", travel * 0.15 + "px");
+      root
+        .querySelector(".fixed-cv")
+        ?.classList.toggle(
+          "is-past-hero",
+          hero.getBoundingClientRect().bottom < 160,
+        );
+    }
+    copies.forEach((copy) => {
+      const rect = copy.getBoundingClientRect();
+      const words = [...copy.querySelectorAll(".word")];
+      const start = height * (innerWidth > 1024 ? 0.88 : 0.85);
+      const end = height * (innerWidth > 1024 ? 0.4 : 0.45);
+      const progress = clamp((start - rect.top) / (start - end));
+      const lines = [];
+      words.forEach((word) => {
+        const top = Math.round(word.getBoundingClientRect().top);
+        let line = lines.find((line) => Math.abs(line.top - top) < 3);
+        if (!line) {
+          line = { top, words: [] };
+          lines.push(line);
+        }
+        line.words.push(word);
+      });
+      lines.forEach((line, index) => {
+        const first = line.words[0].getBoundingClientRect(),
+          last = line.words.at(-1).getBoundingClientRect();
+        const edge =
+          first.left +
+          (last.right - first.left) * clamp(progress * lines.length - index);
+        line.words.forEach((word) => {
+          const r = word.getBoundingClientRect();
+          word.style.setProperty(
+            "--word-fill",
+            enabled ? clamp((edge - r.left) / r.width) * 100 + "%" : "100%",
+          );
+          word.style.setProperty("--word-opacity", "1");
+        });
+      });
     });
+    fills.forEach((fill) =>
+      fill.style.setProperty(
+        "--fill",
+        enabled
+          ? wordProgress(fill.getBoundingClientRect().top, height) * 100 + "%"
+          : "100%",
+      ),
+    );
+    if (laptop && workflow) {
+      const rect = workflow.getBoundingClientRect();
+      const progress = sceneProgress(rect.top, height);
+      laptop.style.transform = enabled
+        ? `rotateX(-12deg) rotateY(${-30 + progress * 25}deg) rotateZ(${12 - progress * 16}deg)`
+        : "rotateX(-10deg) rotateY(-20deg)";
+    }
   }
-  const changes = new MutationObserver(() => { discover(); configure(); });
-  changes.observe(root === document ? doc.documentElement : root, { childList: true, subtree: true });
-  const bodyChanges = new MutationObserver(configure); bodyChanges.observe(doc.body, { attributes: true, attributeFilter: ['class'] });
-  reduced.addEventListener('change', configure);
-  connection?.addEventListener('change', configure); addEventListener('resize', configure, { passive: true });
-  doc.addEventListener('visibilitychange', configure);
-  discover(); configure();
-  if (hero && allowed()) requestAnimationFrame(() => { if (!disposed && allowed()) hero.classList.add('entrance-ready'); });
-  doc.fonts?.ready.then(request);
-  doc.documentElement.dataset.wordMotion = 'ready'; doc.documentElement.dataset.wordMode = 'scroll-linked';
-  function cleanup() {
-    disposed = true; watch(false); changes.disconnect(); bodyChanges.disconnect();
-    wordsObserver.disconnect(); entrances.disconnect(); heroObserver.disconnect(); stackObserver.disconnect();
-    stackTargets.forEach(tiles=>tiles.forEach(tile=>tile.style.removeProperty('transform')));
-    reduced.removeEventListener('change', configure);
-    connection?.removeEventListener('change', configure); removeEventListener('resize', configure);
-    doc.removeEventListener('visibilitychange', configure); targets.forEach(clearTarget);
-    if (scene) { scene.style.transform = ''; scene.style.opacity = ''; }
-    activeRoots.delete(root);
+  function schedule() {
+    if (!frame) frame = requestAnimationFrame(paint);
   }
-  activeRoots.set(root, cleanup); return cleanup;
+  function sync() {
+    root.documentElement?.classList.toggle("motion-ready", allowed());
+    root.documentElement?.toggleAttribute("data-motion-static", !allowed());
+    if (!allowed())
+      titleTargets.forEach((target) => target.classList.add("in-view"));
+    schedule();
+  }
+  function listen(target, name, fn, options) {
+    target.addEventListener(name, fn, options);
+    listenerCleanups.push(() => target.removeEventListener(name, fn, options));
+  }
+  listen(window, "scroll", schedule, { passive: true });
+  listen(window, "resize", schedule, { passive: true });
+  listen(document, "visibilitychange", schedule);
+  listen(reduced, "change", sync);
+  if (navigator.connection) listen(navigator.connection, "change", sync);
+  root.querySelectorAll(".magnetic").forEach((element) => {
+    listen(element, "pointermove", (event) => {
+      if (!allowed() || event.pointerType !== "mouse") return;
+      const rect = element.getBoundingClientRect();
+      element.style.translate = `${(event.clientX - rect.left - rect.width / 2) * 0.16}px ${(event.clientY - rect.top - rect.height / 2) * 0.2}px`;
+    });
+    listen(element, "pointerleave", () => {
+      element.style.translate = "";
+    });
+  });
+  const hero = root.querySelector(".hero");
+  if (hero) {
+    listen(hero, "pointermove", (event) => {
+      if (!allowed() || event.pointerType !== "mouse") return;
+      hero.style.setProperty(
+        "--portrait-x",
+        (event.clientX / innerWidth - 0.5) * 15 + "px",
+      );
+    });
+    listen(hero, "pointerleave", () =>
+      hero.style.setProperty("--portrait-x", "0px"),
+    );
+  }
+  sync();
+  document.documentElement.dataset.wordMotion = "ready";
+  const cleanup = () => {
+    observer.disconnect();
+    listenerCleanups.forEach((fn) => fn());
+    if (frame) cancelAnimationFrame(frame);
+    root.documentElement?.classList.remove("motion-ready");
+  };
+  roots.set(root, cleanup);
+  return cleanup;
 }

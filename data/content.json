@@ -25,12 +25,12 @@
         "Express.js",
         "MY SQL"
       ],
-      "image": "screen-Pic1",
+      "image": "screen-cpc-login-full",
       "gallery": [
         {
-          "image": "screen-Pic1",
+          "image": "screen-cpc-login-full",
           "label": "UI Snapshot 1",
-          "original": "assets/UI/Pic1.png"
+          "original": "assets/UI/cpc-login-full-background.png"
         },
         {
           "image": "screen-Pic2",
@@ -122,12 +122,12 @@
         "CSS",
         "JavaScript"
       ],
-      "image": "screen-Pic1",
+      "image": "screen-cpc-login-full",
       "gallery": [
         {
-          "image": "screen-Pic1",
+          "image": "screen-cpc-login-full",
           "label": "UI Snapshot 1",
-          "original": "assets/UI/Pic1.png"
+          "original": "assets/UI/cpc-login-full-background.png"
         },
         {
           "image": "screen-Pic2",
@@ -461,6 +461,66 @@
       "name": "Vite",
       "logo": "assets/logo-vitejs.svg",
       "source": "https://raw.githubusercontent.com/devicons/devicon/master/icons/vitejs/vitejs-original.svg"
+    },
+    {
+      "name": "Gemini",
+      "logo": "assets/logo-gemini.svg",
+      "source": "https://raw.githubusercontent.com/lobehub/lobe-icons/master/packages/static-svg/icons/gemini-color.svg"
+    },
+    {
+      "name": "OpenAI",
+      "logo": "assets/logo-openai.svg",
+      "source": "https://raw.githubusercontent.com/lobehub/lobe-icons/master/packages/static-svg/icons/openai.svg"
+    },
+    {
+      "name": "Claude",
+      "logo": "assets/logo-claude.svg",
+      "source": "https://raw.githubusercontent.com/lobehub/lobe-icons/master/packages/static-svg/icons/claude-color.svg"
+    },
+    {
+      "name": "Antigravity",
+      "logo": "assets/logo-antigravity.svg",
+      "source": "https://raw.githubusercontent.com/lobehub/lobe-icons/master/packages/static-svg/icons/antigravity-color.svg"
+    },
+    {
+      "name": "Grok",
+      "logo": "assets/logo-grok.svg",
+      "source": "https://raw.githubusercontent.com/lobehub/lobe-icons/master/packages/static-svg/icons/grok.svg"
+    },
+    {
+      "name": "Copilot",
+      "logo": "assets/logo-copilot.svg",
+      "source": "https://raw.githubusercontent.com/lobehub/lobe-icons/master/packages/static-svg/icons/githubcopilot.svg"
+    },
+    {
+      "name": "Cursor AI",
+      "logo": "assets/logo-cursor.svg",
+      "source": "https://raw.githubusercontent.com/lobehub/lobe-icons/master/packages/static-svg/icons/cursor.svg"
+    },
+    {
+      "name": "Vercel",
+      "logo": "assets/logo-vercel.svg",
+      "source": "https://raw.githubusercontent.com/devicons/devicon/master/icons/vercel/vercel-original.svg"
+    },
+    {
+      "name": "Supabase",
+      "logo": "assets/logo-supabase.svg",
+      "source": "https://raw.githubusercontent.com/devicons/devicon/master/icons/supabase/supabase-original.svg"
+    },
+    {
+      "name": "Cloudflare",
+      "logo": "assets/logo-cloudflare.svg",
+      "source": "https://raw.githubusercontent.com/devicons/devicon/master/icons/cloudflare/cloudflare-original.svg"
+    },
+    {
+      "name": "Git",
+      "logo": "assets/logo-git.svg",
+      "source": "https://raw.githubusercontent.com/devicons/devicon/master/icons/git/git-original.svg"
+    },
+    {
+      "name": "GitHub",
+      "logo": "assets/logo-github.svg",
+      "source": "https://raw.githubusercontent.com/devicons/devicon/master/icons/github/github-original.svg"
     }
   ],
   "certificates": [
@@ -554,35 +614,47 @@
       ]
     },
     {
-      "title": "Databases & services",
+      "title": "Databases & Services",
       "tools": [
         "MY SQL",
         "Firebase",
-        "MongoDB"
+        "MongoDB",
+        "Vercel",
+        "Supabase",
+        "Cloudflare"
       ]
     },
     {
-      "title": "Programming languages",
+      "title": "AI",
       "tools": [
+        "Gemini",
+        "OpenAI",
+        "Claude",
+        "Antigravity",
+        "Grok",
+        "Copilot",
+        "Cursor AI"
+      ]
+    },
+    {
+      "title": "Design & Programming",
+      "tools": [
+        "Figma",
+        "Canva",
         "Java",
         "Python",
         "C++"
       ]
     },
     {
-      "title": "Design",
-      "tools": [
-        "Figma",
-        "Canva"
-      ]
-    },
-    {
-      "title": "Development & collaboration",
+      "title": "Development & Collaboration",
       "tools": [
         "Visual Studio Code",
         "Microsoft 365",
         "Microsoft Loop",
-        "Vite"
+        "Vite",
+        "Git",
+        "GitHub"
       ]
     }
   ],

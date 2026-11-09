@@ -1,47 +1,73 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
   <head>
+    <script>
+      // Every full homepage visit starts at Home; section links still work in-page.
+      if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+      if (location.hash)
+        history.replaceState(
+          history.state,
+          "",
+          location.pathname + location.search,
+        );
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+      window.addEventListener("pageshow", (event) => {
+        if (event.persisted)
+          window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+      });
+    </script>
     <link rel="icon" href="/favicon.ico?v=bjn-logo-2" sizes="any" />
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/bjn-favicon-32.png" />
-    <link rel="icon" type="image/png" sizes="96x96" href="assets/bjn-favicon-96.png" />
-    <link rel="icon" type="image/png" sizes="192x192" href="assets/bjn-icon-192.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/bjn-apple-touch-icon.png" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="assets/bjn-favicon-32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="96x96"
+      href="assets/bjn-favicon-96.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="assets/bjn-icon-192.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="assets/bjn-apple-touch-icon.png"
+    />
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,viewport-fit=cover"
+    />
     <meta
       name="description"
       content="Portfolio of Brad Josh Nebreja, web developer and UI/UX designer."
     />
-
-
-
-    <link
-      rel="preload"
-      href="assets/fonts/clash-display-700.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
-    <link rel="preload" href="data/content.json" as="fetch" crossorigin />
-    <link
-      rel="preload"
-      href="assets/fonts/satoshi-400.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
     <title>Brad Josh Nebreja | Web Developer &amp; UI/UX Designer</title>
-    <link rel="stylesheet" href="css/components.css?v=cpc-copy-spacing-38" />
-    <link rel="stylesheet" href="css/style.css?v=cleanup-44" />
-    <link rel="canonical" href="https://nebreja-portfolio-website.vercel.app/" />
+    <link
+      rel="canonical"
+      href="https://nebreja-portfolio-website.vercel.app/"
+    />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Brad Josh Nebreja" />
-    <meta property="og:title" content="Brad Josh Nebreja | Web Developer &amp; UI/UX Designer" />
+    <meta
+      property="og:title"
+      content="Brad Josh Nebreja | Web Developer &amp; UI/UX Designer"
+    />
     <meta
       property="og:description"
       content="I design and build polished digital experiences that turn ideas into efficient, user-focused systems."
     />
-    <meta property="og:url" content="https://nebreja-portfolio-website.vercel.app/" />
+    <meta
+      property="og:url"
+      content="https://nebreja-portfolio-website.vercel.app/"
+    />
     <meta
       property="og:image"
       content="https://nebreja-portfolio-website.vercel.app/assets/brad-hero-social-v3.jpg"
@@ -58,7 +84,10 @@
       content="Brad Josh Nebreja portfolio hero, with his portrait, web developer and UI/UX designer introduction, and profile details."
     />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Brad Josh Nebreja | Web Developer &amp; UI/UX Designer" />
+    <meta
+      name="twitter:title"
+      content="Brad Josh Nebreja | Web Developer &amp; UI/UX Designer"
+    />
     <meta
       name="twitter:description"
       content="I design and build polished digital experiences that turn ideas into efficient, user-focused systems."
@@ -72,24 +101,46 @@
       content="Brad Josh Nebreja portfolio hero with portrait and developer introduction."
     />
     <meta name="theme-color" id="themeColor" content="#090909" />
+    <link
+      rel="preload"
+      href="assets/fonts/general-sans-400.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="preload" href="assets/brad-bjj-cutout-960.webp" as="image" />
+    <link rel="stylesheet" href="css/style.css?v=compact-scenes-4" />
+    <link rel="stylesheet" href="css/scenes.css" />
+    <link rel="stylesheet" href="css/lenis.css" />
+    <link rel="stylesheet" href="css/pages.css" />
+    <link rel="stylesheet" href="css/components.css?v=compact-scenes-4" />
   </head>
   <body>
     <a class="skip" href="#mainContent">Skip to content</a>
-    <nav class="floating-nav" id="sectionNav" aria-label="Portfolio navigation">
-      <a href="#work">Work</a><a href="#about">About</a><a href="#certifications">Certifications</a
-      ><a href="#contact">Contact</a
-      ><button
-        type="button"
+    <header class="site-header" id="sectionNav">
+      <a class="brand" href="#home" aria-label="Brad Josh Nebreja — Home">
+        <span class="brand-cube" aria-hidden="true"
+          ><span class="brand-solid">
+            <span class="cube-face cube-front"></span
+            ><span class="cube-face cube-back"></span>
+            <span class="cube-face cube-right"></span
+            ><span class="cube-face cube-left"></span>
+            <span class="cube-face cube-top"></span
+            ><span class="cube-face cube-bottom"></span> </span
+        ></span>
+        <span class="brand-name" aria-hidden="true">Brad Josh Nebreja</span>
+      </a>
+      <button
         class="menu-toggle"
         id="menuToggle"
         aria-label="Open navigation menu"
         aria-controls="mobileMenu"
         aria-expanded="false"
       >
-        <span></span><span></span><span></span>
+        <span></span><span></span>
       </button>
-    </nav>
-    <aside class="social-rail" aria-label="Professional profiles">
+    </header>
+    <div class="social-rail" aria-label="Professional profiles">
       <a
         href="https://github.com/Josh-L30"
         target="_blank"
@@ -100,20 +151,21 @@
             d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.86c-2.78.6-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.64.35-1.08.64-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.03A9.57 9.57 0 0 1 12 6.83c.85 0 1.71.11 2.51.34 1.91-1.3 2.75-1.03 2.75-1.03.55 1.38.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.84-2.33 4.69-4.56 4.94.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"
           /></svg></a
       ><a
-        class="linkedin"
-        href="https://www.linkedin.com/in/brad-josh-nebreja-894248402/"
-        target="_blank"
-        rel="noopener"
+        href="https://www.linkedin.com/in/josh-nebreja-894248402/"
         aria-label="Brad on LinkedIn"
+        target="_blank"
+        rel="noopener noreferrer"
         ><svg viewBox="0 0 24 24" aria-hidden="true">
           <path
-            d="M5.4 3a2.4 2.4 0 1 1 0 4.8 2.4 2.4 0 0 1 0-4.8ZM3.4 9H7.4V21H3.4ZM10 9H13.8V10.6H13.9C14.4 9.7 15.7 8.7 17.5 8.7 21.4 8.7 22 11.2 22 14.5V21H18V15.2C18 13.8 18 12 16 12S13.7 13.5 13.7 15.1V21H10Z"
-          /></svg></a
-      ><a href="mailto:bradjosh.nebreja05@gmail.com" aria-label="Email Brad"
+            d="M20 2H4a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2ZM8 19H5V9h3ZM6.5 7.7a1.75 1.75 0 1 1 0-3.5 1.75 1.75 0 0 1 0 3.5ZM19 19h-3v-5c0-1.5-.6-2-1.5-2s-1.5.6-1.5 2v5h-3V9h2.9v1.4c.6-1 1.6-1.7 3-1.7 2.1 0 3.1 1.4 3.1 4Z"
+          /></svg
+      ></a>
+      <a href="mailto:bradjosh.nebreja05@gmail.com" aria-label="Email Brad"
         ><svg class="mail" viewBox="0 0 24 24" aria-hidden="true">
           <rect x="3" y="5" width="18" height="14" rx="2" />
-          <path d="m3 6 9 7 9-7" /></svg></a
-      ><a
+          <path d="m3 6 9 7 9-7" /></svg
+      ></a>
+      <a
         href="https://www.facebook.com/brad.josh.nebreja"
         target="_blank"
         rel="noopener noreferrer"
@@ -123,341 +175,523 @@
             d="M14 22v-9h3l.5-4H14V7c0-1.1.3-2 2-2h2V1.4A24 24 0 0 0 15 1c-3 0-5 1.8-5 5v3H7v4h3v9Z"
           /></svg
       ></a>
-    </aside>
-    <dialog id="mobileMenu" aria-labelledby="menuTitle">
-      <header>
-        <h2 id="menuTitle">Explore</h2>
-        <button id="closeMenu" aria-label="Close navigation menu">×</button>
-      </header>
-      <nav aria-label="All portfolio sections">
-        <a href="#home">Home<span aria-hidden="true">↗</span></a
-        ><a href="#work">Selected Works<span aria-hidden="true">↗</span></a
-        ><a href="#about">About<span aria-hidden="true">↗</span></a
-        ><a href="#experience">Experience<span aria-hidden="true">↗</span></a
-        ><a href="#stack">Tech Stack<span aria-hidden="true">↗</span></a
-        ><a href="#certifications">Certifications<span aria-hidden="true">↗</span></a
-        ><a href="#contact">Contact<span aria-hidden="true">↗</span></a>
-      </nav>
-      <div class="menu-socials" aria-label="Social profiles"></div>
-    </dialog>
-    <main id="mainContent">
-      <section class="hero" id="home" aria-labelledby="hero-title">
-        <div class="hero-scene" data-signature-visual>
-          <h1 class="hero-type" id="hero-title">
-            <span class="name-first"><span class="name-inner">BRAD JOSH</span></span
-            ><span class="name-last"><span class="name-inner">NEBREJA</span></span>
-          </h1>
-          <figure class="portrait">
-            <img
-              src="assets/brad-bjj-cutout-960.webp"
-              srcset="assets/brad-bjj-cutout-480.webp 480w, assets/brad-bjj-cutout-960.webp 960w"
-              sizes="(max-width:767px) 110vw, (max-width:1023px) 55vw, 30vw"
-              alt="Brad Josh Nebreja, web developer and UI/UX designer"
-              width="1084"
-              height="1451"
-              fetchpriority="high"
-              decoding="async"
-            />
-          </figure>
-          <div class="name-outline" aria-hidden="true">
-            <span class="name-first"><span class="name-inner">BRAD JOSH</span></span
-            ><span class="name-last"><span class="name-inner">NEBREJA</span></span>
-          </div>
-          <div class="hero-bottom">
-            <p class="hero-intro lede">I design the experience.<br />I build what makes it work.</p>
-            <div class="hero-actions">
-              <a class="button" href="#work">VIEW WORK</a
-              ><a
-                class="button secondary"
-                href="assets/Brad-Josh-Nebreja-CV-2026-v6.pdf"
-                target="_blank"
-                rel="noopener"
-                >VIEW CV</a
-              >
-            </div>
-          </div>
-        </div>
-      </section>
-      <section class="work container" id="work">
-        <div class="section-head">
-          <h2>Selected Works</h2>
-          <a class="quiet-link" href="https://github.com/Josh-L30" target="_blank" rel="noopener"
-            >View GitHub ↗</a
-          >
-        </div>
-        <portfolio-projects><p>Loading project stories.</p></portfolio-projects>
-        <div class="project-proof" data-reveal>
-          <div>
-            <h3>Built to be useful.</h3>
-            <p>Real project screens that show the workflows behind the visual design.</p>
-          </div>
-          <div>
-            <h3>Designed with intent.</h3>
-            <p>Interface concepts, dashboard layouts, and a movie discovery experience.</p>
-          </div>
-          <div>
-            <h3>Led with care.</h3>
-            <p>Experience coordinating a capstone team and leading its UI/UX direction.</p>
-          </div>
-        </div>
-      </section>
-      <section class="statement-section about" id="about">
-        <div class="container">
-          <h2 class="section-label">About</h2>
-          <p class="statement reveal">
-            I turn complex ideas into <span class="muted">clear, useful</span> digital experiences.
-          </p>
-          <div class="about-bottom reveal">
-            <p>
-              I’m Brad Josh Nebreja, an Information Technology student who enjoys connecting
-              thoughtful interface design with practical web development. I care about how a website
-              looks, how it moves, and how well it helps someone finish a task.
-            </p>
-            <div class="about-side">
-              <p class="skill-line">
-                Design. Develop. Collaborate.<br />From the first idea to the working experience.
-              </p>
-              <a class="quiet-link" href="#experience">Explore my experience ↓</a>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section class="experience container" id="experience">
-        <h2 class="reveal">Experience</h2>
-        <details class="reveal" name="experience">
-          <summary>
-            <span class="year">2025–26</span
-            ><span class="title"
-              >Capstone Project Lead<span class="organization"
-                >Containerboard Packaging Corporation</span
-              ></span
-            ><span class="plus" aria-hidden="true">+</span>
-          </summary>
-          <p class="experience-meta">
-            June 2025 – March 2026 · Carmelray Industrial Park II, Calamba City, Laguna
-          </p>
-          <ul>
-            <li>
-              Led the capstone project through successful implementation of a centralized system for
-              CPC.
-            </li>
-            <li>
-              Managed the development team by assigning tasks, monitoring progress, and ensuring
-              project goals were met.
-            </li>
-            <li>
-              Collaborated with team members to design and implement a system centralizing Sales,
-              Production, Inventory, and Logistics operations.
-            </li>
-          </ul>
-        </details>
-        <details class="reveal" name="experience">
-          <summary>
-            <span class="year">2025–26</span
-            ><span class="title"
-              >UI/UX Designer Lead<span class="organization">CPC Centralized System</span></span
-            ><span class="plus" aria-hidden="true">+</span>
-          </summary>
-          <p class="experience-meta">June 2025 – March 2026 · Calamba City, Laguna</p>
-          <ul>
-            <li>Led the UI/UX design to establish the frontend of a centralized system.</li>
-            <li>Assisted the main web developer as a backup web developer for the system.</li>
-            <li>
-              Applied HTML, JavaScript, CSS, and PHP to develop a user-friendly and fully functional
-              centralized system.
-            </li>
-          </ul>
-        </details>
-        <details class="reveal" name="experience">
-          <summary>
-            <span class="year">2026</span
-            ><span class="title"
-              >Development Contributor &amp; QA Tester<span class="organization"
-                >Checkpoint</span
-              ></span
-            ><span class="plus" aria-hidden="true">+</span>
-          </summary>
-          <p class="experience-meta">2026 · Checkpoint</p>
-          <ul>
-            <li>Helped build the Checkpoint website.</li>
-            <li>
-              Contributed to quality assurance and tested the website’s functionality and user
-              experience.
-            </li>
-          </ul>
-        </details>
-        <details class="reveal" name="experience">
-          <summary>
-            <span class="year">2024</span
-            ><span class="title"
-              >UI Designer &amp; Prototype Designer<span class="organization"
-                >CinemaBuddy · School Project</span
-              ></span
-            ><span class="plus" aria-hidden="true">+</span>
-          </summary>
-          <p class="experience-meta">2024 · School Project</p>
-          <ul>
-            <li>Designed the CinemaBuddy interface in Figma for a school project.</li>
-            <li>
-              Created an interactive prototype to demonstrate the app’s screens and user flows.
-            </li>
-          </ul>
-        </details>
-      </section>
-      <section class="section container skills-section" id="stack">
-        <div class="section-top">
-          <h2>Tech Stack</h2>
-          <span>Development &amp; design tools</span>
-        </div>
-        <portfolio-stack><p>Loading tech stack.</p></portfolio-stack>
-        <div class="supporting-skills">
-          <div>
-            <h3>Other Skills</h3>
-            <p>Problem-Solving · Project Management</p>
-          </div>
-          <div>
-            <h3>Languages</h3>
-            <p>Filipino (Native) · English (Proficient)</p>
-          </div>
-        </div>
-      </section>
-      <section class="section container credentials-section" id="certifications">
-        <div class="section-top">
-          <h2>Certifications</h2>
-          <span>Five credentials</span>
-        </div>
-        <portfolio-certificates><p>Loading certificates.</p></portfolio-certificates>
-      </section>
-<section class="contact" id="contact">
-        <div class="container">
-          <p class="contact-eyebrow">Contact</p>
-          <h2>Let’s make<br />it work.</h2>
-          <p class="contact-intro">
-            Let’s talk about web development, UI/UX design, or an opportunity to build something
-            useful.
-          </p>
-          <div class="contact-brief">
-            <h3>Have an opportunity in mind?</h3>
-            <portfolio-contact-form><p>Loading contact form.</p></portfolio-contact-form>
-          </div>
-          <div class="contact-actions">
-            <a class="button secondary" href="mailto:bradjosh.nebreja05@gmail.com">Email me ↗</a
-            ><a
-              class="button secondary"
-              href="assets/Brad-Josh-Nebreja-CV-2026-v6.pdf"
-              target="_blank"
-              rel="noopener"
-              >Download my CV ↗</a
-            >
-          </div>
-          <dl class="contact-details">
-            <div>
-              <dt>Location</dt>
-              <dd>Calamba City, Laguna, Philippines</dd>
-            </div>
-            <div>
-              <dt>Phone</dt>
-              <dd><a href="tel:+639693148752">+63 969 314 8752</a></dd>
-            </div>
-            <div>
-              <dt>Email</dt>
-              <dd>
-                <a href="mailto:bradjosh.nebreja05@gmail.com">bradjosh.nebreja05@gmail.com</a>
-              </dd>
-            </div>
-            <div>
-              <dt>GitHub</dt>
-              <dd><a href="https://github.com/Josh-L30">github.com/Josh-L30</a></dd>
-            </div>
-            <div>
-              <dt>Facebook</dt>
-              <dd>
-                <a
-                  href="https://www.facebook.com/brad.josh.nebreja"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >brad.josh.nebreja</a
-                >
-              </dd>
-            </div>
-            <div>
-              <dt>LinkedIn</dt>
-              <dd>
-                <a href="https://www.linkedin.com/in/josh-nebreja-894248402/"
-                  >josh-nebreja-894248402</a
-                >
-              </dd>
-            </div>
-          </dl>
-        </div>
-      </section>
-    </main>
-    <footer class="container footer">
-      <p class="footer-copyright">© 2026 Brad Josh Nebreja</p>
-      <nav class="footer-links" aria-label="Footer">
-        <a href="privacy.html">Privacy</a><a href="terms.html">Terms</a
-        ><a class="back-to-top" href="#home" aria-label="Back to top" title="Back to top"
-          ><span class="back-top-label">Back to top</span
-          ><svg
-            class="back-top-icon"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.7"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M12 19V5m-6 6 6-6 6 6" /></svg
-        ></a>
-      </nav>
-    </footer>
-    <dialog id="projectDialog" aria-labelledby="detailTitle">
+    </div>
+    <a
+      class="fixed-cv magnetic"
+      href="assets/Brad-Josh-Nebreja-CV-2026-v6.pdf"
+      target="_blank"
+      rel="noopener noreferrer"
+      >VIEW <span>CV</span>
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+        aria-hidden="true"
+      >
+        <path d="M5 19 19 5M5 5h14v14" /></svg
+    ></a>
+    <dialog class="menu-panel" id="mobileMenu" aria-labelledby="menuTitle">
       <button
-        class="close"
-        id="closeDialog"
-        type="button"
-        aria-label="Close project"
-        title="Close project"
+        class="round-close"
+        id="closeMenu"
+        aria-label="Close navigation menu"
       >
         <svg
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
-          stroke-width="1.6"
-          stroke-linecap="round"
+          stroke-width="1.5"
           aria-hidden="true"
         >
           <path d="m6 6 12 12M18 6 6 18" />
         </svg>
       </button>
-      <h2 id="detailTitle"></h2>
-      <div id="detailGallery">
-        <button id="enlargePreview" type="button" aria-label="Enlarge project screenshot">
-          <img
-            id="detailImage"
-            src="assets/screen-Pic1-960.webp"
-            alt="CPC system preview"
-            width="1440"
-            height="720"
-          />
-        </button>
-        <p id="galleryStatus" role="status"></p>
-        <div class="gallery-controls">
-          <button id="galleryPrevious" type="button">Previous</button
-          ><span id="galleryCount" aria-live="polite"></span
-          ><button id="galleryNext" type="button">Next</button>
-        </div>
-        <a id="galleryOriginal" class="text-link" href="assets/UI/Pic1.png">Open full-size image</a>
+      <div class="menu-content">
+        <h2 id="menuTitle">Navigation</h2>
+        <nav class="menu-primary" aria-label="Main navigation">
+          <a href="#home" data-label="Home">Home</a>
+          <a href="#about" data-label="About">About</a>
+          <a href="#work" data-label="Works">Works</a>
+          <a href="#contact" data-label="Contact">Contact</a>
+        </nav>
+        <nav class="menu-secondary" aria-label="More portfolio sections">
+          <a href="#experience">Experience</a><a href="#stack">Tech Stack</a
+          ><a href="#github">GitHub</a
+          ><a href="#certifications">Certifications</a>
+        </nav>
+        <div class="menu-socials"><p>Socials</p></div>
       </div>
-      <div id="caseStudy" class="case-study-copy"></div>
-      <p id="detailRole" class="detail-role"></p>
-      <p id="detailHeadline" class="detail-headline"></p>
-      <p id="detailCategories" class="detail-tags"></p>
-      <p id="detailTags" class="detail-tags"></p>
-      <p id="detailCopy"></p>
-      <ul id="detailBullets"></ul>
     </dialog>
+    <main id="mainContent">
+      <section class="hero" id="home" aria-labelledby="hero-title">
+        <h1 id="hero-title" aria-label="Brad Josh">
+          <span class="hero-name-pair"
+            ><span>BRAD</span> <span>JOSH</span></span
+          >
+          <span class="hero-name-pair hero-name-echo" aria-hidden="true"
+            ><span>BRAD</span> <span>JOSH</span></span
+          >
+        </h1>
+        <figure class="portrait">
+          <img
+            src="assets/brad-bjj-cutout-960.webp"
+            srcset="
+              assets/brad-bjj-cutout-480.webp 480w,
+              assets/brad-bjj-cutout-960.webp 960w
+            "
+            sizes="(max-width:767px) 160vw, 53vw"
+            width="1084"
+            height="1451"
+            alt="Josh Nebreja in a black suit"
+            fetchpriority="high"
+          />
+        </figure>
+        <div class="hero-copy hero-intro">
+          <span class="hero-arrow" aria-hidden="true"
+            ><svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              aria-hidden="true"
+            >
+              <path d="M5 19 19 5M5 5h14v14" /></svg
+          ></span>
+          <p>
+            Aspiring Full-Stack Developer &amp; UI/UX Designer in the
+            Philippines.
+          </p>
+        </div>
+        <p class="hero-copy hero-narrative">
+          Currently building useful websites and learning AI.
+        </p>
+        <div class="hero-socials"></div>
+      </section>
+      <section
+        class="about section container"
+        id="about"
+        aria-labelledby="about-title"
+      >
+        <h2 class="section-label" id="about-title">About me</h2>
+        <p class="about-copy scroll-copy">
+          I turn complex ideas into <strong>clear</strong>,
+          <strong>useful</strong> digital experiences. I focus on how websites
+          <strong>look</strong>, <strong>function</strong>, and
+          <strong>help</strong> people get things done. Leveraging AI and new
+          tools keeps me learning, challenging old habits, and staying
+          competitive in the digital era.
+        </p>
+      </section>
+      <section class="services" id="services" aria-labelledby="services-title">
+        <div class="container service-heading">
+          <h2 class="display reveal-title" id="services-title">
+            I can <em>help</em> you with
+          </h2>
+        </div>
+        <div class="service-track">
+          <div class="service-viewport">
+            <div class="service-cards">
+              <article class="service-card" id="service-design">
+                <div class="service-media">
+                  <img
+                    src="assets/service-design.webp?v=selected-1"
+                    alt="Front-facing laptop displaying mobile interface prototypes in a dark studio"
+                    width="1672"
+                    height="941"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <div class="service-shade"></div>
+                <h3>UI/UX DESIGN</h3>
+              </article>
+              <article class="service-card" id="service-development">
+                <div class="service-media">
+                  <img
+                    src="assets/service-development.webp?v=selected-1"
+                    alt="Right-facing laptop with a design and code workspace by a night window"
+                    width="1672"
+                    height="941"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <div class="service-shade"></div>
+                <h3>WEB DEVELOPMENT</h3>
+              </article>
+              <article class="service-card" id="service-prototype">
+                <div class="service-media">
+                  <img
+                    src="assets/service-prototype.webp?v=selected-1"
+                    alt="Laptop and phone displaying connected mobile prototypes on a concrete desk"
+                    width="1672"
+                    height="941"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <div class="service-shade"></div>
+                <h3>PROTOTYPING</h3>
+              </article>
+            </div>
+            <nav class="service-pagination" aria-label="Explore services">
+              <span class="service-indicator" aria-hidden="true"></span
+              ><a href="#service-design" aria-label="UI/UX Design">01</a
+              ><a href="#service-development" aria-label="Web Development">02</a
+              ><a href="#service-prototype" aria-label="Prototyping">03</a>
+            </nav>
+          </div>
+        </div>
+      </section>
+      <section
+        class="work section container"
+        id="work"
+        aria-labelledby="works-title"
+      >
+        <div class="section-heading">
+          <h2 class="section-label" id="works-title">Selected Works</h2>
+          <p class="display reveal-title">Projects I’ve <em>built</em></p>
+        </div>
+        <portfolio-projects><p>Loading selected works.</p></portfolio-projects>
+        <div class="all-works-link">
+          <a
+            class="reference-pill"
+            href="works.html"
+            data-transition-title="Selected Works"
+            ><span>All Works <sup>4</sup></span></a
+          >
+        </div>
+      </section>
+      <section class="experience section" id="experience">
+        <div class="container section-heading">
+          <h2>Experiences</h2>
+          <p class="display reveal-title">
+            How I keep on <em>learning</em><br />and creating.
+          </p>
+        </div>
+        <div class="experience-stage">
+          <div class="experience-object" aria-hidden="true"></div>
+          <div class="container experience-list">
+            <details name="experience">
+              <summary>
+                <span class="year">2025–26</span
+                ><span class="title"
+                  >Capstone Project Lead<span class="organization"
+                    >Containerboard Packaging Corporation</span
+                  ></span
+                >
+              </summary>
+              <p class="experience-meta">
+                June 2025 – March 2026 · Carmelray Industrial Park II, Calamba
+                City, Laguna
+              </p>
+              <ul>
+                <li>
+                  Led the capstone project through successful implementation of
+                  a centralized system for CPC.
+                </li>
+                <li>
+                  Managed the development team by assigning tasks, monitoring
+                  progress, and ensuring project goals were met.
+                </li>
+                <li>
+                  Collaborated with team members to design and implement a
+                  system centralizing Sales, Production, Inventory, and
+                  Logistics operations.
+                </li>
+              </ul>
+            </details>
+            <details name="experience">
+              <summary>
+                <span class="year">2025–26</span
+                ><span class="title"
+                  >UI/UX Designer Lead<span class="organization"
+                    >CPC Centralized System</span
+                  ></span
+                >
+              </summary>
+              <p class="experience-meta">
+                June 2025 – March 2026 · Calamba City, Laguna
+              </p>
+              <ul>
+                <li>
+                  Led the UI/UX design to establish the frontend of a
+                  centralized system.
+                </li>
+                <li>
+                  Assisted the main web developer as a backup web developer for
+                  the system.
+                </li>
+                <li>
+                  Applied HTML, JavaScript, CSS, and PHP to develop a
+                  user-friendly and fully functional centralized system.
+                </li>
+              </ul>
+            </details>
+            <details name="experience">
+              <summary>
+                <span class="year">2026</span
+                ><span class="title"
+                  >Development Contributor &amp; QA Tester<span
+                    class="organization"
+                    >Checkpoint</span
+                  ></span
+                >
+              </summary>
+              <p class="experience-meta">2026 · Checkpoint</p>
+              <ul>
+                <li>Helped build the Checkpoint website.</li>
+                <li>
+                  Contributed to quality assurance and tested the website’s
+                  functionality and user experience.
+                </li>
+              </ul>
+            </details>
+            <details name="experience">
+              <summary>
+                <span class="year">2024</span
+                ><span class="title"
+                  >UI Designer &amp; Prototype Designer<span
+                    class="organization"
+                    >CinemaBuddy · School Project</span
+                  ></span
+                >
+              </summary>
+              <p class="experience-meta">2024 · School Project</p>
+              <ul>
+                <li>
+                  Designed the CinemaBuddy interface in Figma for a school
+                  project.
+                </li>
+                <li>
+                  Created an interactive prototype to demonstrate the app’s
+                  screens and user flows.
+                </li>
+              </ul>
+            </details>
+          </div>
+        </div>
+      </section>
+      <section
+        class="workflow section"
+        id="workflow"
+        aria-labelledby="workflow-title"
+      >
+        <div class="container section-heading">
+          <h2 class="section-label" id="workflow-title">
+            The Way I Work and Create
+          </h2>
+          <p class="display reveal-title">How I <em>organize</em> and build</p>
+        </div>
+        <div class="container workflow-stage">
+          <div class="workflow-items">
+            <details class="workflow-item">
+              <summary>
+                <span class="scroll-fill">AI</span
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  aria-hidden="true"
+                >
+                  <path d="M5 19 19 5M5 5h14v14" />
+                </svg>
+              </summary>
+              <p>
+                I use AI to explore ideas, support design decisions, and move
+                from questions to working code.
+              </p>
+            </details>
+            <details class="workflow-item">
+              <summary>
+                <span class="scroll-fill">CODE</span
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  aria-hidden="true"
+                >
+                  <path d="M5 19 19 5M5 5h14v14" />
+                </svg>
+              </summary>
+              <p>
+                I create responsive interfaces and connect them to backend
+                functionality that makes the website useful.
+              </p>
+            </details>
+            <details class="workflow-item">
+              <summary>
+                <span class="scroll-fill">WORKFLOW</span
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  aria-hidden="true"
+                >
+                  <path d="M5 19 19 5M5 5h14v14" />
+                </svg>
+              </summary>
+              <p>
+                I organize tasks with productivity tools and automate repetitive
+                steps so I can focus on building.
+              </p>
+            </details>
+          </div>
+          <div class="workflow-object" aria-hidden="true">
+            <div class="mini-laptop">
+              <div class="mini-screen">
+                <img
+                  src="assets/workflow-logo-screen.svg?v=white-3"
+                  width="1600"
+                  height="900"
+                  alt=""
+                />
+              </div>
+              <div class="mini-base">
+                <div class="keyboard-keys"></div>
+                <div class="trackpad"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section
+        class="stack section container"
+        id="stack"
+        aria-labelledby="stack-title"
+      >
+        <div class="section-heading inline-heading">
+          <h2 class="section-label" id="stack-title">Tech Stack</h2>
+          <a
+            class="view-all"
+            href="stack.html"
+            data-transition-title="Tech Stack"
+            >View All</a
+          >
+        </div>
+        <portfolio-stack><p>Loading technologies.</p></portfolio-stack>
+      </section>
+      <section
+        class="github section container"
+        id="github"
+        aria-labelledby="github-title"
+      >
+        <div class="section-heading inline-heading">
+          <h2 class="section-label" id="github-title">GitHub Contributions</h2>
+          <a
+            class="inline-link"
+            href="https://github.com/Josh-L30"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Josh-L30
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              aria-hidden="true"
+            >
+              <path d="M5 19 19 5M5 5h14v14" /></svg
+          ></a>
+        </div>
+        <portfolio-contributions
+          ><p role="status">
+            Loading GitHub activity…
+          </p></portfolio-contributions
+        >
+      </section>
+      <section
+        class="certifications section"
+        id="certifications"
+        aria-labelledby="certifications-title"
+      >
+        <div class="container section-heading">
+          <h2 class="section-label" id="certifications-title">
+            Certifications
+          </h2>
+          <p class="display reveal-title">Always <em>learning.</em></p>
+        </div>
+        <portfolio-certificates
+          ><p class="container">
+            Loading certificates.
+          </p></portfolio-certificates
+        >
+      </section>
+      <section
+        class="contact section"
+        id="contact"
+        aria-labelledby="contact-title"
+      >
+        <div class="contact-stage">
+          <p class="section-label">Have an opportunity in mind?</p>
+          <h2 id="contact-title" class="contact-scroll-title">
+            Let’s make it<br /><em>work.</em>
+          </h2>
+          <a
+            class="reference-pill"
+            href="contact.html"
+            data-transition-title="Contact"
+            ><span>Message me</span
+            ><svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              aria-hidden="true"
+            >
+              <path d="M5 19 19 5M5 5h14v14" /></svg
+          ></a>
+        </div>
+      </section>
+    </main>
+    <footer class="reference-footer">
+      <div class="footer-conversation">
+        <h2>Start a <em>conversation</em> today :)</h2>
+        <div class="footer-info">
+          <div>
+            <h3>Email</h3>
+            <a href="mailto:bradjosh.nebreja05@gmail.com"
+              >bradjosh.nebreja05@gmail.com</a
+            >
+          </div>
+          <div>
+            <h3>Phone</h3>
+            <a href="tel:+639693148752">+63 969 314 8752</a>
+          </div>
+          <div>
+            <h3>Socials</h3>
+            <div class="footer-socials"></div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-clock">
+          <h3>Local time</h3>
+          <time id="localTime">Philippines · PHT</time>
+        </div>
+        <div class="footer-legal">
+          <p>© 2026 Brad Josh Nebreja</p>
+          <nav aria-label="Footer">
+            <a href="privacy.html">Privacy</a><a href="terms.html">Terms</a
+            ><a class="back-to-top" href="#home" aria-label="Back to top"
+              ><svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                aria-hidden="true"
+              >
+                <path d="M5 19 19 5M5 5h14v14" /></svg
+            ></a>
+          </nav>
+        </div>
+      </div>
+      <p class="footer-name" aria-hidden="true">BRAD JOSH</p>
+    </footer>
     <dialog id="imageDialog" aria-labelledby="imageTitle">
       <div class="image-viewer-header">
         <h2 id="imageTitle">Image preview</h2>
@@ -482,6 +716,7 @@
       <p id="imageStatus" role="status"></p>
       <img id="fullImage" alt="" hidden />
     </dialog>
-    <script type="module" src="js/script.js?v=cpc-copy-spacing-38"></script>
+
+    <script type="module" src="js/script.js?v=compact-scenes-4"></script>
   </body>
 </html>

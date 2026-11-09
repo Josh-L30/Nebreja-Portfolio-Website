@@ -1,0 +1,780 @@
+/* Full-screen service choreography and reference row interactions. */
+.services {
+  padding-top: 40px;
+  position: relative;
+}
+.service-heading {
+  text-align: center;
+  padding: 40px 20px 32px;
+}
+.service-heading .display {
+  font-size: clamp(38px, 4.5vw, 64px);
+  font-weight: 500;
+}
+.service-track {
+  position: relative;
+}
+.service-viewport {
+  position: relative;
+  overflow: clip;
+}
+.service-cards {
+  position: relative;
+}
+.service-card {
+  position: relative;
+  height: 100svh;
+  overflow: hidden;
+  background: #030303;
+  isolation: isolate;
+  scroll-margin-top: 0;
+}
+.service-media {
+  position: absolute;
+  top: -25%;
+  height: 150%;
+  width: 100%;
+  will-change: transform;
+}
+.service-media .device {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  transform: none;
+}
+.service-media .device-screen {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  transform: none;
+  background: #171512;
+  overflow: hidden;
+}
+.service-media img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  object-position: center;
+  filter: saturate(0.65);
+}
+.service-media canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.service-media .webgl-ready .device-screen {
+  visibility: hidden;
+}
+.service-keyboard,
+.service-media .device-keyboard {
+  display: none;
+}
+.service-shade {
+  position: absolute;
+  inset: 0;
+  background: #000a;
+  pointer-events: none;
+}
+.service-card h3 {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.22em;
+  padding: 20px;
+  text-align: center;
+  font-size: clamp(38px, 7vw, 76px);
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  color: #fff;
+  pointer-events: none;
+}
+.service-title-word {
+  display: inline-flex;
+  overflow: hidden;
+  padding: 0.08em 0;
+}
+.service-letter {
+  display: inline-block;
+  transform-origin: 0 100%;
+  will-change: transform;
+}
+.service-pagination {
+  display: none;
+}
+.services.is-animated .service-track {
+  height: var(--service-track-height, 440vh);
+}
+.services.is-animated .service-viewport {
+  height: var(--service-scene-height, 100svh);
+  position: sticky;
+  top: var(--service-sticky-top, 0px);
+}
+.services.is-animated .service-cards {
+  height: 100%;
+}
+.services.is-animated .service-card {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  transform-origin: center;
+}
+.services.is-animated .service-pagination {
+  display: flex;
+  position: absolute;
+  z-index: 5;
+  left: 50%;
+  bottom: clamp(24px, 4vh, 40px);
+  translate: -50% 0;
+  padding: 4px;
+  background: #1e1b19c9;
+  border: 1px solid #ffffff26;
+  border-radius: 30px;
+  backdrop-filter: blur(12px);
+  isolation: isolate;
+}
+.service-pagination a {
+  display: grid;
+  place-items: center;
+  position: relative;
+  width: 50px;
+  height: 38px;
+  color: #fff;
+  font-size: 14px;
+  border-radius: 30px;
+}
+.service-pagination a[aria-current] {
+  color: #17120e;
+}
+.service-indicator {
+  position: absolute;
+  width: 50px;
+  height: 38px;
+  top: 4px;
+  left: 4px;
+  background: var(--accent);
+  border-radius: 30px;
+  z-index: -1;
+  transform: translateX(calc(var(--indicator, 0) * 100%));
+}
+@media (min-width: 1025px) {
+  .services.is-animated .service-media {
+    top: -30%;
+    height: 160%;
+  }
+}
+/* Full-width, center-out white reveals. Rows retain their height on hover. */
+.workflow,
+.experience {
+  position: relative;
+  padding-top: 70px;
+}
+.workflow-stage,
+.experience-stage {
+  position: relative;
+}
+.workflow-stage.container {
+  max-width: none;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+.workflow-items {
+  position: relative;
+  z-index: 2;
+}
+.workflow-item {
+  position: relative;
+  min-height: 110px;
+  border-top: 1px solid var(--line);
+  isolation: isolate;
+}
+.workflow-item:last-child,
+.experience details:last-child {
+  border-bottom: 1px solid var(--line);
+}
+.workflow-item::before,
+.experience summary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  clip-path: inset(50% 0 50% 0);
+  transition: clip-path 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: -1;
+}
+.workflow-trigger {
+  width: 100%;
+  height: 110px;
+  display: flex;
+  align-items: center;
+  text-align: left;
+  background: none;
+  border: 0;
+  color: inherit;
+  padding: 0 max(20px, calc((100vw - 1060px) / 2));
+  position: relative;
+}
+.workflow-trigger > svg {
+  display: none;
+}
+.scroll-fill {
+  font-size: clamp(58px, 7.6vw, 110px);
+  font-weight: 500;
+  line-height: 0.88;
+  letter-spacing: -0.025em;
+  background: linear-gradient(
+    to right,
+    var(--ink) var(--fill, 100%),
+    #3b3937 var(--fill, 100%)
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+.workflow-item > p {
+  position: absolute;
+  right: max(20px, calc((100vw - 1060px) / 2));
+  top: 50%;
+  translate: 0 -50%;
+  max-width: 380px;
+  width: 31%;
+  font-size: 16px;
+  line-height: 1.35;
+  text-align: right;
+  color: #111;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.workflow-item:is(:hover, :focus-within, .is-open)::before,
+.experience summary:is(:hover, :focus-visible)::before {
+  clip-path: inset(0);
+}
+.workflow-item:is(:hover, :focus-within, .is-open) .scroll-fill {
+  background: none;
+  color: #111;
+}
+.workflow-item:is(:hover, :focus-within, .is-open) > p {
+  opacity: 1;
+  transition-delay: 0.13s;
+}
+.workflow-object,
+.experience-object {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  right: 80px;
+  top: 43%;
+  translate: 0 -50%;
+  z-index: 5;
+  pointer-events: none;
+}
+.workflow-object > canvas,
+.experience-object > canvas {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  touch-action: pan-y;
+}
+.workflow-object.webgl-ready .mini-laptop {
+  visibility: hidden;
+}
+.workflow-object .mini-laptop {
+  position: absolute;
+  left: 25%;
+  top: 25%;
+}
+.experience-object {
+  width: 540px;
+  height: 540px;
+  right: 90px;
+  top: 32%;
+}
+.experience-list.container {
+  width: 100%;
+  max-width: none;
+  padding: 0;
+}
+.experience details {
+  border-top: 1px solid var(--line);
+  position: relative;
+}
+.experience summary {
+  position: relative;
+  isolation: isolate;
+  list-style: none;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: 190px minmax(0, 1fr);
+  gap: 30px;
+  align-items: center;
+  min-height: 110px;
+  padding: 22px max(20px, calc((100vw - 1060px) / 2));
+  transition: color 0.25s;
+}
+summary::-webkit-details-marker {
+  display: none;
+}
+.experience .year {
+  font-size: 34px;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+.experience .title {
+  font-size: 28px;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  max-width: 530px;
+}
+.experience .organization {
+  display: block;
+  font-size: 14px;
+  margin-top: 8px;
+  letter-spacing: 0;
+  color: var(--soft);
+}
+.experience-preview {
+  position: absolute;
+  right: max(20px, calc((100vw - 1060px) / 2));
+  max-width: 360px;
+  width: 29%;
+  font-size: 16px;
+  line-height: 1.35;
+  text-align: right;
+  opacity: 0;
+  pointer-events: none;
+  color: #111;
+  transition: opacity 0.3s;
+}
+.experience summary:is(:hover, :focus-visible) {
+  color: #111;
+}
+.experience summary:is(:hover, :focus-visible) .organization {
+  color: #444;
+}
+.experience summary:is(:hover, :focus-visible) .title {
+  max-width: 350px;
+  font-size: 24px;
+}
+.experience summary:is(:hover, :focus-visible) .experience-preview {
+  opacity: 1;
+  transition-delay: 0.13s;
+}
+.experience-meta,
+.experience details ul {
+  color: var(--soft);
+  max-width: 690px;
+  margin: 0 max(20px, calc((100vw - 1060px) / 2 + 220px)) 24px;
+  font-size: 15px;
+}
+.experience details ul {
+  padding-left: 18px;
+  margin-right: 20px;
+}
+.experience details li + li {
+  margin-top: 10px;
+}
+@media (max-width: 1024px) {
+  .workflow-object,
+  .experience-object {
+    display: none;
+  }
+  .service-card h3 {
+    flex-wrap: wrap;
+    align-content: center;
+    font-size: clamp(38px, 7vw, 64px);
+  }
+  .workflow-trigger {
+    height: 100px;
+  }
+  .workflow-item {
+    min-height: 100px;
+  }
+  .workflow-item > p {
+    position: relative;
+    top: auto;
+    right: auto;
+    translate: none;
+    max-width: none;
+    width: auto;
+    padding: 0 20px 24px;
+    text-align: left;
+    display: none;
+  }
+  .workflow-item.is-open > p {
+    display: block;
+  }
+  .experience summary {
+    grid-template-columns: 125px 1fr;
+    gap: 20px;
+  }
+  .experience .title {
+    font-size: 24px;
+  }
+  .experience-preview {
+    display: none;
+  }
+  .experience summary:is(:hover, :focus-visible) .title {
+    max-width: none;
+    font-size: 24px;
+  }
+  .experience-meta,
+  .experience details ul {
+    margin-left: 165px;
+  }
+}
+@media (max-width: 600px) {
+  .experience summary {
+    grid-template-columns: 76px 1fr;
+    gap: 12px;
+    padding-block: 25px;
+  }
+  .experience .year {
+    font-size: 21px;
+  }
+  .experience .title,
+  .experience summary:is(:hover, :focus-visible) .title {
+    font-size: 21px;
+  }
+  .experience .organization {
+    font-size: 12px;
+  }
+  .experience-meta,
+  .experience details ul {
+    margin-left: 108px;
+    margin-right: 20px;
+    font-size: 14px;
+  }
+  .scroll-fill {
+    font-size: clamp(48px, 12vw, 72px);
+  }
+  .service-heading {
+    padding-top: 20px;
+  }
+  .service-card h3 {
+    font-size: 38px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .workflow-item::before,
+  .experience summary::before {
+    transition: none;
+  }
+  .service-letter {
+    transform: none !important;
+  }
+}
+/* Responsive line-by-line filling, preserving the caramel keywords. */
+.scroll-copy .word {
+  opacity: 1;
+  --word-color: var(--ink);
+  background: linear-gradient(
+    to right,
+    var(--word-color) var(--word-fill, 100%),
+    #3b3937 var(--word-fill, 100%)
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+.scroll-copy strong .word {
+  --word-color: var(--accent);
+}
+.reveal-title .letter {
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: calc(var(--letter-index, 0) * 40ms);
+  transform-origin: 0 100%;
+}
+.motion-ready .reveal-title:not(.in-view) .letter {
+  opacity: 1;
+  filter: none;
+  transform: translateY(110%);
+}
+.menu-link-text {
+  display: block;
+  overflow: hidden;
+  height: 1.15em;
+}
+.menu-link-roll {
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.38s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.menu-link-roll > span {
+  display: block;
+  height: 1.15em;
+  line-height: 1.15;
+}
+.menu-link-roll > span + span {
+  color: var(--accent);
+}
+.menu-primary a:is(:hover, :focus-visible, [aria-current]) .menu-link-roll {
+  transform: translateY(-50%);
+}
+.menu-primary a:is(:hover, [aria-current]) {
+  padding-left: 20px;
+  color: var(--ink);
+}
+.project-preview {
+  width: 380px;
+  height: 214px;
+  border-radius: 0;
+  opacity: 1;
+  scale: 0;
+  left: var(--preview-x, 0px);
+  top: var(--preview-y, 0px);
+  transform: none;
+  transition: scale 0.7s cubic-bezier(0.76, 0, 0.24, 1);
+  background: transparent;
+  padding: 0;
+}
+.project-preview.is-visible {
+  scale: 1;
+}
+.project-preview img {
+  object-fit: cover;
+}
+@media (min-width: 1025px) {
+  .project-main {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    width: 100%;
+    gap: 20px;
+    align-items: center;
+  }
+  .project-row > div {
+    width: 100%;
+  }
+  .project-main p {
+    text-align: right;
+    margin: 0;
+    max-width: 260px;
+    transition:
+      transform 0.5s var(--ease),
+      color 0.5s;
+  }
+  .project-row {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 34px 10px;
+  }
+  .project-number {
+    display: none;
+  }
+  .project-main:hover h3,
+  .project-main:focus-visible h3 {
+    color: var(--ink);
+    transform: translateX(-24px);
+  }
+  .project-row:is(:hover, :focus-within) .project-main h3 {
+    color: var(--ink);
+    transform: translateX(-24px);
+  }
+  .project-row:is(:hover, :focus-within) .project-main p {
+    color: var(--ink);
+    transform: translateX(24px);
+  }
+  .project-list:has(.project-row:hover)
+    .project-row:not(:hover)
+    .project-main
+    :is(h3, p) {
+    color: #ffffff59;
+  }
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+  .project-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    border: 0;
+  }
+  .project-row {
+    display: block;
+    padding: 0 0 24px;
+  }
+  .project-mobile-image {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16/10;
+    object-fit: cover;
+    margin-bottom: 20px;
+  }
+  .project-preview,
+  .project-number {
+    display: none;
+  }
+}
+
+.stack-groups {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.tech-group,
+.tech-list {
+  display: contents;
+}
+.tech-group-title {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  clip-path: inset(50%);
+  overflow: hidden;
+  white-space: nowrap;
+}
+.tech-logo[src*="express"] {
+  background: #eee;
+  border-radius: 50%;
+  padding: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .menu-link-roll {
+    transition: none;
+  }
+}
+
+.project-preview {
+  padding: 0;
+}
+.project-preview-track {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  transition: transform 0.55s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.project-preview-cell {
+  height: 214px;
+  width: 380px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+}
+
+.menu-panel.closing {
+  animation-delay: 0.2s;
+}
+.menu-panel.closing .menu-link-text {
+  animation: menu-text-out 0.35s cubic-bezier(0.76, 0, 0.24, 1) both;
+}
+@keyframes menu-text-out {
+  to {
+    transform: translateY(120%) rotate(12deg);
+    opacity: 0;
+  }
+}
+.menu-panel[open] .menu-primary a {
+  animation-delay: calc(0.18s + var(--i, 0) * 0.08s);
+}
+.workflow-items {
+  z-index: auto;
+}
+.workflow-item {
+  z-index: 2;
+}
+.workflow-item:is(:hover, :focus-within, .is-open),
+.experience summary:is(:hover, :focus-visible) {
+  z-index: 6;
+}
+.experience .title,
+.experience summary:is(:hover, :focus-visible) .title {
+  max-width: 400px;
+  font-size: 24px;
+}
+.experience summary {
+  min-height: 128px;
+}
+@media (max-width: 600px) {
+  .experience .title,
+  .experience summary:is(:hover, :focus-visible) .title {
+    font-size: 21px;
+  }
+}
+
+/* Slow tool conveyor: pause for reading, keyboard focus and reduced motion. */
+.stack-marquee {
+  overflow: hidden;
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 4%,
+    #000 96%,
+    transparent
+  );
+  padding-block: 12px;
+}
+.stack-marquee-track {
+  display: flex;
+  gap: 12px;
+  width: max-content;
+  animation: stack-travel 160s linear infinite;
+  animation-play-state: paused;
+}
+.stack-marquee.is-visible .stack-marquee-track {
+  animation-play-state: running;
+}
+.stack-marquee:is(:hover, :focus-within) .stack-marquee-track {
+  animation-play-state: paused;
+}
+.stack-marquee .stack-groups {
+  flex-wrap: nowrap;
+  flex-shrink: 0;
+}
+.stack-marquee .tech-chip {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+@keyframes stack-travel {
+  to {
+    transform: translateX(calc(-100% / 3 - 4px));
+  }
+}
+.mini-screen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+@media (prefers-reduced-motion: reduce) {
+  .stack-marquee {
+    overflow: visible;
+    mask-image: none;
+  }
+  .stack-marquee-track {
+    animation: none;
+    width: auto;
+  }
+  .stack-marquee .stack-groups {
+    flex-wrap: wrap;
+  }
+  .stack-replica {
+    display: none;
+  }
+}
+:root[data-motion-static] .stack-marquee-track {
+  animation: none;
+  width: auto;
+}
+:root[data-motion-static] .stack-marquee {
+  overflow: visible;
+  mask-image: none;
+}
+:root[data-motion-static] .stack-marquee .stack-groups {
+  flex-wrap: wrap;
+}
+:root[data-motion-static] .stack-replica {
+  display: none;
+}
+
+.mini-screen {
+  padding: 0;
+  background: #030303;
+}
+.mini-screen > img {
+  border-radius: 0;
+}
