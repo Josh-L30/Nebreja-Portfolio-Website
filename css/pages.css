@@ -6,7 +6,7 @@
   font-display: swap;
 }
 /* Reference photography is the service media; scroll transforms stay on its parent. */
-.service-media > img {
+.service-media img {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -1258,7 +1258,7 @@
 }
 
 /* Compact screens use wide, edge-to-edge image panels without letterboxing. */
-@media (max-width: 1024px) {
+@media (max-width: 1100px), (hover: none) and (pointer: coarse) {
   .service-card {
     height: auto;
     aspect-ratio: 16 / 10;
@@ -1268,19 +1268,19 @@
     top: -8%;
     height: 116%;
   }
-  .service-media > img {
+  .service-media img {
     width: 100%;
     max-width: 100%;
     left: 0;
     object-fit: cover;
     scale: 1;
   }
-  #service-development .service-media > img {
+  #service-development .service-media img {
     object-position: 32% center;
   }
 }
 @media (min-width: 1025px) {
-  .service-media > img {
+  .service-media img {
     scale: 0.9;
   }
 }
@@ -1300,7 +1300,7 @@
 }
 
 /* Compact pinning retains the wide image panel and native touch scrolling. */
-@media (max-width: 1024px) {
+@media (max-width: 1100px), (hover: none) and (pointer: coarse) {
   .services.is-animated .service-card {
     aspect-ratio: auto;
     height: 100%;
@@ -1317,35 +1317,67 @@
   }
 }
 
-.service-ambience {
-  display: none;
-}
-@media (max-width: 1024px) {
-  .services.is-animated .service-ambience {
-    display: block;
-    position: absolute;
-    inset: -8%;
-    pointer-events: none;
-  }
-  .services.is-animated .service-ambience img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: blur(22px) brightness(0.7);
-    opacity: 0.9;
-  }
+/* Each compact scene is one edge-to-edge photograph, with no duplicate surround. */
+@media (max-width: 1100px), (hover: none) and (pointer: coarse) {
   .services.is-animated .service-media {
-    top: calc(50% - var(--service-photo-height) * 0.58);
-    height: calc(var(--service-photo-height) * 1.16);
+    top: -8%;
+    height: 116%;
   }
-  .services.is-animated .service-media > img {
-    object-fit: contain;
-    mask-image: linear-gradient(transparent, #000 24%, #000 76%, transparent);
+  .services.is-animated .service-media img {
+    object-fit: cover;
+    mask-image: none;
   }
   .services.is-animated .service-shade {
-    background: #0007;
+    background: #0005;
   }
   .services.is-animated .service-pagination {
-    bottom: max(16px, env(safe-area-inset-bottom, 0px));
+    bottom: 12px;
   }
+  portfolio-projects .project-row:not(.compact-featured) {
+    display: none;
+  }
+}
+.contact-stage h2 em {
+  font-family: inherit;
+  font-weight: inherit;
+  font-style: normal;
+}
+
+@media (max-width: 1100px), (hover: none) and (pointer: coarse) {
+  #service-prototype .service-media img {
+    object-position: 62% center;
+  }
+}
+
+/* Portrait art direction keeps the whole laptop in a single continuous photo. */
+.service-media picture {
+  display: contents;
+}
+.services.is-compact .service-media {
+  top: 0;
+  height: 100%;
+}
+.services.is-compact .service-media img {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  left: 0;
+  object-fit: cover;
+  object-position: center;
+  scale: 1;
+  mask-image: none;
+}
+.services.is-compact #service-development .service-media img,
+.services.is-compact #service-prototype .service-media img {
+  object-position: center;
+}
+.services.is-compact .service-card h3 {
+  font-size: clamp(24px, 6.4vw, 48px);
+}
+.services.is-compact .service-pagination {
+  bottom: 12px;
+}
+.services.is-compact .service-pagination a,
+.services.is-compact .service-indicator {
+  height: 44px;
 }

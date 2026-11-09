@@ -79,3 +79,23 @@ Five mobile CV placements are preview-only in workspace outputs/responsive-refre
 User confirmed retaining View CV at its current lower-right mobile position; the five alternatives are historical previews only. The service sequence now uses the same .72→1 entrance, two upward wipes, reversing progress, title reveals and moving01–03 indicator on phone/tablet as desktop. Compact scenes pin below the fixed header and fill the remaining viewport. Each selected sharp laptop photo retains its wide contained framing, softly blending into a blurred background from the same photo so the scene has no empty letterbox. Compact scroll units are shorter than desktop; number controls have44px touch height. Native touch scroll is passive/unhijacked and the section releases normally. Reduced-motion/Save-Data shows all three static16:10 scenes with readable titles and no pinning.
 
 The physical six-face cube is white again. The Workflow screen mark is also white. Header spin is0.9s; name appears after0.46s with0.32s opacity/0.42s transform, in caramel #b87945. Cube forward opacity delay0.48s and return delay0.06s with0.3s fade maintain the smooth crossfade. Full-name touch/focus behavior remains.
+
+
+## 10 November 2026 — requested responsive refinements
+
+Implemented the eleven requested changes: nine text-only caramel About tooltips; unframed, contiguous compact service wipes; refreshed portfolio/CPC/Figma laptop screen photography and portfolio cover; compact in-place Experience/Workflow explanations; unified Contact heading font; two compact featured projects with all four on All Works; removed Contact/footer policy and top controls; newest-first summarized experience; faster full-name mobile marquee; vertical secondary menu and Contributions/Credentials labels. View CV, original portrait, current CV file, project live links, stack and credentials content remain current. Prior compact blurred ambience and22s two-word name instructions are superseded by this entry.
+
+
+### Follow-up: full laptop framing and horizontal navigation
+
+Corrected compact scene cropping with three portrait responsive photo assets; wide desktop photos are retained. Compact service media fills the scene without overscan/parallax/scale and the existing entrance/wipes remain. Portrait/landscape touch iPads, including1180px and1366px landscape widths, use compact coverage. The sticky scene reaches the screen bottom. Explicit Safari/native Experience markers are suppressed. Four secondary navigation links now form one horizontal row directly above socials; compact drawers expand up to600px so tablet labels fit.
+
+
+### iPad Pro13 follow-up
+
+Fixed the1032px gap in compact Experience/Workflow rules: the brief explanation now replaces the row without a duplicate description below, and desktop keyboard/laptop decorations stay hidden on touch tablets. Compact begins at1100px or coarse non-hover input, shared by CSS and Experience semantics. Service slides now use full scene-height pacing, retaining entrance and two contiguous upward wipes. Verified with native touch-event drags and intermediate animation-frame sampling rather than only preset scroll positions.
+
+
+### Covered-image motion clarification
+
+User clarified that the second and third laptop photos must be revealed from behind a covering edge, rather than move as an adjacent photo strip. Compact scenes now use stationary full-frame photos and reversible bottom-up overlay masks. First scene entrance and desktop choreography are retained. Verification measures the stationary photo bounds, advancing mask, and correct visible scene on each side of the edge for both transitions, including real touch swipes. Prior strip-motion assertions are superseded for compact screens.

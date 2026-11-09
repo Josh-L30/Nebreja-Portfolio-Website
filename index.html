@@ -109,11 +109,11 @@
       crossorigin
     />
     <link rel="preload" href="assets/brad-bjj-cutout-960.webp" as="image" />
-    <link rel="stylesheet" href="css/style.css?v=compact-scenes-4" />
-    <link rel="stylesheet" href="css/scenes.css" />
+    <link rel="stylesheet" href="css/style.css?v=covered-reveal-4" />
+    <link rel="stylesheet" href="css/scenes.css?v=covered-reveal-4" />
     <link rel="stylesheet" href="css/lenis.css" />
-    <link rel="stylesheet" href="css/pages.css" />
-    <link rel="stylesheet" href="css/components.css?v=compact-scenes-4" />
+    <link rel="stylesheet" href="css/pages.css?v=covered-reveal-4" />
+    <link rel="stylesheet" href="css/components.css?v=covered-reveal-4" />
   </head>
   <body>
     <a class="skip" href="#mainContent">Skip to content</a>
@@ -217,20 +217,22 @@
         </nav>
         <nav class="menu-secondary" aria-label="More portfolio sections">
           <a href="#experience">Experience</a><a href="#stack">Tech Stack</a
-          ><a href="#github">GitHub</a
-          ><a href="#certifications">Certifications</a>
+          ><a href="#github">Contributions</a
+          ><a href="#certifications">Credentials</a>
         </nav>
         <div class="menu-socials"><p>Socials</p></div>
       </div>
     </dialog>
     <main id="mainContent">
       <section class="hero" id="home" aria-labelledby="hero-title">
-        <h1 id="hero-title" aria-label="Brad Josh">
+        <h1 id="hero-title" aria-label="Brad Josh Nebreja">
           <span class="hero-name-pair"
-            ><span>BRAD</span> <span>JOSH</span></span
+            ><span>BRAD</span> <span>JOSH</span
+            ><span class="hero-mobile-surname">NEBREJA</span></span
           >
           <span class="hero-name-pair hero-name-echo" aria-hidden="true"
-            ><span>BRAD</span> <span>JOSH</span></span
+            ><span>BRAD</span> <span>JOSH</span
+            ><span class="hero-mobile-surname">NEBREJA</span></span
           >
         </h1>
         <figure class="portrait">
@@ -278,9 +280,10 @@
           I turn complex ideas into <strong>clear</strong>,
           <strong>useful</strong> digital experiences. I focus on how websites
           <strong>look</strong>, <strong>function</strong>, and
-          <strong>help</strong> people get things done. Leveraging AI and new
-          tools keeps me learning, challenging old habits, and staying
-          competitive in the digital era.
+          <strong>help</strong> people get things done. Leveraging
+          <strong>AI</strong> and new tools keeps me <strong>learning</strong>,
+          <strong>challenging</strong> old habits, and
+          <strong>staying competitive</strong> in the digital era.
         </p>
       </section>
       <section class="services" id="services" aria-labelledby="services-title">
@@ -294,42 +297,66 @@
             <div class="service-cards">
               <article class="service-card" id="service-design">
                 <div class="service-media">
-                  <img
-                    src="assets/service-design.webp?v=selected-1"
-                    alt="Front-facing laptop displaying mobile interface prototypes in a dark studio"
-                    width="1672"
-                    height="941"
-                    loading="lazy"
-                    decoding="async"
-                  />
+                  <picture>
+                    <source
+                      media="(max-aspect-ratio: 1/1)"
+                      srcset="
+                        assets/service-design-portrait.webp?v=full-laptop-1
+                      "
+                    />
+                    <img
+                      src="assets/service-design.webp?v=project-screens-2"
+                      alt="Front-facing Midnight laptop displaying my Personal Portfolio website"
+                      width="1672"
+                      height="941"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </picture>
                 </div>
                 <div class="service-shade"></div>
                 <h3>UI/UX DESIGN</h3>
               </article>
               <article class="service-card" id="service-development">
                 <div class="service-media">
-                  <img
-                    src="assets/service-development.webp?v=selected-1"
-                    alt="Right-facing laptop with a design and code workspace by a night window"
-                    width="1672"
-                    height="941"
-                    loading="lazy"
-                    decoding="async"
-                  />
+                  <picture>
+                    <source
+                      media="(max-aspect-ratio: 1/1)"
+                      srcset="
+                        assets/service-development-portrait.webp?v=full-laptop-1
+                      "
+                    />
+                    <img
+                      src="assets/service-development.webp?v=project-screens-2"
+                      alt="Right-facing Night Window laptop displaying the CPC Nexboard login page"
+                      width="1672"
+                      height="941"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </picture>
                 </div>
                 <div class="service-shade"></div>
                 <h3>WEB DEVELOPMENT</h3>
               </article>
               <article class="service-card" id="service-prototype">
                 <div class="service-media">
-                  <img
-                    src="assets/service-prototype.webp?v=selected-1"
-                    alt="Laptop and phone displaying connected mobile prototypes on a concrete desk"
-                    width="1672"
-                    height="941"
-                    loading="lazy"
-                    decoding="async"
-                  />
+                  <picture>
+                    <source
+                      media="(max-aspect-ratio: 1/1)"
+                      srcset="
+                        assets/service-prototype-portrait.webp?v=full-laptop-1
+                      "
+                    />
+                    <img
+                      src="assets/service-prototype.webp?v=project-screens-2"
+                      alt="Prototype Lab laptop displaying CinemaBuddy in Figma, with its app on a phone"
+                      width="1672"
+                      height="941"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </picture>
                 </div>
                 <div class="service-shade"></div>
                 <h3>PROTOTYPING</h3>
@@ -375,6 +402,22 @@
           <div class="container experience-list">
             <details name="experience">
               <summary>
+                <span class="year">2026</span
+                ><span class="title"
+                  >Development Contributor &amp; QA Tester<span
+                    class="organization"
+                    >Checkpoint</span
+                  ></span
+                >
+              </summary>
+              <p class="experience-meta">2026 · Checkpoint</p>
+              <p class="experience-description">
+                Helped build Checkpoint and tested its features and user
+                experience as a development contributor and QA tester.
+              </p>
+            </details>
+            <details name="experience">
+              <summary>
                 <span class="year">2025–26</span
                 ><span class="title"
                   >Capstone Project Lead<span class="organization"
@@ -386,21 +429,11 @@
                 June 2025 – March 2026 · Carmelray Industrial Park II, Calamba
                 City, Laguna
               </p>
-              <ul>
-                <li>
-                  Led the capstone project through successful implementation of
-                  a centralized system for CPC.
-                </li>
-                <li>
-                  Managed the development team by assigning tasks, monitoring
-                  progress, and ensuring project goals were met.
-                </li>
-                <li>
-                  Collaborated with team members to design and implement a
-                  system centralizing Sales, Production, Inventory, and
-                  Logistics operations.
-                </li>
-              </ul>
+              <p class="experience-description">
+                Led the capstone team in building CPC’s centralized system,
+                coordinating development across Sales, Production, Inventory,
+                and Logistics.
+              </p>
             </details>
             <details name="experience">
               <summary>
@@ -414,39 +447,10 @@
               <p class="experience-meta">
                 June 2025 – March 2026 · Calamba City, Laguna
               </p>
-              <ul>
-                <li>
-                  Led the UI/UX design to establish the frontend of a
-                  centralized system.
-                </li>
-                <li>
-                  Assisted the main web developer as a backup web developer for
-                  the system.
-                </li>
-                <li>
-                  Applied HTML, JavaScript, CSS, and PHP to develop a
-                  user-friendly and fully functional centralized system.
-                </li>
-              </ul>
-            </details>
-            <details name="experience">
-              <summary>
-                <span class="year">2026</span
-                ><span class="title"
-                  >Development Contributor &amp; QA Tester<span
-                    class="organization"
-                    >Checkpoint</span
-                  ></span
-                >
-              </summary>
-              <p class="experience-meta">2026 · Checkpoint</p>
-              <ul>
-                <li>Helped build the Checkpoint website.</li>
-                <li>
-                  Contributed to quality assurance and tested the website’s
-                  functionality and user experience.
-                </li>
-              </ul>
+              <p class="experience-description">
+                Led CPC’s interface design and supported frontend development
+                using HTML, CSS, JavaScript, and PHP.
+              </p>
             </details>
             <details name="experience">
               <summary>
@@ -459,16 +463,11 @@
                 >
               </summary>
               <p class="experience-meta">2024 · School Project</p>
-              <ul>
-                <li>
-                  Designed the CinemaBuddy interface in Figma for a school
-                  project.
-                </li>
-                <li>
-                  Created an interactive prototype to demonstrate the app’s
-                  screens and user flows.
-                </li>
-              </ul>
+              <p class="experience-description">
+                Designed CinemaBuddy’s interface and interactive Figma
+                prototype, connecting app screens and user flows for a school
+                project.
+              </p>
             </details>
           </div>
         </div>
@@ -675,19 +674,6 @@
         </div>
         <div class="footer-legal">
           <p>© 2026 Brad Josh Nebreja</p>
-          <nav aria-label="Footer">
-            <a href="privacy.html">Privacy</a><a href="terms.html">Terms</a
-            ><a class="back-to-top" href="#home" aria-label="Back to top"
-              ><svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                aria-hidden="true"
-              >
-                <path d="M5 19 19 5M5 5h14v14" /></svg
-            ></a>
-          </nav>
         </div>
       </div>
       <p class="footer-name" aria-hidden="true">BRAD JOSH</p>
@@ -717,6 +703,6 @@
       <img id="fullImage" alt="" hidden />
     </dialog>
 
-    <script type="module" src="js/script.js?v=compact-scenes-4"></script>
+    <script type="module" src="js/script.js?v=covered-reveal-4"></script>
   </body>
 </html>

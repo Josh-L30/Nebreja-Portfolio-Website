@@ -169,7 +169,7 @@
       {
         "name": "about-preview",
         "value": "0 20px 40px #0008",
-        "purpose": "Floating About preview."
+        "purpose": "Text-only About message; nine caramel keywords, hover/focus/tap and Escape dismissal."
       },
       {
         "name": "device",
@@ -325,8 +325,8 @@
       },
       {
         "name": "mobile-name-travel",
-        "value": "22s linear infinite after1.2s entrance",
-        "purpose": "Two identically padded BRAD JOSH groups produce seamless mobile motion; one accessible label, static under reduced motion/Save-Data."
+        "value": "18s linear infinite after1.2s entrance",
+        "purpose": "Two identically padded BRAD JOSH NEBREJA groups produce seamless mobile motion; one accessible label, static under reduced motion/Save-Data."
       },
       {
         "name": "compact-service-sequence",
@@ -371,7 +371,41 @@
         "name": "footer-two-column-max",
         "value": "1000px"
       }
-    ]
+    ],
+    "acceptedRefinements20261110": {
+      "compactServices": "Single cover-fit photograph in each viewport-height scene; no ambience, inset frame or letterbox. Shared entrance and contiguous reversible wipes.",
+      "compactRows": "Experience and Workflow descriptions replace their labels in a white row on activation; exclusive open state.",
+      "compactFeaturedWorks": [
+        "portfolio",
+        "checkpoint"
+      ],
+      "secondaryNavigation": [
+        "Experience",
+        "Tech Stack",
+        "Contributions",
+        "Credentials"
+      ],
+      "contact": "Same family for work; remove policy and back-to-top controls from home and Contact footer.",
+      "mobileHero": "Full name BRAD JOSH NEBREJA;18s seamless marquee; static reduced-motion fallback.",
+      "secondaryNavigationLayout": "One horizontal row above socials; replaces prior vertical arrangement."
+    },
+    "compactFramingCorrection20261110": {
+      "photography": "Portrait2:3 art-directed variants in native picture elements; full laptop visible against continuous room and desk. Wide desktop/landscape files retained.",
+      "scene": "Compact devices include large touch iPads. Media has no overscan, scale or parallax. Scene height=viewport-header bottom, capped top120px. Keep entrance and contiguous reversible wipes.",
+      "navigation": "Four secondary destinations on one horizontal row above socials; compact drawer max600px;44px touch height.",
+      "experience": "Suppress summary::marker, WebKit disclosure marker and list markers at all widths."
+    },
+    "ipadProFollowup20261110": {
+      "compactRows": "(max-width:1100px), (hover:none) and (pointer:coarse); CSS and Experience ARIA state agree. No duplicate below-row paragraphs or decorative devices on iPad1032px.",
+      "servicePacing": "Each unit equals one scene height; entrance1unit plus two1.2unit upward slides. Full-laptop art direction and native touch scrolling retained.",
+      "verification": "Sample actual touch-scroll frames and test all four experience rows at1032×1376 and1376×1032."
+    },
+    "coveredPhotoReveal": {
+      "scope": "Compact tablet and mobile scenes2and3; desktop and first entrance unchanged.",
+      "behavior": "Layered stationary photos; inset clip top progresses100% to0% from scroll. Visible incoming area covers earlier photo. Reverse scroll restores the cover.",
+      "framing": "Existing full-laptop portrait/wide sources; no new crop, overscan or zoom.",
+      "verification": "Both50% masks show preceding scene above the edge and incoming scene below; touch swipe moves edge while photo bounding rectangle stays fixed."
+    }
   },
   "components": [
     {

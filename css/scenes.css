@@ -368,20 +368,13 @@ summary::-webkit-details-marker {
   transition-delay: 0.13s;
 }
 .experience-meta,
-.experience details ul {
+.experience .experience-description {
   color: var(--soft);
   max-width: 690px;
   margin: 0 max(20px, calc((100vw - 1060px) / 2 + 220px)) 24px;
   font-size: 15px;
 }
-.experience details ul {
-  padding-left: 18px;
-  margin-right: 20px;
-}
-.experience details li + li {
-  margin-top: 10px;
-}
-@media (max-width: 1024px) {
+@media (max-width: 1100px), (hover: none) and (pointer: coarse) {
   .workflow-object,
   .experience-object {
     display: none;
@@ -426,7 +419,7 @@ summary::-webkit-details-marker {
     font-size: 24px;
   }
   .experience-meta,
-  .experience details ul {
+  .experience .experience-description {
     margin-left: 165px;
   }
 }
@@ -447,7 +440,7 @@ summary::-webkit-details-marker {
     font-size: 12px;
   }
   .experience-meta,
-  .experience details ul {
+  .experience .experience-description {
     margin-left: 108px;
     margin-right: 20px;
     font-size: 14px;
@@ -777,4 +770,134 @@ summary::-webkit-details-marker {
 }
 .mini-screen > img {
   border-radius: 0;
+}
+
+/* Touch rows exchange their label for a short explanation without growing. */
+.workflow-replacement {
+  display: none;
+}
+@media (max-width: 1100px), (hover: none) and (pointer: coarse) {
+  .experience summary {
+    min-height: 130px;
+  }
+  .experience details > .experience-meta,
+  .experience details > .experience-description {
+    display: none;
+  }
+  .experience details[open] summary::before {
+    clip-path: inset(0);
+  }
+  .experience details[open] summary {
+    color: #111;
+  }
+  .experience details[open] .title {
+    visibility: hidden;
+  }
+  .experience .experience-preview {
+    display: block;
+    position: absolute;
+    left: 165px;
+    right: 20px;
+    width: auto;
+    max-width: none;
+    font-size: 15px;
+    text-align: left;
+    opacity: 0;
+    transition:
+      opacity 0.3s,
+      translate 0.4s var(--ease);
+    translate: 0 8px;
+  }
+  .experience details[open] .experience-preview {
+    opacity: 1;
+    translate: 0 0;
+  }
+  .experience summary:not(:focus-visible):hover {
+    color: var(--ink);
+  }
+  .experience summary:not(:focus-visible):hover::before {
+    clip-path: inset(50% 0 50% 0);
+  }
+  .experience details[open] summary:hover {
+    color: #111;
+  }
+  .experience details[open] summary:hover::before {
+    clip-path: inset(0);
+  }
+  .workflow-item,
+  .workflow-trigger {
+    height: 110px;
+    min-height: 110px;
+  }
+  .workflow-item > p,
+  .workflow-item.is-open > p {
+    display: none;
+  }
+  .workflow-replacement {
+    display: block;
+    position: absolute;
+    inset: 0;
+    padding: 20px;
+    align-content: center;
+    color: #111;
+    font-size: 15px;
+    line-height: 1.45;
+    opacity: 0;
+    translate: 0 8px;
+    transition:
+      opacity 0.3s,
+      translate 0.4s var(--ease);
+  }
+  .workflow-item.is-open .workflow-replacement {
+    opacity: 1;
+    translate: 0 0;
+  }
+  .workflow-item.is-open .scroll-fill {
+    visibility: hidden;
+  }
+  .workflow-item:not(.is-open):is(:hover, :focus-within)::before {
+    clip-path: inset(50% 0 50% 0);
+  }
+  .workflow-item:not(.is-open):is(:hover, :focus-within) .scroll-fill {
+    color: var(--ink);
+  }
+}
+@media (max-width: 600px) {
+  .experience summary {
+    min-height: 150px;
+  }
+  .experience .experience-preview {
+    left: 108px;
+    font-size: 14px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .experience .experience-preview,
+  .workflow-replacement {
+    transition: none;
+  }
+}
+
+@media (max-width: 359px) {
+  .experience summary {
+    min-height: 180px;
+  }
+}
+
+/* Hide native disclosure/list markers, including Safari on iPad. */
+.experience summary {
+  list-style: none;
+}
+.experience summary::marker,
+.experience li::marker {
+  content: "";
+  font-size: 0;
+}
+.experience summary::-webkit-details-marker {
+  display: none;
+}
+.experience ul,
+.experience li {
+  list-style: none;
+  padding-inline-start: 0;
 }

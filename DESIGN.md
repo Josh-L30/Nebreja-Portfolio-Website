@@ -181,7 +181,7 @@ General Sans links oversized editorial names and compact controls. The reference
 
 ### Hierarchy
 
-- **Display:** frontmatter describes the desktop name. Mobile uses a22s seamless27vw BRAD JOSH marquee with an aria-hidden duplicate (one centered13.6vw name under reduced motion or Save-Data), and hides the narrative subtitle. Desktop places the two words at the outer sides of an 80% width line so the portrait only overlaps an inner letter edge.
+- **Display:** frontmatter describes the desktop name. Mobile uses an18s seamless27vw BRAD JOSH NEBREJA marquee with an aria-hidden duplicate (one centered8.4vw full name under reduced motion or Save-Data), and hides the narrative subtitle. Desktop places the two words at the outer sides of an 80% width line so the portrait only overlaps an inner letter edge.
 - **Headline:** fluid section statement; standard display statements become 35px on phones.
 - **About:** 500-weight responsive statement from 30px to 57px, with 1.2 line-height and -0.04em tracking. Fill follows actual rendered lines left-to-right and reverses with scroll; emphasized words retain caramel.
 - **Title:** project names, with intermediate size 35px and phone size 29px. Long names wrap naturally.
@@ -265,7 +265,7 @@ The next-project ending has an oversized 48–92px title and a centered preview 
 
 ### Contact stage and footer
 
-The home CTA uses a centered large General Sans statement with one italic caramel DM Serif Text accent. Words fill and sharpen reversibly as the statement enters view; reduced motion and Save-Data show the complete unblurred title. The radial-fill pill leads to contact.html. The footer follows a conversation heading with three contact columns, then a divider and time/legal row, and an oversized owner name. Columns collapse responsively and the name remains contained.
+The home CTA uses a centered large General Sans statement with a caramel accent in the same General Sans family and weight. Words fill and sharpen reversibly as the statement enters view; reduced motion and Save-Data show the complete unblurred title. The radial-fill pill leads to contact.html. The footer follows a conversation heading with three contact columns, then a divider and time/legal row, and an oversized owner name. Columns collapse responsively and the name remains contained.
 
 ### Motion
 
@@ -281,7 +281,7 @@ The Selected Works hover is a frameless380×214px image crop; full row links ope
 
 The large Contact footer name is BRAD JOSH in warm white with a downward alpha fade. The cube retains its original face geometry and white faces; the revealed full-name wordmark is caramel. The Workflow screen mark is white, retaining its original geometry and black orbital background. The user retained the existing lower-right mobile CV position; five earlier options remain historical artifacts outside the shipping website.
 
-Compact service motion shares desktop's entrance/wipe timeline. The sticky scene fills the viewport below the header (top=min(120px, header bottom+20px); scene height=max(120px,viewport−top−20px)). The sharp selected photo uses its wide contained frame, with feathered edges into a static blurred same-photo ambience filling the surrounding scene. Compact photo height=min(track width/1.6, scene height), scroll unit=max(photo height,min(45vh,480px)), track height=scene height+3.4×scroll unit; desktop retains one viewport height per timeline unit with the existing440vh total track. Native vertical scrolling drives reversible progress. Navigation has44px touch controls and smooth01↔03 jumps. Reduced-motion/Save-Data uses ordinary16:10 flow and complete readable titles.
+Compact service motion shares desktop's entrance/wipe timeline. The sticky scene fills the viewport below the header (top=min(120px, header bottom+20px); scene height=max(120px,viewport−top−20px)). One sharp cover-fit photograph fills each compact scene; there is no blurred duplicate, feathered edge, inset photo frame, or letterbox. Adjacent planes share their edges during the two wipes. Compact photo height=min(track width/1.6, scene height), scroll unit=max(photo height,min(45vh,480px)), track height=scene height+3.4×scroll unit; desktop retains one viewport height per timeline unit with the existing440vh total track. Native vertical scrolling drives reversible progress. Navigation has44px touch controls and smooth01↔03 jumps. Reduced-motion/Save-Data uses ordinary16:10 flow and complete readable titles.
 
 Current branding: original white six-face cube,0.9s spin,0.48s forward cube fade delay/0.06s return delay with0.3s opacity; caramel name enters after0.46s over0.32s opacity/0.42s transform. Workflow's same NBJ mark is white. The accepted CV position stays lower right.
 
@@ -303,3 +303,33 @@ Current branding: original white six-face cube,0.9s spin,0.48s forward cube fade
 - Don't make the moving marquee the only way to read the owner’s name.
 - Don't fabricate GitHub counts or hide a cached snapshot’s age.
 - Don't turn the local section-label exception into a blanket rule for new surfaces.
+
+
+## Accepted refinements — 10 November 2026
+
+About uses nine caramel keywords (clear, useful, look, function, help, AI, learning, challenging, staying competitive), each with a short text-only message on mouse hover, keyboard focus or touch. The dark 280px message follows the pointer, stays within the viewport, and dismisses on Escape/outside tap. Previous photo previews are superseded.
+
+Compact Experience and Workflow rows replace the label with a short explanation on a center-out white reveal. The row keeps its height; a second tap closes it, and another row closes the previous one. Native Experience details and named Workflow buttons retain keyboard semantics. Experience has no bullets and orders Checkpoint (2026), CPC lead (2025–26), CPC UI/UX (2025–26), CinemaBuddy (2024). Desktop keeps its existing hover layout with summarized descriptions.
+
+Desktop features four project groups. Tablet/phone feature only Personal Portfolio and Checkpoint; All Works still opens all four. The supplied latest portfolio screenshot is the portfolio cover and gallery image. Approved Midnight, right-facing Night Window and Prototype Lab photos now show the supplied portfolio screenshot, supplied CPC screenshot, and CinemaBuddy-in-Figma screens respectively. Compact scenes fill below the header with one unframed photograph per plane; ordinary-flow static fallback remains.
+
+Mobile marquee is BRAD JOSH NEBREJA at18s, with one accessible label and an aria-hidden exact duplicate. Tablet/phone secondary navigation groups Experience, Tech Stack, Contributions, Credentials horizontally on one line immediately above the socials. Compact drawers are up to600px wide; labels scale from11px to14px and retain44px touch height. GitHub social naming remains GitHub. The contact work accent uses the heading font family; home and Contact footers omit Privacy/Terms and Back to top controls. Policy documents remain available by their URLs. View CV stays lower right.
+
+
+## Compact laptop framing correction — 10 November 2026
+
+Portrait viewports use dedicated2:3 editorial versions of the three approved scenes, with the whole laptop framed inside naturally extended room/desk photography. Landscape touch viewports use the original wide photographs. Desktop fine-pointer views retain the original photos and framing. Native picture source selection follows viewport orientation; reduced-motion/Save-Data explicitly select the original wide files for ordinary-flow cards.
+
+Compact service media now has no overscan, no image scale, and no vertical media parallax. The card entrance and contiguous, reversible01–03 wipes remain. The sticky scene starts at the header bottom (capped120px) and fills the remaining height through the viewport bottom. Touch iPads above1024px use compact framing too, avoiding the desktop contain/0.9-scale black bands. Native Experience summary/list markers are explicitly suppressed, including Safari’s disclosure marker. This supersedes earlier compact cover-cropping and vertical menu instructions.
+
+
+## iPad Pro1032px layout and scene pacing — 10 November2026
+
+The compact row breakpoint is now1100px plus all coarse non-hover touch viewports, covering iPad Pro13 at1032×1376 and1376×1032. Both Experience and Workflow use the in-place touch descriptions; their desktop device art and expanded paragraphs are hidden. Experience ARIA visibility uses the same media query as CSS. The1032px row regression was caused by the older1024px cutoff, not remaining list items.
+
+Service scroll units now span one full scene height on compact screens, matching desktop pacing (entrance1unit, then two upward slides of1.2units each). Native touch events drive the same reversible card transforms; responsive full-laptop pictures remain unchanged. Entry CSS URLs and the dynamically imported service module use ipad-motion-3 to refresh cached assets.
+
+
+## Accepted covered-photo reveal on compact screens
+
+The first laptop retains its existing scale entrance. Scenes2and3 keep their full photos stationary within the pinned viewport and are progressively uncovered bottom-to-top with an inset clip mask. Each later scene is stacked above the earlier one; the unmasked portion covers the previous photo. Scrolling upward reverses the same mask. This replaces the prior compact sliding-strip interpretation; desktop retains its existing translated cards and image parallax. No extra overscan, cropping, image scaling, framing or new photography is added. Number navigation, title choreography, scene-height pacing and reduced-motion/Save-Data fallback remain.

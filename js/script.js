@@ -29,6 +29,10 @@ class PortfolioProjects extends HTMLElement {
         previewTrack.append(previewCell);
         const row = node("article", "project-row");
         row.dataset.family = group.id;
+        row.classList.toggle(
+          "compact-featured",
+          ["portfolio", "checkpoint"].includes(project.id),
+        );
         const content = node("div");
         const main = node("a", "project-main");
 
@@ -456,52 +460,73 @@ document
   .forEach((section) => sectionObserver.observe(section));
 const keys = document.querySelector(".keyboard-keys");
 for (let i = 0; i < 48; i++) keys.append(node("i"));
-// Context previews on the highlighted About words, using the owner's own work.
-const aboutPreviews = [
-  ["assets/checkpoint-arrivals.png", "Clear journeys — Checkpoint"],
-  ["assets/screen-Pic1-960.webp", "Useful systems — CPC"],
-  ["assets/cinemabuddy-overview.png", "Interface design — CinemaBuddy"],
-  ["assets/checkpoint-staff.png", "Working features — Checkpoint"],
-  [
-    "assets/portfolio-overview-v2.png",
-    "Made to help visitors — Personal Portfolio",
-  ],
-];
+// Short, text-only context on hover, keyboard focus, and tap.
+const aboutMessages = {
+  clear: "I simplify complex ideas so people can understand what to do next.",
+  useful: "I build around real tasks, making each feature serve a purpose.",
+  look: "I give typography, spacing, and visual hierarchy the same care as the code.",
+  function: "I connect responsive interfaces to features that work reliably.",
+  help: "I design for people, making everyday tasks easier to complete.",
+  AI: "I use AI to explore ideas and support my work, then review and test the results.",
+  learning:
+    "I keep practicing, exploring new tools, and learning from feedback.",
+  challenging: "I question old habits and try better ways to design and build.",
+  "staying competitive":
+    "I stay curious about new technology and turn what I learn into practical skills.",
+};
 const aboutPreview = node("div", "about-preview");
 aboutPreview.id = "aboutPreview";
 aboutPreview.setAttribute("role", "tooltip");
 aboutPreview.hidden = true;
-const aboutPreviewImage = node("img");
-aboutPreviewImage.alt = "";
 const aboutPreviewCaption = node("p");
-aboutPreview.append(aboutPreviewImage, aboutPreviewCaption);
+aboutPreview.append(aboutPreviewCaption);
 document.body.append(aboutPreview);
 let aboutTrigger = null;
+let positionAbout = null;
 function hideAboutPreview() {
   aboutPreview.hidden = true;
+  aboutTrigger?.removeAttribute("aria-describedby");
   aboutTrigger = null;
+  positionAbout = null;
 }
-document.querySelectorAll("#about strong").forEach((strong, index) => {
-  const [source, caption] = aboutPreviews[index];
-  const button = node("button", "about-keyword", strong.textContent);
+document.querySelectorAll("#about strong").forEach((strong) => {
+  const label = strong.textContent.trim();
+  const button = node("button", "about-keyword", label);
   button.type = "button";
-  button.setAttribute("aria-describedby", "aboutPreview");
+  button.setAttribute("aria-description", aboutMessages[label]);
   strong.replaceChildren(button);
-  const show = () => {
-    aboutTrigger = button;
-    aboutPreviewImage.src = source;
-    aboutPreviewCaption.textContent = caption;
-    aboutPreview.hidden = false;
+  const position = (event) => {
     const r = button.getBoundingClientRect();
+    const width = aboutPreview.offsetWidth;
+    const x =
+      event?.pointerType === "mouse" ? event.clientX : r.left + r.width / 2;
+    const y =
+      event?.pointerType === "mouse" ? event.clientY + 22 : r.bottom + 12;
     aboutPreview.style.left =
-      Math.min(innerWidth - 280, Math.max(15, r.left + r.width / 2 - 130)) +
+      Math.min(innerWidth - width - 16, Math.max(16, x - width / 2)) + "px";
+    aboutPreview.style.top =
+      Math.min(innerHeight - aboutPreview.offsetHeight - 16, Math.max(16, y)) +
       "px";
-    aboutPreview.style.top = Math.max(90, r.top - 215) + "px";
+  };
+  const show = (event) => {
+    aboutTrigger?.removeAttribute("aria-describedby");
+    aboutTrigger = button;
+    button.setAttribute("aria-describedby", "aboutPreview");
+    positionAbout = () => position();
+    aboutPreviewCaption.textContent = aboutMessages[label];
+    aboutPreview.hidden = false;
+    position(event);
   };
   button.addEventListener("pointerenter", (event) => {
-    if (event.pointerType === "mouse") show();
+    if (event.pointerType === "mouse") show(event);
   });
-  button.addEventListener("pointerleave", hideAboutPreview);
+  button.addEventListener("pointermove", (event) => {
+    if (aboutTrigger === button && event.pointerType === "mouse")
+      position(event);
+  });
+  button.addEventListener("pointerleave", () => {
+    if (document.activeElement !== button) hideAboutPreview();
+  });
   button.addEventListener("focus", show);
   button.addEventListener("blur", hideAboutPreview);
   button.addEventListener("click", show);
@@ -512,7 +537,16 @@ document.addEventListener("keydown", (event) => {
 document.addEventListener("pointerdown", (event) => {
   if (!event.target.closest(".about-keyword")) hideAboutPreview();
 });
-window.addEventListener("scroll", hideAboutPreview, { passive: true });
+window.addEventListener(
+  "scroll",
+  () => {
+    const r = aboutTrigger?.getBoundingClientRect();
+    if (r && document.activeElement === aboutTrigger) positionAbout?.();
+    else hideAboutPreview();
+  },
+  { passive: true },
+);
+window.addEventListener("resize", hideAboutPreview);
 function updateLocalTime() {
   document.getElementById("localTime").textContent =
     new Intl.DateTimeFormat("en-PH", {
@@ -550,7 +584,7 @@ const deviceLoader = new IntersectionObserver(
 document
   .querySelectorAll(".workflow,.experience")
   .forEach((section) => deviceLoader.observe(section));
-import("./services.js")
+import("./services.js?v=covered-reveal-4")
   .then(({ initServices }) => {
     initServices();
   })
@@ -562,17 +596,33 @@ document.querySelectorAll(".workflow-item").forEach((item, index) => {
   const button = document.createElement("button");
   button.type = "button";
   button.className = "workflow-trigger";
+  button.setAttribute("aria-label", summary.textContent.trim());
   button.setAttribute("aria-expanded", "false");
   description.id = "workflow-description-" + index;
   button.setAttribute("aria-controls", description.id);
   button.replaceChildren(...summary.childNodes);
   const article = document.createElement("article");
   article.className = item.className;
+  const replacement = node(
+    "span",
+    "workflow-replacement",
+    description.textContent.trim(),
+  );
+  replacement.setAttribute("aria-hidden", "true");
+  button.append(replacement);
   article.append(button, description);
   item.replaceWith(article);
   button.addEventListener("click", () => {
     const expanded = button.getAttribute("aria-expanded") !== "true";
+    document.querySelectorAll(".workflow-item.is-open").forEach((other) => {
+      if (other === article) return;
+      other.classList.remove("is-open");
+      other.querySelector("button").setAttribute("aria-expanded", "false");
+      other.querySelector("button").removeAttribute("aria-describedby");
+    });
     button.setAttribute("aria-expanded", String(expanded));
+    if (expanded) button.setAttribute("aria-describedby", description.id);
+    else button.removeAttribute("aria-describedby");
     article.classList.toggle("is-open", expanded);
   });
 });
@@ -580,8 +630,33 @@ document.querySelectorAll(".experience details").forEach((item) => {
   const preview = document.createElement("span");
   preview.className = "experience-preview";
   preview.setAttribute("aria-hidden", "true");
-  preview.textContent = item.querySelector("li").textContent;
-  item.querySelector("summary").append(preview);
+  preview.textContent = item.querySelector(
+    ".experience-description",
+  ).textContent;
+  const summary = item.querySelector("summary");
+  summary.append(preview);
+  const compactRows = matchMedia(
+    "(max-width:1100px), (hover:none) and (pointer:coarse)",
+  );
+  const syncRow = () => {
+    preview.setAttribute("aria-hidden", String(!compactRows.matches));
+    if (compactRows.matches && item.open) {
+      document
+        .querySelectorAll(".experience details[open]")
+        .forEach((other) => {
+          if (other !== item) other.open = false;
+        });
+    }
+  };
+  summary.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      item.open = false;
+      summary.focus();
+    }
+  });
+  item.addEventListener("toggle", syncRow);
+  compactRows.addEventListener("change", syncRow);
+  syncRow();
 });
 document.querySelectorAll(".menu-primary a").forEach((link) => {
   const label = link.textContent,

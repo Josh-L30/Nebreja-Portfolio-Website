@@ -8,7 +8,7 @@ ROOT = pathlib.Path(__file__).resolve().parents[1]
 class RedesignContentTests(unittest.TestCase):
     def test_requested_sections_and_copy(self):
         html = (ROOT / 'index.html').read_text(encoding='utf-8')
-        for text in ('aria-label="Brad Josh"', 'Aspiring Full-Stack Developer', 'Currently building useful websites and learning AI.', 'UI/UX Design', 'Prototyping', 'GitHub Contributions', 'Josh-L30'):
+        for text in ('aria-label="Brad Josh Nebreja"', 'Aspiring Full-Stack Developer', 'Currently building useful websites and learning AI.', 'UI/UX Design', 'Prototyping', 'GitHub Contributions', 'Josh-L30'):
             self.assertIn(text, html)
         for section in ('home', 'about', 'services', 'work', 'experience', 'workflow', 'stack', 'github', 'certifications', 'contact'):
             self.assertIn('id="' + section + '"', html)

@@ -102,7 +102,7 @@
         results.textContent = "";
         document.getElementById("run").disabled = true;
         try {
-          for (const width of [320, 390, 768, 1440]) {
+          for (const width of [320, 390, 768, 1032, 1440]) {
             const f = await frame(width);
             const d = f.contentDocument,
               w = f.contentWindow;
@@ -111,7 +111,8 @@
               `No horizontal overflow at ${width}`,
             );
             check(
-              d.querySelector("h1").getAttribute("aria-label") === "Brad Josh",
+              d.querySelector("h1").getAttribute("aria-label") ===
+                "Brad Josh Nebreja",
               `Owner name at ${width}`,
             );
             check(
@@ -134,8 +135,8 @@
               `Education remains removed at ${width}`,
             );
             check(
-              d.querySelectorAll("#about strong").length === 5,
-              `Five About highlights at ${width}`,
+              d.querySelectorAll("#about strong").length === 9,
+              `Nine About highlights at ${width}`,
             );
             check(
               d.querySelectorAll(".project-row").length === 4,
@@ -150,6 +151,23 @@
               d.querySelectorAll(".experience details").length === 4,
               `Four experiences retained at ${width}`,
             );
+            if (width <= 1100) {
+              const row = d.querySelector(".experience details");
+              row.querySelector("summary").click();
+              check(
+                w.getComputedStyle(row.querySelector(".experience-description"))
+                  .display === "none" &&
+                  w.getComputedStyle(row.querySelector(".title")).visibility ===
+                    "hidden",
+                `Compact Experience replaces its label without duplicate text at ${width}`,
+              );
+              check(
+                w.getComputedStyle(d.querySelector(".experience-object"))
+                  .display === "none",
+                `Compact Experience hides decorative keyboard at ${width}`,
+              );
+              row.open = false;
+            }
             check(
               d.querySelectorAll(".workflow-item").length === 3,
               `AI, Code and Workflow at ${width}`,

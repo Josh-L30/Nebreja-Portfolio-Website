@@ -1,0 +1,8 @@
+{
+  "role": "development",
+  "prompt": "Create a portrait 2:3 responsive photographic version of the supplied development laptop scene. Preserve its exact laptop design, screen artwork, metal materials, lighting mood and camera direction. Pull the camera back so the ENTIRE open laptop, including all screen bezel and keyboard/base corners, is comfortably visible near the center of the frame, within the central 65% of canvas width and central 45% of canvas height. For the Prototype Lab also retain the CinemaBuddy phone beside it, both within the central 65% width. Extend the same real room, night window or wall ABOVE and the same naturally textured desk BELOW; no plain black void, no black bands, no frames, no blurred duplicated background, no collage, no stretching. Make the room and desk continuous, photographic and richly textured but restrained. Keep the identical website/prototyping screen content recognizable. This is art direction for a tall mobile website photo; safe framing must retain the whole laptop when cropped slightly from the sides or top/bottom. Preserve original right-facing angle for Night Window. No new text, labels or watermarks. Output portrait aspect 2:3.",
+  "source": "C:\\Users\\Brad Josh Nebreja\\.codex\\generated_images\\01a16c66-b98a-78e3-aea3-41fc131e4471\\exec-542aefbc-0046-4815-9f98-909d76faa40b.png",
+  "tool": "image_gen",
+  "purpose": "Responsive portrait art direction; original wide desktop photo retained.",
+  "encoding": "WebP quality91; original dimensions; no other image edits"
+}

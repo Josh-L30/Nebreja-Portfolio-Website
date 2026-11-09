@@ -10,6 +10,7 @@ export function serviceState(progress) {
     scale: 0.72 + 0.28 * expansion,
     radius: 24 * (1 - expansion),
     y: [-100 * first, 100 * (1 - first) - 100 * second, 100 * (1 - second)],
+    reveal: [0, 100 * (1 - first), 100 * (1 - second)],
     mediaY: [18 * first, -18 * (1 - first) + 18 * second, -18 * (1 - second)],
     mediaScale: 1 / 0.72 + (1 - 1 / 0.72) * expansion,
     indicator: first + second,

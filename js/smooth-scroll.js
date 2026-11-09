@@ -2,7 +2,9 @@
 let Lenis;
 let instance;
 const reduced = matchMedia("(prefers-reduced-motion:reduce)");
-const desktop = matchMedia("(hover:hover) and (min-width:1025px)");
+const desktop = matchMedia(
+  "(hover:hover) and (pointer:fine) and (min-width:1101px)",
+);
 export const scrollController = {
   stop() {
     instance?.stop();

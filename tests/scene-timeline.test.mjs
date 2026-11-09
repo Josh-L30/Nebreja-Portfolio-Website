@@ -18,3 +18,14 @@ test('laptop and keyboard rotate on all axes with scroll and retain bounded drag
  assert.ok(Math.abs(devicePose(.5,'laptop',{x:9,y:.4}).x-(.52+.85))<.0001);
  assert.ok(Math.abs(devicePose(.5,'laptop',{x:0,y:.4}).y+.2)<.0001);
 });
+
+test('compact masks progressively uncover stationary second and third photos and reverse',()=>{
+ const start=serviceState(0), first=serviceState(1.6/3.4), second=serviceState(2.8/3.4), end=serviceState(1);
+ assert.deepEqual(start.reveal,[0,100,100]);
+ assert.ok(Math.abs(first.reveal[1]-50)<.0001);
+ assert.equal(first.reveal[2],100);
+ assert.equal(second.reveal[1],0);
+ assert.ok(Math.abs(second.reveal[2]-50)<.0001);
+ assert.deepEqual(end.reveal.map(Math.round),[0,0,0]);
+ assert.deepEqual(serviceState(1.6/3.4).reveal,first.reveal);
+});
