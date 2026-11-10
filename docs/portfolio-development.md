@@ -13,7 +13,7 @@ A cinematic portfolio showcasing my web development, UI/UX design, and QA work, 
 - Reversible scroll-driven typography with reduced-motion and Save-Data support.
 - In-page project stories and certificate previews in glass dialogs.
 - Four Selected Works, a five-certificate carousel, Tech Stack, experience, and public GitHub activity.
-- Downloadable CV, contact form, Privacy, and Terms pages.
+- Downloadable CV and contact form.
 
 ## Selected Works
 
@@ -45,9 +45,8 @@ Open [localhost:8000](http://127.0.0.1:8000/). Use HTTP instead of opening index
 | Path | Purpose |
 | --- | --- |
 | index.html | Main page, hero, About, experience, and contact |
-| privacy.html / terms.html | Portfolio policies |
 | data/content.json | Projects, galleries, certificates, tools, and contact configuration |
-| css/ | Main, component, and legal-page styles |
+| css/ | Main and component styles |
 | js/script.js | Components, navigation, dialogs, galleries, and contact behavior |
 | js/motion.js | Scroll-driven typography and section animations |
 | js/devices.js | Optional 3D device scenes, loaded near their sections |
@@ -65,7 +64,6 @@ Open [localhost:8000](http://127.0.0.1:8000/). Use HTTP instead of opening index
 - Save media in assets/ and update the corresponding paths and alternative text.
 - When replacing the CV, update both the hero and contact download links.
 - Adjust presentation in css/ and animation in js/motion.js.
-- Keep Privacy and Terms accurate when changing external services or contact handling.
 
 HTML files use two-space indentation for readable editing in VS Code.
 

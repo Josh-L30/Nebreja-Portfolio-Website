@@ -21,7 +21,7 @@ class References(HTMLParser):
             elif key == 'srcset' and value:
                 for candidate in value.split(','):
                     check(candidate.strip().split()[0])
-for page in ('index.html', 'privacy.html', 'terms.html', 'project.html', 'works.html', 'stack.html', 'contact.html', 'README.md'):
+for page in ('index.html', 'project.html', 'works.html', 'stack.html', 'contact.html', 'README.md'):
     References().feed((ROOT / page).read_text(encoding='utf-8'))
 for sheet in (ROOT / 'css').glob('*.css'):
     for value in re.findall(r'url\([\s\'"]*([^\)\'"\s]+)', sheet.read_text(encoding='utf-8')):

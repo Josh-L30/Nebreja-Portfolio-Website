@@ -383,13 +383,6 @@
   flex-wrap: wrap;
   gap: 15px 28px;
 }
-.page-policies {
-  width: 100%;
-  display: flex;
-  gap: 24px;
-  font-size: 12px;
-  color: var(--soft);
-}
 .contact-page .footer-contact-link {
   display: none;
 }
