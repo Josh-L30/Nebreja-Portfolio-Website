@@ -89,7 +89,7 @@
         await until(() =>
           page === "/contact.html"
             ? Boolean(f.contentDocument.querySelector("form"))
-            : f.contentDocument.querySelectorAll(".project-row").length === 4 &&
+            : f.contentDocument.querySelectorAll(".project-row").length === 5 &&
               f.contentDocument.querySelectorAll(".certificate-item").length ===
                 5 &&
               f.contentDocument.documentElement.dataset.wordMotion === "ready",
@@ -139,17 +139,17 @@
               `Nine About highlights at ${width}`,
             );
             check(
-              d.querySelectorAll(".project-row").length === 4,
-              `Four Selected Works at ${width}`,
+              d.querySelectorAll(".project-row").length === 5,
+              `Five Selected Works at ${width}`,
             );
             check(
               d.querySelectorAll(".stack-groups:not(.stack-replica) .tech-chip")
-                .length === 33,
-              `33 tools; full library linked at ${width}`,
+                .length === 34,
+              `34 tools; full library linked at ${width}`,
             );
             check(
-              d.querySelectorAll(".experience details").length === 4,
-              `Four experiences retained at ${width}`,
+              d.querySelectorAll(".experience details").length === 5,
+              `Five experiences retained at ${width}`,
             );
             if (width <= 1100) {
               const row = d.querySelector(".experience details");
@@ -285,6 +285,7 @@
               "checkpoint",
               "cinemabuddy",
               "portfolio",
+              "praisepoint",
             ]) {
               const link = d.querySelector(
                 `.project-main[href$="project=${id}"]`,

@@ -40,8 +40,8 @@ for project in config['projects']:
     for screen in project['gallery']:
         for width in (() if screen['image'].startswith('assets/') else (480, 960, 1440)): check(f"assets/{screen['image']}-{width}.webp")
 for certificate in config['certificates']: check(certificate['preview'])
-assert len(config['projects']) == 5 and len(config['certificates']) == 5
+assert len(config['projects']) == 6 and len(config['certificates']) == 5
 html = (ROOT / 'index.html').read_text(encoding='utf-8')
 assert 'id="education"' not in html and 'href="#education"' not in html
 assert not missing, 'Missing assets: ' + ', '.join(sorted(missing))
-print('PASS: local references, four Selected Works (five project entries), five certificates and responsive galleries.')
+print('PASS: local references, five Selected Works (six project entries), five certificates and responsive galleries.')

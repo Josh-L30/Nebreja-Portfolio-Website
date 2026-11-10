@@ -4,8 +4,8 @@ class ContentTests(unittest.TestCase):
  def setUp(self):self.content=json.loads((ROOT/'data/content.json').read_text(encoding='utf-8'))
  def test_current_project_inventory(self):
   ids=[i for g in self.content['projectGroups'] for i in g['projectIds']]
-  self.assertCountEqual(ids,['cpc','dashboard','checkpoint','cinemabuddy','portfolio'])
-  self.assertEqual(len(self.content['projectGroups']),4)
+  self.assertCountEqual(ids,['cpc','dashboard','checkpoint','cinemabuddy','portfolio','praisepoint'])
+  self.assertEqual(len(self.content['projectGroups']),5)
  def test_requested_replacements(self):
   projects={p['id']:p for p in self.content['projects']}
   self.assertEqual(len(projects['checkpoint']['gallery']),2)

@@ -18,9 +18,9 @@ class RedesignContentTests(unittest.TestCase):
 
     def test_preserved_content_and_caramel_palette(self):
         content = json.loads((ROOT / 'data/content.json').read_text(encoding='utf-8'))
-        self.assertEqual(len(content['projectGroups']), 4)
+        self.assertEqual(len(content['projectGroups']), 5)
         self.assertEqual(len(content['certificates']), 5)
-        self.assertEqual(len(content['stack']), 33)
+        self.assertEqual(len(content['stack']), 34)
         css = (ROOT / 'css/style.css').read_text(encoding='utf-8')
         self.assertIn('--accent: #b87945', css)
         self.assertNotIn('#ff6421', css.lower())

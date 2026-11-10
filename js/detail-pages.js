@@ -10,6 +10,7 @@ const year = {
   checkpoint: "2026",
   cinemabuddy: "2024",
   portfolio: "2026",
+  praisepoint: "2026",
 };
 const projectURL = (id) => "project.html?project=" + encodeURIComponent(id);
 function chip(tool) {

@@ -323,9 +323,85 @@
         "problem": "Give potential employers a clear way to understand my design decisions, technical skills and project contributions.",
         "contribution": "Designed and implemented the responsive interface, project presentation, scroll effects and interactive viewing experiences.",
         "approach": "Native HTML, CSS and JavaScript components deliver a monochrome interface, progressive motion, keyboard-accessible dialogs and contact validation.",
-        "result": "A live portfolio with four Selected Works, experience, tech stack, certifications, contact options and a downloadable CV."
+        "result": "A live portfolio with five Selected Works, experience, tech stack, certifications, contact options and a downloadable CV."
       },
       "liveUrl": "https://nebreja-portfolio-website.vercel.app/"
+    },
+    {
+      "id": "praisepoint",
+      "title": "PraisePoint",
+      "headline": "Prepare with care. Lead with clarity.",
+      "summary": "A church presentation workspace for preparing slides, songs and service plans, with online and offline presenting.",
+      "role": "Church presentation web application",
+      "description": "PraisePoint brings presentation editing, a reusable song library, service planning and media management into one workspace for church volunteers. Google sign-in connects private and shared church workspaces, while prepared services support offline presenting from a laptop to a projector.",
+      "bullets": [
+        "Editable slide templates and freeform text editing for lyrics, Scripture, messages and announcements",
+        "Reusable songs, ordered service plans, media imports and private or shared church workspaces",
+        "Operator and projector views, verified offline service preparation and metadata backups"
+      ],
+      "categories": [
+        "Web Application",
+        "Presentation & Collaboration"
+      ],
+      "tags": [
+        "React",
+        "TypeScript",
+        "Tailwind CSS",
+        "Vite",
+        "Supabase",
+        "Firebase"
+      ],
+      "image": "screen-praisepoint-login",
+      "gallery": [
+        {
+          "image": "screen-praisepoint-login",
+          "original": "assets/praisepoint/login.png",
+          "label": "Welcome and Google sign-in"
+        },
+        {
+          "image": "screen-praisepoint-workspace",
+          "original": "assets/praisepoint/workspace.png",
+          "label": "Personal workspace overview"
+        },
+        {
+          "image": "screen-praisepoint-presentations",
+          "original": "assets/praisepoint/presentations.png",
+          "label": "Presentations and editable slide templates"
+        },
+        {
+          "image": "screen-praisepoint-songs",
+          "original": "assets/praisepoint/songs.png",
+          "label": "Reusable song library and lyrics"
+        },
+        {
+          "image": "screen-praisepoint-services",
+          "original": "assets/praisepoint/services.png",
+          "label": "Service planning and ordered presentations"
+        },
+        {
+          "image": "screen-praisepoint-media",
+          "original": "assets/praisepoint/media.png",
+          "label": "Local and workspace media library"
+        },
+        {
+          "image": "screen-praisepoint-templates",
+          "original": "assets/praisepoint/templates.png",
+          "label": "Worship background templates"
+        },
+        {
+          "image": "screen-praisepoint-church",
+          "original": "assets/praisepoint/church.png",
+          "label": "Church teams and workspace switching"
+        }
+      ],
+      "video": null,
+      "liveUrl": "https://gather-ccf-presentations.web.app/",
+      "repositoryUrl": "https://github.com/Josh-L30/PraisePoint",
+      "caseStudy": {
+        "status": "Under development",
+        "problem": "Help church volunteers prepare readable slides, organize worship services and present without relying on a continuous internet connection.",
+        "approach": "A React and TypeScript interface combines private and shared workspaces, Supabase-backed authentication and storage, and locally prepared services for offline presenting. Firebase Hosting serves the frontend."
+      }
     }
   ],
   "contact": {
@@ -521,6 +597,11 @@
       "name": "GitHub",
       "logo": "assets/logo-github.svg",
       "source": "https://raw.githubusercontent.com/devicons/devicon/master/icons/github/github-original.svg"
+    },
+    {
+      "name": "TypeScript",
+      "logo": "assets/logo-typescript.svg",
+      "source": "https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg"
     }
   ],
   "certificates": [
@@ -600,6 +681,7 @@
         "HTML",
         "CSS",
         "JavaScript",
+        "TypeScript",
         "React",
         "Tailwind CSS"
       ]
@@ -697,6 +779,15 @@
       ],
       "description": "My own portfolio, bringing together thoughtful design, responsive development and cinematic interaction.",
       "focus": "Website design & frontend development"
+    },
+    {
+      "id": "praisepoint",
+      "title": "PraisePoint",
+      "projectIds": [
+        "praisepoint"
+      ],
+      "description": "A church presentation workspace for preparing slides, songs and service plans, with online and offline presenting.",
+      "focus": "Church presentation web application"
     }
   ]
 }

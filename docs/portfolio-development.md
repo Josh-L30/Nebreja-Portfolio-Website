@@ -12,7 +12,7 @@ A cinematic portfolio showcasing my web development, UI/UX design, and QA work, 
 - Scroll-stacked services and original, lazily loaded 3D device scenes using self-hosted Three.js.
 - Reversible scroll-driven typography with reduced-motion and Save-Data support.
 - In-page project stories and certificate previews in glass dialogs.
-- Four Selected Works, a five-certificate carousel, Tech Stack, experience, and public GitHub activity.
+- Five Selected Works, a five-certificate carousel, Tech Stack, experience, and public GitHub activity.
 - Downloadable CV and contact form.
 
 ## Selected Works
@@ -23,6 +23,7 @@ A cinematic portfolio showcasing my web development, UI/UX design, and QA work, 
 | Checkpoint | Bus-stop and arrivals website, with development and QA contributions. | [Checkpoint](https://onroute.cloud/) |
 | CinemaBuddy | A 2024 school project featuring UI design and a Figma prototype. | [CinemaBuddy](https://cinema-buddy.vercel.app/) |
 | Personal Portfolio | This website, presenting my work and professional background. | [Portfolio](https://nebreja-portfolio-website.vercel.app/) |
+| PraisePoint | Church slides, song library, service plans, media and offline presenting. | [PraisePoint](https://gather-ccf-presentations.web.app/) |
 
 ## Technology
 

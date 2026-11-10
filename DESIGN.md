@@ -391,3 +391,8 @@ Header cube stays white at rest, smoothly tints caramel #b87945 during the exist
 ### Scroll-dismissed compact row fills
 
 On tablet/mobile, an opened Experience or Workflow row closes when the page moves6px from its activation position. The existing white-fill transition retracts and restores the label. Taps stay open while stationary; tiny2px positioning jitter is ignored. Desktop behavior remains unchanged. The passive listener does not cancel scrolling or blur controls; native details and Workflow ARIA state reset together. Closed compact Experience rows cannot retain the white fill through focus-visible or hover. Verified both scroll directions, touch swipes, reduced motion and keyboard focus.
+
+
+## 10 November: PraisePoint project
+
+PraisePoint is the fifth Selected Works family and uses the existing desktop project row, All Works card, sticky project sidebar, pointer-follow View badge and image viewer. Its eight supplied screenshots retain their original colors; the login screenshot is the cover and first gallery image. Keep the compact homepage selection of Personal Portfolio and Checkpoint; All Works exposes all five projects at every size. React, TypeScript, Tailwind CSS, Vite, Supabase and Firebase use local original-color icons. TypeScript joins Frontend, bringing the library to 34 tools.

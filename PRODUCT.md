@@ -16,7 +16,7 @@ Make the owner's work, contribution, experience and CV easy to explore and provi
 
 ## Capabilities and Constraints
 
-Existing static HTML/CSS/JavaScript, native Web Components, JSON content, Vercel hosting and Web3Forms contact delivery. Four project families and five certificates. Certificate viewers stay in-page. Project case studies, all works, Tech Stack library and Contact now use dedicated pages, following the user’s 9 November reference-view request. CPC has no public live site because of client privacy. Preserve the v6 CV and approved BJJ portrait; only change its displayed crop. No Education section. Keep Contact and social links. Privacy and Terms pages and navigation were removed at the owner's request on 10 November 2026. No invented project outcomes or contribution counts. GitHub account: Josh-L30.
+Existing static HTML/CSS/JavaScript, native Web Components, JSON content, Vercel hosting and Web3Forms contact delivery. Five project families and five certificates. Certificate viewers stay in-page. Project case studies, all works, Tech Stack library and Contact now use dedicated pages, following the user’s 9 November reference-view request. CPC has no public live site because of client privacy. Preserve the v6 CV and approved BJJ portrait; only change its displayed crop. No Education section. Keep Contact and social links. Privacy and Terms pages and navigation were removed at the owner's request on 10 November 2026. No invented project outcomes or contribution counts. GitHub account: Josh-L30.
 
 ## Brand Commitments
 
@@ -24,7 +24,7 @@ Display name BRAD JOSH. Sean Paul reference (https://seanpaul.is-a.dev/) is the 
 
 ## Evidence on Hand
 
-data/content.json contains project stories, galleries, 33 tech stack tools, five certificates and contact configuration. index.html contains four factual experience entries. assets/ contains the approved portrait, screenshot originals, certificate images, logo, CV and licensed fonts/icons.
+data/content.json contains project stories, galleries, 34 tech stack tools, five certificates and contact configuration. index.html contains five factual experience entries. assets/ contains the approved portrait, screenshot originals, certificate images, logo, CV and licensed fonts/icons.
 
 ## Product Principles
 
