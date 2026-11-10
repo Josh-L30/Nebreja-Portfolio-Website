@@ -1,6 +1,6 @@
-<p align="center"><a href="https://nebreja-portfolio-website.vercel.app/"><img src="assets/readme/2026-11/reference-banner.jpg" alt="Brad Josh Nebreja. Aspiring Full-Stack Developer and UI/UX Designer in the Philippines." width="100%" /></a></p>
+<p align="center"><a href="https://nebreja-portfolio-website.vercel.app/"><img src="assets/readme/2026-11/reference-banner-dark-v2.jpg" alt="Brad Josh Nebreja. Full-Stack Developer | UI/UX Designer | AI-Driven Developer." width="100%" /></a></p>
 
-<p align="center"><img src="assets/readme/2026-11/reference-roles.svg" alt="Aspiring Full-Stack Developer; UI/UX Designer; learning AI and building useful websites." width="100%" /></p>
+<p align="center"><img src="assets/readme/2026-11/reference-roles-v2.svg" alt="Full-Stack Developer | UI/UX Designer | AI-Driven Developer." width="100%" /></p>
 
 <h2 align="center">My Tech Stack</h2>
 
@@ -77,7 +77,7 @@
 
 <p align="center">
 <a href="https://nebreja-portfolio-website.vercel.app/"><img src="assets/readme/2026-11/link-portfolio.svg" alt="Portfolio" width="120" /></a>
-<a href="https://www.linkedin.com/in/josh-nebreja-894248402/"><img src="assets/readme/2026-11/link-linkedin.svg" alt="LinkedIn" width="120" /></a>
+<a href="https://www.linkedin.com/in/brad-josh-nebreja-894248402/"><img src="assets/readme/2026-11/link-linkedin.svg" alt="LinkedIn" width="120" /></a>
 <a href="mailto:bradjosh.nebreja05@gmail.com"><img src="assets/readme/2026-11/link-email.svg" alt="Email" width="120" /></a>
 <a href="https://www.facebook.com/brad.josh.nebreja"><img src="assets/readme/2026-11/link-facebook.svg" alt="Facebook" width="120" /></a>
 </p>
