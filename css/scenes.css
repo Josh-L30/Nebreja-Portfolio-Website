@@ -741,9 +741,12 @@ summary::-webkit-details-marker {
   .stack-marquee-track {
     animation: none;
     width: auto;
+    display: block;
   }
   .stack-marquee .stack-groups {
     flex-wrap: wrap;
+    width: 100%;
+    min-width: 0;
   }
   .stack-replica {
     display: none;
@@ -752,6 +755,7 @@ summary::-webkit-details-marker {
 :root[data-motion-static] .stack-marquee-track {
   animation: none;
   width: auto;
+  display: block;
 }
 :root[data-motion-static] .stack-marquee {
   overflow: visible;
@@ -759,6 +763,8 @@ summary::-webkit-details-marker {
 }
 :root[data-motion-static] .stack-marquee .stack-groups {
   flex-wrap: wrap;
+  width: 100%;
+  min-width: 0;
 }
 :root[data-motion-static] .stack-replica {
   display: none;

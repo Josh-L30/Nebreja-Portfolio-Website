@@ -126,3 +126,18 @@ To preserve the full laptop framing without black gaps, the compact media surfac
 ### About hover responsiveness
 
 Removed the320ms tooltip entrance and corrected scroll dismissal for hovered keywords. Verified all nine messages are fully visible in the pointerenter handler, plus keyboard focus/Escape behavior.
+
+
+### Mobile reference polish
+
+Applied reference mobile entry timing, independent already-running full-name marquee, unboxed subtitle layout,30px socials, stationary menu control with moving panel surface, and reference-style About pop entrance with zero start delay. Kept lower-right CV and all existing content/links. Corrected static-stack overflow found while testing reduced-motion mode. Earlier no-animation tooltip and27vw delayed-name specifications are superseded.
+
+
+### Menu icon morph
+
+The two22×2px bars start4px above/below center, translate to the same center and rotate±45° over.4s cubic-bezier(.76,0,.24,1), matching the reference icon geometry/timing. Native-dialog close control uses the same two bars instead of a pre-drawn SVG X, aligned to the original button and animated after its base pose is committed. Close/Escape/navigation reverse the morph while the panel exits; the underlying header button returns to its two-line pose concurrently. Background and stroke colors ease with the icon. Reduced motion removes transitions.
+
+
+### Full-width desktop laptop scenes
+
+Removed the desktop photograph’s0.9scale and contained inset. Animated desktop scenes now use a viewport-sized, cover-fit photo centered in the existing160% counter-motion surface (top18.75%,height62.5%). Photos reach both scene edges without side gutters, while the same scale entrance and connected-edge/parallax transitions remain. Verified all three photos at1280,1440,1920and2560px widths.

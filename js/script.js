@@ -384,18 +384,43 @@ let menuDestination = null,
 function closeMenu() {
   if (!mobileMenu.open || menuClosing) return;
   menuClosing = true;
+  mobileMenu.classList.remove("icon-open");
+  menuToggle.setAttribute("aria-expanded", "false");
   mobileMenu.classList.add("closing");
   setTimeout(
     () => mobileMenu.close(),
     reducedMotion.matches || navigator.connection?.saveData ? 0 : 650,
   );
 }
+function alignMenuControl() {
+  const toggleBounds = menuToggle.getBoundingClientRect();
+  const dialogBounds = mobileMenu.getBoundingClientRect();
+  mobileMenu.style.setProperty(
+    "--menu-button-top",
+    toggleBounds.top - dialogBounds.top + "px",
+  );
+  mobileMenu.style.setProperty(
+    "--menu-button-right",
+    dialogBounds.right - toggleBounds.right + "px",
+  );
+  mobileMenu.style.setProperty("--menu-button-size", toggleBounds.width + "px");
+}
+window.addEventListener("resize", () => {
+  if (mobileMenu.open) alignMenuControl();
+});
 menuToggle.addEventListener("click", () => {
   beginLayer(mobileMenu, menuToggle);
-  mobileMenu.classList.remove("closing");
+  mobileMenu.classList.remove("closing", "icon-open");
   mobileMenu.showModal();
+  alignMenuControl();
   menuToggle.setAttribute("aria-expanded", "true");
-  document.getElementById("closeMenu").focus({ preventScroll: true });
+  const closeControl = document.getElementById("closeMenu");
+  closeControl.focus({ preventScroll: true });
+  // Commit the same two-line starting pose before morphing to the close pose.
+  void closeControl.offsetWidth;
+  requestAnimationFrame(() => {
+    if (mobileMenu.open && !menuClosing) mobileMenu.classList.add("icon-open");
+  });
 });
 document.getElementById("closeMenu").addEventListener("click", closeMenu);
 mobileMenu.addEventListener("cancel", (event) => {
@@ -405,7 +430,7 @@ mobileMenu.addEventListener("cancel", (event) => {
 mobileMenu.addEventListener("close", () => {
   endLayer(mobileMenu);
   menuClosing = false;
-  mobileMenu.classList.remove("closing");
+  mobileMenu.classList.remove("closing", "icon-open");
   menuToggle.setAttribute("aria-expanded", "false");
   if (menuDestination) {
     const destination = menuDestination;
@@ -566,6 +591,19 @@ function updateLocalTime() {
 updateLocalTime();
 setInterval(updateLocalTime, 60000);
 document.querySelector(".hero").classList.add("ready");
+document.body.classList.add("home-ready");
+if (
+  matchMedia("(max-width:767px)").matches &&
+  !reducedMotion.matches &&
+  !navigator.connection?.saveData
+) {
+  document.body.classList.add("mobile-header-entry");
+  menuToggle.addEventListener(
+    "animationend",
+    () => document.body.classList.remove("mobile-header-entry"),
+    { once: true },
+  );
+}
 import("./contributions.js")
   .then(({ defineContributions }) => defineContributions())
   .catch(() => {

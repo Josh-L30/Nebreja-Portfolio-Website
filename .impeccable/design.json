@@ -325,13 +325,13 @@
       },
       {
         "name": "mobile-name-travel",
-        "value": "18s linear infinite after1.2s entrance",
+        "value": "18s linear infinite, no delay; separate2s entrance after.35s",
         "purpose": "Two identically padded BRAD JOSH NEBREJA groups produce seamless mobile motion; one accessible label, static under reduced motion/Save-Data."
       },
       {
         "name": "compact-service-sequence",
         "value": "shared serviceState 0–3.4 with shorter compact units",
-        "purpose": "Viewport-filling pin beneath header, wide sharp photo plus same-photo ambience; .72→1 entrance, reversible wipes and44px number navigation; static3-scene reduced/Save-Data fallback."
+        "purpose": "Full viewport, shared desktop edge/inner counter-motion; responsive full-laptop photo, no extra black framing. Compact2.2viewport timeline and44px number controls; static reduced/Save-Data fallback."
       }
     ],
     "breakpoints": [
@@ -420,9 +420,30 @@
       "verification": "Compare desktop and four compact viewport poses and native gesture samples; both edges, inner-image transforms, coverage, reverse scrolling and navigation."
     },
     "instantAboutHover": {
-      "entrance": "No animation or delay; full opacity synchronously on pointerenter.",
+      "entrance": "Starts synchronously, zero delay; reference-style scale0→1 over.75s cubic-bezier(.76,0,.24,1). Supersedes animation:none.",
       "scroll": "Keep message visible while word stays hovered or focused; preserve pointer position.",
       "verification": "All nine messages checked at pointer entry; keyboard and Escape retained."
+    },
+    "mobileReferencePolish": {
+      "reference": "seanpaul.is-a.dev mobile inspected390×844",
+      "hero": "90svh/min650px; bare26.5px subtitle left20/bottom270;30px social icons on44px touch targets; name clamp145px/35vw/180px bottom90. Compact320px exceptions keep content separated.",
+      "entrance": "2s ease(.2,.8,.2,1); header/portrait0, name wrapper.35, subtitle/arrow.4, socials.4–.7 stagger.",
+      "marquee": "18s linear,0delay; independent track runs during wrapper entry.",
+      "menu": "Stationary native dialog/close control; only menu-surface translates. Close bounds track original button including resize and gutter.",
+      "tooltip": "Reference scale pop.75s, zero start delay, no opacity fade; focus/touch/Escape retained.",
+      "static": "Reduce/Save-Data stop animation and wrap the full stack within viewport width."
+    },
+    "menuIconMorph": {
+      "bars": "22×2px, radius1px, centers±4px from button center.",
+      "open": "Both bars converge to center and rotate±45° over.4s cubic-bezier(.76,0,.24,1).",
+      "close": "Reverse in place while menu-surface closes; Escape/navigation use same path.",
+      "nativeDialog": "Close control uses matching two-bar geometry, keeping its position fixed across the top-layer handoff.",
+      "reducedMotion": "Instant pose change; no transition."
+    },
+    "desktopFullBleedScenes": {
+      "photo": "scale1,object-fit:cover,viewport-sized within160% counter-motion surface; top18.75%,height62.5%.",
+      "result": "Both photo edges align with the scene edges; no0.9-scale side gutters.",
+      "retained": "Entrance, shared-edge parallax, full-screen pinning and compact framing."
     }
   },
   "components": [

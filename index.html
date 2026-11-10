@@ -109,11 +109,11 @@
       crossorigin
     />
     <link rel="preload" href="assets/brad-bjj-cutout-960.webp" as="image" />
-    <link rel="stylesheet" href="css/style.css?v=instant-about-9" />
-    <link rel="stylesheet" href="css/scenes.css?v=instant-about-9" />
+    <link rel="stylesheet" href="css/style.css?v=menu-icon-morph-11" />
+    <link rel="stylesheet" href="css/scenes.css?v=menu-icon-morph-11" />
     <link rel="stylesheet" href="css/lenis.css" />
-    <link rel="stylesheet" href="css/pages.css?v=instant-about-9" />
-    <link rel="stylesheet" href="css/components.css?v=instant-about-9" />
+    <link rel="stylesheet" href="css/pages.css?v=menu-icon-morph-11" />
+    <link rel="stylesheet" href="css/components.css?v=menu-icon-morph-11" />
   </head>
   <body>
     <a class="skip" href="#mainContent">Skip to content</a>
@@ -137,7 +137,7 @@
         aria-controls="mobileMenu"
         aria-expanded="false"
       >
-        <span></span><span></span>
+        <span aria-hidden="true"></span><span aria-hidden="true"></span>
       </button>
     </header>
     <div class="social-rail" aria-label="Professional profiles">
@@ -197,42 +197,40 @@
         id="closeMenu"
         aria-label="Close navigation menu"
       >
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.5"
-          aria-hidden="true"
-        >
-          <path d="m6 6 12 12M18 6 6 18" />
-        </svg>
+        <span aria-hidden="true"></span><span aria-hidden="true"></span>
       </button>
-      <div class="menu-content">
-        <h2 id="menuTitle">Navigation</h2>
-        <nav class="menu-primary" aria-label="Main navigation">
-          <a href="#home" data-label="Home">Home</a>
-          <a href="#about" data-label="About">About</a>
-          <a href="#work" data-label="Works">Works</a>
-          <a href="#contact" data-label="Contact">Contact</a>
-        </nav>
-        <nav class="menu-secondary" aria-label="More portfolio sections">
-          <a href="#experience">Experience</a><a href="#stack">Tech Stack</a
-          ><a href="#github">Contributions</a
-          ><a href="#certifications">Credentials</a>
-        </nav>
-        <div class="menu-socials"><p>Socials</p></div>
+      <div class="menu-surface">
+        <div class="menu-content">
+          <h2 id="menuTitle">Navigation</h2>
+          <nav class="menu-primary" aria-label="Main navigation">
+            <a href="#home" data-label="Home">Home</a>
+            <a href="#about" data-label="About">About</a>
+            <a href="#work" data-label="Works">Works</a>
+            <a href="#contact" data-label="Contact">Contact</a>
+          </nav>
+          <nav class="menu-secondary" aria-label="More portfolio sections">
+            <a href="#experience">Experience</a><a href="#stack">Tech Stack</a
+            ><a href="#github">Contributions</a
+            ><a href="#certifications">Credentials</a>
+          </nav>
+          <div class="menu-socials"><p>Socials</p></div>
+        </div>
       </div>
     </dialog>
     <main id="mainContent">
       <section class="hero" id="home" aria-labelledby="hero-title">
         <h1 id="hero-title" aria-label="Brad Josh Nebreja">
-          <span class="hero-name-pair"
-            ><span>BRAD</span> <span>JOSH</span
-            ><span class="hero-mobile-surname">NEBREJA</span></span
-          >
-          <span class="hero-name-pair hero-name-echo" aria-hidden="true"
-            ><span>BRAD</span> <span>JOSH</span
-            ><span class="hero-mobile-surname">NEBREJA</span></span
+          <span class="hero-marquee-entrance"
+            ><span class="hero-marquee-track">
+              <span class="hero-name-pair"
+                ><span>BRAD</span> <span>JOSH</span
+                ><span class="hero-mobile-surname">NEBREJA</span></span
+              >
+              <span class="hero-name-pair hero-name-echo" aria-hidden="true"
+                ><span>BRAD</span> <span>JOSH</span
+                ><span class="hero-mobile-surname">NEBREJA</span></span
+              >
+            </span></span
           >
         </h1>
         <figure class="portrait">
@@ -703,6 +701,6 @@
       <img id="fullImage" alt="" hidden />
     </dialog>
 
-    <script type="module" src="js/script.js?v=instant-about-9"></script>
+    <script type="module" src="js/script.js?v=menu-icon-morph-11"></script>
   </body>
 </html>

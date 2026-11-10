@@ -181,7 +181,7 @@ General Sans links oversized editorial names and compact controls. The reference
 
 ### Hierarchy
 
-- **Display:** frontmatter describes the desktop name. Mobile uses an18s seamless27vw BRAD JOSH NEBREJA marquee with an aria-hidden duplicate (one centered8.4vw full name under reduced motion or Save-Data), and hides the narrative subtitle. Desktop places the two words at the outer sides of an 80% width line so the portrait only overlaps an inner letter edge.
+- **Display:** frontmatter describes the desktop name. Mobile uses an18s seamless BRAD JOSH NEBREJA marquee at clamp(145px,35vw,180px) with an aria-hidden duplicate (one centered8.4vw full name under reduced motion or Save-Data), and hides the narrative subtitle. Desktop places the two words at the outer sides of an 80% width line so the portrait only overlaps an inner letter edge.
 - **Headline:** fluid section statement; standard display statements become 35px on phones.
 - **About:** 500-weight responsive statement from 30px to 57px, with 1.2 line-height and -0.04em tracking. Fill follows actual rendered lines left-to-right and reverses with scroll; emphasized words retain caramel.
 - **Title:** project names, with intermediate size 35px and phone size 29px. Long names wrap naturally.
@@ -360,3 +360,24 @@ To preserve the full laptop framing without black gaps, the compact media surfac
 ### Immediate About messages
 
 All nine highlighted About words show their full message synchronously on pointer entry, with no fade/slide entrance. Ongoing page scroll preserves the popup while its word remains hovered, retaining the latest pointer position. Keyboard focus, touch activation, Escape and outside dismissal remain.
+
+
+## Reference mobile hero, stationary menu control and About entrance
+
+Reference checked at390×844. Phone hero is90svh with650px minimum; portrait95% height. Bare subtitle uses26.5px General Sans400,1.4line-height, left20px and bottom270px with width fitting the owner’s longer copy (small-phone24px/bottom245px). It has no rectangular backing. Socials use30px icons,44px touch targets and55px center spacing, at bottom225px (195px below360px). Name sits bottom90px (60px small phone), with full-name groups and an aria-hidden duplicate. CV remains lower right within the hero.
+
+Entrance uses the reference’s2s cubic-bezier(.2,.8,.2,1) upward perspective motion: header/portrait0delay, marquee entrance.35s, arrow/subtitle.4s, social icons.4/.5/.6/.7s. The independent18s marquee track begins immediately, including while its outer wrapper enters. Reduced motion and Save-Data restore readable static content. Static Tech Stack groups explicitly take available width so they wrap without horizontal overflow.
+
+The native menu dialog is stationary. Only its new menu-surface and curve animate; the close control is outside that moving surface and aligned to the toggle’s exact bounds, accounting for scrollbar gutter and viewport resizing. Panel entry.85s; exit.45s after.2s content departure. Opening header animation runs only on the initial mobile entry and does not restart on resizing.
+
+About messages start the reference-style scale0→1 pop synchronously on hover, with0s delay and.75s cubic-bezier(.76,0,.24,1). Text is not opacity-faded; pointer positioning eases over.1s. This latest visual request supersedes the earlier animation:none choice. Keyboard focus, touch, Escape, outside dismissal and hovered-word persistence during scroll remain.
+
+
+### Menu icon morph
+
+The two22×2px bars start4px above/below center, translate to the same center and rotate±45° over.4s cubic-bezier(.76,0,.24,1), matching the reference icon geometry/timing. Native-dialog close control uses the same two bars instead of a pre-drawn SVG X, aligned to the original button and animated after its base pose is committed. Close/Escape/navigation reverse the morph while the panel exits; the underlying header button returns to its two-line pose concurrently. Background and stroke colors ease with the icon. Reduced motion removes transitions.
+
+
+### Full-width desktop laptop scenes
+
+Removed the desktop photograph’s0.9scale and contained inset. Animated desktop scenes now use a viewport-sized, cover-fit photo centered in the existing160% counter-motion surface (top18.75%,height62.5%). Photos reach both scene edges without side gutters, while the same scale entrance and connected-edge/parallax transitions remain. Verified all three photos at1280,1440,1920and2560px widths.

@@ -1281,8 +1281,15 @@
 }
 @media (min-width: 1025px) {
   .service-media img {
-    scale: 0.9;
+    scale: 1;
   }
+}
+/* Full-width desktop photography within the existing counter-motion surface. */
+.services.is-animated:not(.is-compact) .service-media img {
+  top: 18.75%;
+  height: 62.5%;
+  object-fit: cover;
+  scale: 1;
 }
 .reference-footer .footer-name {
   width: calc(100vw - 40px);
