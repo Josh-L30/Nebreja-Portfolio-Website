@@ -1,35 +1,92 @@
-<p><a href="https://nebreja-portfolio-website.vercel.app/"><img src="assets/readme/2026-11/visual-nav-brand.svg" alt="Brad Josh Nebreja" width="40%" /></a><a href="#about"><img src="assets/readme/2026-11/visual-nav-about.svg" alt="About" width="18%" /></a><a href="#stack"><img src="assets/readme/2026-11/visual-nav-stack.svg" alt="Tech Stack" width="24%" /></a><a href="#contact"><img src="assets/readme/2026-11/visual-nav-contact.svg" alt="Contact" width="18%" /></a></p>
+<p align="center"><a href="https://nebreja-portfolio-website.vercel.app/"><img src="assets/readme/2026-11/reference-banner.jpg" alt="Brad Josh Nebreja. Aspiring Full-Stack Developer and UI/UX Designer in the Philippines." width="100%" /></a></p>
 
-<a href="https://nebreja-portfolio-website.vercel.app/"><img src="assets/readme/2026-11/hero.jpg" alt="Brad Josh Nebreja, aspiring full-stack developer and UI/UX designer in the Philippines. I design the experience. I build what makes it work." width="100%" /></a>
+<p align="center"><img src="assets/readme/2026-11/reference-roles.svg" alt="Aspiring Full-Stack Developer; UI/UX Designer; learning AI and building useful websites." width="100%" /></p>
 
-<p align="center"><a href="https://nebreja-portfolio-website.vercel.app/"><img src="assets/readme/2026-11/link-portfolio.svg" alt="Portfolio" width="120" /></a> <a href="https://www.linkedin.com/in/josh-nebreja-894248402/"><img src="assets/readme/2026-11/link-linkedin.svg" alt="LinkedIn" width="120" /></a> <a href="https://www.facebook.com/brad.josh.nebreja"><img src="assets/readme/2026-11/link-facebook.svg" alt="Facebook" width="120" /></a> <a href="mailto:bradjosh.nebreja05@gmail.com"><img src="assets/readme/2026-11/link-email.svg" alt="Email" width="120" /></a></p>
+<h2 align="center">My Tech Stack</h2>
 
-<a id="about"></a>
+<table align="center">
+<tr>
+<td width="440" valign="top" align="center">
 
-<a href="https://nebreja-portfolio-website.vercel.app/#about"><picture>
-  <source media="(max-width: 600px)" srcset="assets/readme/2026-11/visual-about-mobile.svg" />
-  <img src="assets/readme/2026-11/visual-about.svg" alt="About Brad Josh Nebreja: aspiring full-stack developer and UI/UX designer in Calamba City, Laguna, Philippines. I turn complex ideas into clear, useful digital experiences. I focus on how websites look, function and help people get things done. PraisePoint is my current work in progress for 2026 and is under development." width="100%" />
-</picture></a>
+<h3 align="center">AI</h3>
+<p align="center">
+<img src="assets/readme/2026-11/logo-gemini.svg" alt="Gemini" title="Gemini" width="42" height="42" />
+<img src="assets/readme/2026-11/logo-openai.svg" alt="OpenAI" title="OpenAI" width="42" height="42" />
+<img src="assets/readme/2026-11/logo-claude.svg" alt="Claude" title="Claude" width="42" height="42" />
+<img src="assets/readme/2026-11/logo-antigravity.svg" alt="Antigravity" title="Antigravity" width="42" height="42" />
+<img src="assets/readme/2026-11/logo-grok.svg" alt="Grok" title="Grok" width="42" height="42" />
+<img src="assets/readme/2026-11/logo-copilot.svg" alt="Copilot" title="Copilot" width="42" height="42" />
+<img src="assets/readme/2026-11/logo-cursor.svg" alt="Cursor AI" title="Cursor AI" width="42" height="42" />
+</p>
 
-<a id="stack"></a>
+<h3 align="center">Frontend</h3>
+<p align="center">
+<img src="assets/readme/2026-11/logo-html5.svg" alt="HTML" title="HTML" width="42" height="42" />
+<img src="assets/readme/2026-11/logo-css3.svg" alt="CSS" title="CSS" width="42" height="42" />
+<img src="assets/readme/2026-11/logo-javascript.svg" alt="JavaScript" title="JavaScript" width="42" height="42" />
+<img src="assets/readme/2026-11/logo-typescript.svg" alt="TypeScript" title="TypeScript" width="42" height="42" />
+<img src="assets/readme/2026-11/logo-react.svg" alt="React" title="React" width="42" height="42" />
+<img src="assets/readme/2026-11/logo-tailwindcss.svg" alt="Tailwind CSS" title="Tailwind CSS" width="42" height="42" />
+</p>
 
-<a href="https://nebreja-portfolio-website.vercel.app/stack.html"><picture>
-  <source media="(max-width: 600px)" srcset="assets/readme/2026-11/visual-stack-mobile.svg" />
-  <img src="assets/readme/2026-11/visual-stack.svg" alt="Tech Stack. Frontend: HTML, CSS, JavaScript, TypeScript, React, Tailwind CSS. Backend: PHP, Express.js, Laravel WebSocket, Node.js. Databases &amp; Services: MY SQL, Firebase, MongoDB, Vercel, Supabase, Cloudflare. AI: Gemini, OpenAI, Claude, Antigravity, Grok, Copilot, Cursor AI. Design &amp; Programming: Figma, Canva, Java, Python, C++. Development &amp; Collaboration: Visual Studio Code, Microsoft 365, Microsoft Loop, Vite, Git, GitHub." width="100%" />
-</picture></a>
+<h3 align="center">Design &amp; Programming</h3>
+<p align="center">
+<img src="assets/readme/2026-11/logo-figma.svg" alt="Figma" title="Figma" width="42" height="42" />
+<img src="assets/readme/2026-11/logo-canva.svg" alt="Canva" title="Canva" width="42" height="42" />
+<img src="assets/readme/2026-11/logo-java.svg" alt="Java" title="Java" width="42" height="42" />
+<img src="assets/readme/2026-11/logo-python.svg" alt="Python" title="Python" width="42" height="42" />
+<img src="assets/readme/2026-11/logo-cplusplus.svg" alt="C++" title="C++" width="42" height="42" />
+</p>
 
-<a id="contact"></a>
+</td>
+<td width="440" valign="top" align="center">
 
-<a href="mailto:bradjosh.nebreja05@gmail.com"><picture>
-  <source media="(max-width: 600px)" srcset="assets/readme/2026-11/visual-contact-mobile.svg" />
-  <img src="assets/readme/2026-11/visual-contact.svg" alt="Let’s make it work. Open to internship opportunities in web development, UI/UX design and QA. Email bradjosh.nebreja05@gmail.com. Based in Calamba City, Philippines." width="100%" />
-</picture></a>
+<h3 align="center">Development &amp; Collaboration</h3>
+<p align="center">
+<img src="assets/readme/2026-11/logo-vscode.svg" alt="Visual Studio Code" title="Visual Studio Code" width="42" height="42" />
+<img src="assets/readme/2026-11/logo-m365.webp" alt="Microsoft 365" title="Microsoft 365" width="42" height="42" />
+<img src="assets/readme/2026-11/logo-mloop.webp" alt="Microsoft Loop" title="Microsoft Loop" width="42" height="42" />
+<img src="assets/readme/2026-11/logo-vitejs.svg" alt="Vite" title="Vite" width="42" height="42" />
+<img src="assets/readme/2026-11/logo-git.svg" alt="Git" title="Git" width="42" height="42" />
+<img src="assets/readme/2026-11/logo-github.svg" alt="GitHub" title="GitHub" width="42" height="42" />
+</p>
 
-<p align="center"><a href="https://nebreja-portfolio-website.vercel.app/"><img src="assets/readme/2026-11/link-portfolio.svg" alt="Portfolio" width="120" /></a> <a href="https://www.linkedin.com/in/josh-nebreja-894248402/"><img src="assets/readme/2026-11/link-linkedin.svg" alt="LinkedIn" width="120" /></a> <a href="https://www.facebook.com/brad.josh.nebreja"><img src="assets/readme/2026-11/link-facebook.svg" alt="Facebook" width="120" /></a> <a href="mailto:bradjosh.nebreja05@gmail.com"><img src="assets/readme/2026-11/link-email.svg" alt="Email" width="120" /></a></p>
+<h3 align="center">Backend</h3>
+<p align="center">
+<img src="assets/readme/2026-11/logo-php.svg" alt="PHP" title="PHP" width="42" height="42" />
+<img src="assets/readme/2026-11/logo-express.svg" alt="Express.js" title="Express.js" width="42" height="42" />
+<img src="assets/readme/2026-11/logo-laravel.svg" alt="Laravel WebSocket" title="Laravel WebSocket" width="42" height="42" />
+<img src="assets/readme/2026-11/logo-nodejs.svg" alt="Node.js" title="Node.js" width="42" height="42" />
+</p>
+
+<h3 align="center">Databases &amp; Services</h3>
+<p align="center">
+<img src="assets/readme/2026-11/logo-mysql.svg" alt="MySQL" title="MySQL" width="42" height="42" />
+<img src="assets/readme/2026-11/logo-firebase.svg" alt="Firebase" title="Firebase" width="42" height="42" />
+<img src="assets/readme/2026-11/logo-mongodb.svg" alt="MongoDB" title="MongoDB" width="42" height="42" />
+<img src="assets/readme/2026-11/logo-vercel.svg" alt="Vercel" title="Vercel" width="42" height="42" />
+<img src="assets/readme/2026-11/logo-supabase.svg" alt="Supabase" title="Supabase" width="42" height="42" />
+<img src="assets/readme/2026-11/logo-cloudflare.svg" alt="Cloudflare" title="Cloudflare" width="42" height="42" />
+</p>
+
+</td>
+</tr>
+</table>
+
+<h2 align="center">Let’s Connect and Collaborate</h2>
+
+<p align="center">
+<a href="https://nebreja-portfolio-website.vercel.app/"><img src="assets/readme/2026-11/link-portfolio.svg" alt="Portfolio" width="120" /></a>
+<a href="https://www.linkedin.com/in/josh-nebreja-894248402/"><img src="assets/readme/2026-11/link-linkedin.svg" alt="LinkedIn" width="120" /></a>
+<a href="mailto:bradjosh.nebreja05@gmail.com"><img src="assets/readme/2026-11/link-email.svg" alt="Email" width="120" /></a>
+<a href="https://www.facebook.com/brad.josh.nebreja"><img src="assets/readme/2026-11/link-facebook.svg" alt="Facebook" width="120" /></a>
+</p>
+
+<p align="center"><img src="assets/readme/2026-11/reference-footer.svg" alt="I design the experience. I build what makes it work. Brad Josh Nebreja." width="100%" /></p>
 
 ---
 
-## About this repository
+## Portfolio Website Source
 
 This is the source for my portfolio website, built with HTML, CSS, JavaScript ES modules, native Web Components and JSON. The interface uses black, white and caramel brown, with original-color project images and tool icons.
 
