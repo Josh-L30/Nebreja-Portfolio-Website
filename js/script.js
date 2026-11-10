@@ -634,6 +634,14 @@ import("./services.js?v=desktop-edge-8")
     initServices();
   })
   .catch(() => {});
+const compactRows = matchMedia(
+  "(max-width:1100px), (hover:none) and (pointer:coarse)",
+);
+let disclosureScrollOrigin = scrollY;
+function rememberDisclosurePosition() {
+  disclosureScrollOrigin = scrollY;
+}
+
 // One accessible description; desktop hover reveals it without expanding the row.
 document.querySelectorAll(".workflow-item").forEach((item, index) => {
   const summary = item.querySelector("summary"),
@@ -669,6 +677,7 @@ document.querySelectorAll(".workflow-item").forEach((item, index) => {
     if (expanded) button.setAttribute("aria-describedby", description.id);
     else button.removeAttribute("aria-describedby");
     article.classList.toggle("is-open", expanded);
+    if (expanded) rememberDisclosurePosition();
   });
 });
 document.querySelectorAll(".experience details").forEach((item) => {
@@ -680,12 +689,10 @@ document.querySelectorAll(".experience details").forEach((item) => {
   ).textContent;
   const summary = item.querySelector("summary");
   summary.append(preview);
-  const compactRows = matchMedia(
-    "(max-width:1100px), (hover:none) and (pointer:coarse)",
-  );
   const syncRow = () => {
     preview.setAttribute("aria-hidden", String(!compactRows.matches));
     if (compactRows.matches && item.open) {
+      rememberDisclosurePosition();
       document
         .querySelectorAll(".experience details[open]")
         .forEach((other) => {
@@ -703,6 +710,31 @@ document.querySelectorAll(".experience details").forEach((item) => {
   compactRows.addEventListener("change", syncRow);
   syncRow();
 });
+// Scrolling away from a compact disclosure restores the original row.
+// Ignore tiny browser positioning adjustments without changing keyboard focus.
+window.addEventListener(
+  "scroll",
+  () => {
+    if (
+      !compactRows.matches ||
+      document.body.classList.contains("modal-open") ||
+      Math.abs(scrollY - disclosureScrollOrigin) < 6
+    )
+      return;
+    document.querySelectorAll(".experience details[open]").forEach((item) => {
+      item.open = false;
+    });
+    document.querySelectorAll(".workflow-item.is-open").forEach((item) => {
+      item.classList.remove("is-open");
+      const button = item.querySelector(".workflow-trigger");
+      button.setAttribute("aria-expanded", "false");
+      button.removeAttribute("aria-describedby");
+    });
+    disclosureScrollOrigin = scrollY;
+  },
+  { passive: true },
+);
+
 document.querySelectorAll(".menu-primary a").forEach((link) => {
   const label = link.textContent,
     mask = node("span", "menu-link-text"),

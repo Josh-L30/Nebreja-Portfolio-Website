@@ -907,3 +907,19 @@ summary::-webkit-details-marker {
   list-style: none;
   padding-inline-start: 0;
 }
+
+/* Retract the closed compact row fill even while keyboard focus remains. */
+@media (max-width: 1100px), (hover: none) and (pointer: coarse) {
+  .experience details:not([open]) summary::before {
+    clip-path: inset(50% 0 50% 0);
+  }
+  .experience details:not([open]) summary {
+    color: var(--ink);
+  }
+  .experience details:not([open]) summary .organization {
+    color: var(--soft);
+  }
+  .experience details:not([open]) .experience-preview {
+    opacity: 0;
+  }
+}

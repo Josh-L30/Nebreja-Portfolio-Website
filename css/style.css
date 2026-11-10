@@ -243,7 +243,8 @@ svg {
   inset: 0;
   backface-visibility: hidden;
   background: #fff center / cover no-repeat;
-  background-blend-mode: normal;
+  background-blend-mode: multiply;
+  transition: background-color 0.22s var(--ease);
   border: 0.5px solid #242424;
 }
 .cube-front {
@@ -279,7 +280,7 @@ svg {
   left: 0;
   font-size: 18px;
   font-weight: 500;
-  color: var(--accent);
+  color: #fff;
   letter-spacing: -0.025em;
   white-space: nowrap;
   opacity: 0;
@@ -287,6 +288,9 @@ svg {
   transition:
     transform 0.42s var(--ease),
     opacity 0.32s var(--ease);
+}
+.brand:is(:focus-visible, .is-revealed) .cube-face {
+  background-color: var(--accent);
 }
 .brand:is(:focus-visible, .is-revealed) .brand-cube {
   transition-delay: 0.48s, 0s;
@@ -302,6 +306,9 @@ svg {
   transition-delay: 0.46s;
 }
 @media (hover: hover) and (pointer: fine) {
+  .brand:hover .cube-face {
+    background-color: var(--accent);
+  }
   .brand:hover .brand-cube {
     transition-delay: 0.48s, 0s;
     translate: 12px 0;

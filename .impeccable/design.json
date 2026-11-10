@@ -444,6 +444,19 @@
       "photo": "scale1,object-fit:cover,viewport-sized within160% counter-motion surface; top18.75%,height62.5%.",
       "result": "Both photo edges align with the scene edges; no0.9-scale side gutters.",
       "retained": "Entrance, shared-edge parallax, full-screen pinning and compact framing."
+    },
+    "brandHoverColors": {
+      "rest": "White cube",
+      "active": "Caramel #b87945 cube during hover/focus/touch spin; background-color transition.22s",
+      "name": "White #fff revealed Brad Josh Nebreja",
+      "retained": "Existing physical face geometry, shaded sides and spin/reveal timing."
+    },
+    "rowScrollDismissal": {
+      "scope": "Compact layout: max1100px or coarse non-hover touch device.",
+      "trigger": "Page scroll distance≥6px from opening; ignore tiny positioning jitter and modal scroll locking.",
+      "result": "Close Experience details and Workflow is-open state; reverse white fill and restore labels/ARIA.",
+      "focus": "Do not blur; closed compact rows cannot retain fills through focus or hover.",
+      "desktop": "Existing desktop disclosure behavior retained."
     }
   },
   "components": [

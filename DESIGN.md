@@ -381,3 +381,13 @@ The two22×2px bars start4px above/below center, translate to the same center an
 ### Full-width desktop laptop scenes
 
 Removed the desktop photograph’s0.9scale and contained inset. Animated desktop scenes now use a viewport-sized, cover-fit photo centered in the existing160% counter-motion surface (top18.75%,height62.5%). Photos reach both scene edges without side gutters, while the same scale entrance and connected-edge/parallax transitions remain. Verified all three photos at1280,1440,1920and2560px widths.
+
+
+### Header brand hover colors
+
+Header cube stays white at rest, smoothly tints caramel #b87945 during the existing hover/focus/touch spin, and returns white on exit. The revealed full-name wordmark is white #fff. White face textures use multiply blending so the existing geometry and shading remain. Spin and name-reveal timings are unchanged. This supersedes the previous caramel-wordmark rule.
+
+
+### Scroll-dismissed compact row fills
+
+On tablet/mobile, an opened Experience or Workflow row closes when the page moves6px from its activation position. The existing white-fill transition retracts and restores the label. Taps stay open while stationary; tiny2px positioning jitter is ignored. Desktop behavior remains unchanged. The passive listener does not cancel scrolling or blur controls; native details and Workflow ARIA state reset together. Closed compact Experience rows cannot retain the white fill through focus-visible or hover. Verified both scroll directions, touch swipes, reduced motion and keyboard focus.
